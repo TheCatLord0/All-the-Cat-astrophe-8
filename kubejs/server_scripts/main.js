@@ -47,6 +47,9 @@ ServerEvents.recipes(event => {
 event.replaceInput(
   { output: 'industrialforegoing:mob_duplicator' },
   ['minecraft:nether_wart', 'minecraft:magma_cream'],
-  'mekanism:pellet_antimatter'
-)
+  'mekanism:pellet_antimatter')
+event.replaceInput(
+  { output: 'simulated:red_portable_engine' },
+  ['minecraft:blast_furnace'],
+  'create:blaze_burner')
 })
