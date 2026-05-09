@@ -21,6 +21,7 @@ options.txt
 ponders_watched.json
 usercache.json
 usernamecache.json
+icon.png
 
 # Runtime files
 *.log
