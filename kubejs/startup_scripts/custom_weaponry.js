@@ -16,7 +16,7 @@ StartupEvents.modifyCreativeTab('kubejs:weaponry', event => {
       event.add('kubejs:ego_mimicry[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
 })
 StartupEvents.registry('item', event => {
-  event.create('kubejs:mimicry', 'sword')
+  event.create('mimicry', 'sword')
     .displayName('§8§l§kAAA §r§4Mimicry §8§l§kAAA')
     .unstackable()
     .fireResistant(true)
@@ -30,7 +30,7 @@ StartupEvents.registry('item', event => {
     .attackDamageBonus(4)
 })
 StartupEvents.registry('item', event => {
-  event.create('kubejs:ego_mimicry', 'sword')
+  event.create('ego_mimicry', 'sword')
     .displayName('§8§l§kAAA §r§4Mimicry §8§l§kAAA')
     .unstackable()
     .fireResistant(true)
@@ -46,7 +46,7 @@ StartupEvents.registry('item', event => {
 })
 
 StartupEvents.registry('item', event => {
-  event.create('kubejs:executioner', 'sword')
+  event.create('executioner', 'sword')
     .displayName("§0§l§kAAA §r§6Executioner's Sword §0§l§kAAA")
     .unstackable()
     .fireResistant(true)
