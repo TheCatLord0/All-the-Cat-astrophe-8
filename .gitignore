@@ -22,6 +22,8 @@ ponders_watched.json
 usercache.json
 usernamecache.json
 icon.png
+resourcepacks/
+shaderpacks/
 
 # Runtime files
 *.log
