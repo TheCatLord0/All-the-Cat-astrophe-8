@@ -1,0 +1,58 @@
+Platform.mods.kubejs.name = 'TheCatLord'
+StartupEvents.registry('creative_mode_tab', event => {
+	event.create('weaponry').icon(() => 'kubejs:mimicry').displayName(('Weaponry')).content(showRestrictedItems => [
+    'minecraft:air'
+  ])
+})
+StartupEvents.modifyCreativeTab('kubejs:tab', event => {
+	event.remove('kubejs:executioner')
+  event.remove('kubejs:mimicry')
+  event.remove('kubejs:ego_mimicry')
+})
+StartupEvents.modifyCreativeTab('kubejs:weaponry', event => {
+    event.remove('minecraft:paper')
+    event.add('kubejs:executioner[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
+    event.add('kubejs:mimicry[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
+      event.add('kubejs:ego_mimicry[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
+})
+StartupEvents.registry('item', event => {
+  event.create('kubejs:mimicry', 'sword')
+    .displayName('§8§l§kAAA §r§4Mimicry §8§l§kAAA')
+    .unstackable()
+    .fireResistant(true)
+    .rarity('EPIC')
+    .tooltip("§4§lThe yearning to imitate the human form is sloppily reflected on the E.G.O, as if it were a reminder that it should remain a mere desire.")
+    .tooltip("§4§lWhen the unfamiliar and otherworldly eyes stare at you, you will feel a chill up your spine.")
+    .tooltip('Heals you for 25% of your damage while this is in your hand.')
+    .parentModel('thecatlord:item/mimicry')
+    .texture('thecatlord:item/mimicry')
+    .speed(9)
+    .attackDamageBonus(4)
+})
+StartupEvents.registry('item', event => {
+  event.create('kubejs:ego_mimicry', 'sword')
+    .displayName('§8§l§kAAA §r§4Mimicry §8§l§kAAA')
+    .unstackable()
+    .fireResistant(true)
+    .rarity('EPIC')
+    .tooltip("§4§lThe yearning to imitate the human form is sloppily reflected on the E.G.O, as if it were a reminder that it should remain a mere desire.")
+    .tooltip("§4§lWhen the unfamiliar and otherworldly eyes stare at you, you will feel a chill up your spine.")
+    .tooltip('§8§lUpgraded.')
+    .tooltip('Heals you for 25% of your damage while this is in your hand.')
+    .parentModel('thecatlord:item/mimicry')
+    .texture('thecatlord:item/mimicry')
+    .speed(9)
+    .attackDamageBonus(16)
+})
+
+StartupEvents.registry('item', event => {
+  event.create('kubejs:executioner', 'sword')
+    .displayName("§0§l§kAAA §r§6Executioner's Sword §0§l§kAAA")
+    .unstackable()
+    .fireResistant(true)
+    .rarity('EPIC')
+    .tooltip("§6§lEven if I'm the only one, I want to keep my eyes open.")
+    .tooltip('Instantly kills any mob.')
+    .parentModel('thecatlord:item/executioner_sword')
+    .texture('kubejs:item/executioner_sword')
+})

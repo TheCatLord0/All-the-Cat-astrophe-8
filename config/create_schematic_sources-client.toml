@@ -1,0 +1,29 @@
+#Controls when the mod source list appears in the schematic tooltip.
+#SHIFT_ONLY  - Only shown while holding Shift (default)
+#ALWAYS      - Always visible in the tooltip
+#Allowed Values: SHIFT_ONLY, ALWAYS
+tooltipMode = "SHIFT_ONLY"
+#Preset colour for installed mods.
+#Set to CUSTOM to use installedCustomHex instead.
+#Allowed Values: AQUA, GREEN, WHITE, YELLOW, RED, GOLD, GRAY, CUSTOM
+installedColor = "AQUA"
+#Custom hex colour for installed mods. Only used when installedColor is CUSTOM.
+#Format: #RRGGBB e.g. #55FFFF
+installedCustomHex = "#55FFFF"
+#Preset colour for missing mods.
+#Set to CUSTOM to use missingCustomHex instead.
+#Allowed Values: AQUA, GREEN, WHITE, YELLOW, RED, GOLD, GRAY, CUSTOM
+missingColor = "YELLOW"
+#Custom hex colour for missing mods. Only used when missingColor is CUSTOM.
+#Format: #RRGGBB e.g. #FFFF55
+missingCustomHex = "#FFFF55"
+#Horizontal offset for the copy button from its default position.
+#Negative moves left, positive moves right.
+# Default: 0
+# Range: -500 ~ 500
+copyButtonXOffset = 0
+#Vertical offset for the copy button from its default position.
+#Negative moves up, positive moves down.
+# Default: 0
+# Range: -500 ~ 500
+copyButtonYOffset = 0

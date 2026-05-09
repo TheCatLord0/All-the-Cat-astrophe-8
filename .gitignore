@@ -1,0 +1,41 @@
+# Minecraft junk
+logs/
+crash-reports/
+saves/
+backups/
+screenshots/
+xaero/
+XaeroWaypoints_BACKUP*
+.mixin_out/
+.sable/
+coremods/
+dynamic-resource-pack-cache/
+local/
+moonlight-global-datapacks/
+schematics/
+server-resource-packs/
+.qmenu_opened.marker
+command_history.txt
+emi.json
+options.txt
+ponders_watched.json
+usercache.json
+usernamecache.json
+
+# Runtime files
+*.log
+*.tmp
+
+# Curseforge/Prism cache junk
+downloads/
+instance.cfg.lock
+
+# Java
+*.class
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Mods folder
+mods/

@@ -1,0 +1,34 @@
+#min I Frames
+# Default: 4
+# Range: > 0
+miniframes = 4
+#max I Frames
+# Default: 24
+# Range: > 1
+maxiframes = 24
+#I Frames Factor
+# Default: 0.3
+# Range: 0.2 ~ 1.7976931348623157E308
+iframesfactor = 0.3
+#projectile I Frames
+# Default: 0
+# Range: > 0
+projectileiframes = 0
+#fall I Frames
+# Default: 0
+# Range: > 0
+falliframes = 0
+#direct magic I Frames
+# Default: 10
+# Range: > 0
+directmagiciframes = 10
+#indirect magic I Frames
+# Default: 10
+# Range: > 0
+indirectmagiciframes = 10
+#indirect magic I Frames
+# Default: 10
+# Range: > 0
+fireiframes = 10
+#no attack damage I frame reduction
+noattackdamageiframesreduction = true

@@ -1,0 +1,18 @@
+filename = '+1.21.3 Fresh Moves v3.1.1 (With Animated Eyes).zip'
+name = 'Fresh Moves'
+side = ''
+x-prismlauncher-dependencies = []
+x-prismlauncher-loaders = []
+x-prismlauncher-mc-versions = [ '1.21.3', '1.21.4' ]
+x-prismlauncher-release-type = 'beta'
+x-prismlauncher-version-number = '+1.21.3 Fresh Moves v3.1.1 (With Animated Eyes).zip'
+
+[download]
+hash = '5bbfbc64d6a187d85344b2f1f446e3fff4210c39'
+hash-format = 'sha1'
+mode = 'metadata:curseforge'
+url = ''
+
+[update.curseforge]
+file-id = 6105679
+project-id = 990406

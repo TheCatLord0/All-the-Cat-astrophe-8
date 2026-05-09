@@ -1,0 +1,57 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "create:empty_blaze_burner"
+  },
+  "loops": 3,
+  "results": [
+    {
+      "chance": 90.0,
+      "id": "create:blaze_burner"
+    },
+    {
+      "chance": 10.0,
+      "id": "create:empty_blaze_burner"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create:empty_blaze_burner"
+        },
+        {
+          "item": "create:blaze_burner"
+        }
+      ],
+      "keep_held_item": true,
+      "results": [
+        {
+          "id": "create:empty_blaze_burner"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "create:empty_blaze_burner"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 500,
+          "fluid": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "create:empty_blaze_burner"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "create:empty_blaze_burner"
+  }
+}

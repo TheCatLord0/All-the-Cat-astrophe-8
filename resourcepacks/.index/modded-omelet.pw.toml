@@ -1,0 +1,149 @@
+filename = 'Modded Omelet [1-20] [161].zip'
+name = 'Modded Omelet - Modern Spawn Eggs'
+side = ''
+x-prismlauncher-loaders = []
+x-prismlauncher-mc-versions = [ '1.20', '1.20.1', '1.20.2', '1.20.3', '1.20.4', '1.20.5', '1.20.6', '1.21', '1.21.1', '1.21.2', '1.21.3', '1.21.4' ]
+x-prismlauncher-release-type = 'release'
+x-prismlauncher-version-number = 'Modded Omelet 1.6.1 [1.20+]'
+
+[download]
+hash = '53b4414f17340f72ea0c0aff92aaf806f66114c3'
+hash-format = 'sha1'
+mode = 'metadata:curseforge'
+url = ''
+
+[update.curseforge]
+file-id = 7966985
+project-id = 1296468
+
+[[x-prismlauncher-dependencies]]
+addonId = '1248466'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '536254'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '360203'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '1265621'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '1111586'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '602059'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '551586'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '561625'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '381736'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '363703'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '1252482'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '566142'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '312353'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '622967'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '852465'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '1070751'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '451789'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '576124'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '857968'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '1111965'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '1111063'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '227639'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '892827'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '659011'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '891324'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '848381'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '1021581'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '60028'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '884685'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '670011'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '635042'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '574409'
+type = 'OPTIONAL'
+
+[[x-prismlauncher-dependencies]]
+addonId = '536638'
+type = 'OPTIONAL'
