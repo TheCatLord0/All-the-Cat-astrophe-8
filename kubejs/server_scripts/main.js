@@ -42,3 +42,11 @@ ServerEvents.tags('item', event => {
     event.add('cat:removal', bannedItems)
   })
 })
+// Replacement recipes
+ServerEvents.recipes(event => {
+event.replaceInput(
+  { output: 'industrialforegoing:mob_duplicator' },
+  ['minecraft:nether_wart', 'minecraft:magma_cream'],
+  'mekanism:pellet_antimatter'
+)
+})
