@@ -27,6 +27,7 @@ shaderpacks/
 .vscode
 .probe
 config/ars_nouveau/search_index/
+config/iris.properties
 
 # Runtime files
 *.log
@@ -45,4 +46,4 @@ Thumbs.db
 
 # Mods folder
 mods/
-.probe
+
