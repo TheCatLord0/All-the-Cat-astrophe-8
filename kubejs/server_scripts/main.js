@@ -152,6 +152,26 @@ event.replaceInput(
   { output: ["functionalstorage:storage_controller", "functionalstorage:framed_storage_controller"] },
   ["minecraft:comparator"],
   "create:precision_mechanism")
+event.replaceInput(
+  { output: "ars_technica:glyph_fuse" },
+  ["ars_nouveau:manipulation_essence"],
+  "create:blaze_burner")
+event.replaceInput(
+  { output: "ars_technica:glyph_fuse" },
+  ["ars_nouveau:fire_essence"],
+  "create:blaze_cake")
+event.replaceInput(
+  { output: "ars_technica:glyph_obliterate" },
+  ["minecraft:diamond_block","minecraft:anvil"],
+  "create:crushing_wheel")
+event.replaceInput(
+  { output: "ars_technica:glyph_pack" },
+  ["minecraft:iron_block"],
+  "create:mechanical_press")
+event.replaceInput(
+  { output: "ars_technica:glyph_whirl" },
+  ["ars_nouveau:air_essence"],
+  "create:encased_fan")
 })
 
 // Drygmys
