@@ -25,7 +25,13 @@ let bannedItems = [
    "sophisticatedbackpacks:auto_smoking_upgrade",
    "sophisticatedbackpacks:blasting_upgrade",
    "sophisticatedbackpacks:auto_blasting_upgrade",
-   "sophisticatedbackpacks:inception_upgrade"
+   "sophisticatedbackpacks:inception_upgrade",
+   "ars_zero:augment_amplify_two",
+   "ars_zero:augment_amplify_three",
+   "ars_zero:augment_aoe_two",
+   "ars_zero:augment_aoe_three",
+   "ars_zero:effect_conjure_blight",
+   "ars_zero:zero_gravity_effect"
 ]
 
 PlayerEvents.inventoryChanged(event => {

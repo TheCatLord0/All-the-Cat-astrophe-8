@@ -12,6 +12,7 @@ ars_hex-1.21.1-5.0.4b.jar
 ars_nouveau-1.21.1-5.11.4.jar
 ars_polymorphia-1.0.3.jar
 ars_technica-1.21.1-2.7.6.jar
+ars_zero-1.21.1-2.0.0-beta3.jar
 arseng-2.1.1-beta.jar
 attributefix-neoforge-1.21.1-21.1.3.jar
 baguettelib-1.21.1-NeoForge-2.0.3.jar
@@ -67,7 +68,6 @@ FastWorkbench-1.21.1-9.1.3.jar
 ferritecore-7.0.3-neoforge.jar
 flerovium-neoforge-1.21.1-1.0.18-all.jar
 FluxNetworks-1.21.1-8.0.0.jar
-freecam-neoforge-1.3.0+mc1.21.jar
 functionalstorage-1.21.1-1.5.5.jar
 fusion-1.2.12-neoforge-mc1.21.1.jar
 gametechbcs_spellbooks-3.0.0-1.21.1.jar

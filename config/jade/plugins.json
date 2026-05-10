@@ -91,9 +91,8 @@
   "gravestone": {
     "grave": true
   },
-  "occultism": {
-    "foliot": true,
-    "sacrificial": true
+  "ars_zero": {
+    "entity_mana": true
   },
   "iceandfire": {
     "dragon_egg_entity": true,
