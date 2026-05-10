@@ -115,6 +115,14 @@ event.replaceInput(
   { output: "fluxnetworks:flux_core" },
   ["minecraft:ender_eye"],
   "mekanism:ultimate_control_circuit")
+event.replaceInput(
+  { output: "ae2:wireless_receiver" },
+  ["ae2:quartz_fiber"],
+  "mekanism:teleportation_core")
+event.replaceInput(
+  { output: "ae2:quantum_link" },
+  ["#ae2:smart_dense_cable"],
+  "mekanism:teleportation_core")
 })
 // Drygmys
 const DRYGMY_UUID = '7400926d-1007-4e53-880f-b43e67f2bf29';
