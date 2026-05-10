@@ -123,7 +123,20 @@ event.replaceInput(
   { output: "ae2:quantum_link" },
   ["#ae2:smart_dense_cable"],
   "mekanism:teleportation_core")
+event.replaceInput(
+  { output: "sfm:manager" },
+  ["#c:chests"],
+  "ae2:engineering_processor")
+event.replaceInput(
+  { output: "sfm:cable" },
+  ["minecraft:light_weighted_pressure_plate"],
+  "mekanism:ingot_steel")
+event.replaceInput(
+  { output: "sfm:cable" },
+  ["minecraft:black_dye"],
+  /mekanism:.*_logistical_transporter/)
 })
+
 // Drygmys
 const DRYGMY_UUID = '7400926d-1007-4e53-880f-b43e67f2bf29';
 
