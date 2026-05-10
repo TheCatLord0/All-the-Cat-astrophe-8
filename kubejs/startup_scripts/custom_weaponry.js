@@ -1,7 +1,7 @@
 Platform.mods.kubejs.name = 'TheCatLord'
 StartupEvents.registry('creative_mode_tab', event => {
 	event.create('weaponry').icon(() => 'kubejs:mimicry').displayName(('Weaponry')).content(showRestrictedItems => [
-    'minecraft:air'
+  'kubejs:executioner[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]'
   ])
 })
 StartupEvents.modifyCreativeTab('kubejs:tab', event => {
@@ -11,7 +11,6 @@ StartupEvents.modifyCreativeTab('kubejs:tab', event => {
 })
 StartupEvents.modifyCreativeTab('kubejs:weaponry', event => {
     event.remove('minecraft:paper')
-    event.add('kubejs:executioner[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
     event.add('kubejs:mimicry[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
       event.add('kubejs:ego_mimicry[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
 })

@@ -144,7 +144,7 @@
     "dragonLightningMaxSearchCount": 10
   },
   "armors": {
-    "dragonSteelBaseDamage": 20.0,
+    "dragonSteelBaseDamage": 17.0,
     "dragonSteelBaseDurability": 8000,
     "dragonsteelArmorToughness": 6.0,
     "dragonsteelHelmetArmor": 7,
