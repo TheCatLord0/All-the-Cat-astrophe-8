@@ -6,7 +6,10 @@ let bannedItems = [
    "minecraft:elytra",
    "mekanism:hdpe_elytra",
    "mekanism:module_elytra_unit",
-   "cataclysm:ignitium_elytra_chestplate"
+   "cataclysm:ignitium_elytra_chestplate",
+   "mekanism:jetpack",
+   "mekanism:jetpack_armored",
+   "mekanism:module_jetpack_unit"
 ]
 
 PlayerEvents.inventoryChanged(event => {
