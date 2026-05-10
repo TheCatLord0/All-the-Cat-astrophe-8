@@ -9,7 +9,8 @@ let bannedItems = [
    "cataclysm:ignitium_elytra_chestplate",
    "mekanism:jetpack",
    "mekanism:jetpack_armored",
-   "mekanism:module_jetpack_unit"
+   "mekanism:module_jetpack_unit",
+   "ars_nouveau:glyph_blink"
 ]
 
 PlayerEvents.inventoryChanged(event => {
