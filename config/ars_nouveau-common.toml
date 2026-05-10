@@ -33,23 +33,23 @@
 	#Max Bonus number of items a drygmy produces from nearby entities. Each entity equals 1 item.
 	# Default: 5
 	# Range: 0 ~ 300
-	drygmyQuantityCap = 0
+	drygmyQuantityCap = 5
 	#Base number of items a drygmy produces per cycle before bonuses.
 	# Default: 1
 	# Range: > -2147483648
-	drygmyBaseItems = 0
+	drygmyBaseItems = 1
 	#How much source drygmys consume per generation
 	# Default: 1000
 	# Range: 0 ~ 10000
-	drygmyManaCost = 10000
+	drygmyManaCost = 1000
 	#Bonus number of items a drygmy produces per unique mob
 	# Default: 2
 	# Range: 0 ~ 300
-	drygmyUniqueBonus = 0
+	drygmyUniqueBonus = 2
 	#How many channels must occur before a drygmy produces loot
 	# Default: 20
 	# Range: 0 ~ 300
-	drygmyMaxProgress = 300
+	drygmyMaxProgress = 20
 
 [alakarkinos]
 	#How much mana alakarkinos consume per generation

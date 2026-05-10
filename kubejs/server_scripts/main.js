@@ -102,5 +102,18 @@ event.replaceInput(
   { output: "create:empty_blaze_burner" },
   ["create:iron_sheet"],
   "immersiveengineering:plate_steel")
+event.replaceInput(
+  { output: "fluxnetworks:flux_dust" },
+  ["minecraft:redstone"],
+  "create:powdered_obsidian")
 })
+// Drygmys
+const DRYGMY_UUID = '7400926d-1007-4e53-880f-b43e67f2bf29';
 
+function onlyDrygmy(event, entity) {
+    return event.addEntityModifier(entity).matchAttackerCustom((attacker) => attacker.uuid.toString() == DRYGMY_UUID);
+}
+ServerEvents.tags("entity_type", (event) => {
+  event.add(["ars_nouveau:drygmy_blacklist","industrialforegoing:mob_duplicator_blacklist"], ["minecraft:ender_dragon", "minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"])
+    event.add(["ars_nouveau:jar_blacklist"], ["minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
+})
