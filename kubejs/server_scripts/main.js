@@ -74,5 +74,17 @@ event.replaceInput(
   { output: "mekanism:digital_miner" },
   ["mekanism:logistical_sorter"],
   "ae2:quantum_link")
+event.replaceInput(
+  { output: ["industrialforegoing:ore_laser_base", "industrialforegoing:fluid_laser_base"] },
+  ["minecraft:redstone"],
+  "mekanism:ultimate_control_circuit")
+event.replaceInput(
+  { output: ["industrialforegoing:ore_laser_base", "industrialforegoing:fluid_laser_base"] },
+  ["industrialforegoing:plastic"],
+  "#iceandfire:dragon_steels")
+event.replaceInput(
+  { output: ["industrialforegoing:ore_laser_base", "industrialforegoing:fluid_laser_base"] },
+  ["industrialforegoing:diamond_gear"],
+  "immersiveengineering:component_steel")
 })
 
