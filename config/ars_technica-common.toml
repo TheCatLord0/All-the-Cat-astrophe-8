@@ -18,7 +18,7 @@
 	#Determines the multiplier used in the cost for generating rotation, defaults to 4.0
 	# Default: 4.0
 	# Range: 0.0 ~ 100.0
-	sourceMotorSpeedToSourceMultiplier = 4.0
+	sourceMotorSpeedToSourceMultiplier = 1.0
 
 #Logic related to Fuse
 ["Glyph - Fuse"]
