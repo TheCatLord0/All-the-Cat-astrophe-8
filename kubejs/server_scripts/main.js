@@ -65,5 +65,13 @@ event.replaceInput(
   { output: 'ars_nouveau:ritual_flight' },
   ['minecraft:feather', "minecraft:ender_pearl"],
   "minecraft:nether_star")
+event.replaceInput(
+  { output: "mekanism:digital_miner" },
+  ["mekanism:basic_control_circuit"],
+  "ae2:quantum_entangled_singularity")
+event.replaceInput(
+  { output: "mekanism:digital_miner" },
+  ["mekanism:logistical_sorter"],
+  "ae2:quantum_link")
 })
 
