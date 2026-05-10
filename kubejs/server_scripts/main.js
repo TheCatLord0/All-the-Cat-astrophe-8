@@ -86,5 +86,13 @@ event.replaceInput(
   { output: ["industrialforegoing:ore_laser_base", "industrialforegoing:fluid_laser_base"] },
   ["industrialforegoing:diamond_gear"],
   "immersiveengineering:component_steel")
+event.replaceInput(
+  { output: "computercraft:turtle_normal" },
+  ["minecraft:iron_ingot"],
+  "mekanism:ingot_steel")
+event.replaceInput(
+  { output: "computercraft:turtle_advanced" },
+  ["minecraft:gold_ingot"],
+  "create:brass_ingot")
 })
 
