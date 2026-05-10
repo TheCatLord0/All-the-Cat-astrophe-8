@@ -106,6 +106,14 @@ event.replaceInput(
   { output: "fluxnetworks:flux_dust" },
   ["minecraft:redstone"],
   "create:powdered_obsidian")
+event.replaceInput(
+  { output: "fluxnetworks:flux_controller" },
+  ["fluxnetworks:flux_dust"],
+  "ae2:quantum_entangled_singularity")
+event.replaceInput(
+  { output: "fluxnetworks:flux_core" },
+  ["minecraft:ender_eye"],
+  "mekanism:ultimate_control_circuit")
 })
 // Drygmys
 const DRYGMY_UUID = '7400926d-1007-4e53-880f-b43e67f2bf29';
