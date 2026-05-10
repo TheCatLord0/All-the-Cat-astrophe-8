@@ -95,6 +95,10 @@ event.replaceInput(
   ["minecraft:gold_ingot"],
   "create:brass_ingot")
 event.replaceInput(
+  { output: ["computercraft:turtle_advanced", "computercraft:turtle_normal"] },
+  ["minecraft:chest"],
+  "mekanism:advanced_control_circuit")
+event.replaceInput(
   { output: "create:empty_blaze_burner" },
   ["create:iron_sheet"],
   "immersiveengineering:plate_steel")
