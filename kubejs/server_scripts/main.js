@@ -135,6 +135,10 @@ event.replaceInput(
   { output: "sfm:cable" },
   ["minecraft:black_dye"],
   /mekanism:.*_logistical_transporter/)
+event.replaceInput(
+  { output: ["functionalstorage:storage_controller", "functionalstorage:framed_storage_controller"] },
+  ["minecraft:comparator"],
+  "create:precision_mechanism")
 })
 
 // Drygmys
