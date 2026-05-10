@@ -12,7 +12,20 @@ let bannedItems = [
    "mekanism:module_jetpack_unit",
    "ars_nouveau:glyph_blink",
    "mekanism:cardboard_box",
-   "mekanism:upgrade_anchor"
+   "mekanism:upgrade_anchor",
+   "sophisticatedbackpacks:feeding_upgrade",
+   "sophisticatedbackpacks:advanced_feeding_upgrade",
+   "sophisticatedbackpacks:refill_upgrade",
+   "sophisticatedbackpacks:advanced_refill_upgrade",
+   "sophisticatedbackpacks:compacting_upgrade",
+   "sophisticatedbackpacks:advanced_compacting_upgrade",
+   "sophisticatedbackpacks:smelting_upgrade",
+   "sophisticatedbackpacks:auto_smelting_upgrade",
+   "sophisticatedbackpacks:smoking_upgrade",
+   "sophisticatedbackpacks:auto_smoking_upgrade",
+   "sophisticatedbackpacks:blasting_upgrade",
+   "sophisticatedbackpacks:auto_blasting_upgrade",
+   "sophisticatedbackpacks:inception_upgrade"
 ]
 
 PlayerEvents.inventoryChanged(event => {
