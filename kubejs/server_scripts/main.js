@@ -56,9 +56,5 @@ event.replaceInput(
   { output: 'ars_nouveau:ritual_flight' },
   ['minecraft:feather', "minecraft:ender_pearl"],
   "minecraft:nether_star")
-event.replaceInput(
-  { output: "ars_nouveau:glyph_leap" },
-  ["ars_nouveau:air_essence"],
-  "minecraft:dragon_breath")
 })
 
