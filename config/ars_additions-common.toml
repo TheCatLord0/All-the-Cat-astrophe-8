@@ -6,8 +6,8 @@
 #Structures
 [structures]
 	#Should ruined warp portals spawn in the world?
-	ruined_warp_portals_enabled = true
+	ruined_warp_portals_enabled = false
 	#Should nexus towers spawn in the world?
-	nexus_tower_enabled = true
+	nexus_tower_enabled = false
 	#Should arcane libraries spawn in the world?
-	arcane_library_enabled = true
+	arcane_library_enabled = false
