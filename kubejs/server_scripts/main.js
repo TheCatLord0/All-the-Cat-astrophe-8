@@ -172,6 +172,10 @@ event.replaceInput(
   { output: "ars_technica:glyph_whirl" },
   ["ars_nouveau:air_essence"],
   "create:encased_fan")
+event.replaceInput(
+  { output: "mekanismgenerators:heat_generator" },
+  ["mekanism:ingot_osmium"],
+  "create:blaze_burner")
 })
 
 // Drygmys
