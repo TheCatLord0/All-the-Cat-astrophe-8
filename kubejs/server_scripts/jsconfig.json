@@ -24,7 +24,8 @@
         ],
         "typeRoots": [
             "../../.probe/packages",
-            "../../.probe/startup"
+            "../../.probe/startup",
+            "../../.probe/server"
         ]
     }
 }

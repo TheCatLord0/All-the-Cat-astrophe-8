@@ -52,4 +52,8 @@ event.replaceInput(
   { output: 'simulated:red_portable_engine' },
   ['minecraft:blast_furnace'],
   'create:blaze_burner')
+event.replaceInput(
+  { output: 'ars_nouveau:ritual_flight' },
+  ['minecraft:feather', "minecraft:ender_pearl"],
+  "minecraft:nether_star")
 })
