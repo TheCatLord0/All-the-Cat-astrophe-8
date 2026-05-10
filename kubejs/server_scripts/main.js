@@ -165,3 +165,8 @@ ServerEvents.tags("entity_type", (event) => {
     event.add("industrialforegoing:mob_duplicator_blacklist", ["minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
     event.add("ars_nouveau:jar_blacklist", ["minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
 })
+
+// Global Loot Removal
+LootJS.modifiers(event => {
+    event.addTableModifier(/chests/).removeLoot(["minecraft:netherite_scrap", "minecraft:netherite_ingot", "minecraft:ancient_debris", "minecraft:diamond"])
+})
