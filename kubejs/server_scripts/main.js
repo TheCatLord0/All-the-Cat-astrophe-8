@@ -207,4 +207,11 @@ const isNamedOdinshi = entity => {
   event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
        .matchEntityCustom(isNamedOdinshi)
        .addLoot("kubejs:odins_plush")
+const isNamedTheCatLord0 = entity => {
+  if (entity == null) return false
+  return entity.getName().getString() == 'TheCatLord0'
+}
+  event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
+       .matchEntityCustom(isNamedTheCatLord0)
+       .addLoot("kubejs:cat_plush")
 })
