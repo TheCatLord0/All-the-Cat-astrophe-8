@@ -144,6 +144,7 @@ function onlyDrygmy(event, entity) {
     return event.addEntityModifier(entity).matchAttackerCustom((attacker) => attacker.uuid.toString() == DRYGMY_UUID);
 }
 ServerEvents.tags("entity_type", (event) => {
-  event.add(["ars_nouveau:drygmy_blacklist","industrialforegoing:mob_duplicator_blacklist"], ["minecraft:ender_dragon", "minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"])
-    event.add(["ars_nouveau:jar_blacklist"], ["minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
+  event.add("ars_nouveau:drygmy_blacklist", ["minecraft:ender_dragon", "minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"])
+    event.add("industrialforegoing:mob_duplicator_blacklist", ["minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
+    event.add("ars_nouveau:jar_blacklist", ["minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
 })
