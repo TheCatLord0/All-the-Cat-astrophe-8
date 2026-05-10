@@ -1,7 +1,12 @@
 // Banned items
 let bannedItems = [
    'easy_villagers:auto_trader',
-   'easy_villagers:iron_farm' 
+   'easy_villagers:iron_farm',
+   "ars_nouveau:glyph_glide",
+   "minecraft:elytra",
+   "mekanism:hdpe_elytra",
+   "mekanism:module_elytra_unit",
+   "cataclysm:ignitium_elytra_chestplate"
 ]
 
 PlayerEvents.inventoryChanged(event => {
