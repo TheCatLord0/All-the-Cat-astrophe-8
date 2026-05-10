@@ -10,7 +10,8 @@ let bannedItems = [
    "mekanism:jetpack",
    "mekanism:jetpack_armored",
    "mekanism:module_jetpack_unit",
-   "ars_nouveau:glyph_blink"
+   "ars_nouveau:glyph_blink",
+   "mekanism:cardboard_box"
 ]
 
 PlayerEvents.inventoryChanged(event => {
