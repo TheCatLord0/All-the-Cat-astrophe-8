@@ -52,27 +52,12 @@
     "painting": true,
     "chiseled_bookshelf": true
   },
-  "ars_nouveau": {
-    "mob_jar": true
-  },
   "jade_access": {
     "held_item": true,
     "sign": true,
     "block": true,
     "entity": true,
     "entity_variant": true
-  },
-  "mekanism": {
-    "chemical": true,
-    "remove_builtin": true,
-    "fluid": true,
-    "energy": true,
-    "tooltip_renderer": true
-  },
-  "easy_villagers": {
-    "villager": true,
-    "converter": true,
-    "breeder": true
   },
   "immersiveengineering": {
     "multiblock_icon": true
@@ -88,11 +73,12 @@
     "block_properties": false,
     "mod_name": true
   },
-  "gravestone": {
-    "grave": true
-  },
   "ars_zero": {
     "entity_mana": true
+  },
+  "extendedae": {
+    "jade_chamber": true,
+    "jade_wireless": true
   },
   "iceandfire": {
     "dragon_egg_entity": true,
@@ -118,5 +104,23 @@
     "power_storage": true,
     "crafting_monitor": true,
     "part_name": true
+  },
+  "ars_nouveau": {
+    "mob_jar": true
+  },
+  "mekanism": {
+    "chemical": true,
+    "remove_builtin": true,
+    "fluid": true,
+    "energy": true,
+    "tooltip_renderer": true
+  },
+  "easy_villagers": {
+    "villager": true,
+    "converter": true,
+    "breeder": true
+  },
+  "gravestone": {
+    "grave": true
   }
 }

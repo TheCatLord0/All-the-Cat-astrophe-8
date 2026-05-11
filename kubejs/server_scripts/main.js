@@ -91,7 +91,7 @@ let removedID = [
   "ars_nouveau:archmage_spell_book",
     "ars_nouveau:archmage_book_upgrade",  
   "ars_zero:archmage_spell_staff",
-   "ars_zero:spellcasting_circlet"
+   "ars_zero:spellcasting_circlet",
 ]
   removedID.forEach(removedID => {
     event.remove({id: removedID })
