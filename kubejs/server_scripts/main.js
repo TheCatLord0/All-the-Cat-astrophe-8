@@ -296,7 +296,7 @@ event.replaceInput(
         ], // input items
 	    "ars_nouveau:apprentice_spell_book", // reagent
 	    "ars_zero:mage_spell_staff", // output
-	    20000, // source cost
+	    30000, // source cost
 	    false // NBT
 	)
 })
