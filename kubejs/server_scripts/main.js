@@ -90,7 +90,8 @@ let removedID = [
   "ars_zero:mage_spell_staff",
   "ars_nouveau:archmage_spell_book",
     "ars_nouveau:archmage_book_upgrade",  
-  "ars_zero:archmage_spell_staff"
+  "ars_zero:archmage_spell_staff",
+   "ars_zero:spellcasting_circlet"
 ]
   removedID.forEach(removedID => {
     event.remove({id: removedID })
@@ -332,6 +333,23 @@ event.replaceInput(
 	    "ars_zero:archmage_spell_staff", // output
 	    30000, // source cost
 	    true // NBT
+	)
+	event.recipes.ars_nouveau.enchanting_apparatus(
+        [
+          "irons_spellbooks:mithril_ingot",
+          "irons_spellbooks:legendary_ink",
+          "irons_spellbooks:ruined_book",
+          "minecraft:heart_of_the_sea",
+          "cataclysm:ignitium_ingot",
+          "malum:complete_design",
+          "minecraft:heavy_core",
+          "#iceandfire:dragon_steels",
+          "ars_nouveau:archmage_spell_book", 
+        ], // input items
+	    "ars_zero:dull_circlet", // reagent
+	    "ars_zero:spellcasting_circlet", // output
+	    50000, // source cost
+	    false // NBT
 	)
 })
 
