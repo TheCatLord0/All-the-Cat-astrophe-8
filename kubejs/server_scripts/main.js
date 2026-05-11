@@ -73,6 +73,30 @@ ServerEvents.tags('item', event => {
     event.add('cat:removal', bannedItems)
   })
 })
+// Remove 
+
+let removedRecipe = [
+]
+ServerEvents.recipes(event => {
+  removedRecipe.forEach(removedRecipe => {
+    event.remove({output: removedRecipe })
+  })
+let removedID = [
+  "ars_nouveau:novice_spell_book",
+    "ars_nouveau:novice_spellbook_alt",
+  "ars_zero:novice_spell_staff",
+  "ars_nouveau:apprentice_spell_book",
+    "ars_nouveau:apprentice_book_upgrade",
+  "ars_zero:mage_spell_staff",
+  "ars_nouveau:archmage_spell_book",
+    "ars_nouveau:archmage_book_upgrade",  
+  "ars_zero:archmage_spell_staff"
+]
+  removedID.forEach(removedID => {
+    event.remove({id: removedID })
+  })
+})
+
 // Replacement recipes
 ServerEvents.recipes(event => {
 event.replaceInput(
@@ -183,6 +207,20 @@ event.replaceInput(
   { output: "mekanismgenerators:heat_generator" },
   ["mekanism:ingot_osmium"],
   "create:blaze_burner")
+	event.recipes.ars_nouveau.enchanting_apparatus(
+        [
+            "minecraft:bow",
+            "minecraft:iron_sword",
+            "minecraft:iron_axe",
+            "minecraft:iron_hoe",
+            "minecraft:iron_shovel",
+            
+        ], // input items
+	    ["ars_nouveau:worn_notebook", "minecraft:book"], // reagent
+	    "ars_nouveau:novice_spell_book", // output
+	    10000, // source cost
+	    // true // NBT
+	)
 })
 
 // Drygmys
