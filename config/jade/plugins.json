@@ -6,8 +6,8 @@
     "animal_owner": true,
     "harvest_tool.effective_tool": true,
     "energy_storage.style": "PROGRESS_BAR",
-    "item_storage.normal_amount": 9,
     "item_storage": true,
+    "item_storage.normal_amount": 9,
     "harvest_tool": true,
     "armor_stand": true,
     "fluid_storage.detailed": false,
@@ -73,18 +73,22 @@
     "block_properties": false,
     "mod_name": true
   },
-  "ars_zero": {
-    "entity_mana": true
-  },
   "extendedae": {
     "jade_chamber": true,
     "jade_wireless": true
   },
+  "ars_zero": {
+    "entity_mana": true
+  },
+  "occultism": {
+    "foliot": true,
+    "sacrificial": true
+  },
   "iceandfire": {
     "dragon_egg_entity": true,
     "multipart": true,
-    "dragon_egg_block": true,
-    "dragon": true
+    "dragon": true,
+    "dragon_egg_block": true
   },
   "balm": {
     "jade": true
