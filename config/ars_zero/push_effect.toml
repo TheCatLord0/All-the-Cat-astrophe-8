@@ -3,7 +3,7 @@
 	#Is Enabled?
 	enabled = true
 	#Cost
-	# Default: 25
+	# Default: 75
 	# Range: > -2147483648
 	cost = 25
 	#Is Starter Glyph?
