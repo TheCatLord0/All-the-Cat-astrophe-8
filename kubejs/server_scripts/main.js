@@ -230,10 +230,27 @@ event.replaceInput(
           "minecraft:quartz_block",
           "minecraft:quartz_block",
           "minecraft:obsidian",
+          "malum:soul_stained_steel_ingot",
         ], // input items
 	    "ars_nouveau:novice_spell_book", // reagent
 	    "ars_nouveau:apprentice_spell_book", // output
 	    50000, // source cost
+	    true // NBT
+	)
+	event.recipes.ars_nouveau.enchanting_apparatus(
+        [
+          "ars_nouveau:wilden_tribute",
+          "minecraft:nether_star",
+          "minecraft:totem_of_undying",
+          "malum:malignant_pewter_ingot",
+          "irons_spellbooks:pyrium_ingot",
+          "minecraft:echo_shard",
+          "cataclysm:void_core",
+          "minecraft:dragon_breath",
+        ], // input items
+	    "ars_nouveau:apprentice_spell_book", // reagent
+	    "ars_nouveau:archmage_spell_book", // output
+	    100000, // source cost
 	    true // NBT
 	)
 })
