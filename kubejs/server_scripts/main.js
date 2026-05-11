@@ -299,6 +299,40 @@ event.replaceInput(
 	    30000, // source cost
 	    false // NBT
 	)
+	event.recipes.ars_nouveau.enchanting_apparatus(
+        [
+          "irons_spellbooks:epic_ink",
+          "minecraft:blaze_rod",
+          "minecraft:blaze_rod",
+          "minecraft:crying_obsidian",
+          "malum:hallowed_gold_ingot",
+          "iceandfire:pixie_dust",
+          "#iceandfire:scales/dragon",
+          "minecraft:diamond",
+          "ars_nouveau:apprentice_spell_book",
+        ], // input items
+	    "ars_zero:novice_spell_staff", // reagent
+	    "ars_zero:mage_spell_staff", // output
+	    20000, // source cost
+	    false // NBT
+	)
+	event.recipes.ars_nouveau.enchanting_apparatus(
+        [
+          "irons_spellbooks:mithril_ingot",
+          "irons_spellbooks:legendary_ink",
+          "irons_spellbooks:ruined_book",
+          "minecraft:heart_of_the_sea",
+          "cataclysm:ignitium_ingot",
+          "malum:complete_design",
+          "minecraft:heavy_core",
+          "#iceandfire:dragon_steels",
+          "ars_nouveau:archmage_spell_book", 
+        ], // input items
+	    "ars_zero:mage_spell_staff", // reagent
+	    "ars_zero:archmage_spell_staff", // output
+	    30000, // source cost
+	    true // NBT
+	)
 })
 
 // Drygmys
