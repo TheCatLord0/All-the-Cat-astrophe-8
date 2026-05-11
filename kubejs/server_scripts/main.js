@@ -33,6 +33,8 @@ let bannedItems = [
    "ars_zero:effect_conjure_blight",
    "ars_zero:zero_gravity_effect",
    "ars_zero:anchor_effect",
+   "ars_zero:effect_convergence",
+   "ars_nouveau:glyph_explosion",
    'ars_additions:codex_entry'
 ]
 
