@@ -1,6 +1,7 @@
 ﻿AdvancedLootInfo-neoforge-1.21.1-1.10.0.jar
 ae2wtlib-19.5.0.jar
 aeronauticscompat-1.1.2.jar
+almostunified-neoforge-1.21.1-1.4.1.jar
 appleskin-neoforge-mc1.21-3.0.9.jar
 appliedenergistics2-19.2.17.jar
 AppliedFlux-1.21-2.1.4-neoforge.jar
@@ -15,6 +16,7 @@ ars_technica-1.21.1-2.7.6.jar
 ars_zero-1.21.1-2.0.0-beta3.jar
 arseng-2.1.1-beta.jar
 attributefix-neoforge-1.21.1-21.1.3.jar
+audrops-1.0.1.jar
 baguettelib-1.21.1-NeoForge-2.0.3.jar
 balm-neoforge-1.21.1-21.0.56.jar
 better-compatability-checker-neoforge-21.1.8.jar
@@ -60,6 +62,7 @@ entity_texture_features_1.21-neoforge-7.1.jar
 entityculling-neoforge-1.10.2-mc1.21.1.jar
 entityjs-1.4.5-1.21.jar
 etched-5.0.0.jar
+ExtendedAE-1.21-2.2.32-neoforge.jar
 fancymenu_neoforge_3.9.0_MC_1.21.1.jar
 FarmersDelight-1.21.1-1.3.1.jar
 FastFurnace-1.21.1-9.0.1.jar
@@ -150,7 +153,9 @@ rechiseledcreate-1.1.0-neoforge-mc1.21.jar
 reeses-sodium-options-neoforge-1.8.3+mc1.21.4.jar
 rhino-2101.2.7-build.81.jar
 rightclickharvest-neoforge-4.6.1+1.21.1.jar
+sablemassview-1.0.0.jar
 sable-neoforge-1.21.1-1.2.2.jar
+sablephysicscompat-1.3.0.jar
 screenshot-to-clipboard-neoforge-1.0.10.jar
 Searchables-neoforge-1.21.1-1.0.2.jar
 SmartBrainLib-neoforge-1.21.1-1.16.11.jar
