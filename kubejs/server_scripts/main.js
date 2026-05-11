@@ -294,8 +294,8 @@ event.replaceInput(
           "minecraft:heavy_core",
           "#iceandfire:dragon_steels", 
         ], // input items
-	    "ars_nouveau:apprentice_spell_book", // reagent
-	    "ars_zero:mage_spell_staff", // output
+	    "ars_nouveau:archmage_spell_book", // reagent
+	    "ars_zero:archmage_spell_staff", // output
 	    30000, // source cost
 	    false // NBT
 	)
