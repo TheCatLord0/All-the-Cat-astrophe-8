@@ -214,12 +214,27 @@ event.replaceInput(
             "minecraft:iron_axe",
             "minecraft:iron_hoe",
             "minecraft:iron_shovel",
-            
+            "ars_nouveau:source_gem_block",
         ], // input items
 	    ["ars_nouveau:worn_notebook", "minecraft:book"], // reagent
 	    "ars_nouveau:novice_spell_book", // output
 	    10000, // source cost
 	    // true // NBT
+	)
+	event.recipes.ars_nouveau.enchanting_apparatus(
+        [
+          "create:blaze_burner",
+          "ars_nouveau:source_gem_block",
+          "minecraft:diamond",
+          "minecraft:diamond",
+          "minecraft:quartz_block",
+          "minecraft:quartz_block",
+          "minecraft:obsidian",
+        ], // input items
+	    "ars_nouveau:novice_spell_book", // reagent
+	    "ars_nouveau:apprentice_spell_book", // output
+	    50000, // source cost
+	    true // NBT
 	)
 })
 
