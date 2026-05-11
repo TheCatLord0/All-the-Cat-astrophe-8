@@ -284,4 +284,7 @@ const isNamedTheCatLord0 = entity => {
   event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
        .matchEntityCustom(isNamedTheCatLord0)
        .addLoot("kubejs:cat_plush")
+
+  event.addEntityModifier("cataclysm:ender_guardian")
+    .addLoot("cataclysm:void_core")
 })
