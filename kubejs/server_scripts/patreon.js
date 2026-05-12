@@ -75,7 +75,7 @@ PlayerEvents.loggedIn(event => {
   if (p.stages.has('first_join')) return
 
   p.runCommandSilent('kubejs stages add @s first_join')
-  p.give('kubejs:justice[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false],irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:divine_smite",index:0,level:6}],maxSpells:1,mustEquip:0b,spellWheel:1b},irons_spellbooks:casting_implement={}]')
+  p.give('kubejs:justice[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false,irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:divine_smite",index:0,level:6}],maxSpells:1,mustEquip:0b,spellWheel:1b},irons_spellbooks:casting_implement={}]')
 })
 PlayerEvents.loggedIn(event => {
   const p = event.player

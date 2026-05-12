@@ -35,7 +35,9 @@ let bannedItems = [
    "ars_zero:anchor_effect",
    "ars_zero:effect_convergence",
    "ars_nouveau:glyph_explosion",
-   'ars_additions:codex_entry'
+   'ars_additions:codex_entry',
+   "mekanism:module_gravitational_modulating_unit",
+   "occultism:trinity_gem",
 ]
 
 PlayerEvents.inventoryChanged(event => {
@@ -79,6 +81,8 @@ ServerEvents.tags('item', event => {
 // Remove 
 
 let removedRecipe = [
+  "occultism:miner_marid_master",
+  "occultism:miner_ancient_eldritch",
 ]
 ServerEvents.recipes(event => {
   removedRecipe.forEach(removedRecipe => {
@@ -95,6 +99,7 @@ let removedID = [
     "ars_nouveau:archmage_book_upgrade",  
   "ars_zero:archmage_spell_staff",
    "ars_zero:spellcasting_circlet",
+   "occultism:ritual/resurrect_mob",
 ]
   removedID.forEach(removedID => {
     event.remove({id: removedID })
@@ -354,6 +359,25 @@ event.replaceInput(
 	    50000, // source cost
 	    false // NBT
 	)
+  event.recipes.occultism.ritual(
+    'occultism:miner_marid_master',
+    [
+      'occultism:miner_afrit_deeps',
+      'occultism:iesnium_pickaxe',
+      'occultism:spirit_attuned_crystal',
+      /iceandfire:dragonsteel_.*_pickaxe/,
+      'minecraft:dragon_breath',
+      'minecraft:totem_of_undying',
+      'minecraft:nether_star',
+      'occultism:marid_essence'
+    ],
+    'occultism:book_of_binding_bound_marid',
+    'occultism:craft_marid'
+  )
+  .duration(240)
+  .ritualType('occultism:craft_miner_spirit')
+  .dummy('occultism:ritual_dummy/craft_miner_marid_master')
+  .id('occultism:ritual/craft_miner_marid_master')
 })
 
 // Drygmys
