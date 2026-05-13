@@ -50,6 +50,7 @@ CreateDragonsPlus-1.10.0b.jar
 create-enchantment-industry-2.3.1.jar
 createliquidfuel-2.1.1-1.21.1.jar
 create-new-age-1.1.7c+neoforge-mc1.21.1.jar
+createthrusters-bundled-0.1.5.jar
 cupboard-1.21-3.5.jar
 curios-neoforge-9.5.1+1.21.1.jar
 defaultoptions-neoforge-1.21.1-21.1.6.jar

@@ -38,6 +38,7 @@ let bannedItems = [
    'ars_additions:codex_entry',
    "mekanism:module_gravitational_modulating_unit",
    "occultism:trinity_gem",
+   "createthrusters:physics_staff",
 ]
 
 PlayerEvents.inventoryChanged(event => {
