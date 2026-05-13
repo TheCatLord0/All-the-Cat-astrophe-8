@@ -379,7 +379,31 @@ event.replaceInput(
   .dummy('occultism:ritual_dummy/craft_miner_marid_master')
   .id('occultism:ritual/craft_miner_marid_master')
 })
-
+// Cooldowns
+let staffs = [
+  "ars_zero:novice_spell_staff",
+  "ars_zero:mage_spell_staff",
+  "ars_zero:archmage_spell_staff",
+  "ars_zero:creative_spell_staff"
+]
+ItemEvents.rightClicked(staffs, event => {
+    const { player, server, item } = event
+    server.scheduleInTicks(1, callback => {
+    player.addItemCooldown(item, 30)
+  })
+})
+let books = [
+    "ars_nouveau:novice_spell_book",
+    "ars_nouveau:apprentice_spell_book",
+    "ars_nouveau:archmage_spell_book",
+    "ars_nouveau:creative_spell_book"
+]
+ItemEvents.rightClicked(books, event => {
+    const { player, server, item } = event
+    server.scheduleInTicks(1, callback => {
+    player.addItemCooldown(item, 15)
+  })
+})
 // Drygmys
 const DRYGMY_UUID = '7400926d-1007-4e53-880f-b43e67f2bf29';
 

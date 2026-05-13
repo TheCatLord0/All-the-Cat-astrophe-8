@@ -87,7 +87,6 @@ gravestone-neoforge-1.21.1-1.0.37.jar
 gtbcs_spell_lib-1.5.0-1.21.1.jar
 guideme-21.1.15.jar
 IceAndFireCE-2.0-beta.16-1.21.1-neoforge.jar
-iframestweakerneo-1.0.3.jar
 ImmediatelyFast-NeoForge-1.6.10+1.21.1.jar
 ImmersiveEngineering-1.21.1-12.4.2-194.jar
 industrialforegoing-1.21-3.6.38.jar
@@ -141,7 +140,6 @@ occultism-1.21.1-neoforge-1.215.0.jar
 Oh-The-Biomes-Weve-Gone-NeoForge-2.5.5.jar
 Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.3.1.jar
 ok_zoomer-neo-10.0.0-beta.13.jar
-origins_classes-0.1-beta.2.jar
 origins_js-1.0-beta.2.jar
 origins-0.1-beta.5.jar
 Placebo-1.21.1-9.9.1.jar
