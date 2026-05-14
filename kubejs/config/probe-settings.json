@@ -1,5 +1,10 @@
 {
     "probejs.classScanning": false,
     "probejs.complete": false,
-    "probejs.modHash": 7967619069623179029
+    "probejs.modHash": 7967619069623179029,
+    "probejs.fullScanMods": [
+        "minecraft",
+        "kubejs",
+        "neoforge"
+    ]
 }

@@ -4,7 +4,7 @@
 	#.
 	#.
 	#If true, cannons cannot fail whatsoever. Equivalent to setting all the chances below to zero.
-	disableAllCannonFailure = false
+	disableAllCannonFailure = true
 	#.
 	#Chance that a fired projectile will get stuck in a barrel after exceeding the squib ratio. 0 is 0%, 1 is 100%.
 	# Default: 0.25

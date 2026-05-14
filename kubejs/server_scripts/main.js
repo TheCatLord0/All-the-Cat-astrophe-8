@@ -1,3 +1,5 @@
+import { tag } from "@package/dev/latvian/mods/kubejs/server";
+
 // Banned items
 let bannedItems = [
    'easy_villagers:auto_trader',
@@ -38,6 +40,7 @@ let bannedItems = [
    'ars_additions:codex_entry',
    "mekanism:module_gravitational_modulating_unit",
    "occultism:trinity_gem",
+   "starbunclemania:fluid_sourcelink",
 ]
 
 PlayerEvents.inventoryChanged(event => {
@@ -216,6 +219,14 @@ event.replaceInput(
   { output: "mekanismgenerators:heat_generator" },
   ["mekanism:ingot_osmium"],
   "create:blaze_burner")
+  event.replaceInput(
+  { output:'createpropulsion:ion_thruster'},
+  ["create:precision_mechanism"],
+  "extendedae:concurrent_processor")
+  event.replaceInput(
+  { output:Fluid.of("aeronautics:levitite_blend")},
+  Fluid.of("minecraft:water"),
+  Fluid.of("industrialforegoing:ether_gas"))
 	event.recipes.ars_nouveau.enchanting_apparatus(
         [
             "minecraft:bow",
@@ -436,4 +447,9 @@ const isNamedTheCatLord0 = entity => {
 
   event.addEntityModifier("cataclysm:ender_guardian")
     .addLoot("cataclysm:void_core")
+})
+
+// Item Tags
+ServerEvents.tags("item", (event) => {
+  event.remove("ars_nouveau:magic_food", "@ars_nouveau")
 })

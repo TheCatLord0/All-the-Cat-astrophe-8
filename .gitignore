@@ -48,3 +48,6 @@ Thumbs.db
 mods/
 
 config/iris.properties
+.github/agents/kubejs-explore.agent.md
+.github/agents/kubejs-planner.agent.md
+.github/agents/kubejs-survey.agent.md

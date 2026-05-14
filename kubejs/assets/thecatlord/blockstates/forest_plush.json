@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "thecatlord:block/plushies/forest_plush" },
+    "facing=south": { "model": "thecatlord:block/plushies/forest_plush", "y": 180 },
+    "facing=east":  { "model": "thecatlord:block/plushies/forest_plush", "y": 90 },
+    "facing=west":  { "model": "thecatlord:block/plushies/forest_plush", "y": 270 }
+  }
+}
