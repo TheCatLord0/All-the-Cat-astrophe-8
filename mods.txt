@@ -10,7 +10,7 @@ architectury-13.0.8-neoforge.jar
 ars_additions-1.21.1-21.3.0.jar
 ars_elemental-1.21.1-0.7.9.3.jar
 ars_hex-1.21.1-5.0.4b.jar
-ars_nouveau-1.21.1-5.11.4.jar
+ars_nouveau-1.21.1-5.11.5.jar
 ars_ocultas-1.21.1-2.4.1.jar
 ars_polymorphia-1.0.3.jar
 ars_technica-1.21.1-2.7.6.jar
@@ -20,6 +20,7 @@ attributefix-neoforge-1.21.1-21.1.3.jar
 audrops-1.0.1.jar
 baguettelib-1.21.1-NeoForge-2.0.3.jar
 balm-neoforge-1.21.1-21.0.56.jar
+betterbiomeblend-1.5.2.jar
 better-compatability-checker-neoforge-21.1.8.jar
 BiomesOPlenty-neoforge-1.21.1-21.1.0.13.jar
 biomespy-neoforge-1.21.1-1.3.3.jar
@@ -27,6 +28,7 @@ bits_n_bobs-0.0.44.jar
 bookshelf-neoforge-1.21.1-21.1.81.jar
 c2me-neoforge-mc1.21.1-0.3.0+alpha.0.91.jar
 catworks-1.0.6-neoforge.jar
+cbc_at_Neoforge_1.21.1_0.1.4c.jar
 cccbridge-mc1.21.1-v1.7.2-neoforge.jar
 cc-tweaked-1.21.1-forge-1.118.0.jar
 chat_heads-0.15.1-neoforge-1.21.jar
@@ -34,6 +36,7 @@ cleanswing-1.9.jar
 cleanview-1.21.1-v1-neoforge.jar
 cloth-config-15.0.140-neoforge.jar
 Clumps-neoforge-1.21.1-19.0.0.1.jar
+CodeChickenLib-1.21.1-4.6.1.526.jar
 configurable-3.5.1+1.21.1-neoforge.jar
 configured-neoforge-1.21.1-2.6.3.jar
 Controlling-neoforge-1.21.1-19.0.5.jar
@@ -45,12 +48,14 @@ create_ratatouille-1.21.1-1.3.9-2.jar
 create_schematic_sources-1.1.0.jar
 create-1.21.1-6.0.10.jar
 create-aeronautics-bundled-1.21.1-1.2.1.jar
+createbigcannons-5.11.3-mc.1.21.1.jar
 createdeco-2.1.3.jar
 CreateDragonsPlus-1.10.0b.jar
 create-enchantment-industry-2.3.1.jar
+createenderstorage-1.1.1.jar
 createliquidfuel-2.1.1-1.21.1.jar
 create-new-age-1.1.7c+neoforge-mc1.21.1.jar
-createthrusters-bundled-0.1.5.jar
+createpropulsion-1.1.3.jar
 cupboard-1.21-3.5.jar
 curios-neoforge-9.5.1+1.21.1.jar
 defaultoptions-neoforge-1.21.1-21.1.6.jar
@@ -58,7 +63,9 @@ dimthread-NEOFORGE-mc1.21.1-v1.2.1.jar
 dummmmmmy-1.21-2.0.12-neoforge.jar
 easy-villagers-neoforge-1.21.1-1.1.42.jar
 eidolon_repraised-1.21.1-0.5.0.2.jar
-emi-1.1.23+1.21.1+neoforge.jar
+emi-1.1.24+1.21.1+neoforge.jar
+endersourcejars-1.1.0.jar
+EnderStorage-1.21.1-2.13.0.191.jar
 entity_model_features-3.2.4-1.21-neoforge.jar
 entity_texture_features_1.21-neoforge-7.1.jar
 entityculling-neoforge-1.10.2-mc1.21.1.jar
@@ -66,7 +73,7 @@ entityjs-1.4.5-1.21.jar
 etched-5.0.0.jar
 ExtendedAE-1.21-2.2.32-neoforge.jar
 fancymenu_neoforge_3.9.0_MC_1.21.1.jar
-FarmersDelight-1.21.1-1.3.1.jar
+FarmersDelight-1.21.1-1.3.2.jar
 FastFurnace-1.21.1-9.0.1.jar
 fastleafdecay-35.jar
 FastSuite-1.21.1-6.0.7.jar
@@ -79,7 +86,7 @@ fusion-1.2.12-neoforge-mc1.21.1.jar
 gametechbcs_spellbooks-3.0.0-1.21.1.jar
 gaze-1.1.7.1.jar
 geckolib-neoforge-1.21.1-4.8.4.jar
-Geophilic v3.4.6.mod.jar
+Geophilic v3.5.mod.jar
 getittogetherdrops-neoforge-1.21.5-1.4.jar
 GlitchCore-neoforge-1.21.1-2.1.0.0.jar
 Glodium-1.21-2.2-neoforge.jar
@@ -105,7 +112,7 @@ kubejsarsnouveau-1.3.2.jar
 kubejs-create-neoforge-2101.3.1-build.18.jar
 kubejsdelight-1.21.1-1.1.5.jar
 kubejs-mekanism-neoforge-2101.1.7-build.18.jar
-kubejs-neoforge-2101.7.2-build.363.jar
+kubejs-neoforge-2101.7.2-build.368.jar
 L_Ender's Cataclysm 1.21.1-3.27.jar
 larion-neoforge-1.21.1-4.3.0.jar
 leaky-1.21-2.4.jar
@@ -126,7 +133,7 @@ moogs_structures-neoforge-1.21.1-2.0.2.jar
 MoogsEndStructures-1.21-2.0.2.jar
 MoogsNetherStructures-1.21-2.0.4.jar
 MoogsSoaringStructures-1.21-2.1.0.jar
-MoogsVoyagerStructures-1.21-5.0.9.jar
+MoogsVoyagerStructures-1.21-5.0.10.jar
 moonlight-neoforge-1.21.1-3.0.7.jar
 moreculling-neoforge-1.21.1-1.0.7.jar
 MouseTweaks-neoforge-mc1.21-2.26.1.jar
@@ -149,7 +156,7 @@ polyeng-0.4.1.jar
 polymorph-neoforge-1.1.0+1.21.1.jar
 portable_engine_liquid_fuel-2.0.0-neoforge-1.21.1.jar
 prickle-neoforge-1.21.1-21.1.11.jar
-ProbeJS-7.7.2.jar
+ProbeJS-8.0.0.jar
 Quark-4.1-479.jar
 rechiseled-1.2.4-neoforge-mc1.21.jar
 rechiseledae-1.0.0-neoforge-mc1.21.1.jar
@@ -158,6 +165,7 @@ rechiseledcreate-1.1.0-neoforge-mc1.21.jar
 reeses-sodium-options-neoforge-1.8.3+mc1.21.4.jar
 rhino-2101.2.7-build.81.jar
 rightclickharvest-neoforge-4.6.1+1.21.1.jar
+ritchiesprojectilelib-2.1.2-mc.1.21.1-neoforge.jar
 sablemassview-1.0.0.jar
 sable-neoforge-1.21.1-1.2.2.jar
 sablephysicscompat-1.3.0.jar
@@ -169,8 +177,8 @@ sodiumleafculling-neoforge-1.0.1-1.21.1.jar
 sodium-neoforge-0.6.13+mc1.21.1.jar
 sodiumoptionsapi-neoforge-1.0.10-1.21.1.jar
 sodiumoptionsmodcompat-neoforge-1.0.0-1.21.1.jar
-sophisticatedbackpacks-1.21.1-3.25.44.1736.jar
-sophisticatedcore-1.21.1-1.4.38.1847.jar
+sophisticatedbackpacks-1.21.1-3.25.45.1742.jar
+sophisticatedcore-1.21.1-1.4.39.1852.jar
 starbunclemania-1.21.1-1.5.6.jar
 Super Factory Manager (SFM)-MC1.21.1-4.32.0.jar
 supermartijn642configlib-1.1.8-neoforge-mc1.21.jar
