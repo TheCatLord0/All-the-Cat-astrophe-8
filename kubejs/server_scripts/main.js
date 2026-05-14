@@ -407,7 +407,8 @@ let books = [
     "ars_nouveau:novice_spell_book",
     "ars_nouveau:apprentice_spell_book",
     "ars_nouveau:archmage_spell_book",
-    "ars_nouveau:creative_spell_book"
+    "ars_nouveau:creative_spell_book",
+    "not_enough_glyphs:spell_binder",
 ]
 ItemEvents.rightClicked(books, event => {
     const { player, server, item } = event
