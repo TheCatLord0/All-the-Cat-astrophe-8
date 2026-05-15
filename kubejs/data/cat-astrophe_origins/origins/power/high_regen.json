@@ -1,0 +1,21 @@
+{
+    "type": "origins:modify_healing",
+    "modifier": {
+        "operation": "multiply_total",
+        "value": 50
+    },
+    "name": "Extreme Regeneration",
+    "description": "All healing is increased by 500%.",
+    "badges": [
+        {
+        "type": "origins:sprite",
+        "sprite": "minecraft:textures/effect/regeneration"
+        }
+    ],
+        "condition": {
+        "type": "origins:not",
+            "condition": {
+            "type": "origins:on_fire"
+        }
+    }
+}

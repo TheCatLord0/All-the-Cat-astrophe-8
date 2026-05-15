@@ -7,7 +7,7 @@ umbralDropEntities = ["minecraft:villager"]
 #Chance (0.0 to 1.0) for configured entities to drop Umbral Spirits when killed with a Veil Dagger. It's always 100% for players.
 # Default: 0.1
 # Range: 0.0 ~ 1.0
-umbralDropChance = 0.1
+umbralDropChance = 0.5
 #How much Soul Ward Integrity for a single Armour Toughness point
 # Default: 5.0
 # Range: 1.0 ~ 10.0

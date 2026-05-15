@@ -1,0 +1,10 @@
+{
+  "powers": [
+    "cat-astrophe_origins:high_regen"
+  ],
+  "icon": {
+    "id": "iceandfire:hydra_heart"
+  },
+  "order": 4,
+  "impact": 3
+}
