@@ -41,6 +41,10 @@ let bannedItems = [
    "mekanism:module_gravitational_modulating_unit",
    "occultism:trinity_gem",
    "starbunclemania:fluid_sourcelink",
+   "industrialforegoing:infinity_backpack",
+   "industrialforegoing:infinity_nuke",
+   "industrialforegoing:mechanical_dirt",
+   
 ]
 
 PlayerEvents.inventoryChanged(event => {
