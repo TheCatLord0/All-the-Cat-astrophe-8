@@ -1,0 +1,7 @@
+{
+    "type": "neoorigins:modify_damage",
+    "direction": "in",
+    "multiplier": 2,
+    "damage_type": "ars_nouveau:flare",
+    "hidden": true
+}

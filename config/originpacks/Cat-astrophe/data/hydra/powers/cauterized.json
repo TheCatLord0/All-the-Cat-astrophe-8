@@ -1,0 +1,8 @@
+{
+    "name": "Cauterized",
+    "description": "You're unable to regenerate while on fire which causes you to take extra fire damage.",
+    "type": "neoorigins:modify_damage",
+    "direction": "in",
+    "multiplier": 4,
+    "damage_type": "#minecraft:is_fire"
+}

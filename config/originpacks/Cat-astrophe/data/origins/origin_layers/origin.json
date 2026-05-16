@@ -1,0 +1,6 @@
+{
+    "origins": [
+        "hydra:hydra"
+    ],
+    "enabled": true
+}

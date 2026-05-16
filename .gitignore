@@ -28,6 +28,7 @@ shaderpacks/
 .probe
 config/ars_nouveau/search_index/
 config/iris.properties
+essential
 
 # Runtime files
 *.log
@@ -51,3 +52,10 @@ config/iris.properties
 .github/agents/kubejs-explore.agent.md
 .github/agents/kubejs-planner.agent.md
 .github/agents/kubejs-survey.agent.md
+ops.json
+servers.dat
+servers.dat_old
+servers.essential.dat
+whitelist.json
+config/iris.properties
+etched_sounds

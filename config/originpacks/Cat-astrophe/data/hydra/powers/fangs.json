@@ -1,0 +1,10 @@
+{
+  "type": "neoorigins:action_on_hit",
+  "action": "target_effect",
+  "effect": "minecraft:poison",
+  "duration": "2 * 20",
+  "amplifier": 1,
+  "chance": 0.75,
+  "name": "Venoumous Fangs",
+  "description": "Your venom is a milder version compared to that of your purebred cousin."
+}

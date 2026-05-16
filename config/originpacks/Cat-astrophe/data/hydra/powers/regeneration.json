@@ -1,0 +1,12 @@
+{
+    "name": "Cut One Head...",
+    "description": "You possess exceptional regenerative abilities thanks to your lineage.",
+    "condition": {
+        "inverted": true,
+        "type": "origins:on_fire"
+    },
+    "type": "neoorigins:persistent_effect",
+    "effect": "minecraft:regeneration",
+    "amplifier": 3,
+    "show_icon": false
+}

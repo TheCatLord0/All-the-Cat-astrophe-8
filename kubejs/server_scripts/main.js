@@ -435,6 +435,7 @@ ServerEvents.tags("entity_type", (event) => {
 // Global Loot
 LootJS.modifiers(event => {
   event.addTableModifier(/chests/).removeLoot(["minecraft:netherite_scrap", "minecraft:netherite_ingot", "minecraft:ancient_debris", "minecraft:diamond"])
+
 const isNamedOdinshi = entity => {
   if (entity == null) return false
   return entity.getName().getString() == 'Odinshi'
@@ -442,6 +443,7 @@ const isNamedOdinshi = entity => {
   event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
        .matchEntityCustom(isNamedOdinshi)
        .addLoot("kubejs:odins_plush")
+
 const isNamedTheCatLord0 = entity => {
   if (entity == null) return false
   return entity.getName().getString() == 'TheCatLord0'
@@ -449,6 +451,14 @@ const isNamedTheCatLord0 = entity => {
   event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
        .matchEntityCustom(isNamedTheCatLord0)
        .addLoot("kubejs:cat_plush")
+
+const isNamedForestQueen558 = entity => {
+  if (entity == null) return false
+  return entity.getName().getString() == 'ForestQueen558'
+}
+  event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
+       .matchEntityCustom(isNamedForestQueen558)
+       .addLoot("kubejs:forest_plush")
 
   event.addEntityModifier("cataclysm:ender_guardian")
     .addLoot("cataclysm:void_core")
