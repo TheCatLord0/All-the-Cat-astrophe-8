@@ -147,6 +147,7 @@ MouseTweaks-neoforge-mc1.21-2.26.1.jar
 mru-1.0.19+LTS+1.21.1+neoforge.jar
 NaNny-1.21.1-1.0.1.jar
 NaturesCompass-1.21.1-3.4.0-neoforge.jar
+neoorigins-2.0.36+1.21.1.jar
 neruina-3.3.1+1.21.1-neoforge.jar
 noisium-neoforge-2.7.0+mc1.21-1.21.1.jar
 not_enough_glyphs-1.21.1-4.4.0.jar
@@ -156,8 +157,6 @@ occultism-1.21.1-neoforge-1.215.0.jar
 Oh-The-Biomes-Weve-Gone-NeoForge-2.5.5.jar
 Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.3.1.jar
 ok_zoomer-neo-10.0.0-beta.13.jar
-origins_js-1.0-beta.2.jar
-origins-0.1-beta.6.jar
 particlerain-4.0.0-beta.10+1.21.1-neoforge.jar
 particular-1.21.1-NeoForge-1.5.0.jar
 Placebo-1.21.1-9.9.1.jar
