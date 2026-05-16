@@ -6,5 +6,7 @@
         "minecraft",
         "kubejs",
         "neoforge"
-    ]
+    ],
+    "probejs.generateBeans": true,
+    "probejs.hintsForLLM": false
 }

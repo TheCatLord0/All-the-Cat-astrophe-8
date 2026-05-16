@@ -44,6 +44,8 @@ let bannedItems = [
    "industrialforegoing:infinity_backpack",
    "industrialforegoing:infinity_nuke",
    "industrialforegoing:mechanical_dirt",
+   "irons_spellbooks:fireward_ring",
+   "eidolon_repraised:raven_cloak",
    
 ]
 
