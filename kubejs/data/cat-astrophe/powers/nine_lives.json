@@ -1,0 +1,8 @@
+{
+  "type": "neoorigins:attribute_modifier",
+  "attribute": "minecraft:generic.max_health",
+  "amount": -2.0,
+  "operation": "add_value",
+  "name": "Nine Lives",
+  "description": "The tale of cats having nine lives applies to you, but as a result, you have less health."
+}

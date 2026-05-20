@@ -1,0 +1,6 @@
+{
+  "type": "neoorigins:scare_entities",
+  "entity_types": ["minecraft:creeper", "minecraft:spider"],
+  "name": "Adorable",
+  "description": "Even frightening creatures tremble before your cuteness."
+}

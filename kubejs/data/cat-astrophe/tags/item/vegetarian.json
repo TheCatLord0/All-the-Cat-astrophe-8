@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "#c:crops",
+    "#c:foods/vegetable",
+    "#c:fruits",
+    "minecraft:mushroom_stew",
+    "minecraft:beetroot_soup",
+    "minecraft:suspicious_stew",
+    "farmersdelight:tomato_sauce",
+    "minecraft:pumpkin_pie",
+    "farmersdelight:apple_pie_slice",
+    "farmersdelight:sweet_berry_cheesecake_slice",
+    "farmersdelight:sweet_berry_cookie",
+    "farmersdelight:melon_popsicle",
+    "farmersdelight:glow_berry_custard",
+    "farmersdelight:fruit_salad",
+    "farmersdelight:mixed_salad",
+    "farmersdelight:nether_salad",
+    "farmersdelight:egg_sandwich",
+    "farmersdelight:cabbage_rolls",
+    "farmersdelight:cooked_rice",
+    "farmersdelight:vegetable_soup",
+    "farmersdelight:fried_rice",
+    "farmersdelight:onion_soup",
+    "farmersdelight:mushroom_rice",
+    "farmersdelight:vegetable_noodles",
+    "farmersdelight:ratatouille",
+    "farmersdelight:stuffed_pumpkin",
+    "farmersdelight:gleaming_salad"
+  ]
+}

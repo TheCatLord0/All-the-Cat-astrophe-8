@@ -2,7 +2,7 @@
   "type": "neoorigins:action_on_hit",
   "action": "target_effect",
   "effect": "minecraft:poison",
-  "duration": "2 * 20",
+  "duration": 40,
   "amplifier": 1,
   "chance": 0.75,
   "name": "Venoumous Fangs",

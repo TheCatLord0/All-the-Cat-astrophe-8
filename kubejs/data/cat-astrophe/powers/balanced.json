@@ -1,0 +1,8 @@
+{
+  "type": "neoorigins:attribute_modifier",
+  "attribute": "minecraft:generic.safe_fall_distance",
+  "amount": 24,
+  "operation": "add_value",
+  "name": "Balanced",
+  "description": "Because of your tail, you're able to flip mid-air to get back onto your feet."
+}

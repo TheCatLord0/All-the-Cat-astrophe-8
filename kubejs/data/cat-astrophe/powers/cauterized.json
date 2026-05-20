@@ -1,6 +1,6 @@
 {
     "name": "Cauterized",
-    "description": "You're unable to regenerate while on fire which causes you to take extra fire damage.",
+    "description": "You cannot regenerate while on fire, causing you to take additional fire damage.",
     "type": "neoorigins:modify_damage",
     "direction": "in",
     "multiplier": 4,

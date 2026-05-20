@@ -1,0 +1,12 @@
+{
+    "order": 1,
+    "name": "Human",
+    "description": "The most common race in the Rim.",
+    "powers": [
+        "cat-astrophe:human"
+    ],
+    "icon": {
+        "item": "minecraft:apple"
+    },
+    "impact": 0
+}

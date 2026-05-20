@@ -1,12 +1,14 @@
 {
+    "order": 3,
     "name": "Half Hydra",
     "description": "A magical relative to the Hydra that somehow combined with a human.",
     "powers": [
-        "hydra:regeneration",
-        "hydra:cauterized",
-        "hydra:flare",
-        "hydra:fangs",
-        "hydra:carnivore"
+        "cat-astrophe:regeneration",
+        "cat-astrophe:fangs",
+        "cat-astrophe:cauterized",
+        "cat-astrophe:flare",
+        "cat-astrophe:carnivore",
+        "cat-astrophe:weak_flesh"
     ],
     "icon": {
         "item": "iceandfire:hydra_heart"

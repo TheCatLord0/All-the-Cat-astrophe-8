@@ -20,16 +20,16 @@ disable_resource_bars = false
 #Disabled origins can still be assigned via /neoorigins set.
 #Datapack and originpack origins are not affected by these toggles.
 [origins]
-	human = true
-	merling = true
-	avian = true
-	blazeling = true
+	human = false
+	merling = false
+	avian = false
+	blazeling = false
 	elytrian = false
-	enderian = true
-	arachnid = true
-	shulk = true
+	enderian = false
+	arachnid = false
+	shulk = false
 	phantom = false
-	feline = true
+	feline = false
 	golem = false
 	caveborn = false
 	sylvan = false
@@ -1525,3 +1525,11 @@ disable_resource_bars = false
 	# Default: 0.07
 	# Range: 0.0 ~ 1.0
 	helmet_dura_damage_chance = 0.07
+
+#Command access tuning.
+[commands]
+	#Allow non-OP players to run /neoorigins get <player> to look up
+	#another player's origin. Operators (permission level 2) can always
+	#run it regardless of this setting. Set to false to make origins
+	#visible only to staff.
+	public_origin_get = true

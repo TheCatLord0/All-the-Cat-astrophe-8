@@ -1,0 +1,15 @@
+{
+    "order": 2,
+    "name": "Automaton",
+    "description": "A dying race created by the Ancient Beings.",
+    "powers": [
+        "cat-astrophe:multi_tool",
+        "cat-astrophe:multi_tool_shovel",
+        "cat-astrophe:multi_tool_axe",
+        "cat-astrophe:steam_engine"
+    ],
+    "icon": {
+        "item": "create:brass_ingot"
+    },
+    "impact": 1
+}

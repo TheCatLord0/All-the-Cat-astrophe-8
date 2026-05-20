@@ -1,0 +1,17 @@
+{
+    "order": 4,
+    "name": "Feline",
+    "description": "A cat demi human that has exceptional reflexes.",
+    "powers": [
+        "cat-astrophe:adorable",
+        "cat-astrophe:leap",
+        "cat-astrophe:balanced",
+        "cat-astrophe:nine_lives",
+        "cat-astrophe:little_legs",
+        "cat-astrophe:carnivore"
+    ],
+    "icon": {
+        "item": "minecraft:salmon"
+    },
+    "impact": 2
+}

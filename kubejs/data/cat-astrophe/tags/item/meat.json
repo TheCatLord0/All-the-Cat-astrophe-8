@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:meat",
+    "#minecraft:fishes",
+    "#c:foods/golden",
+    "farmersdelight:chicken_sandwich",
+    "farmersdelight:roast_chicken",
+    "farmersdelight:beef_stew",
+    "farmersdelight:hamburger",
+    "farmersdelight:bacon_sandwich",
+    "farmersdelight:mutton_wrap",
+    "farmersdelight:stuffed_potato",
+    "farmersdelight:salmon_roll",
+    "farmersdelight:cod_roll",
+    "farmersdelight:fish_stew",
+    "farmersdelight:pumpkin_soup",
+    "farmersdelight:baked_cod_stew",
+    "farmersdelight:noodle_soup",
+    "farmersdelight:bacon_and_eggs",
+    "farmersdelight:pasta_with_mutton_chop",
+    "farmersdelight:pasta_with_meatballs",
+    "farmersdelight:roasted_mutton_chops",
+    "farmersdelight:steak_and_potatoes",
+    "farmersdelight:squid_ink_pasta",
+    "farmersdelight:grilled_salmon",
+    "farmersdelight:honey_glazed_ham",
+    "farmersdelight:shepherds_pie",
+    "#tide:fish",
+    "#tide:cooked_fish" 
+  ]
+}

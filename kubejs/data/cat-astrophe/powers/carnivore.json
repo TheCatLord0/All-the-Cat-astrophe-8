@@ -1,13 +1,13 @@
 {
-  "name": "Carnivore Pescatarian",
-  "description": "Can only eat meat or fish.",
+  "name": "Carnivore",
+  "description": "You can only consume meat or fish.",
   "type": "neoorigins:action_on_event",
   "event": "food_eaten",
   "entity_action": {
     "type": "neoorigins:if_else",
     "condition": {
       "type": "neoorigins:food_item_in_tag",
-      "tag": "#minecraft:meat"
+      "tag": "#cat-astrophe:meat"
     },
     "if_action": { "type": "neoorigins:nothing" },
     "else_action":   { "type": "neoorigins:cancel_event" }

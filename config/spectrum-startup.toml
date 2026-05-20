@@ -86,9 +86,9 @@ improved_critical_extra_damage_multiplier_per_level = 0.5
 #Flat additional damage dealt with each level of the First Strike enchantment
 first_strike_damage_per_level = 2.0
 #The percentile a mobs armor/hand stacks are being dropped when hit with a Disarming enchanted weapon per the enchantments level
-disarming_chance_per_level_mobs = 0.01
+disarming_chance_per_level_mobs = 0.0
 #If > 0 the Disarming Enchantment is able to remove armor and hand tools from a hit player. Should be a far smaller chance than for mobs
-disarming_chance_per_level_players = 0.0025
+disarming_chance_per_level_players = 0.0
 #Experience dropped my mined infested blocks is multiplied by this value
 pest_control_experience_multiplier = 2.0
 #The duration a glow ink sac gives night vision when wearing a glow vision helmet in seconds

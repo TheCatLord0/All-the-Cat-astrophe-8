@@ -1,0 +1,15 @@
+{
+    "name": "Steam Power",
+    "description": "Your creators wanted you to be eco-friendly, so you can only eat as a vegetarian.",
+  "type": "neoorigins:action_on_event",
+  "event": "food_eaten",
+  "entity_action": {
+    "type": "neoorigins:if_else",
+    "condition": {
+      "type": "neoorigins:food_item_in_tag",
+      "tag": "#cat-astrophe:vegetarian"
+    },
+    "if_action": { "type": "neoorigins:nothing" },
+    "else_action":   { "type": "neoorigins:cancel_event" }
+  }
+}

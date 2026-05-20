@@ -1,0 +1,11 @@
+{
+    "type": "neoorigins:active_ability",
+    "name": "Leap",
+    "description": "Like a normal cat, you're able to leap great distances.",
+    "cooldown_ticks": 200,
+    "entity_action": {
+        "type": "neoorigins:dash",
+        "strength": 1.75,
+        "allow_vertical": true
+    }
+}

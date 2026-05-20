@@ -8,5 +8,6 @@
     "type": "neoorigins:persistent_effect",
     "effect": "minecraft:regeneration",
     "amplifier": 3,
-    "show_icon": false
+    "show_icon": false,
+    "toggleable": false
 }

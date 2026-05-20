@@ -1,0 +1,9 @@
+{
+    "origins": [
+        "cat-astrophe:human",
+        "cat-astrophe:feline",
+        "cat-astrophe:hydra",
+        "cat-astrophe:automaton"
+    ],
+    "enabled": true
+}

@@ -1,0 +1,8 @@
+{
+    "name": "Fragile Legs",
+    "description": "After a point in the air, your soft feet can't carry the blow.",
+    "type": "neoorigins:modify_damage",
+    "direction": "in",
+    "multiplier": 2,
+    "damage_type": "fall"
+}
