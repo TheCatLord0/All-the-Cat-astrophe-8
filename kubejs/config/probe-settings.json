@@ -8,5 +8,6 @@
         "neoforge"
     ],
     "probejs.generateBeans": true,
-    "probejs.hintsForLLM": false
+    "probejs.hintsForLLM": false,
+    "probejs.newGame": false
 }

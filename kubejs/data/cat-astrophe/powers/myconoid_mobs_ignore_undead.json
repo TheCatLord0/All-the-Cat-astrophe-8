@@ -1,0 +1,18 @@
+{
+  "type": "neoorigins:mobs_ignore_player",
+  "entity_types": [
+    "minecraft:zombie",
+    "minecraft:husk",
+    "minecraft:drowned",
+    "minecraft:zombie_villager",
+    "minecraft:zombified_piglin",
+    "minecraft:skeleton",
+    "minecraft:stray",
+    "minecraft:wither_skeleton",
+    "minecraft:phantom",
+    "minecraft:zoglin"
+  ],
+  "name": "Old Scent",
+  "description": "Certain creatures sense the mycelium in you and keep their distance.",
+  "hidden": true
+}

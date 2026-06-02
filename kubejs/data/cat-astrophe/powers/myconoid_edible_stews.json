@@ -1,0 +1,8 @@
+{
+  "type": "neoorigins:edible_item",
+  "tags": ["cat-astrophe:myconoid_foods_stew"],
+  "nutrition": 6,
+  "saturation": 0.6,
+  "always_edible": true,
+  "hidden": true
+}

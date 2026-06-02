@@ -1,0 +1,16 @@
+{
+  "type": "neoorigins:action_on_hit",
+  "target_action": {
+    "type": "neoorigins:execute_command",
+    "command": "tag @s add myconid_infect_request"
+  },
+  "condition": {
+    "type": "neoorigins:equipped_item",
+    "slot": "mainhand",
+    "item_condition": {
+      "type": "neoorigins:empty"
+    }
+  },
+  "name": "Inoculation",
+  "description": "Strike a mob with bare hands to inject your spores directly into its body."
+}

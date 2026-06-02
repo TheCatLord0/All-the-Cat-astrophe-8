@@ -1,0 +1,8 @@
+{
+  "type": "neoorigins:edible_item",
+  "items": ["minecraft:spider_eye"],
+  "nutrition": 2,
+  "saturation": 0.8,
+  "always_edible": true,
+  "hidden": true
+}

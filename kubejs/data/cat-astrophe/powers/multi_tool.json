@@ -2,5 +2,5 @@
   "type": "neoorigins:bare_hand_tool",
   "tool": "minecraft:stone_pickaxe",
   "name": "Multi-tool",
-  "description": "Your creators, in preparation to have you automate, carefully made it so your hands can break early materials in the Rim."
+  "description": "Your bare hands mine stone and cobblestone as if wielding a stone pickaxe. Sneak and right-click any log bare-handed to strip it, or stone and cobblestone to crumble them."
 }

@@ -1,0 +1,8 @@
+{
+  "type": "neoorigins:mobs_ignore_player",
+  "entity_types": [
+    "minecraft:spider",
+    "minecraft:cave_spider"
+  ],
+  "hidden": true
+}

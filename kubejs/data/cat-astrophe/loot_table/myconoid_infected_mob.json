@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        { "type": "minecraft:item", "name": "minecraft:brown_mushroom", "weight": 1 },
+        { "type": "minecraft:item", "name": "minecraft:red_mushroom", "weight": 1 },
+        { "type": "minecraft:item", "name": "minecraft:brown_mushroom_block", "weight": 1 },
+        { "type": "minecraft:item", "name": "minecraft:red_mushroom_block", "weight": 1 }
+      ],
+      "bonus_rolls": 0
+    }
+  ]
+}

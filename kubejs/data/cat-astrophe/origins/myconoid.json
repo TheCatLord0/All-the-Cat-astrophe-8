@@ -1,0 +1,23 @@
+{
+  "name": "Myconid",
+  "description": "A living fungal colony. You do not fight — you infest, persist, and observe.",
+  "icon": "minecraft:brown_mushroom",
+  "impact": 3,
+  "order": 0,
+  "powers": [
+    "cat-astrophe:myconoid_on_chosen",
+    "cat-astrophe:myconoid_possess",
+    "cat-astrophe:myconoid_network_collapse",
+    "cat-astrophe:myconoid_bare_hand_infection",
+    "cat-astrophe:myconoid_mobs_ignore_undead",
+    "cat-astrophe:myconoid_mobs_ignore_spiders",
+    "cat-astrophe:myconoid_mobs_ignore_creepers",
+    "cat-astrophe:myconoid_food_restriction",
+    "cat-astrophe:myconoid_frail_body",
+    "cat-astrophe:myconoid_entity_set",
+    "cat-astrophe:myconoid_edible_mushrooms",
+    "cat-astrophe:myconoid_edible_stews",
+    "cat-astrophe:myconoid_edible_rotten",
+    "cat-astrophe:myconoid_edible_spider"
+  ]
+}

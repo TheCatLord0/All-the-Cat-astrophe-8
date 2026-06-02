@@ -1,0 +1,10 @@
+{
+  "type": "neoorigins:active_ability",
+  "action": {
+    "type": "neoorigins:execute_command",
+    "command": "tag @s add myconid_collapse_pending"
+  },
+  "cooldown_ticks": 300,
+  "name": "Network Collapse",
+  "description": "Send a pulse through your infected network. Every host is stunned, blinded, and damaged. The network is then severed."
+}

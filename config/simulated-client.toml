@@ -5,7 +5,7 @@
 	#.
 	#When to display physics properties in block tooltips
 	#Allowed Values: ALWAYS, SHIFT, GOGGLES, SHIFT_GOGGLES, NEVER
-	displayProperties = "GOGGLES"
+	displayProperties = "SHIFT"
 	#.
 	#The sensitivity of scrolling when holding a sub-level with the Creative Physics Staff
 	# Default: 0.6000000238418579

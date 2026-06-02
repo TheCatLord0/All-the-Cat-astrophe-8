@@ -1,0 +1,17 @@
+{
+    "name": "Resonant",
+    "description": "An arcane accident transfigured your body into a vessel of pure Ars Nouveau source energy. You no longer hunger — you resonate with magical flux.",
+    "icon": {
+        "item": "ars_nouveau:source_gem"
+    },
+    "impact": 3,
+    "order": 0,
+    "powers": [
+        "cat-astrophe:resonant_on_chosen",
+        "cat-astrophe:resonant_hide_hunger",
+        "cat-astrophe:resonant_no_exhaustion",
+        "cat-astrophe:resonant_food_restriction",
+        "cat-astrophe:resonant_no_regen",
+        "cat-astrophe:resonant_channel"
+    ]
+}

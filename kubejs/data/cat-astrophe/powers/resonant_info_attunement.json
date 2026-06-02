@@ -1,0 +1,5 @@
+{
+    "type": "origins:nothing",
+    "name": "Disrupted Attunement",
+    "description": "Taking damage disrupts your arcane attunement, draining your source bar proportionally to the hit received."
+}

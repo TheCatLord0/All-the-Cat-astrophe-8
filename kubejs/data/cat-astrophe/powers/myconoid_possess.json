@@ -1,0 +1,11 @@
+{
+    "type": "neoorigins:active_ability",
+    "action": {
+        "type": "neoorigins:execute_command",
+        "command": "tag @s add myconoid_possess_activated"
+    },
+    "cooldown_ticks": 200,
+    "name": "Neural Tap",
+    "description": "Merge your consciousness with the nearest infected host. Observe through its senses. Sneak to withdraw.",
+    "hidden": false
+}

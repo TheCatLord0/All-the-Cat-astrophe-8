@@ -46,7 +46,10 @@ let bannedItems = [
    "industrialforegoing:mechanical_dirt",
    "irons_spellbooks:fireward_ring",
    "eidolon_repraised:raven_cloak",
-   
+   "ars_additions:source_spawner",
+   "ars_additions:ender_source_jar",
+   "sophisticatedbackpacks:mob_catcher_upgrade",
+   "sophisticatedbackpacks:advanced_mob_catcher_upgrade",
 ]
 
 PlayerEvents.inventoryChanged(event => {
@@ -192,11 +195,11 @@ event.replaceInput(
 event.replaceInput(
   { output: "sfm:cable" },
   ["minecraft:light_weighted_pressure_plate"],
-  "mekanism:ingot_steel")
+  "immersiveengineering:ingot_steel")
 event.replaceInput(
   { output: "sfm:cable" },
   ["minecraft:black_dye"],
-  /mekanism:.*_logistical_transporter/)
+  'mekanism:basic_logistical_transporter')
 event.replaceInput(
   { output: ["functionalstorage:storage_controller", "functionalstorage:framed_storage_controller"] },
   ["minecraft:comparator"],
@@ -233,6 +236,10 @@ event.replaceInput(
   { output:Fluid.of("aeronautics:levitite_blend")},
   Fluid.of("minecraft:water"),
   Fluid.of("industrialforegoing:ether_gas"))
+  event.replaceInput(
+  { output:"eidolon_repraised:soul_enchanter"},
+  ["minecraft:diamond"],
+  "spectrum:stratine_gem")
 	event.recipes.ars_nouveau.enchanting_apparatus(
         [
             "minecraft:bow",
@@ -429,9 +436,10 @@ function onlyDrygmy(event, entity) {
     return event.addEntityModifier(entity).matchAttackerCustom((attacker) => attacker.uuid.toString() == DRYGMY_UUID);
 }
 ServerEvents.tags("entity_type", (event) => {
-  event.add("ars_nouveau:drygmy_blacklist", ["minecraft:ender_dragon", "minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"])
+  event.add("ars_nouveau:drygmy_blacklist", ["minecraft:ender_dragon", "minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks", "@occultism"])
     event.add("industrialforegoing:mob_duplicator_blacklist", ["minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
-    event.add("ars_nouveau:jar_blacklist", ["minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
+    event.add("ars_nouveau:jar_blacklist", ["minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
+  event.remove("ars_nouveau:drygmy_blacklist", ["occultism:marid_unbound", "occultism:afrit_wild"]) 
 })
 
 // Global Loot
@@ -461,6 +469,15 @@ const isNamedForestQueen558 = entity => {
   event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
        .matchEntityCustom(isNamedForestQueen558)
        .addLoot("kubejs:forest_plush")
+
+const isNamedCotyn__ = entity => {
+  if (entity == null) return false
+  return entity.getName().getString() == 'Cotyn__'
+}
+  event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
+       .matchEntityCustom(isNamedCotyn__)
+       .addLoot("kubejs:cotyn_plush")
+
 
   event.addEntityModifier("cataclysm:ender_guardian")
     .addLoot("cataclysm:void_core")

@@ -1,0 +1,8 @@
+{
+    "type": "neoorigins:food_restriction",
+    "mode": "whitelist",
+    "item_tag": "cat-astrophe:resonant_foods",
+    "name": "Arcane Diet",
+    "description": "Your body no longer processes mundane food. Only arcane source sustains you.",
+    "hidden": true
+}

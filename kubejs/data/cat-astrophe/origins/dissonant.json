@@ -1,0 +1,12 @@
+{
+  "name": "Dissonant",
+  "description": "A broker of dark bargains. You traffic in power — for a price.",
+  "icon": "minecraft:nether_star",
+  "impact": 2,
+  "order": 0,
+  "powers": [
+    "cat-astrophe:dissonant_contracts",
+    "cat-astrophe:dissonant_weakness",
+    "cat-astrophe:carnivore"
+  ]
+}

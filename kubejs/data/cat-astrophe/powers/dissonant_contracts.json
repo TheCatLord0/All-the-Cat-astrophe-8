@@ -1,0 +1,11 @@
+{
+  "type": "neoorigins:active_ability",
+  "action": {
+    "type": "neoorigins:execute_command",
+    "command": "tag @s add dissonant_contract_activated"
+  },
+  "cooldown_ticks": 40,
+  "name": "Soul Contractor",
+  "description": "Because of your innate ability to see the Soul, you can either empower your fake Soul or another's Soul in exchange for a downside of some sort.",
+  "hidden": false
+}

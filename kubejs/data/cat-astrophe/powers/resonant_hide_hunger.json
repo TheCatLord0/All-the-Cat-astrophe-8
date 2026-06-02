@@ -1,0 +1,7 @@
+{
+    "type": "neoorigins:hide_hud_bar",
+    "bar": "hunger",
+    "name": "No Hunger",
+    "description": "Your body no longer requires food. Instead it is sustained by a source bar that slowly drains over time and must be replenished with arcane materials.",
+    "hidden": false
+}

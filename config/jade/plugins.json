@@ -126,5 +126,8 @@
   },
   "gravestone": {
     "grave": true
+  },
+  "neovitae": {
+    "block_info": true
   }
 }

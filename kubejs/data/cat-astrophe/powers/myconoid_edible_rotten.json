@@ -1,0 +1,8 @@
+{
+  "type": "neoorigins:edible_item",
+  "items": ["minecraft:rotten_flesh"],
+  "nutrition": 4,
+  "saturation": 0.1,
+  "always_edible": true,
+  "hidden": true
+}

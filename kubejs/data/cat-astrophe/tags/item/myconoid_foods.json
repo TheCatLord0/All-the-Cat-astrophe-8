@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:mushroom_stew",
+    "minecraft:suspicious_stew",
+    "minecraft:rotten_flesh",
+    "minecraft:spider_eye",
+    "minecraft:beetroot_soup",
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
+    "minecraft:mushroom_stem",
+    "minecraft:brown_mushroom_block",
+    "minecraft:red_mushroom_block"
+  ]
+}

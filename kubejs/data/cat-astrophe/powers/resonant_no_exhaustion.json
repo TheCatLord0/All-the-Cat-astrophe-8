@@ -1,0 +1,11 @@
+{
+    "type": "neoorigins:action_on_event",
+    "event": "mod_exhaustion",
+    "modifier": {
+        "operation": "multiplication",
+        "value": 0.0
+    },
+    "name": "Source Feeding",
+    "description": "Right-click to instantly consume source berries, archfruit pods, or source gems. Sneak and right-click a source jar to draw directly from it.",
+    "hidden": false
+}

@@ -1,0 +1,8 @@
+{
+    "type": "neoorigins:attribute_modifier",
+    "attribute": "minecraft:water_movement_efficiency",
+    "amount": -0.4,
+    "operation": "add_value",
+    "name": "Heavy Frame",
+    "description": "Your mechanical body was not designed for water. You move sluggishly while submerged."
+}

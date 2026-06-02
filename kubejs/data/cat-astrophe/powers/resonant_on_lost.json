@@ -1,0 +1,9 @@
+{
+    "type": "neoorigins:action_on_event",
+    "event": "LOST",
+    "entity_action": {
+        "type": "neoorigins:execute_command",
+        "command": "tag @s add resonant_lost_pending"
+    },
+    "hidden": true
+}

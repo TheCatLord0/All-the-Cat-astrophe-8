@@ -1,0 +1,11 @@
+{
+    "type": "neoorigins:action_on_event",
+    "event": "GAINED",
+    "entity_action": {
+        "type": "neoorigins:execute_command",
+        "command": "tag @s add resonant_owner"
+    },
+    "name": "Resonance",
+    "description": "Your body resonates with arcane energy. At high resonance you regenerate and glow. At low resonance weakness and slowness set in. At zero, poison takes hold.",
+    "hidden": false
+}

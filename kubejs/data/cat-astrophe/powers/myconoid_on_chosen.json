@@ -1,0 +1,18 @@
+{
+  "type": "neoorigins:action_on_event",
+  "event": "GAINED",
+  "entity_action": {
+    "type": "neoorigins:and",
+    "actions": [
+      {
+        "type": "neoorigins:execute_command",
+        "command": "tag @s add myconoid_owner"
+      },
+      {
+        "type": "neoorigins:execute_command",
+        "command": "tag @s remove myconoid_lost_pending"
+      }
+    ]
+  },
+  "hidden": true
+}

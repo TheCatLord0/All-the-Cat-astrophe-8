@@ -1,0 +1,18 @@
+{
+    "replace": true,
+    "order": 1,
+    "name": "origins.layer.origin",
+    "origins": [
+        "cat-astrophe:human",
+        "cat-astrophe:feline",
+        "cat-astrophe:hydra",
+        "cat-astrophe:automaton",
+        "cat-astrophe:myconoid",
+        "cat-astrophe:resonant",
+        "cat-astrophe:dissonant"
+    ],
+    "allow_random": false,
+    "auto_choose": false,
+    "hidden": false,
+    "enabled": true
+}

@@ -141,4 +141,25 @@ ItemEvents.modification(event => {
       ]
     })
   })
+  event.modify("create:blaze_cake", item => {
+    item.setFood({
+        nutrition: 8,
+        saturation: 8.0,
+        eatSeconds: 1.6,
+        canAlwaysEat: true,
+        effects: [
+        {
+          probability: 1,
+          effectSupplier: () =>
+            new $MobEffectInstance(
+              /* Effect:         */ "ars_nouveau:blasting",
+              /* Duration:       */ 10 * 20,
+              /* Level:          */ 4,
+              /* Is ambient:     */ false,
+              /* Hide particles: */ true
+            )
+        }
+      ]
+    })
+  })
 })

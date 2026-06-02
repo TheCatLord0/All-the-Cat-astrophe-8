@@ -1376,6 +1376,28 @@ disable_resource_bars = false
 		# Range: 0.0 ~ 128.0
 		radius = 8.0
 
+	[power_overrides.mount]
+		# Default: 5.0
+		# Range: 1.0 ~ 64.0
+		range = 5.0
+		# Default: 100
+		# Range: 0 ~ 72000
+		cooldown_ticks = 100
+		# Default: 0
+		# Range: 0 ~ 100
+		hunger_cost = 0
+		allow_players = true
+		allow_mobs = true
+		block_bosses = true
+
+	[power_overrides.js_active]
+		# Default: 20
+		# Range: 0 ~ 72000
+		cooldown_ticks = 20
+		# Default: 0
+		# Range: 0 ~ 100
+		hunger_cost = 0
+
 #Orb of Origins settings.
 #Controls XP cost behaviour when a player uses an Orb of Origin.
 [orb_of_origins]
@@ -1533,3 +1555,17 @@ disable_resource_bars = false
 	#run it regardless of this setting. Set to false to make origins
 	#visible only to staff.
 	public_origin_get = true
+
+#Mount power settings. Controls how player-to-player mounting
+#consent works. ALWAYS: mount any player without consent.
+#PROMPT: target must click [ACCEPT] or run /neoorigins mount accept.
+#TEAM: auto-allow if both players share a team (FTB Teams or
+#Open Parties and Claims); falls back to ALWAYS if no team mod is loaded.
+[mount]
+	#Consent mode for mounting other players.
+	#Allowed Values: ALWAYS, PROMPT, TEAM
+	consent_mode = "ALWAYS"
+	#Seconds before a mount request expires (only used in PROMPT mode).
+	# Default: 30
+	# Range: 5 ~ 300
+	request_timeout_seconds = 30
