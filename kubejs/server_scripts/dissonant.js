@@ -1,5 +1,4 @@
 var DISSONANT_CONTRACT_ITEMS = [
-    'kubejs:executioner',
     'kubejs:cat_plush'
 ]
 
