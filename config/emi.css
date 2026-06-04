@@ -320,7 +320,7 @@
 	/**
 	 * Clears the search bar.
 	 */
-	clear-search: "key.keyboard.unknown";
+	clear-search: "ctrl key.keyboard.d";
 
 	/**
 	 * Display the recipes for creating a stack.

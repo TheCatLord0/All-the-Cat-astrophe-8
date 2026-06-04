@@ -1,12 +1,13 @@
 {
     "order": 2,
     "name": "Automaton",
-    "description": "Made by the [[Ancient Ones]] they were designed to create more of the [[Paradise of Hell]] from nothing.",
+    "description": "Made by the Ancient Ones they were designed to create more of the Paradise of Hell from nothing.",
     "powers": [
         "cat-astrophe:automaton_on_chosen",
         "cat-astrophe:multi_tool",
         "cat-astrophe:steam_engine",
-        "cat-astrophe:automaton_heavy_body"
+        "cat-astrophe:automaton_heavy_body",
+        "cat-astrophe:automaton_grapple"
     ],
     "icon": {
         "item": "create:brass_ingot"

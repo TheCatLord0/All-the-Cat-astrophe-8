@@ -1,36 +1,8 @@
 var DISSONANT_CONTRACT_ITEMS = [
-    'kubejs:cat_plush'
+    'kubejs:martyr_core'
 ]
 
 var DISSONANT_CONTRACTS = [
-    {
-        id: 'embers',
-        short: 'Fire',
-        name: 'Fear no Fire',
-        desc: "Having been afraid of fire all one's life will make them gravitate towards this type of Contract which lowers one's health but grants them the magical effect of Fire Resistance. (-1 Hearts, +Fire Resistance)",
-        attrs: [{ attr: 'minecraft:generic.max_health', id: 'dissonant:embers_health', amount: -2 }],
-        fx: [{ id: 'minecraft:fire_resistance', amp: 0 }]
-    },
-    {
-        id: 'knight',
-        short: 'Metal',
-        name: 'Metal Ossification',
-        desc: 'This #Contract slowly, painfully, eternally changes your bones to be that of metal causing you to move extremely slowly however your bones will not break. (+6 Armor, +Slowness I)',
-        attrs: [{ attr: 'minecraft:generic.armor', id: 'dissonant:knight_armor', amount: 6 }],
-        fx: [{ id: 'minecraft:slowness', amp: 0 }]
-    },
-    {
-        id: 'waif',
-        short: 'Tiny',
-        name: "Tiny Soul, Large Heart",
-        desc: 'You were always the smaller person at heart, having this Contract will make you faster at the cost of there being less surface area to protect from any attack. (-40% Size, +20% Speed, -3 Heart)',
-        attrs: [
-            { attr: 'minecraft:generic.scale', id: 'dissonant:waif_scale', amount: -0.4 },
-            { attr: 'minecraft:generic.movement_speed', id: 'dissonant:waif_speed', amount: 0.2, op: 'add_multiplied_base' },
-            { attr: 'minecraft:generic.max_health', id: 'dissonant:waif_health', amount: -6 }
-        ],
-        fx: []
-    },
     {
         id: 'revenant',
         short: 'Revenant',
@@ -38,6 +10,14 @@ var DISSONANT_CONTRACTS = [
         desc: "One dies only when their soul escapes their corpse, what if we locked it to this plane? Which the Revenant Contract does exactly however, the body doesn't take the time to recover causing them to be frailer. (Death Prevention, -1 Heart per Prevention)",
         attrs: [],
         fx: []
+    },
+    {
+        id: 'embers',
+        short: 'Fire',
+        name: 'Fear no Fire',
+        desc: "Having been afraid of fire all one's life will make them gravitate towards this type of Contract which lowers one's health but grants them the magical effect of Fire Resistance. (-1 Hearts, +Fire Resistance)",
+        attrs: [{ attr: 'minecraft:generic.max_health', id: 'dissonant:embers_health', amount: -2 }],
+        fx: [{ id: 'minecraft:fire_resistance', amp: 0 }]
     },
     {
         id: 'leviathan',
@@ -63,6 +43,18 @@ var DISSONANT_CONTRACTS = [
         fx: [{ id: 'minecraft:hunger', amp: 0 }]
     },
     {
+        id: 'waif',
+        short: 'Tiny',
+        name: "Tiny Soul, Large Heart",
+        desc: 'You were always the smaller person at heart, having this Contract will make you faster at the cost of there being less surface area to protect from any attack. (-40% Size, +20% Speed, -3 Heart)',
+        attrs: [
+            { attr: 'minecraft:generic.scale', id: 'dissonant:waif_scale', amount: -0.4 },
+            { attr: 'minecraft:generic.movement_speed', id: 'dissonant:waif_speed', amount: 0.2, op: 'add_multiplied_base' },
+            { attr: 'minecraft:generic.max_health', id: 'dissonant:waif_health', amount: -6 }
+        ],
+        fx: []
+    },
+    {
         id: 'void_chord',
         short: 'Void Song',
         name: 'Song of the Void',
@@ -81,6 +73,14 @@ var DISSONANT_CONTRACTS = [
         fx: [],
         color: 'yellow',
         originReq: 'automaton_is_owner'
+    },
+    {
+        id: 'knight',
+        short: 'Metal',
+        name: 'Metal Ossification',
+        desc: 'This Contract slowly, painfully, eternally changes your bones to be that of metal causing you to move extremely slowly however your bones will not break. (+6 Armor, +Slowness I)',
+        attrs: [{ attr: 'minecraft:generic.armor', id: 'dissonant:knight_armor', amount: 6 }],
+        fx: [{ id: 'minecraft:slowness', amp: 0 }]
     }
 ]
 
@@ -282,7 +282,7 @@ function dissonantFindPlayer(server, name) {
 
 function dissonantGiveItem(player) {
     var itemId = DISSONANT_CONTRACT_ITEMS[Math.floor(Math.random() * DISSONANT_CONTRACT_ITEMS.length)]
-    player.level.getServer().runCommandSilent('give ' + player.username + ' ' + itemId + '[enchantments={levels:{"minecraft:binding_curse":1,"minecraft:vanishing_curse":1}}]')
+    player.level.getServer().runCommandSilent('give ' + player.username + ' ' + itemId + '[enchantments={levels:{"minecraft:binding_curse":1,"minecraft:vanishing_curse":1}},enchantment_glint_override=false]]')
 }
 
 function dissonantTellraw(player, components) {
@@ -555,9 +555,9 @@ PlayerEvents.tick(function(event) {
 })
 
 NeoOriginsEvents.powerActivated(function(event) {
-    if (String(event.getPowerId()) !== 'cat-astrophe:dissonant_contract_broker') return
+    if (String(event.getPowerId()) !== 'cat-astrophe:dissonant_contracts') return
     var player = event.getPlayer()
-    player.tags.remove('dissonant_broker_activated')
+    player.tags.remove('dissonant_contract_activated')
     var srv = player.level.getServer()
     srv.runCommandSilent('playsound minecraft:block.enchantment_table.use ambient ' + player.username + ' ' + player.x + ' ' + player.y + ' ' + player.z + ' 1 0.6')
     srv.runCommandSilent('particle minecraft:soul_fire_flame ' + player.x + ' ' + (player.y + 1) + ' ' + player.z + ' 0.4 0.7 0.4 0.02 25')
@@ -632,7 +632,7 @@ PlayerEvents.respawned(function(event) {
     srv.runCommandSilent('effect clear ' + player.username)
     dissonantRestoreFx(player)
     player.setHealth(2.0)
-    player.displayClientMessage(Text.of('§8[§4† Revenant§8] §7The contract holds.'), true)
+    player.displayClientMessage(Text.of('§8[§4† Revenant§8] §7The Contract holds.'), true)
 })
 
 ServerEvents.commandRegistry(function(event) {
@@ -764,7 +764,7 @@ ServerEvents.commandRegistry(function(event) {
                     if (!contract) { dissonantClearFlow(player); return 0 }
                     if (targetName === '_self') {
                         if (!dissonantCanRemovecontract(String(player.username), player, contractId)) {
-                            player.tell(Text.of('§c[♦ Soul Contractor] §7That Contract was sealed by another dissonant.'))
+                            player.tell(Text.of('§c[♦ Soul Contractor] §7That Contract was sealed by another Dissonant.'))
                             dissonantClearFlow(player)
                             return 0
                         }
@@ -832,7 +832,7 @@ ServerEvents.commandRegistry(function(event) {
                     var contract = dissonantGetcontract(contractId)
                     if (!contract) { dissonantClearIncoming(player); return 0 }
                     if (!dissonantCanRemovecontract(fromName, player, contractId)) {
-                        player.tell(Text.of('§c[♦ Soul Contractor] §7That Contract was sealed by a different dissonant.'))
+                        player.tell(Text.of('§c[♦ Soul Contractor] §7That Contract was sealed by a different Dissonant.'))
                         if (dissonant) dissonant.tell(Text.of('§c[♦ Soul Contractor] §7You did not seal that Contract.'))
                         dissonantClearIncoming(player)
                         return 0
@@ -883,7 +883,7 @@ ServerEvents.commandRegistry(function(event) {
                     dissonantPurgeAllcontracts(tp)
                     player.tell(Text.of('§c[♦ Soul Contractor] §7All contracts purged from §e' + targetName + '§7.'))
                     if (String(tp.username) !== String(player.username)) {
-                        tp.tell(Text.of('§c[♦ Soul Contractor] §7All your Contracts have been dissolved by the dissonant.'))
+                        tp.tell(Text.of('§c[♦ Soul Contractor] §7All your Contracts have been dissolved by the Dissonant.'))
                     }
                     return 1
                 })
@@ -941,7 +941,7 @@ ServerEvents.commandRegistry(function(event) {
                     }
                     var contractId = JAString.getString(ctx, 'contractid')
                     var ok = dissonantApplycontract(player, contractId, String(player.username))
-                    player.tell(Text.of(ok ? '§c[♦ Dev] §7Contract applied: §d' + contractId : '§c[♦ Dev] §7Unknown or already active contract: §d' + contractId))
+                    player.tell(Text.of(ok ? '§c[♦ Dev] §7Contract applied: §d' + contractId : '§c[♦ Dev] §7Unknown or already active Contract: §d' + contractId))
                     return ok ? 1 : 0
                 })
             )
@@ -959,7 +959,7 @@ ServerEvents.commandRegistry(function(event) {
                     }
                     var contractId = JAString.getString(ctx, 'contractid')
                     var ok = dissonantRemovecontract(player, contractId)
-                    player.tell(Text.of(ok ? '§c[♦ Dev] §7Contract removed: §d' + contractId : '§c[♦ Dev] §7contract not found: §d' + contractId))
+                    player.tell(Text.of(ok ? '§c[♦ Dev] §7Contract removed: §d' + contractId : '§c[♦ Dev] §7Contract not found: §d' + contractId))
                     return ok ? 1 : 0
                 })
             )

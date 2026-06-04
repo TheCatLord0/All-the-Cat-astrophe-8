@@ -1,0 +1,11 @@
+{
+  "type": "neoorigins:active_ability",
+  "action": {
+    "type": "neoorigins:execute_command",
+    "command": "tag @s add dissonant_step_activated"
+  },
+  "cooldown_ticks": 50,
+  "name": "Shadow Step",
+  "description": "Evaporate your body to seemingly teleport 12 meters away.",
+  "hidden": false
+}

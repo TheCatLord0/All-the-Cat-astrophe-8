@@ -1,0 +1,11 @@
+{
+  "type": "neoorigins:active_ability",
+  "action": {
+    "type": "neoorigins:execute_command",
+    "command": "tag @s add automaton_hook_fired"
+  },
+  "cooldown_ticks": 20,
+  "name": "Grapple Hook",
+  "description": "Fire a mechanical hook at a surface up to 20 blocks away. Scroll to reel in or extend the line. Jump or activate again to release.",
+  "hidden": false
+}

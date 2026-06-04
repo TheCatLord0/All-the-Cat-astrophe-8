@@ -1,0 +1,14 @@
+{
+  "item.project_moon_hit": {
+    "subtitle": "Snap",
+    "sounds": [
+      "kubejs:item/project_moon_hit"
+    ]
+  },
+    "item.die": {
+    "subtitle": "DIE",
+    "sounds": [
+      "kubejs:item/die"
+    ]
+  }
+}
