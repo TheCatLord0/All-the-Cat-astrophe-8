@@ -17,6 +17,21 @@ const RPM_FAST_EXIT = MOMENTUM_GAIN_MAX * RPM_TIER_SIZE
 const CREATIVE_MOTOR_RPM = 256
 const CREATIVE_MOTOR_ID = 'create:creative_motor'
 
+var JADustParticle = null
+var JAVec3f = null
+try {
+    JADustParticle = Java.loadClass('net.minecraft.core.particles.DustParticleOptions')
+    JAVec3f = Java.loadClass('org.joml.Vector3f')
+} catch(e) {}
+
+function spawnDust(level, x, y, z, r, g, b, size) {
+    if (!JADustParticle || !JAVec3f) return
+    try {
+        var data = new JADustParticle(new JAVec3f(r, g, b), size)
+        level.sendParticles(data, x, y, z, 1, 0, 0, 0, 0)
+    } catch(e) {}
+}
+
 function getMomentum(player) {
     if (!player.persistentData.contains('automaton_momentum')) return MOMENTUM_MAX
     return player.persistentData.getInt('automaton_momentum')
@@ -105,6 +120,16 @@ function removeBossbar(player) {
     player.persistentData.putInt('automaton_bossbar_active', 0)
 }
 
+function automatonClearHook(player) {
+    player.tags.remove('automaton_hooked')
+    var pd = player.persistentData
+    pd.remove('automaton_hook_x')
+    pd.remove('automaton_hook_y')
+    pd.remove('automaton_hook_z')
+    pd.remove('automaton_hook_len')
+    pd.remove('automaton_hook_slot')
+}
+
 NeoOriginsEvents.originChosen(function(event) {
     if (String(event.getOriginId()) !== 'cat-astrophe:automaton') return
     var player = event.getPlayer()
@@ -130,6 +155,7 @@ PlayerEvents.loggedIn(function(event) {
 PlayerEvents.loggedOut(function(event) {
     var player = event.player
     if (player.tags.contains('automaton_owner')) removeBossbar(player)
+    automatonClearHook(player)
     player.tags.remove('automaton_owner')
 })
 
@@ -138,6 +164,7 @@ PlayerEvents.tick(function(event) {
 
     if (player.tags.contains('automaton_lost_pending')) {
         if (player.tags.contains('automaton_owner')) removeBossbar(player)
+        automatonClearHook(player)
         player.persistentData.putInt('automaton_is_owner', 0)
         player.tags.remove('automaton_lost_pending')
         player.tags.remove('automaton_owner')
@@ -149,6 +176,56 @@ PlayerEvents.tick(function(event) {
 
     if (player.persistentData.getInt('automaton_bossbar_active') < 1) {
         createBossbar(player)
+    }
+
+    if (player.tags.contains('automaton_hooked')) {
+        var pd = player.persistentData
+        if (!pd.contains('automaton_hook_x')) {
+            player.tags.remove('automaton_hooked')
+        } else {
+            try { if (player.isShiftKeyDown()) { automatonClearHook(player); return } } catch(e) {}
+
+            var hookX = pd.getDouble('automaton_hook_x')
+            var hookY = pd.getDouble('automaton_hook_y')
+            var hookZ = pd.getDouble('automaton_hook_z')
+            var ropeLen = pd.getDouble('automaton_hook_len')
+
+            var lastSlot = pd.getInt('automaton_hook_slot')
+            var curSlot = player.getInventory().selected
+            if (curSlot !== lastSlot) {
+                var slotDelta = curSlot - lastSlot
+                if (slotDelta > 4) slotDelta -= 9
+                if (slotDelta < -4) slotDelta += 9
+                ropeLen = Math.max(1.5, Math.min(20.0, ropeLen - slotDelta))
+                pd.putDouble('automaton_hook_len', ropeLen)
+                pd.putInt('automaton_hook_slot', curSlot)
+            }
+
+            var hkdx = player.x - hookX
+            var hkdy = player.y - hookY
+            var hkdz = player.z - hookZ
+            var hkdist = Math.sqrt(hkdx*hkdx + hkdy*hkdy + hkdz*hkdz)
+
+            if (hkdist > ropeLen + 0.05) {
+                var scale = ropeLen / hkdist
+                var tx = hookX + hkdx * scale
+                var ty = hookY + hkdy * scale
+                var tz = hookZ + hkdz * scale
+                var dim = String(player.level.dimension)
+                player.level.getServer().runCommandSilent('execute in ' + dim + ' run teleport ' + player.username + ' ' + tx + ' ' + ty + ' ' + tz)
+            }
+
+            var eyeY = player.y + 1.5
+            var steps = Math.max(1, Math.min(40, Math.ceil(hkdist * 2)))
+            for (var si = 2; si <= steps; si++) {
+                var t = si / steps
+                spawnDust(player.level,
+                    player.x + (hookX - player.x) * t,
+                    eyeY   + (hookY - eyeY)   * t,
+                    player.z + (hookZ - player.z) * t,
+                    0.9, 0.6, 0.2, 0.4)
+            }
+        }
     }
 
     if (player.level.time % MOMENTUM_INTERVAL !== 0) return
@@ -184,6 +261,43 @@ PlayerEvents.tick(function(event) {
     if (momentum > MOMENTUM_SPEED_THRESHOLD) {
         player.level.getServer().runCommandSilent('effect give ' + player.username + ' minecraft:speed ' + SPEED_EFFECT_DURATION + ' 0 true')
     }
+})
+
+NeoOriginsEvents.powerActivated(function(event) {
+    if (String(event.getPowerId()) !== 'cat-astrophe:automaton_grapple') return
+    var player = event.getPlayer()
+    player.tags.remove('automaton_hook_fired')
+
+    if (player.tags.contains('automaton_hooked')) {
+        automatonClearHook(player)
+        return
+    }
+
+    var result = player.pick(20.0, 0.0, false)
+    if (String(result.getType()) !== 'BLOCK') return
+
+    var hit = result.getLocation()
+    var hookX = hit.x
+    var hookY = hit.y
+    var hookZ = hit.z
+
+    var dx = player.x - hookX
+    var dy = player.y - hookY
+    var dz = player.z - hookZ
+    var initLen = Math.sqrt(dx*dx + dy*dy + dz*dz)
+
+    if (initLen < 1.5) return
+
+    var pd = player.persistentData
+    pd.putDouble('automaton_hook_x', hookX)
+    pd.putDouble('automaton_hook_y', hookY)
+    pd.putDouble('automaton_hook_z', hookZ)
+    pd.putDouble('automaton_hook_len', initLen)
+    pd.putInt('automaton_hook_slot', player.getInventory().selected)
+    player.tags.add('automaton_hooked')
+
+    var srv = player.level.getServer()
+    srv.runCommandSilent('playsound create:cogs block ' + player.username + ' ' + player.x + ' ' + player.y + ' ' + player.z + ' 1.0 1.4')
 })
 
 BlockEvents.rightClicked(function(event) {

@@ -50,6 +50,7 @@ let bannedItems = [
    "ars_additions:ender_source_jar",
    "sophisticatedbackpacks:mob_catcher_upgrade",
    "sophisticatedbackpacks:advanced_mob_catcher_upgrade",
+   'dimdungeons:item_blank_build_key',
 ]
 
 PlayerEvents.inventoryChanged(event => {
@@ -402,6 +403,169 @@ event.replaceInput(
   .ritualType('occultism:craft_miner_spirit')
   .dummy('occultism:ritual_dummy/craft_miner_marid_master')
   .id('occultism:ritual/craft_miner_marid_master')
+  // New recipes!
+  const enkephalinEnemies = (entityIDs) => {
+  event.custom({
+  type: "industrialforegoing:laser_drill_fluid",
+  catalyst: {
+    item: "industrialforegoing:lime_laser_lens"
+  },
+  entity_data: {
+    data: {},
+    display: "",
+    entity: {
+      type: entityIDs
+    }
+  },
+  output: {
+    amount: 10,
+    fluid: "kubejs:enkephalin"
+  },
+  rarity: [
+    {
+      biome_filter: {
+        "blacklist": [],
+        "whitelist": []
+      },
+      depth_max: 256,
+      depth_min: -64,
+      dimension_filter: {
+        "blacklist": [],
+        "whitelist": []
+      },
+      weight: 8
+      }
+    ]
+  })
+}
+  enkephalinEnemies('cataclysm:ender_guardian')
+  enkephalinEnemies('cataclysm:netherite_monstrosity')
+  enkephalinEnemies('cataclysm:ignis')
+  enkephalinEnemies('cataclysm:the_harbinger')
+  enkephalinEnemies('cataclysm:the_leviathan')
+  enkephalinEnemies('cataclysm:ancient_remnant')
+  enkephalinEnemies('cataclysm:maledictus')
+  enkephalinEnemies('cataclysm:scylla')
+  enkephalinEnemies('ars_nouveau:wilden_boss')
+  enkephalinEnemies('irons_spellbooks:dead_king')
+  enkephalinEnemies('irons_spellbooks:fire_boss')
+event.custom({
+  type: "neovitae:alchemytable",
+  input: [
+    {
+      item: "kubejs:enkephalin_bucket"
+    },
+    {
+      item: "malum:imitation_heart"
+    },
+    {
+      item: "kubejs:enkephalin_bucket"
+    },
+    {
+      item: "malum:imitation_flesh"
+    },
+    {
+      item: "malum:imitation_flesh"
+    },
+    {
+      item: "malum:imitation_flesh"
+    }
+  ],
+  output: {
+    count: 1,
+    id: "kubejs:mimicry"
+  },
+  syphon: 72000,
+  ticks: 72000,
+  upgradeLevel: 5
+  })
+	event.recipes.ars_nouveau.enchanting_apparatus(
+        [
+          'minecraft:potion[potion_contents={potion:"minecraft:healing"}]',
+          "minecraft:echo_shard",
+          "ars_nouveau:source_gem_block",
+          "minecraft:echo_shard",
+          'minecraft:potion[potion_contents={potion:"minecraft:healing"}]',
+
+        ], // input items
+	    "neovitae:blood_orb_weak", // reagent
+	    "kubejs:aeternitas_control", // output
+	    10000, // source cost
+	    false // NBT
+	)
+  event.custom({
+    type: "neovitae:alchemytable",
+    input: [
+      { item: "malum:imitation_flesh" },
+      { item: "minecraft:wither_skeleton_skull" },
+      { item: "minecraft:bone_block" },
+      { item: "minecraft:player_head" },
+      { item: 'eidolon_repraised:zombie_heart' },
+      { item: "occultism:spirit_attuned_crystal" }
+    ],
+    output: {
+      count: 1,
+      id: "kubejs:tibia"
+    },
+    syphon: 64000,
+    ticks: 12000,
+    upgradeLevel: 4
+  })
+  event.recipes.occultism.ritual(
+    "kubejs:first_blade",
+    [
+      "minecraft:netherite_sword",
+      'neovitae:blood_pearl',
+      'neovitae:gore_clotted_fang',
+      'irons_spellbooks:blood_rune',
+      'iceandfire:dragon_bone_block',
+      "malum:complete_design",
+      'irons_spellbooks:blood_rune'
+    ],
+    '#iceandfire:mob_skulls',
+    "occultism:craft_marid"
+  )
+  .duration(2000)
+  .ritualType("occultism:craft")
+  .id("kubejs:ritual/craft_first_blade")
+  .dummy('kubejs:craft_first_blade')
+  event.recipes.occultism.ritual(
+    "kubejs:mark_of_cain",
+    [
+      'spectrum:freigeist',
+      'minecraft:enchanted_golden_apple',
+      Item.of('minecraft:ominous_bottle[ominous_bottle_amplifier=4]'),
+      'irons_spellbooks:pyrium_ingot'
+      
+    ],
+    'irons_spellbooks:divine_soulshard',
+    'occultism:craft_marid'
+  )
+    .ritualType('occultism:execute_command')
+    .dummy('kubejs:remove_the_mark')
+    .duration(200)
+    .command('curios clear @p[distance=..10,curios={item:{id:"kubejs:mark_of_cain"},slot:["an_focus"]}] an_focus')
+    .id('kubejs:ritual/mark_of_cain_removal')
+  event.recipes.occultism.ritual(
+    "kubejs:mark_of_cain",
+    [
+      "eidolon_repraised:shadow_gem",
+      "malum:malignant_pewter_ingot",
+      "minecraft:wither_skeleton_skull",
+      "minecraft:nether_star",
+      "minecraft:echo_shard",
+      "occultism:spirit_attuned_crystal",
+      "minecraft:redstone_block"
+    ],
+    "occultism:book_of_binding_bound_afrit",
+    "occultism:craft_afrit"
+  )
+  .ritualType('occultism:execute_command')
+  .duration(1000)
+  .id("kubejs:ritual/craft_mark_of_cain")
+  .command('curios replace an_focus 0 @p[distance=..10] with kubejs:mark_of_cain')
+  .dummy('kubejs:craft_the_mark')
+  .id('kubejs:ritual/mark_of_cain_creation')
 })
 // Cooldowns
 let staffs = [
@@ -486,4 +650,24 @@ const isNamedCotyn__ = entity => {
 // Item Tags
 ServerEvents.tags("item", (event) => {
   event.remove("ars_nouveau:magic_food", "@ars_nouveau")
+  event.remove("curios:face", "spectrum:glow_vision_goggles")
+  event.add("curios:head", "spectrum:glow_vision_goggles")
+  event.add("curios:ring", "cataclysm:ring_of_grudged")
+  event.remove("curios:rings", "cataclysm:ring_of_grudged")
+  event.add("curios:belt", "cataclysm:belt_of_beginner")
+  event.remove("curios:waist", "cataclysm:belt_of_beginner")
+  event.add("curios:belt", "cataclysm:belt_of_monstrosity")
+  event.remove("curios:waist", "cataclysm:belt_of_monstrosity")
+
+})
+// EMI Information
+RecipeViewerEvents.addInformation('fluid', event => {
+	event.add('kubejs:enkephalin', [
+		'Obtained from Cataclysm Bosses, Wilden Chimera, Dead King, and Tyros using a Liquid Laser drill.'
+	])
+})
+RecipeViewerEvents.addInformation('item', event => {
+	event.add('kubejs:enkephalin_bucket', [
+		'Obtained from Cataclysm Bosses, Wilden Chimera, Dead King, and Tyros using a Liquid Laser drill.'
+	])
 })

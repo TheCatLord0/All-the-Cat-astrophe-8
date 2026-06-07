@@ -109,6 +109,9 @@
     "crafting_monitor": true,
     "part_name": true
   },
+  "neoorigins": {
+    "origin": true
+  },
   "ars_nouveau": {
     "mob_jar": true
   },

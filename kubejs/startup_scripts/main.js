@@ -1,7 +1,6 @@
 import { effect } from "@package/net/minecraft/world"
 
 const $MobEffectInstance = Java.loadClass('net.minecraft.world.effect.MobEffectInstance')
-
 ItemEvents.modification(event => {
   event.modify("ars_nouveau:mendosteen_pod", item => {
     item.setFood({
@@ -162,4 +161,32 @@ ItemEvents.modification(event => {
       ]
     })
   })
+})
+StartupEvents.registry('fluid', event => {
+  event.create('enkephalin')
+    .displayName('Enkephalin')
+    .type(type => type
+      .renderType(3)
+      .stillTexture('thecatlord:block/enkephalin_still')
+      .flowingTexture('thecatlord:block/enkephalin_flowing')
+      .fallDistanceModifier(0)
+      .canSwim(false)
+      .canDrown(true)
+    )
+    .tickRate('10')
+    .levelDecreasePerBlock('2')
+})
+StartupEvents.registry('item', (event) => {
+    event.create('craft_first_blade', 'occultism:ritual_dummy')
+        .pentacleType("craft")
+        .displayName('Ritual: Craft The First Blade')
+        .ritualTooltip('The blade used by the first murderer.')
+    event.create('craft_the_mark', 'occultism:ritual_dummy')
+        .pentacleType("craft")
+        .displayName('Ritual: Conjure The Mark Of Cain')
+        .ritualTooltip('There is no resisting the Mark or the Blade, there is only remission and relapse.')
+    event.create('remove_the_mark', 'occultism:ritual_dummy')
+        .pentacleType("craft")
+        .displayName('Ritual: Break the Curse of the Mark')
+        .ritualTooltip('Removing it however releases a far greater evil...')
 })

@@ -5,7 +5,9 @@ StartupEvents.registry('creative_mode_tab', event => {
             'kubejs:mimicry',
             'kubejs:ego_mimicry',
             'kubejs:tibia',
-            'kubejs:callisto_tibia'
+            'kubejs:callisto_tibia',
+            'kubejs:first_blade',
+            'kubejs:mark_of_cain'
   ])
 })
 StartupEvents.modifyCreativeTab('kubejs:tab', event => {
@@ -14,22 +16,26 @@ StartupEvents.modifyCreativeTab('kubejs:tab', event => {
   event.remove('kubejs:ego_mimicry')
   event.remove('kubejs:tibia')
   event.remove('kubejs:callisto_tibia')
+  event.remove('kubejs:first_blade')
+  event.remove('kubejs:mark_of_cain')
 })
 StartupEvents.modifyCreativeTab('kubejs:weaponry', event => {
-    // Remove the plain default stacks that .content() added
     event.remove('kubejs:executioner')
     event.remove('kubejs:mimicry')
     event.remove('kubejs:ego_mimicry')
     event.remove('kubejs:tibia')
     event.remove('kubejs:callisto_tibia')
+    event.remove('kubejs:first_blade')
+    event.remove('kubejs:mark_of_cain')
 
-    // Add the exact component stacks
     event.add([
         Item.of('kubejs:executioner[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
         Item.of('kubejs:mimicry[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
         Item.of('kubejs:ego_mimicry[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
         Item.of('kubejs:tibia[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
-        Item.of('kubejs:callisto_tibia[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]')
+        Item.of('kubejs:callisto_tibia[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
+        Item.of('kubejs:first_blade[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
+        Item.of('kubejs:mark_of_cain[enchantments={levels:{"ars_elemental:soulbound":1,"minecraft:binding_curse":1}},enchantment_glint_override=false]')
     ])
 })
 StartupEvents.registry('item', event => {
@@ -67,8 +73,8 @@ StartupEvents.registry('item', event => {
   .unstackable()
   .fireResistant(true)
   .rarity('EPIC')
-  .tooltip('Inflicts Corpus which causes burst damage at 10 stacks.')
   .tooltip("§7§lVeins and arteries. The bicolor shades of red that will flow out of you... Aah...! Marvelous art!")
+  .tooltip('Inflicts Corpus which causes burst damage at 10 stacks.')
   .parentModel('thecatlord:item/tibia')
   .texture('thecatlord:item/tibia')
   .speed(9)
@@ -99,6 +105,43 @@ StartupEvents.registry('item', event => {
     .tooltip('Instantly kills any mob.')
     .parentModel('thecatlord:item/executioner_sword')
     .texture('kubejs:item/executioner_sword')
+})
+StartupEvents.registry('item', event => {
+  event.create('first_blade', 'sword')
+    .displayName('§8§l§kAAA §r§cThe First Blade §8§l§kAAA')
+    .unstackable()
+    .fireResistant(true)
+    .rarity('EPIC')
+    .tooltip('§4§lA blade fashioned from the jaw of a donkey, only one linked to the first killer can use its power.')
+    .parentModel('thecatlord:item/first_blade')
+    .texture('thecatlord:item/first_blade')
+    .speed(9)
+    .attackDamageBonus(4)
+})
+StartupEvents.registry('item', event => {
+  event.create('mark_of_cain')
+    .displayName('§8§l§kAAAA §r§4The Mark Of Cain §8§l§kAAAA')
+    .unstackable()
+    .fireResistant(true)
+    .rarity('EPIC')
+    .tooltip("§4§lThe Mark didn't change you, it just made you more of what you already were.")
+    .texture('thecatlord:item/mark_of_cain')
+    .tag('curios:an_focus')
+    .attachCuriosCapability(
+        CuriosJSCapabilityBuilder.create()
+            .addAttribute(
+                "malum:healing_received",
+                "cdc642c8-25e3-4d23-9a11-7bc6963f4639",
+                -0.5,
+                'add_value'
+            )
+            .addAttribute(
+                "minecraft:generic.attack_damage",
+                "024f9ec8-618b-4354-b855-6d175d3e11c0",
+                0.5,
+                'add_multiplied_total'
+            )
+    )
 })
     const CORPUS_EFFECT = 'kubejs:corpus'
 

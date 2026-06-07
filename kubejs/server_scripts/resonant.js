@@ -391,22 +391,22 @@ NeoOriginsEvents.powerActivated(function(event) {
 
     var hasVoidChord = false
     try {
-        if (player.persistentData.contains('devil_pacts')) {
-            var pactList = JSON.parse(player.persistentData.getString('devil_pacts'))
-            for (var i = 0; i < pactList.length; i++) {
-                if (pactList[i] === 'void_chord') { hasVoidChord = true; break }
+        if (player.persistentData.contains('dissonant_contracts')) {
+            var contractList = JSON.parse(player.persistentData.getString('dissonant_contracts'))
+            for (var i = 0; i < contractList.length; i++) {
+                if (contractList[i] === 'void_chord') { hasVoidChord = true; break }
             }
         }
     } catch(e) {}
 
     var hp = player.health
+    var source = getPlayerSource(player)
     if (hasVoidChord) {
         if (hp <= 1.0) {
             player.displayClientMessage(Text.of('§cNot enough health to channel.'), true)
             return
         }
     } else {
-        var source = getPlayerSource(player)
         if (source < SCROLL_COST) {
             player.displayClientMessage(Text.of('§cNot enough Resonance.'), true)
             return

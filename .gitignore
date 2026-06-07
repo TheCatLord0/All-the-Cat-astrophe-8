@@ -60,3 +60,7 @@ whitelist.json
 config/iris.properties
 etched_sounds
 ESM
+config/creeperconfetti.properties
+config/iris.properties
+config/asyncparticles/asyncparticles-mixin.properties
+config/fabric/indigo-renderer.properties

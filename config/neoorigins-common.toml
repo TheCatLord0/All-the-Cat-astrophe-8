@@ -4,96 +4,14 @@ debug_power_loading = false
 #Send in-game chat feedback when a compat power action resolves to no-op (unsupported action type).
 #Useful for pack authors debugging why their imported powers aren't working.
 debug_compat_actions = false
-#Hide hunger / air HUD bars for origins that don't consume them
-#(e.g. Automaton hunger, Merling / Kraken / Automaton air).
-#Turn off to keep vanilla bars visible regardless of origin.
-hide_hud_bars = true
-#Disable all resource bars (mana, stamina, rage, etc.) globally.
-#When true, resource bars are hidden from the HUD and any active
-#power that would normally cost a resource falls back to costing
-#hunger instead (resource_cost_amount food points are deducted).
-#Useful for packs that prefer vanilla hunger as the universal cost.
-disable_resource_bars = false
-
-#Enable or disable built-in origins.
-#Set to false to hide an origin from the selection screen.
-#Disabled origins can still be assigned via /neoorigins set.
-#Datapack and originpack origins are not affected by these toggles.
-[origins]
-	human = false
-	merling = false
-	avian = false
-	blazeling = false
-	elytrian = false
-	enderian = false
-	arachnid = false
-	shulk = false
-	phantom = false
-	feline = false
-	golem = false
-	caveborn = false
-	sylvan = false
-	draconic = false
-	revenant = false
-	tiny = false
-	abyssal = false
-	voidwalker = false
-	stoneguard = false
-	verdant = false
-	umbral = false
-	inchling = false
-	sporeling = false
-	frostborn = false
-	strider = false
-	siren = false
-	piglin = false
-	hiveling = false
-	cinderborn = false
-	sculkborn = false
-	enderite = false
-	necromancer = false
-	gorgon = false
-	automaton = false
-	kraken = false
-	warden = false
-	dwarf = false
-	breeze = false
-	vampire = false
-	air_mage = false
-	darkness_mage = false
-	earth_mage = false
-	fire_mage = false
-	gravity_mage = false
-	water_mage = false
-	monster_tamer = false
-	skeleton = false
-	slime = false
-	wraith = false
-
-#Enable or disable built-in classes.
-#Set to false to remove a class from the selection screen.
-#If all classes are disabled, the class selection screen is skipped entirely.
-[classes]
-	class_warrior = false
-	class_archer = false
-	class_miner = false
-	class_beastmaster = false
-	class_explorer = false
-	class_sentinel = false
-	class_herbalist = false
-	class_scout = false
-	class_berserker = false
-	class_titan = false
-	class_rogue = false
-	class_lumberjack = false
-	class_blacksmith = false
-	class_cook = false
-	class_merchant = false
-	class_cleric = false
-	class_nitwit = false
-	class_fisher = false
-	class_mason = false
-	class_paladin = false
+#Layers in which each origin can be claimed by only one player on the server.
+#List the layer IDs that should enforce uniqueness; layers not listed are unaffected.
+#Once a player picks an origin in a listed layer, no one else can pick that same
+#origin there. Claims are released only by /neoorigins unlock, an Orb of Origin
+#re-pick, or /neoorigins reset. Operators in creative mode — and /neoorigins set —
+#bypass the lock and take over the claim.
+#Format: list of layer IDs. Example: ["neoorigins:origin"]
+unique_origin_layers = []
 
 #Per-power dimension restrictions.
 #Powers listed here will be disabled when the player is in the specified dimension(s).
@@ -1401,12 +1319,17 @@ disable_resource_bars = false
 #Orb of Origins settings.
 #Controls XP cost behaviour when a player uses an Orb of Origin.
 [orb_of_origins]
-	#XP levels charged per prior orb use.
-	#Cost = this value * number of previous orb uses.
-	#First use is always free. Set to 0 to disable XP cost entirely.
+	#XP levels charged per orb use.
+	#When scale_cost=true:  Cost = this value * number of previous orb uses (first use free).
+	#When scale_cost=false: Cost = this value, flat, on every use.
+	#Set to 0 to disable XP cost entirely.
 	# Default: 5
 	# Range: 0 ~ 1000
 	levels_per_use = 5
+	#Whether the XP cost scales with the number of prior orb uses.
+	#true  (default): Cost = levels_per_use * previous orb uses (first use free, then ramps).
+	#false: flat cost — every use (including the first) costs exactly levels_per_use levels.
+	scale_cost = true
 
 #Auto-human mode.
 #When enabled, new players are automatically assigned neoorigins:human
@@ -1569,3 +1492,13 @@ disable_resource_bars = false
 	# Default: 30
 	# Range: 5 ~ 300
 	request_timeout_seconds = 30
+
+#Commands that NeoOrigins powers are NEVER allowed to run.
+#Applies to the command/execute_command actions, the raycast
+#command_along_ray and command_at_hit extensions, and the command
+#condition. A blocked command is refused and logged instead of run.
+#Match is case-insensitive on the command root; `execute ... run X`
+#is unwrapped so X is what gets checked. List the root only (no slash).
+[command_powers]
+	#Command roots forbidden from power execution.
+	command_power_blacklist = ["op", "deop", "ban", "ban-ip", "pardon", "pardon-ip", "kick", "whitelist", "stop", "save-all", "save-off", "save-on", "setidletimeout", "debug", "perf", "datapack", "reload"]

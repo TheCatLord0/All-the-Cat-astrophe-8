@@ -2,12 +2,7 @@ Platform.mods.kubejs.name = 'TheCatLord'
 StartupEvents.modifyCreativeTab('kubejs:tab', event => {
 	event.icon = 'minecraft:music_disc_cat'
 	event.displayName = Text.darkBlue('Patreon Items')
-	event.remove('kubejs:justice')
-  event.remove('kubejs:divine_justice')
-  event.remove('kubejs:earthshaker')
-  event.remove('kubejs:eternal_earthshaker')
-  event.remove('kubejs:fixer_scythe')
-  event.remove('kubejs:upgraded_fixer_scythe')
+	event.remove('@kubejs')
 
     event.add('kubejs:justice[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false,irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:divine_smite",index:0,level:6}],maxSpells:1,mustEquip:0b,spellWheel:1b},irons_spellbooks:casting_implement={}]')
     event.add('kubejs:divine_justice[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false,irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:divine_smite",index:0,level:6}],maxSpells:1,mustEquip:0b,spellWheel:1b},irons_spellbooks:casting_implement={}]')

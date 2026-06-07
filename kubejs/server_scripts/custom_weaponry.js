@@ -1,4 +1,78 @@
+// Configuration
 
+// Mimicry
+const MIMICRY_HEAL = 0.25
+// Tibia
+const CORPUS_DURATION = 8 * 20
+const CORPUS_MAX_AMPLIFIER = 9
+// The First Blade
+const FIRST_BLADE_MULTIPLY = 5.33333333333
+const FIRST_BLADE_DRAWBACK = 0.33
+
+// Actual code
+const CuriosCheck = Java.loadClass('top.theillusivec4.curios.api.CuriosApi')
+
+function getEquippedCurios(player) {
+  const optional = CuriosCheck.getCuriosInventory(player)
+
+  if (!optional.isPresent()) {
+    return []
+  }
+
+  const curiosInventory = optional.get()
+  const curios = curiosInventory.getCurios()
+  const equipped = []
+
+  curios.entrySet().forEach(entry => {
+    const slotType = entry.getKey()
+    const handler = entry.getValue()
+    const stacks = handler.getStacks()
+
+    for (let i = 0; i < stacks.getSlots(); i++) {
+      const stack = stacks.getStackInSlot(i)
+
+      if (!stack.isEmpty()) {
+        equipped.push({
+          slot: slotType,
+          index: i,
+          id: stack.id,
+          count: stack.count
+        })
+      }
+    }
+  })
+
+  return equipped
+}
+
+function hasEquippedCurio(player, itemId) {
+  return getEquippedCurios(player).some(curio => curio.id === itemId)
+}
+
+ServerEvents.commandRegistry(event => {
+  const { commands: Commands } = event
+
+  event.register(
+    Commands.literal('curios_dump')
+      .executes(ctx => {
+        const player = ctx.source.playerOrException
+        const equipped = getEquippedCurios(player)
+
+        if (equipped.length === 0) {
+          player.tell('No curios equipped.')
+          return 1
+        }
+
+        player.tell('Equipped Curios:')
+
+        equipped.forEach(curio => {
+          player.tell(`${curio.slot}[${curio.index}] = ${curio.id} x${curio.count}`)
+        })
+
+        return 1
+      })
+  )
+})
 ServerEvents.recipes(event => {
 event.smithing(
  Item.of('kubejs:ego_mimicry[minecraft:unbreakable={show_in_tooltip:false}]'),
@@ -25,7 +99,7 @@ EntityEvents.afterHurt(event => {
         let weapon = player.getMainHandItem()
         if (weapon.id === 'kubejs:mimicry') {
             let damageDealt = event.damage
-            let healAmount = damageDealt * 0.25
+            let healAmount = damageDealt * MIMICRY_HEAL
             player.heal(healAmount)
         }
     }
@@ -36,7 +110,7 @@ EntityEvents.afterHurt(event => {
         let weapon = player.getMainHandItem()
         if (weapon.id === 'kubejs:ego_mimicry') {
             let damageDealt = event.damage
-            let healAmount = damageDealt * 0.25
+            let healAmount = damageDealt * MIMICRY_HEAL
             player.heal(healAmount)
         }
     }
@@ -47,9 +121,6 @@ EntityEvents.afterHurt(event => {
     ]
 
     const CORPUS_EFFECT = 'kubejs:corpus'
-
-    const CORPUS_DURATION = 8 * 20
-    const CORPUS_MAX_AMPLIFIER = 9
 
     EntityEvents.afterHurt(event => {
         const { entity, source } = event
@@ -94,4 +165,15 @@ EntityEvents.afterHurt(event => {
         server.runCommandSilent(
             `execute positioned ${entity.x} ${entity.y} ${entity.z} run playsound ${PM_HIT_SOUND} master @a[distance=..12] ~ ~ ~ 1 ${pitch}`
         )
+})
+EntityEvents.beforeHurt(event => {
+  const player = event.source.player
+  if (!player) return
+  const health = player.getMaxHealth()
+  if (!hasEquippedCurio(player, 'kubejs:mark_of_cain')) return
+  const weapon = player.mainHandItem
+        if (weapon.id === 'kubejs:first_blade') {
+            event.setDamage(event.damage * FIRST_BLADE_MULTIPLY)
+            player.damage(health * FIRST_BLADE_DRAWBACK)
+        }
 })

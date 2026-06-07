@@ -1,3 +1,13 @@
+// Configuration
+
+// Earthshaker
+const EARTHSHAKER_TIME = 25
+const EARTHSHAKER_POWER = 9
+// Blue Reverbiation
+const REVERB_TIME = 120
+const REVERB_POWER = 1
+
+// Actual code
 ServerEvents.tags('item', event => {
   event.add('thecatlord:dragonsteel', 'iceandfire:dragonsteel_fire_ingot')
   event.add('thecatlord:dragonsteel', 'iceandfire:dragonsteel_ice_ingot')
@@ -108,26 +118,26 @@ EntityEvents.afterHurt(event => {
     let attackingEntity = source.actual
     if (!attackingEntity) return
     if (attackingEntity.mainHandItem.id != 'kubejs:earthshaker') return
-    entity.potionEffects.add("minecraft:slowness", 20, 9, true, true)
+    entity.potionEffects.add("minecraft:slowness", EARTHSHAKER_TIME, EARTHSHAKER_POWER, true, true)
 })
 EntityEvents.afterHurt(event => {
     const { entity, source } = event
     let attackingEntity = source.actual
     if (!attackingEntity) return
     if (attackingEntity.mainHandItem.id != 'kubejs:eternal_earthshaker') return
-    entity.potionEffects.add("minecraft:slowness", 20, 9, true, true)
+    entity.potionEffects.add("minecraft:slowness", EARTHSHAKER_TIME, EARTHSHAKER_POWER, true, true)
 })
 EntityEvents.afterHurt(event => {
     const { source } = event
     let attackingEntity = source.actual
     if (!attackingEntity) return
     if (attackingEntity.mainHandItem.id != 'kubejs:fixer_scythe') return
-    attackingEntity.potionEffects.add("minecraft:resistance", 120, 1, true, true)
+    attackingEntity.potionEffects.add("minecraft:resistance", REVERB_TIME, REVERB_POWER, true, true)
 })
 EntityEvents.afterHurt(event => {
     const { source } = event
     let attackingEntity = source.actual
     if (!attackingEntity) return
     if (attackingEntity.mainHandItem.id != 'kubejs:upgraded_fixer_scythe') return
-    attackingEntity.potionEffects.add("minecraft:resistance", 120, 1, true, true)
+    attackingEntity.potionEffects.add("minecraft:resistance", REVERB_TIME, REVERB_POWER, true, true)
 })
