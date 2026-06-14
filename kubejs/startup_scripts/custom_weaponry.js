@@ -35,7 +35,7 @@ StartupEvents.modifyCreativeTab('kubejs:weaponry', event => {
         Item.of('kubejs:tibia[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
         Item.of('kubejs:callisto_tibia[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
         Item.of('kubejs:first_blade[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
-        Item.of('kubejs:mark_of_cain[enchantments={levels:{"ars_elemental:soulbound":1,"minecraft:binding_curse":1}},enchantment_glint_override=false]')
+        Item.of('kubejs:mark_of_cain[enchantment_glint_override=false]')
     ])
 })
 StartupEvents.registry('item', event => {

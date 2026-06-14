@@ -1,0 +1,127 @@
+[ocean_origins]
+	#Ocean origins slowly lose air while out of water (Minecraft-fish style).
+	#Turn off to disable the on-land suffocation entirely.
+	dries_out = true
+	#Ticks per single air point lost while out of water.
+	#Default 10 = 1 air per 0.5s, 300 air → ~2.5 minutes to deplete.
+	#Larger values mean a slower drain. Vanilla cod uses ~1 tick per air;
+	#for a fish-comparable feel set this near 16 (≈4 minutes).
+	#Replaces the per-power drain_rate field in built-in dries_out JSONs.
+	# Default: 10
+	# Range: 1 ~ 1200
+	drain_rate_ticks = 10
+	#Pescivore restriction — when true, ocean origins (Abyssal, Kraken, Merling,
+	#Siren) can only eat items in the neoorigins:fish_foods tag; non-fish food
+	#is silently cancelled. Set to false to let them eat anything (powered by
+	#the aquatic_fish_diet power's runtime check on this flag).
+	#Default true: matches the long-standing pescivore design.
+	fish_diet_required = true
+	#Damage applied per second once a dried-out aquatic player's virtual air
+	#is exhausted. Mirrors WaterAnimal.handleAirSupply cadence (vanilla cod / salmon).
+	#Default 2.0 (= 1 heart per second). Set to 0 to make dry-out non-lethal.
+	# Default: 2.0
+	# Range: 0.0 ~ 100.0
+	drown_damage_per_second = 2.0
+	#Teleport ocean origins to a random ocean biome on first origin pick.
+	#Turn off to let them spawn at the world's normal spawn point.
+	spawn_in_ocean = true
+
+[friendly_fire]
+	#Protect TamableAnimals owned by the casting player (wolves, cats, etc.).
+	protect_owned_pets = true
+	#Protect villagers and wandering traders from origin AOEs.
+	#Default true: avoids accidentally aggroing or killing your trade hub.
+	protect_villagers = true
+	#Protect ALL passive animals (sheep, cow, pig, horse, fox, ...).
+	#Default false: an active combat AOE should hit livestock; otherwise
+	#abilities like Hiveling Sting silently no-op against passive mobs.
+	#Turn on if your pack treats farm animals as untouchable allies.
+	protect_animals = false
+	#Protect mobs tracked as minions of the casting player
+	#(necromancer skeletons, beastmaster summons, etc.).
+	protect_minions = true
+	#Protect iron golems from origin AOEs.
+	#Default true: village-built golems represent player investment and
+	#their protection is consistent with vanilla golem AI rules.
+	protect_iron_golems = true
+
+[armor_classes]
+	#Additional items/tags to treat as heavy armor.
+	#Default heavy armor (iron, gold, diamond, netherite) is defined in the
+	#neoorigins:heavy_armor item tag and does not need to be listed here.
+	heavy_armor = []
+	#Additional items/tags to treat as light armor.
+	#Default light armor (leather + chainmail) is defined in the
+	#neoorigins:light_armor item tag and does not need to be listed here.
+	light_armor = []
+
+[orb_of_origins]
+	#Whether the XP cost scales with the number of prior orb uses.
+	#true  (default): Cost = levels_per_use * previous orb uses (first use free, then ramps).
+	#false: flat cost — every use (including the first) costs exactly levels_per_use levels.
+	scale_cost = true
+	#XP levels charged per orb use.
+	#When scale_cost=true:  Cost = this value * number of previous orb uses (first use free).
+	#When scale_cost=false: Cost = this value, flat, on every use.
+	#Set to 0 to disable XP cost entirely.
+	# Default: 5
+	# Range: 0 ~ 1000
+	levels_per_use = 5
+
+[sun_damage]
+	#Per-evaluation chance (0.0 – 1.0) that a damageable helmet takes
+	#1 durability while the player is in direct sun. The condition is
+	#evaluated once per condition_passive interval (~1 second), so a
+	#value of 0.07 averages 1 durability per ~14 seconds — about 40
+	#minutes of continuous sun for a 165-durability iron helmet.
+	#Unbreaking still stacks via vanilla hurtAndBreak. Set to 0 to
+	#disable helmet protection (player always burns); set to 1 to
+	#match vanilla zombie/skeleton wear rate (very fast).
+	# Default: 0.07
+	# Range: 0.0 ~ 1.0
+	helmet_dura_damage_chance = 0.07
+
+[random_assignment]
+	#When to randomly assign origins.
+	#Allowed Values: DISABLED, FIRST_JOIN, EVERY_DEATH
+	mode = "DISABLED"
+	#Number of times a player may reroll after random assignment.
+	#0 = no rerolls (stuck with what you get).
+	#-1 = unlimited rerolls via Orb of Origin.
+	# Default: 0
+	# Range: -1 ~ 100
+	rerolls = 0
+
+[evolution]
+	#Chat milestone message interval (every N kills).
+	# Default: 100
+	# Range: 10 ~ 10000
+	message_interval = 100
+	#Mob kills required to reach Apex (tier 3).
+	# Default: 5000
+	# Range: 1 ~ 1000000
+	tier_3_kills = 5000
+	#Mob kills required to reach Ascended (tier 2).
+	# Default: 2500
+	# Range: 1 ~ 1000000
+	tier_2_kills = 2500
+	#Mob kills required to reach Evolved (tier 1).
+	# Default: 1000
+	# Range: 1 ~ 1000000
+	tier_1_kills = 1000
+	#Enable the evolution system. When false, kills are not tracked
+	#and evolution prompts never appear.
+	enabled = true
+
+[mount]
+	#Consent mode for mounting other players.
+	#Allowed Values: ALWAYS, PROMPT, TEAM
+	consent_mode = "ALWAYS"
+	#Seconds before a mount request expires (only used in PROMPT mode).
+	# Default: 30
+	# Range: 5 ~ 300
+	request_timeout_seconds = 30
+
+[auto_human]
+	#Automatically assign human origin and open class selection only.
+	enabled = false

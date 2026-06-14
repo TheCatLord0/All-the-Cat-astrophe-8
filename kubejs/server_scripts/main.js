@@ -96,6 +96,7 @@ ServerEvents.tags('item', event => {
 let removedRecipe = [
   "occultism:miner_marid_master",
   "occultism:miner_ancient_eldritch",
+  "neoorigins:orb_of_origin",
 ]
 ServerEvents.recipes(event => {
   removedRecipe.forEach(removedRecipe => {
@@ -241,6 +242,10 @@ event.replaceInput(
   { output:"eidolon_repraised:soul_enchanter"},
   ["minecraft:diamond"],
   "spectrum:stratine_gem")
+  event.replaceInput(
+  { output:'dimdungeons:item_portal_key'},
+  ["minecraft:name_tag"],
+  "ars_nouveau:spell_parchment")
 	event.recipes.ars_nouveau.enchanting_apparatus(
         [
             "minecraft:bow",
@@ -512,7 +517,7 @@ event.custom({
     upgradeLevel: 4
   })
   event.recipes.occultism.ritual(
-    "kubejs:first_blade",
+    "kubejs:first_blade[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]",
     [
       "minecraft:netherite_sword",
       'neovitae:blood_pearl',
@@ -563,9 +568,22 @@ event.custom({
   .ritualType('occultism:execute_command')
   .duration(1000)
   .id("kubejs:ritual/craft_mark_of_cain")
-  .command('curios replace an_focus 0 @p[distance=..10] with kubejs:mark_of_cain')
+  .command('curios replace an_focus 0 @p[distance=..10] with kubejs:mark_of_cain[enchantments={levels:{"ars_elemental:soulbound":1,"minecraft:binding_curse":1}},enchantment_glint_override=false]')
   .dummy('kubejs:craft_the_mark')
   .id('kubejs:ritual/mark_of_cain_creation')
+
+  event.recipes.create.mechanical_crafting("neoorigins:orb_of_origin", [
+    '  S  ',
+    ' PEP ',
+    'SEDES',
+    ' PEP ',
+    '  S  '
+  ], {
+    D: /iceandfire:dragonegg_.*/,
+    E: "ars_elemental:mark_of_mastery",
+    P: "mekanism:pellet_polonium",
+    S: "create_enchantment_industry:super_experience_nugget"
+  })
 })
 // Cooldowns
 let staffs = [

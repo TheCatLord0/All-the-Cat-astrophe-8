@@ -2,7 +2,7 @@
   "general": {
     "preview": {
       "enable_mod": true,
-      "toggle_preview": true,
+      "toggle_preview": false,
       "hold_preview": false
     },
     "rendering": {

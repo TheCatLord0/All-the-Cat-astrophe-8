@@ -1,0 +1,40 @@
+#User-interface theming. Lets you pin a specific theme on this
+#client regardless of what the server's datapacks declared.
+[ui]
+	#Forced UI theme id (e.g. "neoorigins:parchment" or
+	#"examplepack:dark_woods"). When non-empty AND the theme is
+	#actually loaded, this overrides the datapack-declared active
+	#theme. Leave empty to follow whatever the server selects.
+	theme_override = ""
+	#Revert the origin/class selection screens to the original flat
+	#high-contrast style (dark panels, light text, vanilla font) instead
+	#of the parchment scroll skin. Enable this if the parchment theme's
+	#low-contrast brown-on-paper text is hard to read.
+	classic_picker_style = false
+	#Show the in-game Origin Editor button on the origin info screen for
+	#ALL players, not just those in Creative mode. The editor is a
+	#pack-authoring tool that is creative-only by default to keep it out
+	#of survival players' way. Enable this if you author origins in
+	#survival or want testers to reach the editor without /gamemode.
+	show_origin_editor = false
+
+#Heads-up-display options local to this client.
+[hud]
+	#Hide hunger / air HUD bars for origins that don't consume them
+	#(e.g. Automaton hunger, Merling / Kraken / Automaton air).
+	#Turn off to keep vanilla bars visible regardless of origin.
+	hide_hud_bars = true
+
+#Hotkey pool. Each pack-declared `"key": "translation.key.id"` on an active
+#power consumes one slot. The Controls screen shows N unassigned "Hotkey N"
+#entries; assignments happen at login from the server-side registry, so
+#rebinding a slot affects whichever power currently occupies it.
+#Larger pool = more named hotkeys can coexist, but more rows in Controls.
+#This is a CLIENT setting: keybinds are registered at client startup, so
+#the slot count is chosen locally and cannot be dictated by the server.
+[hotkeys]
+	#Number of named-keybind slots to register at client startup.
+	#Default 32. Increase if packs declare more than 32 distinct keys.
+	# Default: 32
+	# Range: 1 ~ 256
+	pool_size = 32

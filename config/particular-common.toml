@@ -14,7 +14,7 @@
 		#Enable falling leaves particles
 		fallingLeaves = true
 		#Enable cave dust particles
-		caveDust = true
+		caveDust = false
 		#Enable chest bubbles
 		chestBubbles = true
 		#Enable soul sand bubbles

@@ -627,9 +627,9 @@ NeoOriginsEvents.powerActivated(function(event) {
     if (dx*dx + dy2*dy2 + dz*dz > 900) return
 
     var dim = String(player.level.dimension)
-    srv.runCommandSilent('particle minecraft:squid_ink ' + player.x + ' ' + (player.y + 1) + ' ' + player.z + ' 0.3 0.5 0.3 0.05 20')
+    srv.runCommandSilent('particle spectrum:void_fog ' + player.x + ' ' + (player.y + 1) + ' ' + player.z + ' 0.3 0.5 0.3 0.05 20')
     srv.runCommandSilent('execute in ' + dim + ' run teleport ' + player.username + ' ' + tx + ' ' + ty + ' ' + tz)
-    srv.runCommandSilent('particle minecraft:squid_ink ' + tx + ' ' + (ty + 1) + ' ' + tz + ' 0.3 0.5 0.3 0.05 20')
+    srv.runCommandSilent('particle spectrum:void_fog ' + tx + ' ' + (ty + 1) + ' ' + tz + ' 0.3 0.5 0.3 0.05 20')
 })
 
 EntityEvents.afterHurt(function(event) {

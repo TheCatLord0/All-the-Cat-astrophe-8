@@ -1,0 +1,64 @@
+#User-interface theming. Lets you pin a specific theme on this
+#client regardless of what the server's datapacks declared.
+[ui]
+	#Forced UI theme id (e.g. "neoorigins:parchment" or
+	#"examplepack:dark_woods"). When non-empty AND the theme is
+	#actually loaded, this overrides the datapack-declared active
+	#theme. Leave empty to follow whatever the server selects.
+	theme_override = ""
+	#Revert the origin/class selection screens to the original flat
+	#high-contrast style (dark panels, light text, vanilla font) instead
+	#of the parchment scroll skin. Enable this if the parchment theme's
+	#low-contrast brown-on-paper text is hard to read.
+	classic_picker_style = false
+	#Show the in-game Origin Editor button on the origin info screen for
+	#ALL players, not just those in Creative mode. The editor is a
+	#pack-authoring tool that is creative-only by default to keep it out
+	#of survival players' way. Enable this if you author origins in
+	#survival or want testers to reach the editor without /gamemode.
+	show_origin_editor = false
+
+#Heads-up-display options local to this client.
+[hud]
+	#Hide hunger / air HUD bars for origins that don't consume them
+	#(e.g. Automaton hunger, Merling / Kraken / Automaton air).
+	#Turn off to keep vanilla bars visible regardless of origin.
+	hide_hud_bars = true
+	#Master switch for the numeric seconds drawn on cooldown icons.
+	#Packs opt individual powers in via "cooldown_countdown": true;
+	#set this to false to suppress ALL countdown numbers on this client.
+	show_cooldown_countdown = true
+	#Opacity (in percent) of the seconds countdown drawn on cooldown
+	#icons, so the number reads without hiding the icon underneath.
+	#100 = fully opaque, 0 = invisible. Values below 5 are treated
+	#as 5 when rendering (the font renderer drops text below that).
+	# Default: 70
+	# Range: 0 ~ 100
+	cooldown_countdown_opacity = 70
+	#What the ability HUD cluster shows besides live cooldowns.
+	#ALL_ACTIVE_ABILITIES (default): every keybind ability with an icon
+	#keeps a persistent slot — full-bright while idle, cooldown sweep
+	#while recharging, bright/dim for toggles.
+	#COOLDOWNS_AND_TOGGLES: cooldown slots only while recharging, plus
+	#icon-bearing toggleable powers (bright = on, dimmed = off).
+	#Allowed Values: COOLDOWNS_AND_TOGGLES, ALL_ACTIVE_ABILITIES
+	hud_ability_display = "ALL_ACTIVE_ABILITIES"
+	#Force every icon-bearing ability to stay on the HUD cluster even
+	#while off cooldown (as if each power declared
+	#"always_show_icon": true). Default false: idle cooldown icons
+	#disappear unless the power itself opts in.
+	always_show_ability_icons = false
+
+#Hotkey pool. Each pack-declared `"key": "translation.key.id"` on an active
+#power consumes one slot. The Controls screen shows N unassigned "Hotkey N"
+#entries; assignments happen at login from the server-side registry, so
+#rebinding a slot affects whichever power currently occupies it.
+#Larger pool = more named hotkeys can coexist, but more rows in Controls.
+#This is a CLIENT setting: keybinds are registered at client startup, so
+#the slot count is chosen locally and cannot be dictated by the server.
+[hotkeys]
+	#Number of named-keybind slots to register at client startup.
+	#Default 32. Increase if packs declare more than 32 distinct keys.
+	# Default: 32
+	# Range: 1 ~ 256
+	pool_size = 32

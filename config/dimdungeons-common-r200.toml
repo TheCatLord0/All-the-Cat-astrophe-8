@@ -19,12 +19,12 @@
 
 #Enemy Sets for Dungeons
 [enemySets]
-	basicEnemySet1 = ["minecraft:zombie", "minecraft:husk", "minecraft:drowned", "minecraft:spider"]
-	basicEnemySet2 = ["minecraft:wither_skeleton", "minecraft:stray", "minecraft:skeleton", "minecraft:pillager"]
-	advancedEnemySet1 = ["minecraft:pillager", "minecraft:skeleton", "minecraft:stray", "minecraft:blaze"]
+	basicEnemySet1 = ["minecraft:zombie", "minecraft:husk", "minecraft:drowned", "minecraft:spider", "ars_nouveau:wilden_stalker", "ars_nouveau:wilden_guardian", "ars_nouveau:wilden_hunter"]
+	basicEnemySet2 = ["minecraft:wither_skeleton", "minecraft:stray", "minecraft:skeleton", "minecraft:pillager", "minecraft:vex"]
+	advancedEnemySet1 = ["minecraft:pillager", "minecraft:skeleton", "minecraft:stray", "minecraft:blaze", "minecraft:ravenger"]
 	advancedEnemySet2 = ["minecraft:wither_skeleton", "minecraft:hoglin", "minecraft:vindicator", "minecraft:witch"]
-	basicEnemyHealthScaling = 1.0
-	advancedEnemyHealthScaling = 2.0
+	basicEnemyHealthScaling = 2.0
+	advancedEnemyHealthScaling = 4.0
 	#The number of themes to expect in the common config.
 	numberOfThemes = 3
 
