@@ -6,6 +6,6 @@
     },
     "cooldown_ticks": 200,
     "name": "Channel Resonance",
-    "description": "Spend 30 Resonance to channel a random spell onto a parchment.",
+    "description": "Cast Aeternitas into the air to create a temporary spell effect. If you imbue Aeternitas into an item, it transforms that item into a magical version.",
     "hidden": false
 }

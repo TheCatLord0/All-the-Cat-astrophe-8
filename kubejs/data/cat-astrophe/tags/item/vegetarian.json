@@ -3,6 +3,7 @@
   "values": [
     "#c:crops",
     "#c:foods/vegetable",
+    "#c:foods/fruit",
     "#c:fruits",
     "minecraft:mushroom_stew",
     "minecraft:beetroot_soup",
@@ -27,6 +28,7 @@
     "farmersdelight:vegetable_noodles",
     "farmersdelight:ratatouille",
     "farmersdelight:stuffed_pumpkin",
-    "farmersdelight:gleaming_salad"
+    "farmersdelight:gleaming_salad",
+    "minecraft:bread"
   ]
 }

@@ -6,6 +6,6 @@
         "command": "tag @s add resonant_owner"
     },
     "name": "Resonance",
-    "description": "Your body resonates with arcane energy. At high resonance you regenerate and glow. At low resonance weakness and slowness set in. At zero, poison takes hold.",
+    "description": "At high Aeternitas you regenerate and glow. At low Aeternitas weakness and slowness set in. At zero, poison takes hold.",
     "hidden": false
 }

@@ -1,5 +1,7 @@
 #Options for general mod behavior.
 [general]
+	#If set to TRUE then portals leading to the personal build dimension will never open.
+	disablePersonalBuildDimension = true
 	#You shouldn't manually change the version number.
 	configVersion = 6
 	#If set to FALSE the block protection on the dungeon dimension will be disabled, making the options in the next section useless.
@@ -12,8 +14,6 @@
 	disablePersonalDimSecurity = false
 	#If set to TRUE then portals leading to the dungeon dimension will never open.
 	disableAllDungeons = false
-	#If set to TRUE then portals leading to the personal build dimension will never open.
-	disablePersonalBuildDimension = false
 	#If set to TRUE some cheats are available.
 	enableDebugCheats = false
 	#How many ticks the portal blocks cooldown for.

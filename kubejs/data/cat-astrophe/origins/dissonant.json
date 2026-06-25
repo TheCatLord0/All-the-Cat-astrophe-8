@@ -1,8 +1,8 @@
 {
   "name": "Dissonant",
-  "description": "A broker of dark bargains. You traffic in power — for a price.",
+  "description": "The inverse of the Resonant, they are made the same as the Resonant however, they are only made if a soul is missing from the corpse.",
   "icon": "minecraft:nether_star",
-  "imcontract": 2,
+  "impact": 2,
   "order": 0,
   "powers": [
     "cat-astrophe:dissonant_contract_broker",

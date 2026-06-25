@@ -1,6 +1,6 @@
 {
     "name": "Resonant",
-    "description": "An arcane accident transfigured your body into a vessel of pure Ars Nouveau source energy. You no longer hunger — you resonate with magical flux.",
+    "description": "An extremely rare occurrence when enough Aeternitas compacts into a corpse that resurrects them but at the cost of most of their former life's memories.",
     "icon": {
         "item": "ars_nouveau:source_gem"
     },
@@ -10,7 +10,6 @@
         "cat-astrophe:resonant_on_chosen",
         "cat-astrophe:resonant_hide_hunger",
         "cat-astrophe:resonant_no_exhaustion",
-        "cat-astrophe:resonant_food_restriction",
         "cat-astrophe:resonant_no_regen",
         "cat-astrophe:resonant_channel"
     ]

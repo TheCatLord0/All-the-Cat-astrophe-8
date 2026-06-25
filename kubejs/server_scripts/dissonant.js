@@ -23,7 +23,7 @@ var DISSONANT_CONTRACTS = [
         id: 'waif',
         short: 'Tiny',
         name: 'Tiny Soul, Large Heart',
-        desc: 'You were always the smaller person at heart, having this Contract will make you faster at the cost of there being less surface area to protect from any attack. (-40% Size, +20% Speed, -3 Heart)',
+        desc: 'You were always the smaller person at heart, having this Contract will make you faster at the cost of there being less surface area to protect from any attack. (-40% Size, +20% Speed, -3 Heart, -20% Gravity)',
         attrs: [
             { attr: 'minecraft:generic.scale', id: 'dissonant:waif_scale', amount: -0.4 },
             { attr: 'minecraft:generic.movement_speed', id: 'dissonant:waif_speed', amount: 0.2, op: 'add_multiplied_base' },
@@ -38,7 +38,8 @@ var DISSONANT_CONTRACTS = [
         name: 'Revenant',
         desc: "One dies only when their soul escapes their corpse, what if we locked it to this plane? Which the Revenant Contract does exactly however, the body doesn't take the time to recover causing them to be frailer. (Death Prevention, -1 Heart per Prevention)",
         attrs: [],
-        fx: []
+        fx: [],
+        requireItem: 'minecraft:totem_of_undying'
     },
     {
         id: 'leviathan',
@@ -60,9 +61,33 @@ var DISSONANT_CONTRACTS = [
             { attr: 'minecraft:generic.scale', id: 'dissonant:colossus_scale', amount: 0.5 },
             { attr: 'minecraft:generic.attack_damage', id: 'dissonant:colossus_damage', amount: 4 },
             { attr: 'minecraft:generic.gravity', id: 'dissonant:colossus_gravity', amount: 0.05 },
-            { attr: 'minecraft:generic.jump_strength', id: 'dissonant:colossus_jump', amount: 0.2 }
+            { attr: 'minecraft:generic.jump_strength', id: 'dissonant:colossus_jump', amount: 0.2 },
+            { attr: 'minecraft:generic.max_health', id: 'dissonant:colossus_health', amount: 10 }
         ],
         fx: [{ id: 'minecraft:hunger', amp: 0 }]
+    },
+    {
+        id: 'dwarf',
+        short: 'Dwarven',
+        name: 'Dwarven Might',
+        desc: "Some wish to invoke the might of a Dwarf, shortening them and giving faster mining speed, however you must consume more. (-30% Size, +50% Mining Speed, Faster Hunger)",
+        attrs: [
+            { attr: 'minecraft:generic.scale', id: 'dissonant:dwarf_scale', amount: -0.34 },
+            { attr: 'minecraft:player.block_break_speed', id: 'dissonant:dwarf_mining', amount: 0.5, op: 'add_multiplied_base' }
+        ],
+        fx: [],
+        requireItem: 'minecraft:diamond'
+    },
+    {
+        id: 'web_pact',
+        short: 'Gossamer',
+        name: 'Gossamer Pact',
+        desc: "You brokered a deal with the weavers, allowing you to phase through cobwebs as though they were air. In exchange, your strikes carry less weight. (Cobweb Immunity, -20% Attack Damage)",
+        attrs: [
+            { attr: 'minecraft:generic.attack_damage', id: 'dissonant:gossamer_damage', amount: -0.2, op: 'add_multiplied_base' }
+        ],
+        fx: [],
+        powers: ['cat-astrophe:gossamer_cobweb_immunity']
     },
     {
         id: 'void_chord',
@@ -156,6 +181,24 @@ function dissonantApplyFx(player, contract) {
     }
 }
 
+function dissonantApplyPowers(player, contract) {
+    if (!contract.powers || !contract.powers.length) return
+    var srv = player.level.getServer()
+    for (var i = 0; i < contract.powers.length; i++) {
+        srv.runCommandSilent('power grant ' + player.username + ' ' + contract.powers[i])
+    }
+    player.persistentData.putByte('dissonant_power_sync', 1)
+}
+
+function dissonantRemovePowers(player, contract) {
+    if (!contract.powers || !contract.powers.length) return
+    var srv = player.level.getServer()
+    for (var i = 0; i < contract.powers.length; i++) {
+        srv.runCommandSilent('power revoke ' + player.username + ' ' + contract.powers[i])
+    }
+    player.persistentData.putByte('dissonant_power_sync', 1)
+}
+
 function dissonantApplyCost(player) {
     var hp = player.health
     if (hp <= 1.0) return
@@ -175,6 +218,7 @@ function dissonantApplyContract(player, contractId, dissonantName) {
     dissonantSaveContractOwners(player, owners)
     dissonantApplyAttrs(player, contract)
     dissonantApplyFx(player, contract)
+    dissonantApplyPowers(player, contract)
     return true
 }
 
@@ -195,6 +239,7 @@ function dissonantPurgeAllContracts(target) {
         var contract = dissonantGetContract(list[i])
         if (!contract) continue
         dissonantRemoveAttrs(target, contract)
+        dissonantRemovePowers(target, contract)
         for (var j = 0; j < contract.fx.length; j++) {
             srv.runCommandSilent('effect clear ' + target.username + ' ' + contract.fx[j].id)
         }
@@ -223,6 +268,7 @@ function dissonantRemoveContract(player, contractId) {
     delete owners[contractId]
     dissonantSaveContractOwners(player, owners)
     dissonantRemoveAttrs(player, contract)
+    dissonantRemovePowers(player, contract)
     if (contractId === 'revenant') dissonantRevenantCleanup(player)
     for (var i = 0; i < contract.fx.length; i++) {
         var stillNeeded = false
@@ -246,6 +292,14 @@ function dissonantRestoreFx(player) {
     for (var i = 0; i < list.length; i++) {
         var contract = dissonantGetContract(list[i])
         if (contract) dissonantApplyFx(player, contract)
+    }
+}
+
+function dissonantRestorePowers(player) {
+    var list = dissonantGetPlayerContracts(player)
+    for (var i = 0; i < list.length; i++) {
+        var contract = dissonantGetContract(list[i])
+        if (contract) dissonantApplyPowers(player, contract)
     }
 }
 
@@ -284,7 +338,22 @@ function dissonantFindPlayer(server, name) {
 
 function dissonantGiveItem(player) {
     var itemId = DISSONANT_CONTRACT_ITEMS[Math.floor(Math.random() * DISSONANT_CONTRACT_ITEMS.length)]
-    player.level.getServer().runCommandSilent('give ' + player.username + ' ' + itemId + '[enchantments={levels:{"minecraft:binding_curse":1,"minecraft:vanishing_curse":1}}]')
+    player.level.getServer().runCommandSilent('give ' + player.username + ' ' + itemId + '[enchantments={levels:{"minecraft:binding_curse":1,"minecraft:vanishing_curse":1}},enchantment_glint_override=false]')
+}
+
+function dissonantCheckAndConsumeItem(player, itemId) {
+    try {
+        var inv = player.getInventory()
+        var size = inv.getContainerSize()
+        for (var i = 0; i < size; i++) {
+            var stack = inv.getItem(i)
+            if (stack && !stack.isEmpty() && String(stack.id) === itemId) {
+                stack.shrink(1)
+                return true
+            }
+        }
+    } catch(e) {}
+    return false
 }
 
 function dissonantTellraw(player, components) {
@@ -327,7 +396,7 @@ function dissonantSendSelectPlayer(dissonant) {
 
     var parts = ['',
         { text: '[', color: 'dark_red' },
-        { text: '♦ Soul Contracter', color: 'red', bold: true },
+        { text: '♦ Soul Contractor', color: 'red', bold: true },
         { text: '] ', color: 'dark_red' },
         { text: 'Select a target:\n', color: 'gray' },
         {
@@ -353,7 +422,7 @@ function dissonantSendActionMenu(dissonant, targetName) {
     var display = targetName === '_self' ? 'yourself' : targetName
     var parts = ['',
         { text: '[', color: 'dark_red' },
-        { text: '♦ Soul Contracter', color: 'red', bold: true },
+        { text: '♦ Soul Contractor', color: 'red', bold: true },
         { text: '] ', color: 'dark_red' },
         { text: 'Target: ', color: 'gray' },
         { text: display + '\n', color: 'yellow' },
@@ -373,9 +442,9 @@ function dissonantSendContractMenu(dissonant) {
     var targetPlayer = targetName === '_self' ? dissonant : dissonantFindPlayer(dissonant.level.getServer(), targetName)
     var parts = ['',
         { text: '[', color: 'dark_red' },
-        { text: '♦ Soul Contracter', color: 'red', bold: true },
+        { text: '♦ Soul Contractor', color: 'red', bold: true },
         { text: '] ', color: 'dark_red' },
-        { text: 'Choose a contract:\n', color: 'gray' }
+        { text: 'Choose a Contract:\n', color: 'gray' }
     ]
     for (var i = 0; i < DISSONANT_CONTRACTS.length; i++) {
         var p = DISSONANT_CONTRACTS[i]
@@ -390,6 +459,9 @@ function dissonantSendContractMenu(dissonant) {
         })
         parts.push({ text: ' — ', color: 'dark_gray' })
         parts.push({ text: p.name, color: 'gray', italic: true })
+        if (p.requireItem) {
+            parts.push({ text: ' (needs: ' + p.requireItem + ')', color: 'dark_gray', italic: true })
+        }
     }
     parts.push({ text: '\n' })
     parts.push({ text: '[ Back ]', color: 'dark_gray', clickEvent: { action: 'run_command', value: '/dissonant back' } })
@@ -400,9 +472,9 @@ function dissonantSendRemoveMenu(dissonant, targetContracts) {
     if (targetContracts.length === 0) {
         var emptyParts = ['',
             { text: '[', color: 'dark_red' },
-            { text: '♦ Soul Contracter', color: 'red', bold: true },
+            { text: '♦ Soul Contractor', color: 'red', bold: true },
             { text: '] ', color: 'dark_red' },
-            { text: 'No active contracts to remove.\n', color: 'gray' },
+            { text: 'No active Contracts to remove.\n', color: 'gray' },
             { text: '[ Back ]', color: 'dark_gray', clickEvent: { action: 'run_command', value: '/dissonant back' } }
         ]
         dissonantTellraw(dissonant, emptyParts)
@@ -410,9 +482,9 @@ function dissonantSendRemoveMenu(dissonant, targetContracts) {
     }
     var parts = ['',
         { text: '[', color: 'dark_red' },
-        { text: '♦ Soul Contracter', color: 'red', bold: true },
+        { text: '♦ Soul Contractor', color: 'red', bold: true },
         { text: '] ', color: 'dark_red' },
-        { text: 'Remove which contract?\n', color: 'gray' }
+        { text: 'Remove which Contract?\n', color: 'gray' }
     ]
     for (var i = 0; i < targetContracts.length; i++) {
         var p = dissonantGetContract(targetContracts[i])
@@ -435,16 +507,19 @@ function dissonantSendConfirm(dissonant, targetName, contract, isRemove) {
     var action = isRemove ? 'Remove' : 'Offer'
     var parts = ['',
         { text: '[', color: 'dark_red' },
-        { text: '♦ Soul Contracter', color: 'red', bold: true },
+        { text: '♦ Soul Contractor', color: 'red', bold: true },
         { text: '] ', color: 'dark_red' },
         { text: action + ' ', color: 'gray' },
         { text: contract.name, color: 'light_purple' },
         { text: ' to ' + display + '?\n', color: 'gray' },
-        { text: contract.desc + '\n', color: 'dark_gray', italic: true },
-        { text: '[ Confirm ]', color: 'green', bold: true, clickEvent: { action: 'run_command', value: '/dissonant confirm' } },
-        { text: '  ' },
-        { text: '[ Back ]', color: 'dark_gray', clickEvent: { action: 'run_command', value: '/dissonant back' } }
+        { text: contract.desc + '\n', color: 'dark_gray', italic: true }
     ]
+    if (!isRemove && contract.requireItem) {
+        parts.push({ text: 'Requires: ' + contract.requireItem + '\n', color: 'gold' })
+    }
+    parts.push({ text: '[ Confirm ]', color: 'green', bold: true, clickEvent: { action: 'run_command', value: '/dissonant confirm' } })
+    parts.push({ text: '  ' })
+    parts.push({ text: '[ Back ]', color: 'dark_gray', clickEvent: { action: 'run_command', value: '/dissonant back' } })
     dissonantTellraw(dissonant, parts)
 }
 
@@ -452,9 +527,9 @@ function dissonantSendItemConfirm(dissonant, targetName) {
     var display = targetName === '_self' ? 'yourself' : targetName
     var parts = ['',
         { text: '[', color: 'dark_red' },
-        { text: '♦ Soul Contracter', color: 'red', bold: true },
+        { text: '♦ Soul Contractor', color: 'red', bold: true },
         { text: '] ', color: 'dark_red' },
-        { text: 'Give a contract item to ' + display + '?\n', color: 'gray' },
+        { text: 'Give a Contract item to ' + display + '?\n', color: 'gray' },
         { text: '[ Confirm ]', color: 'green', bold: true, clickEvent: { action: 'run_command', value: '/dissonant confirm' } },
         { text: '  ' },
         { text: '[ Back ]', color: 'dark_gray', clickEvent: { action: 'run_command', value: '/dissonant back' } }
@@ -465,7 +540,7 @@ function dissonantSendItemConfirm(dissonant, targetName) {
 function dissonantSendInvite(target, dissonantName, contract, type) {
     var parts = ['',
         { text: '[', color: 'dark_red' },
-        { text: '♦ Soul Contracter', color: 'red', bold: true },
+        { text: '♦ Soul Contractor', color: 'red', bold: true },
         { text: '] ', color: 'dark_red' }
     ]
     if (type === 'contract') {
@@ -536,13 +611,20 @@ PlayerEvents.loggedOut(function(event) {
             if (!p.persistentData.contains('dissonant_incoming_from')) continue
             if (String(p.persistentData.getString('dissonant_incoming_from')) !== username) continue
             dissonantClearIncoming(p)
-            p.tell(Text.of('§c[♦ Soul Contracter] §7The Dissonant has left. The offer is void.'))
+            p.tell(Text.of('§c[♦ Soul Contractor] §7The Dissonant has left. The offer is void.'))
         }
     } catch(e) {}
 })
 
 PlayerEvents.tick(function(event) {
     var player = event.player
+
+    if (player.persistentData.getByte('dissonant_power_sync') === 1) {
+        player.persistentData.remove('dissonant_power_sync')
+        try {
+            Java.loadClass('com.cyberday1.neoorigins.network.NeoOriginsNetwork').syncActivePowersToPlayer(player)
+        } catch(e) {}
+    }
 
     if (player.tags.contains('dissonant_lost_pending')) {
         player.persistentData.putInt('dissonant_is_owner', 0)
@@ -555,6 +637,20 @@ PlayerEvents.tick(function(event) {
     if (player.level.time % 1200 === 0) {
         if (player.persistentData.contains('dissonant_contracts')) dissonantRestoreFx(player)
     }
+
+    if (player.level.time % 60 === 0 && player.persistentData.contains('dissonant_contracts')) {
+        var dContracts = dissonantGetPlayerContracts(player)
+        for (var dci = 0; dci < dContracts.length; dci++) {
+            if (dContracts[dci] === 'dwarf') {
+                try {
+                    var fd = player.getFoodData()
+                    var sat = fd.getSaturationLevel()
+                    if (sat > 0) fd.setSaturation(Math.max(0, sat - 0.5))
+                } catch(e) {}
+                break
+            }
+        }
+    }
 })
 
 NeoOriginsEvents.powerActivated(function(event) {
@@ -563,7 +659,7 @@ NeoOriginsEvents.powerActivated(function(event) {
     player.tags.remove('dissonant_broker_activated')
     var srv = player.level.getServer()
     srv.runCommandSilent('playsound minecraft:block.enchantment_table.use ambient ' + player.username + ' ' + player.x + ' ' + player.y + ' ' + player.z + ' 1 0.6')
-    srv.runCommandSilent('particle minecraft:soul_fire_flame ' + player.x + ' ' + (player.y + 1) + ' ' + player.z + ' 0.4 0.7 0.4 0.02 25')
+    srv.runCommandSilent('particle spectrum:void_fog ' + player.x + ' ' + (player.y + 1) + ' ' + player.z + ' 0.4 0.7 0.4 0.02 25')
     dissonantClearFlow(player)
     dissonantSendSelectPlayer(player)
 })
@@ -651,10 +747,11 @@ EntityEvents.afterHurt(function(event) {
     player.persistentData.putInt('automaton_momentum', Math.max(0, momentum - 40))
 })
 
-EntityEvents.death(function(event) {
+EntityEvents.afterHurt(function(event) {
     var entity = event.entity
     if (!entity.player) return
     var player = entity
+    if (player.health > 0) return
     var contracts = dissonantGetPlayerContracts(player)
     var hasRevenant = false
     for (var i = 0; i < contracts.length; i++) {
@@ -662,44 +759,64 @@ EntityEvents.death(function(event) {
     }
     if (!hasRevenant) return
     if (player.maxHealth <= 4) return
-    player.persistentData.putDouble('dissonant_revenant_x', player.x)
-    player.persistentData.putDouble('dissonant_revenant_y', player.y)
-    player.persistentData.putDouble('dissonant_revenant_z', player.z)
-    player.persistentData.putString('dissonant_revenant_dim', String(player.level.dimension))
-    player.persistentData.putInt('dissonant_revenant_pending', 1)
+
     var newDrain = player.persistentData.getInt('dissonant_revenant_drain') + 2
     player.persistentData.putInt('dissonant_revenant_drain', newDrain)
     var srv = player.level.getServer()
     srv.runCommandSilent('attribute ' + player.username + ' minecraft:generic.max_health modifier remove dissonant:revenant_drain')
     srv.runCommandSilent('attribute ' + player.username + ' minecraft:generic.max_health modifier add dissonant:revenant_drain -' + newDrain + ' add_value')
+
+    player.setHealth(player.maxHealth)
+
+    try {
+        var JABlockPos = Java.loadClass('net.minecraft.core.BlockPos')
+        var angle = Math.random() * Math.PI * 2
+        var dx = Math.floor(Math.cos(angle) * 50)
+        var dz = Math.floor(Math.sin(angle) * 50)
+        var tx = player.x + dx
+        var tz = player.z + dz
+        var bx = Math.floor(tx)
+        var bz = Math.floor(tz)
+
+        var minY = -63
+        var maxY = 319
+        try { minY = player.level.getMinBuildHeight() + 1 } catch(e2) {}
+        try { maxY = player.level.getMaxBuildHeight() - 1 } catch(e2) {}
+
+        var yOffset = Math.floor(Math.random() * 21) - 10
+        var baseY = Math.min(maxY, Math.max(minY, Math.floor(player.y) + yOffset))
+
+        var teleported = false
+        for (var checkY = baseY; checkY > minY && !teleported; checkY--) {
+            var ground = player.level.getBlockState(new JABlockPos(bx, checkY, bz))
+            if (!ground.isSolid()) continue
+            var feet = player.level.getBlockState(new JABlockPos(bx, checkY + 1, bz))
+            if (!feet.isAir()) continue
+            var head = player.level.getBlockState(new JABlockPos(bx, checkY + 2, bz))
+            if (!head.isAir()) continue
+            srv.runCommandSilent('teleport ' + player.username + ' ' + tx + ' ' + (checkY + 1) + ' ' + tz)
+            teleported = true
+        }
+        if (!teleported) {
+            srv.runCommandSilent('teleport ' + player.username + ' ' + tx + ' ' + baseY + ' ' + tz)
+        }
+    } catch(e) {}
+
+    srv.runCommandSilent('playsound minecraft:entity.player.death ambient ' + player.username + ' ' + player.x + ' ' + player.y + ' ' + player.z + ' 1 1')
+    player.displayClientMessage(Text.of('§8[§4† Revenant§8] §7The Contract holds.'), true)
 })
 
 PlayerEvents.respawned(function(event) {
     var player = event.player
     var srv = player.level.getServer()
-    if (player.persistentData.contains('dissonant_contracts')) {
-        dissonantRestoreAttrs(player)
-        var revenantDrain = player.persistentData.getInt('dissonant_revenant_drain')
-        if (revenantDrain > 0) {
-            srv.runCommandSilent('attribute ' + player.username + ' minecraft:generic.max_health modifier add dissonant:revenant_drain -' + revenantDrain + ' add_value')
-        }
-        dissonantRestoreFx(player)
+    if (!player.persistentData.contains('dissonant_contracts')) return
+    dissonantRestoreAttrs(player)
+    var revenantDrain = player.persistentData.getInt('dissonant_revenant_drain')
+    if (revenantDrain > 0) {
+        srv.runCommandSilent('attribute ' + player.username + ' minecraft:generic.max_health modifier add dissonant:revenant_drain -' + revenantDrain + ' add_value')
     }
-    if (player.persistentData.getInt('dissonant_revenant_pending') !== 1) return
-    player.persistentData.putInt('dissonant_revenant_pending', 0)
-    var x = player.persistentData.getDouble('dissonant_revenant_x')
-    var y = player.persistentData.getDouble('dissonant_revenant_y')
-    var z = player.persistentData.getDouble('dissonant_revenant_z')
-    var dim = player.persistentData.contains('dissonant_revenant_dim') ? String(player.persistentData.getString('dissonant_revenant_dim')) : ''
-    if (dim) {
-        srv.runCommandSilent('execute in ' + dim + ' run teleport ' + player.username + ' ' + x + ' ' + y + ' ' + z)
-    } else {
-        srv.runCommandSilent('teleport ' + player.username + ' ' + x + ' ' + y + ' ' + z)
-    }
-    srv.runCommandSilent('effect clear ' + player.username)
     dissonantRestoreFx(player)
-    player.setHealth(2.0)
-    player.displayClientMessage(Text.of('§8[§4† Revenant§8] §7The contract holds.'), true)
+    dissonantRestorePowers(player)
 })
 
 ServerEvents.commandRegistry(function(event) {
@@ -782,7 +899,7 @@ ServerEvents.commandRegistry(function(event) {
                     if (!contract) return 0
                     var removeTarget = targetName === '_self' ? player : dissonantFindPlayer(player.level.getServer(), targetName)
                     if (!dissonantCanRemoveContract(String(player.username), removeTarget, contractId)) {
-                        player.tell(Text.of('§c[♦ Soul Contracter] §7That contract was sealed by another Dissonant.'))
+                        player.tell(Text.of('§c[♦ Soul Contractor] §7That Contract was sealed by another Dissonant.'))
                         return 0
                     }
                     player.persistentData.putString('dissonant_flow_contract', contractId)
@@ -809,17 +926,22 @@ ServerEvents.commandRegistry(function(event) {
                     if (!contract) { dissonantClearFlow(player); return 0 }
                     if (targetName === '_self') {
                         if (contract.noSelf) {
-                            player.tell(Text.of('§c[♦ Soul Contracter] §7That contract cannot be bound to yourself.'))
+                            player.tell(Text.of('§c[♦ Soul Contractor] §7That Contract cannot be bound to yourself.'))
+                            dissonantClearFlow(player)
+                            return 0
+                        }
+                        if (contract.requireItem && !dissonantCheckAndConsumeItem(player, contract.requireItem)) {
+                            player.tell(Text.of('§c[♦ Soul Contractor] §7This Contract requires §e' + contract.requireItem + '§r§7.'))
                             dissonantClearFlow(player)
                             return 0
                         }
                         dissonantApplyContract(player, contractId, String(player.username))
                         dissonantApplyCost(player)
-                        player.tell(Text.of('§c[♦ Soul Contracter] §7Contract sealed.'))
+                        player.tell(Text.of('§c[♦ Soul Contractor] §7Contract sealed.'))
                     } else {
                         var tp = dissonantFindPlayer(srv, targetName)
                         if (!tp) {
-                            player.tell(Text.of('§c[♦ Soul Contracter] §7Target is no longer reachable.'))
+                            player.tell(Text.of('§c[♦ Soul Contractor] §7Target is no longer reachable.'))
                             dissonantClearFlow(player)
                             return 0
                         }
@@ -827,7 +949,7 @@ ServerEvents.commandRegistry(function(event) {
                         tp.persistentData.putString('dissonant_incoming_contract', contractId)
                         tp.persistentData.putString('dissonant_incoming_type', 'contract')
                         dissonantSendInvite(tp, String(player.username), contract, 'contract')
-                        player.tell(Text.of('§c[♦ Soul Contracter] §7Awaiting §e' + targetName + '§7\'s response…'))
+                        player.tell(Text.of('§c[♦ Soul Contractor] §7Awaiting §e' + targetName + '§7\'s response…'))
                     }
                     dissonantClearFlow(player)
 
@@ -836,45 +958,45 @@ ServerEvents.commandRegistry(function(event) {
                     if (!contract) { dissonantClearFlow(player); return 0 }
                     if (targetName === '_self') {
                         if (!dissonantCanRemoveContract(String(player.username), player, contractId)) {
-                            player.tell(Text.of('§c[♦ Soul Contracter] §7That contract was sealed by another Dissonant.'))
+                            player.tell(Text.of('§c[♦ Soul Contractor] §7That Contract was sealed by another Dissonant.'))
                             dissonantClearFlow(player)
                             return 0
                         }
                         var ok = dissonantRemoveContract(player, contractId)
-                        player.tell(Text.of(ok ? '§c[♦ Soul Contracter] §7Contract broken.' : '§c[♦ Soul Contracter] §7You don\'t have that contract.'))
+                        player.tell(Text.of(ok ? '§c[♦ Soul Contractor] §7Contract broken.' : '§c[♦ Soul Contractor] §7You don\'t have that Contract.'))
                     } else {
                         var tp = dissonantFindPlayer(srv, targetName)
                         if (!tp) {
-                            player.tell(Text.of('§c[♦ Soul Contracter] §7Target is no longer reachable.'))
+                            player.tell(Text.of('§c[♦ Soul Contractor] §7Target is no longer reachable.'))
                             dissonantClearFlow(player)
                             return 0
                         }
                         if (!dissonantCanRemoveContract(String(player.username), tp, contractId)) {
-                            player.tell(Text.of('§c[♦ Soul Contracter] §7That contract was sealed by another Dissonant.'))
+                            player.tell(Text.of('§c[♦ Soul Contractor] §7That Contract was sealed by another Dissonant.'))
                             dissonantClearFlow(player)
                             return 0
                         }
                         var ok = dissonantRemoveContract(tp, contractId)
-                        player.tell(Text.of(ok ? '§c[♦ Soul Contracter] §7Contract torn from §e' + targetName + '§7.' : '§c[♦ Soul Contracter] §7That contract is not active.'))
-                        if (ok) tp.tell(Text.of('§c[♦ Soul Contracter] §7Your §d' + contract.name + ' §7has been dissolved.'))
+                        player.tell(Text.of(ok ? '§c[♦ Soul Contractor] §7Contract torn from §e' + targetName + '§7.' : '§c[♦ Soul Contractor] §7That Contract is not active.'))
+                        if (ok) tp.tell(Text.of('§c[♦ Soul Contractor] §7Your §d' + contract.name + ' §7has been dissolved.'))
                     }
                     dissonantClearFlow(player)
 
                 } else if (step === 'confirm_item') {
                     if (targetName === '_self') {
                         dissonantGiveItem(player)
-                        player.tell(Text.of('§c[♦ Soul Contracter] §7Gift given.'))
+                        player.tell(Text.of('§c[♦ Soul Contractor] §7Gift given.'))
                     } else {
                         var tp = dissonantFindPlayer(srv, targetName)
                         if (!tp) {
-                            player.tell(Text.of('§c[♦ Soul Contracter] §7Target is no longer reachable.'))
+                            player.tell(Text.of('§c[♦ Soul Contractor] §7Target is no longer reachable.'))
                             dissonantClearFlow(player)
                             return 0
                         }
                         tp.persistentData.putString('dissonant_incoming_from', String(player.username))
                         tp.persistentData.putString('dissonant_incoming_type', 'item')
                         dissonantSendInvite(tp, String(player.username), null, 'item')
-                        player.tell(Text.of('§c[♦ Soul Contracter] §7Awaiting §e' + targetName + '§7\'s response…'))
+                        player.tell(Text.of('§c[♦ Soul Contractor] §7Awaiting §e' + targetName + '§7\'s response…'))
                     }
                     dissonantClearFlow(player)
                 }
@@ -897,29 +1019,42 @@ ServerEvents.commandRegistry(function(event) {
                     var contractId = dissonantGetFlowVal(player, 'dissonant_incoming_contract')
                     var contract = dissonantGetContract(contractId)
                     if (!contract) { dissonantClearIncoming(player); return 0 }
+                    if (contract.requireItem) {
+                        if (!dissonant) {
+                            player.tell(Text.of('§c[♦ Soul Contractor] §7The Dissonant is offline — Contract voided.'))
+                            dissonantClearIncoming(player)
+                            return 0
+                        }
+                        if (!dissonantCheckAndConsumeItem(dissonant, contract.requireItem)) {
+                            player.tell(Text.of('§c[♦ Soul Contractor] §7The Dissonant lost the required material — deal fell through.'))
+                            dissonant.tell(Text.of('§c[♦ Soul Contractor] §7You no longer have §e' + contract.requireItem + '§r§7. Contract voided.'))
+                            dissonantClearIncoming(player)
+                            return 0
+                        }
+                    }
                     dissonantApplyContract(player, contractId, fromName)
                     if (dissonant) dissonantApplyCost(dissonant)
-                    player.tell(Text.of('§c[♦ Soul Contracter] §7You accepted the §d' + contract.name + '§7.'))
-                    if (dissonant) dissonant.tell(Text.of('§c[♦ Soul Contracter] §e' + String(player.username) + ' §7accepted §d' + contract.name + '§7.'))
+                    player.tell(Text.of('§c[♦ Soul Contractor] §7You accepted the §d' + contract.name + '§7.'))
+                    if (dissonant) dissonant.tell(Text.of('§c[♦ Soul Contractor] §e' + String(player.username) + ' §7accepted §d' + contract.name + '§7.'))
 
                 } else if (type === 'remove') {
                     var contractId = dissonantGetFlowVal(player, 'dissonant_incoming_contract')
                     var contract = dissonantGetContract(contractId)
                     if (!contract) { dissonantClearIncoming(player); return 0 }
                     if (!dissonantCanRemoveContract(fromName, player, contractId)) {
-                        player.tell(Text.of('§c[♦ Soul Contracter] §7That contract was sealed by a different Dissonant.'))
-                        if (dissonant) dissonant.tell(Text.of('§c[♦ Soul Contracter] §7You did not seal that contract.'))
+                        player.tell(Text.of('§c[♦ Soul Contractor] §7That Contract was sealed by a different Dissonant.'))
+                        if (dissonant) dissonant.tell(Text.of('§c[♦ Soul Contractor] §7You did not seal that contract.'))
                         dissonantClearIncoming(player)
                         return 0
                     }
                     var ok = dissonantRemoveContract(player, contractId)
-                    player.tell(Text.of(ok ? '§c[♦ Soul Contracter] §7Contract broken.' : '§c[♦ Soul Contracter] §7Contract not found.'))
-                    if (dissonant) dissonant.tell(Text.of('§c[♦ Soul Contracter] §e' + String(player.username) + '§7\'s §d' + contract.name + ' §7was broken.'))
+                    player.tell(Text.of(ok ? '§c[♦ Soul Contractor] §7Contract broken.' : '§c[♦ Soul Contractor] §7Contract not found.'))
+                    if (dissonant) dissonant.tell(Text.of('§c[♦ Soul Contractor] §e' + String(player.username) + '§7\'s §d' + contract.name + ' §7was broken.'))
 
                 } else if (type === 'item') {
                     dissonantGiveItem(player)
-                    player.tell(Text.of('§c[♦ Soul Contracter] §7You received a gift.'))
-                    if (dissonant) dissonant.tell(Text.of('§c[♦ Soul Contracter] §e' + String(player.username) + ' §7accepted your gift.'))
+                    player.tell(Text.of('§c[♦ Soul Contractor] §7You received a gift.'))
+                    if (dissonant) dissonant.tell(Text.of('§c[♦ Soul Contractor] §e' + String(player.username) + ' §7accepted your gift.'))
                 }
 
                 dissonantClearIncoming(player)
@@ -934,9 +1069,9 @@ ServerEvents.commandRegistry(function(event) {
                 if (!player) return 0
                 var fromName = dissonantGetFlowVal(player, 'dissonant_incoming_from')
                 if (!fromName) return 0
-                player.tell(Text.of('§c[♦ Soul Contracter] §7You refused.'))
+                player.tell(Text.of('§c[♦ Soul Contractor] §7You refused.'))
                 var dissonant = dissonantFindPlayer(player.level.getServer(), fromName)
-                if (dissonant) dissonant.tell(Text.of('§c[♦ Soul Contracter] §e' + String(player.username) + ' §7refused.'))
+                if (dissonant) dissonant.tell(Text.of('§c[♦ Soul Contractor] §e' + String(player.username) + ' §7refused.'))
                 dissonantClearIncoming(player)
                 return 1
             })
@@ -952,13 +1087,13 @@ ServerEvents.commandRegistry(function(event) {
                     var srv = player.level.getServer()
                     var tp = String(targetName) === String(player.username) ? player : dissonantFindPlayer(srv, targetName)
                     if (!tp) {
-                        player.tell(Text.of('§c[♦ Soul Contracter] §7Target not found or offline.'))
+                        player.tell(Text.of('§c[♦ Soul Contractor] §7Target not found or offline.'))
                         return 0
                     }
                     dissonantPurgeAllContracts(tp)
-                    player.tell(Text.of('§c[♦ Soul Contracter] §7All contracts purged from §e' + targetName + '§7.'))
+                    player.tell(Text.of('§c[♦ Soul Contractor] §7All Contracts purged from §e' + targetName + '§7.'))
                     if (String(tp.username) !== String(player.username)) {
-                        tp.tell(Text.of('§c[♦ Soul Contracter] §7All your contracts have been dissolved by the Dissonant.'))
+                        tp.tell(Text.of('§c[♦ Soul Contractor] §7All your Contracts have been dissolved by the Dissonant.'))
                     }
                     return 1
                 })
@@ -1016,7 +1151,7 @@ ServerEvents.commandRegistry(function(event) {
                     }
                     var contractId = JAString.getString(ctx, 'contractid')
                     var ok = dissonantApplyContract(player, contractId, String(player.username))
-                    player.tell(Text.of(ok ? '§c[♦ Dev] §7Contract applied: §d' + contractId : '§c[♦ Dev] §7Unknown or already active contract: §d' + contractId))
+                    player.tell(Text.of(ok ? '§c[♦ Dev] §7Contract applied: §d' + contractId : '§c[♦ Dev] §7Unknown or already active Contract: §d' + contractId))
                     return ok ? 1 : 0
                 })
             )
@@ -1046,7 +1181,7 @@ ServerEvents.commandRegistry(function(event) {
                 try { player = ctx.getSource().getPlayer() } catch(e) {}
                 if (!player) return 0
                 dissonantClearFlow(player)
-                player.tell(Text.of('§c[♦ Soul Contracter] §7Cancelled.'))
+                player.tell(Text.of('§c[♦ Soul Contractor] §7Cancelled.'))
                 return 1
             })
         )

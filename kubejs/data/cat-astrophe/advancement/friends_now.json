@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "id": "kubejs:yaoi_plush"
+    },
+    "title": "Friends now. Lovers later",
+    "description": "Reunite the two.",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "minecraft:story/root",
+  "criteria": {
+    "obtain_yaoi": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "kubejs:yaoi_plush"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "obtain_yaoi"
+    ]
+  ],
+  "rewards": {
+    "experience": 500
+  }
+}

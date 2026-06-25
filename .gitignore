@@ -64,3 +64,7 @@ config/creeperconfetti.properties
 config/iris.properties
 config/asyncparticles/asyncparticles-mixin.properties
 config/fabric/indigo-renderer.properties
+debug/*
+particular_cache/*
+fancymenu_data/*
+cache/*

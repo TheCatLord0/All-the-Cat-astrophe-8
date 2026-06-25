@@ -17,6 +17,16 @@
 	#of survival players' way. Enable this if you author origins in
 	#survival or want testers to reach the editor without /gamemode.
 	show_origin_editor = false
+	#Initial sort order for the origin selection / info screens, used
+	#until you cycle the on-screen sort button (your cycled choice still
+	#wins for the rest of the session). Options:
+	#  CLASS      - grouped by mod/namespace, alphabetical within (default)
+	#  NAME_ASC   - flat alphabetical
+	#  NAME_DESC  - flat reverse-alphabetical
+	#  IMPACT_ASC - by origin impact/influence (none -> low -> medium -> high)
+	#Set IMPACT_ASC to open the picker sorted by influence.
+	#Allowed Values: NAME_ASC, NAME_DESC, CLASS, IMPACT_ASC
+	default_sort = "CLASS"
 
 #Heads-up-display options local to this client.
 [hud]

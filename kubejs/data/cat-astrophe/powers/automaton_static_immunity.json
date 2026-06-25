@@ -1,0 +1,7 @@
+{
+  "type": "neoorigins:effect_immunity",
+  "effects": ["ars_elemental:static_charged"],
+  "name": "Grounded Circuits",
+  "description": "The brass you're made off lets energy flow through you.",
+  "hidden": true
+}

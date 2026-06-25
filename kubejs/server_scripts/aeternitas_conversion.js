@@ -16,9 +16,9 @@
   const Registries = Java.loadClass('net.minecraft.core.registries.Registries')
   const BuiltInRegistries = Java.loadClass('net.minecraft.core.registries.BuiltInRegistries')
 
-  const ServerPlayer = Java.loadClass('net.minecraft.server.level.ServerPlayer')
-
   const CuriosApi = Java.loadClass('top.theillusivec4.curios.api.CuriosApi')
+
+  const EntityType = Java.loadClass('net.minecraft.world.entity.EntityType')
 
   // Ars Nouveau mana
   const ArsManaCap = Java.loadClass('com.hollingsworth.arsnouveau.common.capability.ManaCap')
@@ -67,7 +67,16 @@
     return null
   }
   function isServerPlayer(entity) {
-    return entity != null && entity instanceof ServerPlayer
+    if (entity == null) {
+      return false
+    }
+
+    try {
+     return EntityType.PLAYER.equals(entity.getType()) &&
+        entity.getServer() != null
+    } catch (ignored) {
+      return false
+    }
   }
 
   function forEachServerPlayer(server, callback) {

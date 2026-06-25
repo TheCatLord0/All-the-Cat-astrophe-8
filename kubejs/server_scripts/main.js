@@ -1,4 +1,5 @@
 import { tag } from "@package/dev/latvian/mods/kubejs/server";
+import { loot } from "@package/net/minecraft/data";
 
 // Banned items
 let bannedItems = [
@@ -37,7 +38,6 @@ let bannedItems = [
    "ars_zero:anchor_effect",
    "ars_zero:effect_convergence",
    "ars_nouveau:glyph_explosion",
-   'ars_additions:codex_entry',
    "mekanism:module_gravitational_modulating_unit",
    "occultism:trinity_gem",
    "starbunclemania:fluid_sourcelink",
@@ -51,6 +51,14 @@ let bannedItems = [
    "sophisticatedbackpacks:mob_catcher_upgrade",
    "sophisticatedbackpacks:advanced_mob_catcher_upgrade",
    'dimdungeons:item_blank_build_key',
+   "ars_nouveau:drygmy_charm",
+   'dimdungeons:item_blank_teleporter_key',
+   'advanced_ae:quantum_helmet',
+   'advanced_ae:quantum_chestplate',
+   'advanced_ae:quantum_leggings',
+   'advanced_ae:quantum_boots',
+   'advanced_ae:quantum_upgrade_base',
+   'create_lnl:thruster'
 ]
 
 PlayerEvents.inventoryChanged(event => {
@@ -584,6 +592,26 @@ event.custom({
     P: "mekanism:pellet_polonium",
     S: "create_enchantment_industry:super_experience_nugget"
   })
+	event.recipes.ars_nouveau.enchanting_apparatus(
+        [
+          "kubejs:cat_plush",
+          "kubejs:odins_plush"
+        ], // input items
+	    'minecraft:nether_star', // reagent
+	    "kubejs:yaoi_plush", // output
+	    100000, // source cost
+	    false // NBT
+	)
+  event.custom({
+  type: "malum:void_favor",
+  input: {
+    item: "kubejs:odins_plush"
+  },
+  result: {
+    count: 1,
+    id: "kubejs:odins_shork"
+  }
+  })
 })
 // Cooldowns
 let staffs = [
@@ -611,22 +639,14 @@ ItemEvents.rightClicked(books, event => {
     player.addItemCooldown(item, 15)
   })
 })
-// Drygmys
-const DRYGMY_UUID = '7400926d-1007-4e53-880f-b43e67f2bf29';
-
-function onlyDrygmy(event, entity) {
-    return event.addEntityModifier(entity).matchAttackerCustom((attacker) => attacker.uuid.toString() == DRYGMY_UUID);
-}
 ServerEvents.tags("entity_type", (event) => {
-  event.add("ars_nouveau:drygmy_blacklist", ["minecraft:ender_dragon", "minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks", "@occultism"])
     event.add("industrialforegoing:mob_duplicator_blacklist", ["minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
     event.add("ars_nouveau:jar_blacklist", ["minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
-  event.remove("ars_nouveau:drygmy_blacklist", ["occultism:marid_unbound", "occultism:afrit_wild"]) 
 })
 
 // Global Loot
 LootJS.modifiers(event => {
-  event.addTableModifier(/chests/).removeLoot(["minecraft:netherite_scrap", "minecraft:netherite_ingot", "minecraft:ancient_debris", "minecraft:diamond"])
+  event.addTableModifier(/chests/).removeLoot(["minecraft:netherite_scrap", "minecraft:netherite_ingot", "minecraft:ancient_debris", "minecraft:diamond", 'ars_additions:codex_entry'])
 
 const isNamedOdinshi = entity => {
   if (entity == null) return false
@@ -688,4 +708,101 @@ RecipeViewerEvents.addInformation('item', event => {
 	event.add('kubejs:enkephalin_bucket', [
 		'Obtained from Cataclysm Bosses, Wilden Chimera, Dead King, and Tyros using a Liquid Laser drill.'
 	])
+})
+// Infinite Dungeon Loot
+let generalLoot = [
+  "dimdungeons:chest/chestloot_1",
+  "dimdungeons:chest/chestloot_2",
+  "dimdungeons:chest/chestloot_3",
+  "dimdungeons:chest/chestloot_4"
+]
+let easyLoot = [
+  "dimdungeons:chest/chestloot_basic_easy",
+  "dimdungeons:chest/chestloot_advanced_easy"
+]
+let hardLoot = [
+  "dimdungeons:chest/chestloot_basic_hard",
+  "dimdungeons:chest/chestloot_advanced_hard"
+]
+
+LootJS.modifiers(event => {
+  // Loot that appears frequantly
+  const commonLoot = [
+    "ars_nouveau:source_gem",
+    "minecraft:leather",
+    "minecraft:string",
+    "minecraft:spider_eye",
+    "minecraft:redstone",
+    "minecraft:iron_ingot",
+    "minecraft:quartz",
+    "minecraft:bone",
+    "irons_spellbooks:common_ink",
+    'minecraft:potion[potion_contents={potion:"minecraft:healing"}]',
+  ]
+  commonLoot.forEach(commonLoot => {
+  event.addTableModifier(generalLoot).addLoot(commonLoot).randomChance(0.2).setCount([1, 5])
+  event.addTableModifier(easyLoot).addLoot(commonLoot).randomChance(0.25).setCount([1, 5])
+  event.addTableModifier(hardLoot).addLoot(commonLoot).randomChance(0.4).setCount([1, 5])
+  })
+  // Loot that you should see but not in every chest
+  const uncommonLoot = [
+    "minecraft:amethyst_shard",
+    "spectrum:citrine_shard",
+    "spectrum:topaz_shard",
+    "minecraft:gold_ingot",
+    "iceandfire:pixie_dust",
+    "irons_spellbooks:blank_rune",
+    "irons_spellbooks:uncommon_ink",
+    "irons_spellbooks:rare_ink",
+    "irons_spellbooks:evasion_elixir",
+    "irons_spellbooks:oakskin_elixir",
+    "irons_spellbooks:invisibility_elixir",
+    "irons_spellbooks:greater_evasion_elixir",
+    "irons_spellbooks:greater_oakskin_elixir",
+    "irons_spellbooks:greater_invisibility_elixir",
+    "irons_spellbooks:greater_healing_potion",
+    'minecraft:potion[potion_contents={potion:"minecraft:strong_healing"}]',
+  ]
+  uncommonLoot.forEach(uncommonLoot => {
+  event.addTableModifier(generalLoot).addLoot(uncommonLoot).randomChance(0.075).setCount([1, 3])
+  event.addTableModifier(easyLoot).addLoot(uncommonLoot).randomChance(0.1).setCount([1, 3])
+  event.addTableModifier(hardLoot).addLoot(uncommonLoot).randomChance(0.2).setCount([1, 3])
+  })
+  // Loot that you should be excited to see
+  const rareLoot = [
+    "minecraft:ghast_tear",
+    "minecraft:end_crystal",
+    "minecraft:emerald",
+    "minecraft:lapis_lazuli",
+    "minecraft:rabbit_foot",
+    "iceandfire:hippogryph_egg",
+    "iceandfire:deathworm_egg",
+    "iceandfire:deathworm_egg_giant",
+    "malum:soul_stained_steel_ingot",
+    "ars_additions:codex_entry",
+    "eidolon_repraised:shadow_gem",
+    "irons_spellbooks:upgrade_orb",
+    "irons_spellbooks:epic_ink",
+  ]
+  rareLoot.forEach(rareLoot => {
+  event.addTableModifier(generalLoot).addLoot(rareLoot).randomChance(0.05).setCount([1, 2])
+  event.addTableModifier(easyLoot).addLoot(rareLoot).randomChance(0.15).setCount([1, 2])
+  event.addTableModifier(hardLoot).addLoot(rareLoot).randomChance(0.20).setCount([1, 3])
+  })
+  // Loot EXTREMELY rare
+  const relicLoot = [
+    "kubejs:justice",
+    "kubejs:earthshaker",
+    "kubejs:fixer_scythe",
+    "kubejs:first_blade",
+    "kubejs:tibia",
+    "kubejs:martyr_core",
+    "kubejs:aeternitas_control",
+  ]
+  relicLoot.forEach(relicLoot => {
+  event.addTableModifier(generalLoot).addLoot(relicLoot).randomChance(0.0005).setCount([1, 1])
+  event.addTableModifier(easyLoot).addLoot(relicLoot).randomChance(0.005).setCount([1, 1])
+  event.addTableModifier(hardLoot).addLoot(relicLoot).randomChance(0.01).setCount([1, 1])
+  })
+
 })

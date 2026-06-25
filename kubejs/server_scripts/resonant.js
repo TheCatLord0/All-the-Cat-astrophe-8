@@ -8,7 +8,7 @@ const SOURCE_JAR_GAIN = 40
 const SOURCE_JAR_COST = 1000
 const SOURCE_FOOD_GAIN = 20
 const SOURCE_FOOD_GAIN_CRAFTED = 30
-const SOURCE_DAMAGE_DRAIN_RATIO = 2
+const SOURCE_DAMAGE_DRAIN_RATIO = 1
 const SOURCE_EAT_COOLDOWN = 20
 const SOURCE_EFFECT_AMPLIFIER = 1
 const SOURCE_HIGH_EFFECT_AMPLIFIER = 0
@@ -28,6 +28,12 @@ const SOURCE_FOODS_CRAFTED = [
 ]
 
 const SCROLL_COST = 30
+const INFUSE_COST = 5
+const INFUSE_TABLE = [
+    { inputs: ['minecraft:sweet_berries'], outputs: ['ars_nouveau:sourceberry_bush'] },
+    { inputs: ['minecraft:oak_sapling', 'minecraft:birch_sapling', 'minecraft:spruce_sapling', 'minecraft:jungle_sapling', 'minecraft:acacia_sapling', 'minecraft:dark_oak_sapling', 'minecraft:cherry_sapling', 'minecraft:mangrove_propagule'], outputs: ['ars_nouveau:blue_archwood_sapling', 'ars_nouveau:red_archwood_sapling', 'ars_nouveau:green_archwood_sapling', 'ars_nouveau:purple_archwood_sapling'] },
+    { inputs: ['minecraft:apple'],         outputs: ['ars_nouveau:bombegranate_pod', 'ars_nouveau:bastion_pod', 'ars_nouveau:frostaya_pod', 'ars_nouveau:mendosteen_pod'] }
+]
 var SCROLL_FORM_CLASSES = [
     { cls: 'com.hollingsworth.arsnouveau.common.spell.method.MethodProjectile', names: ['Bolt', 'Shot'] },
     { cls: 'com.hollingsworth.arsnouveau.common.spell.method.MethodTouch',      names: ['Touch', 'Grasp'] },
@@ -65,7 +71,7 @@ var SCROLL_EFFECT_CLASSES = [
     { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectFreeze',      names: ['Glacial', 'Frost'] },
     { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectPull',        names: ['Drawing', 'Magnetic'] },
     { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectLight',       names: ['Radiant', 'Illuminating'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectBubble',      names: ['Shielding', 'Warding'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectBubble',      names: ['Floating', 'Soapy'] },
     { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectFell',        names: ['Felling', 'Cleaving'] },
     { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectBreak',       names: ['Shattering', 'Crushing'] },
     { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectGrow',        names: ['Verdant', 'Flourishing'] },
@@ -207,7 +213,11 @@ PlayerEvents.tick(function(event) {
         createSourceBossbar(player)
     }
 
-    try { player.getFoodData().setSaturation(0) } catch(e) {}
+    try {
+        var fd = player.getFoodData()
+        fd.setSaturation(0)
+        if (fd.getFoodLevel() > 19) fd.setFoodLevel(19)
+    } catch(e) {}
 
     var curHealth = Math.floor(player.health)
     var prevHealth = player.persistentData.contains('resonant_prev_health') ? player.persistentData.getInt('resonant_prev_health') : curHealth
@@ -388,6 +398,33 @@ NeoOriginsEvents.powerActivated(function(event) {
     if (String(event.getPowerId()) !== 'cat-astrophe:resonant_channel') return
     var player = event.getPlayer()
     player.tags.remove('resonant_channeled')
+
+    var heldId = String(player.mainHandItem.id)
+    var infuseEntry = null
+    for (var i = 0; i < INFUSE_TABLE.length; i++) {
+        var ins = INFUSE_TABLE[i].inputs
+        for (var j = 0; j < ins.length; j++) { if (ins[j] === heldId) { infuseEntry = INFUSE_TABLE[i]; break } }
+        if (infuseEntry) break
+    }
+
+    if (infuseEntry) {
+        var source = getPlayerSource(player)
+        if (source < INFUSE_COST) {
+            player.displayClientMessage(Text.of('§cNot enough Resonance.'), true)
+            return
+        }
+        var output = infuseEntry.outputs[Math.floor(Math.random() * infuseEntry.outputs.length)]
+        var srv = player.level.getServer()
+        srv.runCommandSilent('clear ' + player.username + ' ' + heldId + ' 1')
+        var newSource = Math.max(0, source - INFUSE_COST)
+        setPlayerSource(player, newSource)
+        updateSourceBossbar(player, newSource)
+        srv.runCommandSilent('give ' + player.username + ' ' + output + ' 1')
+        player.displayClientMessage(Text.of('§9Infused.'), true)
+        srv.runCommandSilent('playsound ars_nouveau:generic_cast block ' + player.username + ' ' + player.x + ' ' + player.y + ' ' + player.z + ' 0.7 1.3')
+        srv.runCommandSilent('particle minecraft:end_rod ' + player.x + ' ' + (player.y + 0.5) + ' ' + player.z + ' 0.2 0.4 0.2 0.04 8')
+        return
+    }
 
     var hasVoidChord = false
     try {

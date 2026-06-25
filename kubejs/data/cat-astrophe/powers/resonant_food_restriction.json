@@ -2,7 +2,7 @@
     "type": "neoorigins:food_restriction",
     "mode": "whitelist",
     "item_tag": "cat-astrophe:resonant_foods",
-    "name": "Arcane Diet",
-    "description": "Your body no longer processes mundane food. Only arcane source sustains you.",
+    "name": "Aeternitas Diet",
+    "description": "You're unable to consume normal food and can only sustain yourself on Aeternitas.",
     "hidden": true
 }
