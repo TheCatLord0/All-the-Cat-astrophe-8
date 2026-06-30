@@ -4,6 +4,25 @@ var DISSONANT_CONTRACT_ITEMS = [
 
 var DISSONANT_CONTRACTS = [
     {
+        id: 'revenant',
+        short: 'Revenant',
+        name: 'Revenant',
+        desc: "One dies only when their soul escapes their corpse, what if we locked it to this plane? Which the Revenant Contract does exactly however, the body doesn't take the time to recover causing them to be frailer. (Death Prevention, -1 Heart per Prevention)",
+        attrs: [],
+        fx: [],
+        requireItem: 'minecraft:totem_of_undying'
+    },
+    {
+        id: 'knowledge',
+        short: 'Knowledge',
+        name: 'Forbidden Knowledge',
+        desc: "By accepting this, the Dissonant will give you eldritch and forbidden knowledge causing you to be in a state of madness. (+50% XP Gained, -20% Attack Damage)",
+        attrs: [{ attr: 'irons_lib:experience_gained', id: 'dissonant:knowledge_xp', amount: 0.5, op: 'add_multiplied_base' },
+                { attr: 'minecraft:generic.attack_damage', id: 'dissonant:knowledge_damage', amount: -0.2, op: 'add_multiplied_base' }
+        ],
+        fx: [],
+    },
+    {
         id: 'embers',
         short: 'Fire',
         name: 'Fear no Fire',
@@ -12,12 +31,27 @@ var DISSONANT_CONTRACTS = [
         fx: [{ id: 'minecraft:fire_resistance', amp: 0 }]
     },
     {
-        id: 'knight',
-        short: 'Metal',
-        name: 'Metal Ossification',
-        desc: 'This Contract slowly, painfully, eternally changes your bones to be that of metal causing you to move extremely slowly however your bones will not break. (+6 Armor, +Slowness I)',
-        attrs: [{ attr: 'minecraft:generic.armor', id: 'dissonant:knight_armor', amount: 6 }],
-        fx: [{ id: 'minecraft:slowness', amp: 0 }]
+        id: 'web_pact',
+        short: 'Silk',
+        name: 'Silk touched',
+        desc: "Webs cause fear to so many, not for you. (Cobweb Immunity, -20% Attack Damage)",
+        attrs: [
+            { attr: 'minecraft:generic.attack_damage', id: 'dissonant:gossamer_damage', amount: -0.2, op: 'add_multiplied_base' }
+        ],
+        fx: [],
+        powers: ['cat-astrophe:gossamer_cobweb_immunity']
+    },
+    {
+        id: 'dwarf',
+        short: 'Dwarven',
+        name: 'Dwarven Might',
+        desc: "Some wish to invoke the might of a Dwarf, shortening them and giving faster mining speed, however you must consume more. (-30% Size, +50% Mining Speed, Faster Hunger)",
+        attrs: [
+            { attr: 'minecraft:generic.scale', id: 'dissonant:dwarf_scale', amount: -0.34 },
+            { attr: 'minecraft:player.block_break_speed', id: 'dissonant:dwarf_mining', amount: 0.5, op: 'add_multiplied_base' }
+        ],
+        fx: [],
+        requireItem: 'minecraft:diamond'
     },
     {
         id: 'waif',
@@ -31,26 +65,6 @@ var DISSONANT_CONTRACTS = [
             { attr: 'minecraft:generic.gravity', id: 'dissonant:waif_gravity', amount: -0.2, op: 'add_multiplied_total' }
         ],
         fx: []
-    },
-    {
-        id: 'revenant',
-        short: 'Revenant',
-        name: 'Revenant',
-        desc: "One dies only when their soul escapes their corpse, what if we locked it to this plane? Which the Revenant Contract does exactly however, the body doesn't take the time to recover causing them to be frailer. (Death Prevention, -1 Heart per Prevention)",
-        attrs: [],
-        fx: [],
-        requireItem: 'minecraft:totem_of_undying'
-    },
-    {
-        id: 'leviathan',
-        short: 'Leviathan',
-        name: 'Leviathan',
-        desc: 'You were always fascinated by the Deep, drawn towards it, your soul screams to be within it, your body disallowed it, this Contract will force it into the Deep. (Water Breathing, 3x Swim Speed, -20% Land Speed)',
-        attrs: [
-            { attr: 'minecraft:generic.water_movement_efficiency', id: 'dissonant:leviathan_swim', amount: 2 },
-            { attr: 'minecraft:generic.movement_speed', id: 'dissonant:leviathan_land', amount: -0.2, op: 'add_multiplied_base' }
-        ],
-        fx: [{ id: 'minecraft:water_breathing', amp: 0 }]
     },
     {
         id: 'colossus',
@@ -67,27 +81,23 @@ var DISSONANT_CONTRACTS = [
         fx: [{ id: 'minecraft:hunger', amp: 0 }]
     },
     {
-        id: 'dwarf',
-        short: 'Dwarven',
-        name: 'Dwarven Might',
-        desc: "Some wish to invoke the might of a Dwarf, shortening them and giving faster mining speed, however you must consume more. (-30% Size, +50% Mining Speed, Faster Hunger)",
-        attrs: [
-            { attr: 'minecraft:generic.scale', id: 'dissonant:dwarf_scale', amount: -0.34 },
-            { attr: 'minecraft:player.block_break_speed', id: 'dissonant:dwarf_mining', amount: 0.5, op: 'add_multiplied_base' }
-        ],
-        fx: [],
-        requireItem: 'minecraft:diamond'
+        id: 'knight',
+        short: 'Metal',
+        name: 'Metal Ossification',
+        desc: 'This Contract slowly, painfully, eternally changes your bones to be that of metal causing you to move extremely slowly however your bones will not break. (+6 Armor, +Slowness I)',
+        attrs: [{ attr: 'minecraft:generic.armor', id: 'dissonant:knight_armor', amount: 6 }],
+        fx: [{ id: 'minecraft:slowness', amp: 0 }]
     },
     {
-        id: 'web_pact',
-        short: 'Gossamer',
-        name: 'Gossamer Pact',
-        desc: "You brokered a deal with the weavers, allowing you to phase through cobwebs as though they were air. In exchange, your strikes carry less weight. (Cobweb Immunity, -20% Attack Damage)",
+        id: 'leviathan',
+        short: 'Leviathan',
+        name: 'Leviathan',
+        desc: 'You were always fascinated by the Deep, drawn towards it, your soul screams to be within it, your body disallowed it, this Contract will force it into the Deep. (Water Breathing, 3x Swim Speed, -20% Land Speed)',
         attrs: [
-            { attr: 'minecraft:generic.attack_damage', id: 'dissonant:gossamer_damage', amount: -0.2, op: 'add_multiplied_base' }
+            { attr: 'minecraft:generic.water_movement_efficiency', id: 'dissonant:leviathan_swim', amount: 2 },
+            { attr: 'minecraft:generic.movement_speed', id: 'dissonant:leviathan_land', amount: -0.2, op: 'add_multiplied_base' }
         ],
-        fx: [],
-        powers: ['cat-astrophe:gossamer_cobweb_immunity']
+        fx: [{ id: 'minecraft:water_breathing', amp: 0 }]
     },
     {
         id: 'void_chord',
