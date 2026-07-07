@@ -6,5 +6,10 @@
 	"smartHeuristics": true,
 	"handleSystemMessages": true,
 	"drawShadow": true,
-	"nameAliases": { }
+	"nameAliases": {
+		"<ForestQueen558>": "tiny",
+		"<Amethystborne>": "there",
+		"<TheCatLord0>": "30%",
+		"<masterfuldummy>": "ruined"
+	}
 }

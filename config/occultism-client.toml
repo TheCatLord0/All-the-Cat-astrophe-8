@@ -5,7 +5,7 @@
 	#Disables the headache- and possibly seizure-inducing visual effects of Demon's Dream.
 	disableDemonsDreamShaders = false
 	#Disables holiday themed visual content such as familiar skins.
-	disableHolidayTheming = false
+	disableHolidayTheming = true
 	#When true the old divination rod selected block renderer will be used.
 	#May work for some people that do not see selected block outlines when using the divination rod.
 	useAlternativeDivinationRodRenderer = false
@@ -109,13 +109,13 @@
 #Misc Settings
 [misc]
 	#Sync JEI search in storage actuator.
-	syncJeiSearch = false
+	syncJeiSearch = true
 	#Enables EMI sync for the storage actuator.
 	enableEMISync = true
 	#How many rows show at one time on storage controller
 	# Default: 4
 	# Range: 1 ~ 9
-	storageRows = 4
+	storageRows = 3
 	#If true, divination rod will render all matching blocks with an outline. Disable if it causes lag.
 	#This setting will be unused, if Theurgy is installed alongside, as Occultism will use Theurgy's divination rod result rendering instead.
 	divinationRodHighlightAllResults = false

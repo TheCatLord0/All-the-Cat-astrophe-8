@@ -94,7 +94,7 @@ var DISSONANT_CONTRACTS = [
         name: 'Leviathan',
         desc: 'You were always fascinated by the Deep, drawn towards it, your soul screams to be within it, your body disallowed it, this Contract will force it into the Deep. (Water Breathing, 3x Swim Speed, -20% Land Speed)',
         attrs: [
-            { attr: 'minecraft:generic.water_movement_efficiency', id: 'dissonant:leviathan_swim', amount: 2 },
+            { attr: 'additionalentityattributes:generic.water_speed', id: 'dissonant:leviathan_swim', amount: 2 },
             { attr: 'minecraft:generic.movement_speed', id: 'dissonant:leviathan_land', amount: -0.2, op: 'add_multiplied_base' }
         ],
         fx: [{ id: 'minecraft:water_breathing', amp: 0 }]
