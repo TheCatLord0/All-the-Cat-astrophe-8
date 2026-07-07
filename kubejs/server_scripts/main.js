@@ -625,6 +625,13 @@ event.custom({
       500,
       []
   )
+  event.recipes.ars_nouveau.imbuement(
+      'create:sturdy_sheet',
+      'irons_spellbooks:blank_rune',
+      2000,
+      []
+  )
+  event.recipes.create.filling('minecraft:ender_pearl', [Fluid.of('minecraft:water', 500), 'create:powdered_obsidian'])
 })
 // Cooldowns
 let staffs = [

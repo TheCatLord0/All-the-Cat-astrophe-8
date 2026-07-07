@@ -1,8 +1,17 @@
 {
   "trees": {
-    "allowedLogs": ["malum:runewood_log","malum:blighted_soulwood","malum:exposed_runewood_log","malum:exposed_soulwood_log"],
+    "allowedLogs": [
+      "malum:runewood_log",
+      "malum:blighted_soulwood",
+      "malum:exposed_runewood_log",
+      "malum:exposed_soulwood_log"
+    ],
     "deniedLogs": [],
-    "allowedLeaves": ["malum:runewood_leaves", "malum:azure_runewood_leaves", "malum:soulwood_leaves"],
+    "allowedLeaves": [
+      "malum:runewood_leaves",
+      "malum:azure_runewood_leaves",
+      "malum:soulwood_leaves"
+    ],
     "allowedNonDecayLeaves": [],
     "deniedLeaves": [],
     "breakMode": "INSTANTANEOUS",
