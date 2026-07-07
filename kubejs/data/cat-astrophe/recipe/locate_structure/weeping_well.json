@@ -1,0 +1,12 @@
+{
+  "type": "ars_additions:locate_structure",
+  "augments": [
+    {
+      "key": "malum:refined_soulstone"
+    }
+  ],
+  "id": "cat-astrophe:weeping_well",
+  "structure": {
+    "tag": "cat-astrophe:weeping_well"
+  }
+}

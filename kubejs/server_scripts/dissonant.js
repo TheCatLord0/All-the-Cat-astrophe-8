@@ -45,13 +45,14 @@ var DISSONANT_CONTRACTS = [
         id: 'dwarf',
         short: 'Dwarven',
         name: 'Dwarven Might',
-        desc: "Some wish to invoke the might of a Dwarf, shortening them and giving faster mining speed, however you must consume more. (-30% Size, +50% Mining Speed, Faster Hunger)",
+        desc: "Some wish to invoke the might of a Dwarf, shortening them and giving faster mining speed, however you must consume more. (-30% Size, +50% Mining Speed, -1 Heart, -20% Speed)",
         attrs: [
             { attr: 'minecraft:generic.scale', id: 'dissonant:dwarf_scale', amount: -0.34 },
-            { attr: 'minecraft:player.block_break_speed', id: 'dissonant:dwarf_mining', amount: 0.5, op: 'add_multiplied_base' }
+            { attr: 'minecraft:player.block_break_speed', id: 'dissonant:dwarf_mining', amount: 0.5, op: 'add_multiplied_base' },
+            { attr: 'minecraft:generic.movement_speed', id: 'dissonant:dwarf_speed', amount: -0.2, op: 'add_multiplied_base' },
+            { attr: 'minecraft:generic.max_health', id: 'dissonant:dwarf_health', amount: -2 }
         ],
         fx: [],
-        requireItem: 'minecraft:diamond'
     },
     {
         id: 'waif',

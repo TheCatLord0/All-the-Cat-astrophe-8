@@ -1,7 +1,7 @@
 {
   "type": "neoorigins:edible_item",
   "tags": ["cat-astrophe:myconoid_foods_basic"],
-  "nutrition": 3,
+  "nutrition": 7,
   "saturation": 0.4,
   "always_edible": true,
   "hidden": true

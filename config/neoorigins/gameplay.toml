@@ -166,3 +166,12 @@
 	#built-in, datapack and compat origins all spawn at the world's
 	#normal spawn point. Overrides ocean_origins.spawn_in_ocean.
 	teleports_enabled = true
+
+#Active-ability cooldown behaviour.
+[cooldowns]
+	#When true, players in Creative mode ignore active-ability cooldowns
+	#entirely — every keybind / on-hit / on-kill power can fire without
+	#waiting. Cooldowns still apply normally in Survival/Adventure, so a
+	#creative-mode player switching back to survival resumes any in-flight
+	#cooldown. Useful for testing powers without spam-waiting.
+	creative_no_cooldown = true

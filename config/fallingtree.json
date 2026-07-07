@@ -1,8 +1,8 @@
 {
   "trees": {
-    "allowedLogs": [],
+    "allowedLogs": ["malum:runewood_log","malum:blighted_soulwood","malum:exposed_runewood_log","malum:exposed_soulwood_log"],
     "deniedLogs": [],
-    "allowedLeaves": [],
+    "allowedLeaves": ["malum:runewood_leaves", "malum:azure_runewood_leaves", "malum:soulwood_leaves"],
     "allowedNonDecayLeaves": [],
     "deniedLeaves": [],
     "breakMode": "INSTANTANEOUS",
@@ -10,7 +10,7 @@
     "detectionModeBiomeOverride": {},
     "maxScanSize": 500,
     "minSize": 0,
-    "maxSize": 100,
+    "maxSize": 512,
     "maxLeafDistanceFromLog": 15,
     "maxSizeAction": "ABORT",
     "breakOrder": "FURTHEST_FIRST",

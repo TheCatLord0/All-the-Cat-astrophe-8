@@ -2,16 +2,18 @@ const SOURCE_MAX = 100
 const SOURCE_INTERVAL = 120
 const SOURCE_DRAIN = 1
 const SOURCE_HIGH_THRESHOLD = 70
+const SOURCE_MEDIUM_THRESHOLD = 50
 const SOURCE_LOW_THRESHOLD = 20
 const SOURCE_EFFECT_DURATION = 130
 const SOURCE_JAR_GAIN = 40
 const SOURCE_JAR_COST = 1000
 const SOURCE_FOOD_GAIN = 20
-const SOURCE_FOOD_GAIN_CRAFTED = 30
+const SOURCE_FOOD_GAIN_CRAFTED = 50
 const SOURCE_DAMAGE_DRAIN_RATIO = 1
 const SOURCE_EAT_COOLDOWN = 20
 const SOURCE_EFFECT_AMPLIFIER = 1
-const SOURCE_HIGH_EFFECT_AMPLIFIER = 0
+const SOURCE_HIGH_EFFECT_AMPLIFIER = 1
+const SOURCE_MEDIUM_EFFECT_AMPLIFIER = 0
 const SOURCE_JAR_ID = 'ars_nouveau:source_jar'
 const SOURCE_CREATIVE_JAR_ID = 'ars_nouveau:creative_source_jar'
 const SOURCE_FOODS = [
@@ -20,7 +22,8 @@ const SOURCE_FOODS = [
     'ars_nouveau:bombegranate_pod',
     'ars_nouveau:bastion_pod',
     'ars_nouveau:frostaya_pod',
-    'ars_nouveau:mendosteen_pod'
+    'ars_nouveau:mendosteen_pod',
+    'ars_elemental:flashpine_pod'
 ]
 const SOURCE_FOODS_CRAFTED = [
     'ars_nouveau:source_berry_pie',
@@ -31,8 +34,8 @@ const SCROLL_COST = 30
 const INFUSE_COST = 5
 const INFUSE_TABLE = [
     { inputs: ['minecraft:sweet_berries'], outputs: ['ars_nouveau:sourceberry_bush'] },
-    { inputs: ['minecraft:oak_sapling', 'minecraft:birch_sapling', 'minecraft:spruce_sapling', 'minecraft:jungle_sapling', 'minecraft:acacia_sapling', 'minecraft:dark_oak_sapling', 'minecraft:cherry_sapling', 'minecraft:mangrove_propagule'], outputs: ['ars_nouveau:blue_archwood_sapling', 'ars_nouveau:red_archwood_sapling', 'ars_nouveau:green_archwood_sapling', 'ars_nouveau:purple_archwood_sapling'] },
-    { inputs: ['minecraft:apple'],         outputs: ['ars_nouveau:bombegranate_pod', 'ars_nouveau:bastion_pod', 'ars_nouveau:frostaya_pod', 'ars_nouveau:mendosteen_pod'] }
+    { inputs: ['minecraft:oak_sapling', 'minecraft:birch_sapling', 'minecraft:spruce_sapling', 'minecraft:jungle_sapling', 'minecraft:acacia_sapling', 'minecraft:dark_oak_sapling', 'minecraft:cherry_sapling', 'minecraft:mangrove_propagule'], outputs: ['ars_nouveau:blue_archwood_sapling', 'ars_nouveau:red_archwood_sapling', 'ars_nouveau:green_archwood_sapling', 'ars_nouveau:purple_archwood_sapling', 'ars_elemental:yellow_archwood_sapling'] },
+    { inputs: ['minecraft:apple'], outputs: ['ars_nouveau:bombegranate_pod', 'ars_nouveau:bastion_pod', 'ars_nouveau:frostaya_pod', 'ars_nouveau:mendosteen_pod', 'ars_elemental:flashpine_pod'] }
 ]
 var SCROLL_FORM_CLASSES = [
     { cls: 'com.hollingsworth.arsnouveau.common.spell.method.MethodProjectile', names: ['Bolt', 'Shot'] },
@@ -95,6 +98,7 @@ function setPlayerSource(player, value) {
 
 function sourceBossbarColor(source) {
     if (source > SOURCE_HIGH_THRESHOLD) return 'blue'
+    if (source > SOURCE_MEDIUM_THRESHOLD) return 'magenta'
     if (source > SOURCE_LOW_THRESHOLD) return 'purple'
     if (source > 0) return 'pink'
     return 'red'
@@ -274,9 +278,12 @@ PlayerEvents.tick(function(event) {
         }
     }
 
+    if (source > SOURCE_MEDIUM_THRESHOLD) {
+        player.level.getServer().runCommandSilent('effect give ' + player.username + ' minecraft:glowing ' + SOURCE_EFFECT_DURATION + ' ' + SOURCE_MEDIUM_EFFECT_AMPLIFIER + ' true')
+    }
     if (source > SOURCE_HIGH_THRESHOLD) {
         player.level.getServer().runCommandSilent('effect give ' + player.username + ' minecraft:regeneration ' + SOURCE_EFFECT_DURATION + ' ' + SOURCE_HIGH_EFFECT_AMPLIFIER + ' true')
-        player.level.getServer().runCommandSilent('effect give ' + player.username + ' minecraft:glowing ' + SOURCE_EFFECT_DURATION + ' ' + SOURCE_HIGH_EFFECT_AMPLIFIER + ' true')
+        player.level.getServer().runCommandSilent('effect give ' + player.username + ' ars_nouveau:mana_regeneration ' + SOURCE_EFFECT_DURATION + ' ' + SOURCE_HIGH_EFFECT_AMPLIFIER + ' true')
     }
 })
 

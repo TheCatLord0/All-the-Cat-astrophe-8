@@ -4,6 +4,19 @@
 #hunger instead (resource_cost_amount food points are deducted).
 #Useful for packs that prefer vanilla hunger as the universal cost.
 disable_resource_bars = false
+#Disable night-vision globally.
+#When true, any power that would apply the minecraft:night_vision
+#effect (the neoorigins:night_vision / persistent_effect path) is
+#suppressed — the player's screen is never brightened by the effect.
+#Other effects on the same power still apply; only night_vision is
+#stripped. Useful for packs that want darkness to stay threatening.
+disable_night_vision = false
+#Disable enhanced-vision (low-light brightness boost) globally.
+#When true, the neoorigins:enhanced_vision capability is never sent
+#to clients, so the client-side brightness-curve boost (cat eyes,
+#salamander, oculus drone, etc.) stays off. Independent of the
+#night-vision toggle above — these are two separate mechanisms.
+disable_enhanced_vision = false
 
 #Enable or disable built-in origins.
 #Set to false to hide an origin from the selection screen.
@@ -59,6 +72,12 @@ disable_resource_bars = false
 	skeleton = true
 	slime = true
 	wraith = true
+	asura = true
+	windwalker = true
+	qi_cultivator = true
+	golden_body = true
+	iron_monk = true
+	sword_immortal = true
 
 #Enable or disable built-in classes.
 #Set to false to remove a class from the selection screen.
