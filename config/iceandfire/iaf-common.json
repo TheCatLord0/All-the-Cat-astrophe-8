@@ -33,7 +33,7 @@
     "dragonFlightSpeedMod": 1.0,
     "maxTamedDragonAge": 128,
     "maxBreathTimeMul": 2.0,
-    "neutralToPlayer": false,
+    "neutralToPlayer": true,
     "enableBrushDragonScales": true,
     "maxBrushScalesDropPerTime": 2,
     "brushTimesMul": 1.0,
@@ -44,7 +44,7 @@
   "hippogryphs": {
     "spawn": true,
     "spawnWeight": 1,
-    "fightSpeedMod": 1.0
+    "fightSpeedMod": 1.25
   },
   "pixie": {
     "size": 5,
@@ -122,7 +122,7 @@
   },
   "hippocampus": {
     "spawnChance": 0.025,
-    "swimSpeedMod": 1.0
+    "swimSpeedMod": 1.25
   },
   "ghost": {
     "maxHealth": 30.0,

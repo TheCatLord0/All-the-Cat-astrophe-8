@@ -1,139 +1,95 @@
 (function () {
-  // Configuration
-
   const COOLDOWN_TICKS = 5 * 20
   const EFFECT_DURATION = 2147483647
-
   const ARS_MANA_PER_HEALTH_POINT = 10
   const IRONS_MANA_PER_HEALTH_POINT = 10
 
-  // Actual code
   const Component = Java.loadClass('net.minecraft.network.chat.Component')
   const MobEffectInstance = Java.loadClass('net.minecraft.world.effect.MobEffectInstance')
-
   const ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
   const ResourceKey = Java.loadClass('net.minecraft.resources.ResourceKey')
   const Registries = Java.loadClass('net.minecraft.core.registries.Registries')
   const BuiltInRegistries = Java.loadClass('net.minecraft.core.registries.BuiltInRegistries')
-
+  const EventPriority = Java.loadClass('net.neoforged.bus.api.EventPriority')
   const CuriosApi = Java.loadClass('top.theillusivec4.curios.api.CuriosApi')
-
-  const EntityType = Java.loadClass('net.minecraft.world.entity.EntityType')
-
-  // Ars Nouveau mana
   const ArsManaCap = Java.loadClass('com.hollingsworth.arsnouveau.common.capability.ManaCap')
-
-  // Iron's Spells mana
   const IronMagicData = Java.loadClass('io.redspace.ironsspellbooks.api.magic.MagicData')
   const IronSyncManaPacket = Java.loadClass('io.redspace.ironsspellbooks.network.SyncManaPacket')
   const PacketDistributor = Java.loadClass('net.neoforged.neoforge.network.PacketDistributor')
 
   const CHANNEL = 'aeternitas_conversion'
-
-  const AETERNITAS_CONVERSION_ITEM_ID = 'kubejs:aeternitas_control'
-  const AETERNITAS_CONVERSION_EFFECT_ID = 'kubejs:aeternitas_conversion'
-
-  const COOLDOWN_TICKS_LEFT_NBT = 'aeternitas_conversion_cooldown_ticks_left'
+  const ITEM_ID = 'kubejs:aeternitas_control'
+  const EFFECT_ID = 'kubejs:aeternitas_conversion'
+  const COOLDOWN_KEY = 'aeternitas_conversion_cooldown_ticks_left'
   const ACTIVE_KEY = 'aeternitas_conversion_active'
 
   const AETERNITAS_EFFECT = BuiltInRegistries.MOB_EFFECT.getHolderOrThrow(
     ResourceKey.create(
       Registries.MOB_EFFECT,
-      ResourceLocation.parse(AETERNITAS_CONVERSION_EFFECT_ID)
+      ResourceLocation.parse(EFFECT_ID)
     )
   )
 
-  function getPersistentData(targetPlayer) {
-    if (targetPlayer.persistentData) {
-      return targetPlayer.persistentData
-    }
-
-    return targetPlayer.getPersistentData()
+  function getData(player) {
+    return player.persistentData || player.getPersistentData()
   }
 
-  function actionBar(targetPlayer, message) {
-    targetPlayer.displayClientMessage(Component.literal(message), true)
+  function actionBar(player, message) {
+    player.displayClientMessage(Component.literal(message), true)
   }
 
-  function getPacketPlayer(networkEvent) {
-    if (networkEvent.player) {
-      return networkEvent.player
-    }
-
-    if (networkEvent.entity) {
-      return networkEvent.entity
-    }
-
-    return null
+  function getPacketPlayer(event) {
+    return event.player || event.entity || null
   }
-  function isServerPlayer(entity) {
-    if (entity == null) {
-      return false
-    }
 
+  function forEachPlayer(server, callback) {
     try {
-     return EntityType.PLAYER.equals(entity.getType()) &&
-        entity.getServer() != null
-    } catch (ignored) {
-      return false
-    }
-  }
+      var iterator = server.getPlayerList().getPlayers().iterator()
 
-  function forEachServerPlayer(server, callback) {
-    try {
-      var serverPlayers = server.getPlayerList().getPlayers()
-      var serverPlayerIterator = serverPlayers.iterator()
-
-      while (serverPlayerIterator.hasNext()) {
-        callback(serverPlayerIterator.next())
+      while (iterator.hasNext()) {
+        callback(iterator.next())
       }
     } catch (error) {
-      console.error('[aeternitas_conversion] Server player loop failed: ' + error)
+      console.error('[aeternitas_conversion] Player loop failed: ' + error)
     }
   }
-  function hasAeternitasConversionEquipped(targetPlayer) {
-    try {
-      var curiosOptional = CuriosApi.getCuriosInventory(targetPlayer)
 
-      if (curiosOptional == null || !curiosOptional.isPresent()) {
+  function isEquipped(player) {
+    try {
+      var optional = CuriosApi.getCuriosInventory(player)
+
+      if (optional == null || !optional.isPresent()) {
         return false
       }
 
-      var curiosInventory = curiosOptional.get()
-      var curiosMap = curiosInventory.getCurios()
-      var curiosIterator = curiosMap.entrySet().iterator()
+      var iterator = optional.get().getCurios().entrySet().iterator()
 
-      while (curiosIterator.hasNext()) {
-        var curiosEntry = curiosIterator.next()
-        var curiosHandler = curiosEntry.getValue()
-        var curiosStacks = curiosHandler.getStacks()
-        var curiosSlotCount = curiosStacks.getSlots()
+      while (iterator.hasNext()) {
+        var stacks = iterator.next().getValue().getStacks()
 
-        for (var slotIndex = 0; slotIndex < curiosSlotCount; slotIndex++) {
-          var curiosStack = curiosStacks.getStackInSlot(slotIndex)
+        for (var slot = 0; slot < stacks.getSlots(); slot++) {
+          var stack = stacks.getStackInSlot(slot)
 
-          if (!curiosStack || curiosStack.isEmpty()) {
+          if (!stack || stack.isEmpty()) {
             continue
           }
 
-          var curiosStackId = String(BuiltInRegistries.ITEM.getKey(curiosStack.getItem()))
+          var id = String(BuiltInRegistries.ITEM.getKey(stack.getItem()))
 
-          if (curiosStackId === AETERNITAS_CONVERSION_ITEM_ID) {
+          if (id === ITEM_ID) {
             return true
           }
         }
       }
     } catch (error) {
-      console.error('[aeternitas_conversion] Curios equipped check failed: ' + error)
+      console.error('[aeternitas_conversion] Curios check failed: ' + error)
     }
+
     return false
   }
-  function disableAeternitasConversion(targetPlayer) {
-    targetPlayer.removeEffect(AETERNITAS_EFFECT)
-    getPersistentData(targetPlayer).putBoolean(ACTIVE_KEY, false)
-  }
-  function enableAeternitasConversion(targetPlayer) {
-    targetPlayer.addEffect(
+
+  function enable(player) {
+    player.addEffect(
       new MobEffectInstance(
         AETERNITAS_EFFECT,
         EFFECT_DURATION,
@@ -143,132 +99,153 @@
         true
       )
     )
-    getPersistentData(targetPlayer).putBoolean(ACTIVE_KEY, true)
+
+    getData(player).putBoolean(ACTIVE_KEY, true)
   }
-  function syncIronMana(targetPlayer, ironMagicData) {
+
+  function disable(player) {
+    player.removeEffect(AETERNITAS_EFFECT)
+    getData(player).putBoolean(ACTIVE_KEY, false)
+  }
+
+  function syncIronMana(player, magicData) {
     PacketDistributor.sendToPlayer(
-      targetPlayer,
-      new IronSyncManaPacket(ironMagicData)
+      player,
+      new IronSyncManaPacket(magicData)
     )
   }
 
-  function giveAeternitasMana(targetPlayer, healthPointsToConvert) {
-    var arsManaToAdd = healthPointsToConvert * ARS_MANA_PER_HEALTH_POINT
-    var ironsManaToAdd = healthPointsToConvert * IRONS_MANA_PER_HEALTH_POINT
-
+  function giveMana(player, health) {
+    var arsAmount = health * ARS_MANA_PER_HEALTH_POINT
+    var ironAmount = health * IRONS_MANA_PER_HEALTH_POINT
     var arsCap = null
-    var ironMagicData = null
-
+    var ironData = null
     var oldArsMana = 0
     var oldIronMana = 0
 
     try {
-      arsCap = new ArsManaCap(targetPlayer)
+      arsCap = new ArsManaCap(player)
+      ironData = IronMagicData.getPlayerMagicData(player)
+
       oldArsMana = arsCap.getCurrentMana()
+      oldIronMana = ironData.getMana()
 
-      ironMagicData = IronMagicData.getPlayerMagicData(targetPlayer)
-      oldIronMana = ironMagicData.getMana()
+      arsCap.addMana(arsAmount)
+      arsCap.syncToClient(player)
 
-      arsCap.addMana(arsManaToAdd)
-      arsCap.syncToClient(targetPlayer)
-
-      ironMagicData.addMana(ironsManaToAdd)
-      syncIronMana(targetPlayer, ironMagicData)
-
-      return true
+      ironData.addMana(ironAmount)
+      syncIronMana(player, ironData)
     } catch (error) {
       console.error('[aeternitas_conversion] Mana conversion failed: ' + error)
+
       try {
         if (arsCap != null) {
           arsCap.setMana(oldArsMana)
-          arsCap.syncToClient(targetPlayer)
+          arsCap.syncToClient(player)
         }
-      } catch (rollbackArsError) {
-        console.error('[aeternitas_conversion] Ars rollback failed: ' + rollbackArsError)
-      }
-      try {
-        if (ironMagicData != null) {
-          ironMagicData.setMana(oldIronMana)
-          syncIronMana(targetPlayer, ironMagicData)
-        }
-      } catch (rollbackIronError) {
-        console.error('[aeternitas_conversion] Iron rollback failed: ' + rollbackIronError)
+      } catch (rollbackError) {
+        console.error('[aeternitas_conversion] Ars rollback failed: ' + rollbackError)
       }
 
-      return false
+      try {
+        if (ironData != null) {
+          ironData.setMana(oldIronMana)
+          syncIronMana(player, ironData)
+        }
+      } catch (rollbackError) {
+        console.error('[aeternitas_conversion] Iron rollback failed: ' + rollbackError)
+      }
     }
   }
-  ServerEvents.tick(function (tickEvent) {
-    forEachServerPlayer(tickEvent.server, function (serverPlayer) {
-      var data = getPersistentData(serverPlayer)
-      var cooldownTicksLeft = data.getInt(COOLDOWN_TICKS_LEFT_NBT)
 
-      if (cooldownTicksLeft > 0) {
-        data.putInt(COOLDOWN_TICKS_LEFT_NBT, cooldownTicksLeft - 1)
+  ServerEvents.tick(function (event) {
+    forEachPlayer(event.server, function (player) {
+      var data = getData(player)
+      var cooldown = data.getInt(COOLDOWN_KEY)
+
+      if (cooldown > 0) {
+        data.putInt(COOLDOWN_KEY, cooldown - 1)
       }
-      if (
-        data.getBoolean(ACTIVE_KEY) &&
-        serverPlayer.hasEffect(AETERNITAS_EFFECT) &&
-        !hasAeternitasConversionEquipped(serverPlayer)
-      ) {
-        disableAeternitasConversion(serverPlayer)
+
+      if (data.getBoolean(ACTIVE_KEY) && !isEquipped(player)) {
+        disable(player)
       }
     })
   })
-  NetworkEvents.dataReceived(CHANNEL, function (networkEvent) {
-    var targetPlayer = getPacketPlayer(networkEvent)
-    if (!targetPlayer) {
+
+  NetworkEvents.dataReceived(CHANNEL, function (event) {
+    var player = getPacketPlayer(event)
+
+    if (!player) {
       return
     }
-    if (!hasAeternitasConversionEquipped(targetPlayer)) {
-      disableAeternitasConversion(targetPlayer)
-      actionBar(targetPlayer, 'Aeternitas Conversion is not equipped.')
+
+    if (!isEquipped(player)) {
+      disable(player)
+      actionBar(player, 'Aeternitas Conversion is not equipped.')
       return
     }
-    var data = getPersistentData(targetPlayer)
-    var cooldownTicksLeft = data.getInt(COOLDOWN_TICKS_LEFT_NBT)
-    if (cooldownTicksLeft > 0) {
-      var secondsLeft = Math.ceil(cooldownTicksLeft / 20)
-      actionBar(targetPlayer, 'Aeternitas Conversion cooling down: ' + secondsLeft + 's')
+
+    var data = getData(player)
+    var cooldown = data.getInt(COOLDOWN_KEY)
+
+    if (cooldown > 0) {
+      actionBar(
+        player,
+        'Aeternitas Conversion cooling down: ' +
+          Math.ceil(cooldown / 20) +
+          's'
+      )
+
       return
     }
-    data.putInt(COOLDOWN_TICKS_LEFT_NBT, COOLDOWN_TICKS)
-    if (targetPlayer.hasEffect(AETERNITAS_EFFECT)) {
-      disableAeternitasConversion(targetPlayer)
-      actionBar(targetPlayer, 'Aeternitas Conversion: OFF')
+
+    data.putInt(COOLDOWN_KEY, COOLDOWN_TICKS)
+
+    if (data.getBoolean(ACTIVE_KEY)) {
+      disable(player)
+      actionBar(player, 'Aeternitas Conversion: OFF')
     } else {
-      enableAeternitasConversion(targetPlayer)
-      actionBar(targetPlayer, 'Aeternitas Conversion: ON')
+      enable(player)
+      actionBar(player, 'Aeternitas Conversion: ON')
     }
   })
-  NativeEvents.onEvent('net.neoforged.neoforge.event.entity.living.LivingHealEvent', function (healEvent) {
-    var targetEntity = healEvent.getEntity()
-    if (!isServerPlayer(targetEntity)) {
-      return
+
+  NativeEvents.onEvent(
+    EventPriority.LOWEST,
+    'net.neoforged.neoforge.event.entity.living.LivingHealEvent',
+    function (event) {
+      var player = event.getEntity()
+      var data = getData(player)
+
+      if (!data.getBoolean(ACTIVE_KEY)) {
+        return
+      }
+
+      if (!isEquipped(player)) {
+        disable(player)
+        return
+      }
+
+      var healing = event.getAmount()
+
+      if (healing <= 0) {
+        return
+      }
+
+      var missingHealth = Math.max(
+        0,
+        player.getMaxHealth() - player.getHealth()
+      )
+
+      var convertedHealth = Math.min(healing, missingHealth)
+
+      event.setAmount(0)
+      event.setCanceled(true)
+
+      if (convertedHealth > 0) {
+        giveMana(player, convertedHealth)
+      }
     }
-    var targetPlayer = targetEntity
-    var data = getPersistentData(targetPlayer)
-    if (!targetPlayer.hasEffect(AETERNITAS_EFFECT)) {
-      data.putBoolean(ACTIVE_KEY, false)
-      return
-    }
-    if (!hasAeternitasConversionEquipped(targetPlayer)) {
-      disableAeternitasConversion(targetPlayer)
-      return
-    }
-    var attemptedHealing = healEvent.getAmount()
-    if (attemptedHealing <= 0) {
-      return
-    }
-    var missingHealth = targetPlayer.getMaxHealth() - targetPlayer.getHealth()
-    var healthPointsToConvert = Math.min(attemptedHealing, missingHealth)
-    if (healthPointsToConvert <= 0) {
-      healEvent.setCanceled(true)
-      return
-    }
-    if (!giveAeternitasMana(targetPlayer, healthPointsToConvert)) {
-      return
-    }
-    healEvent.setCanceled(true)
-  })
+  )
 })()

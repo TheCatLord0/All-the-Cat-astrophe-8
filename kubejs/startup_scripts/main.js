@@ -190,3 +190,46 @@ StartupEvents.registry('item', (event) => {
         .displayName('Ritual: Break the Curse of the Mark')
         .ritualTooltip('Removing it however releases a far greater evil...')
 })
+ItemEvents.modification(event => {
+  event.modify(/iceandfire:armor_.*_helmet/, item => {
+    item.maxDamage = 165
+  })
+  event.modify(/iceandfire:armor_.*_chestplate/, item => {
+    item.maxDamage = 240
+  })
+  event.modify(/iceandfire:armor_.*_leggings/, item => {
+    item.maxDamage = 225
+  })
+  event.modify(/iceandfire:armor_.*_boots/, item => {
+    item.maxDamage = 195
+  })
+  event.modify('gaze:encyclopedia_unveiled', item => {
+    item.attachCuriosCapability(
+      CuriosJSCapabilityBuilder.create()
+        .addAttribute(
+          'irons_spellbooks:max_mana',
+          'kubejs:gaze_mana',
+          200,
+          'add_value'
+        )
+        .addAttribute(
+          'irons_spellbooks:spell_power',
+          'kubejs:gaze_power',
+          0.0,
+          'add_value'
+        )
+        .addAttribute(
+          'irons_spellbooks:ender_spell_power',
+          'kubejs:gaze_ender',
+          0.0,
+          'add_value'
+        )
+        .addAttribute(
+          'irons_spellbooks:eldritch_spell_power',
+          'kubejs:gaze_eldritch',
+          0.1,
+          'add_value'
+        )
+    )
+  })
+})

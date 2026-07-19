@@ -1,6 +1,6 @@
 const SOURCE_MAX = 100
 const SOURCE_INTERVAL = 120
-const SOURCE_DRAIN = 1
+const SOURCE_DRAIN = 0.5
 const SOURCE_HIGH_THRESHOLD = 70
 const SOURCE_MEDIUM_THRESHOLD = 50
 const SOURCE_LOW_THRESHOLD = 20
@@ -9,7 +9,7 @@ const SOURCE_JAR_GAIN = 40
 const SOURCE_JAR_COST = 1000
 const SOURCE_FOOD_GAIN = 20
 const SOURCE_FOOD_GAIN_CRAFTED = 50
-const SOURCE_DAMAGE_DRAIN_RATIO = 1
+const SOURCE_DAMAGE_DRAIN_RATIO = 0.25
 const SOURCE_EAT_COOLDOWN = 20
 const SOURCE_EFFECT_AMPLIFIER = 1
 const SOURCE_HIGH_EFFECT_AMPLIFIER = 1
@@ -138,6 +138,7 @@ function clearNegativeEffects(player) {
     player.level.getServer().runCommandSilent('effect clear ' + player.username + ' minecraft:weakness')
     player.level.getServer().runCommandSilent('effect clear ' + player.username + ' minecraft:slowness')
     player.level.getServer().runCommandSilent('effect clear ' + player.username + ' minecraft:poison')
+    player.level.getServer().runCommandSilent('effect clear ' + player.username + ' minecraft:glowing')
 }
 
 function tryConsumeSourceFood(player, itemId) {
@@ -278,12 +279,12 @@ PlayerEvents.tick(function(event) {
         }
     }
 
-    if (source > SOURCE_MEDIUM_THRESHOLD) {
+    if (source < SOURCE_MEDIUM_THRESHOLD) {
         player.level.getServer().runCommandSilent('effect give ' + player.username + ' minecraft:glowing ' + SOURCE_EFFECT_DURATION + ' ' + SOURCE_MEDIUM_EFFECT_AMPLIFIER + ' true')
     }
     if (source > SOURCE_HIGH_THRESHOLD) {
         player.level.getServer().runCommandSilent('effect give ' + player.username + ' minecraft:regeneration ' + SOURCE_EFFECT_DURATION + ' ' + SOURCE_HIGH_EFFECT_AMPLIFIER + ' true')
-        player.level.getServer().runCommandSilent('effect give ' + player.username + ' ars_nouveau:mana_regeneration ' + SOURCE_EFFECT_DURATION + ' ' + SOURCE_HIGH_EFFECT_AMPLIFIER + ' true')
+        player.level.getServer().runCommandSilent('effect give ' + player.username + ' ars_nouveau:mana_regen ' + SOURCE_EFFECT_DURATION + ' ' + SOURCE_HIGH_EFFECT_AMPLIFIER + ' true')
     }
 })
 
@@ -475,4 +476,17 @@ NeoOriginsEvents.powerActivated(function(event) {
     player.displayClientMessage(Text.of('§9Spell channeled...'), true)
     player.level.getServer().runCommandSilent('playsound ars_nouveau:ea_channel block ' + player.username + ' ' + player.x + ' ' + player.y + ' ' + player.z + ' 0.8 1.2')
     player.level.getServer().runCommandSilent('particle minecraft:end_rod ' + player.x + ' ' + (player.y + 0.5) + ' ' + player.z + ' 0.3 0.5 0.3 0.05 15')
+})
+PlayerEvents.respawned(function(event) {
+    var player = event.player
+    if (player.persistentData.getInt('resonant_is_owner') !== 1) return
+
+    var source = 60
+    setPlayerSource(player, source)
+    updateSourceBossbar(player, source)
+
+    if (source > 0) {
+        player.tags.remove('resonant_starved')
+        clearNegativeEffects(player)
+    }
 })

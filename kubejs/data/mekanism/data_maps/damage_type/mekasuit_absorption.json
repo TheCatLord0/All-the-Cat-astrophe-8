@@ -1,0 +1,49 @@
+{
+  "values": {
+    "#mekanism:mekasuit_always_supported": {
+      "absorption": 1.0
+    },
+    "minecraft:sonic_boom": {
+      "absorption": 0.75
+    },
+    "minecraft:player_attack": {
+      "absorption": 0.5
+    },
+    "minecraft:magic": {
+      "absorption": 0.6
+    },
+    "ars_nouveau:spell": {
+      "absorption": 0.7
+    },
+    "irons_spellbooks:heartstop": {
+      "absorption": 0
+    },
+    "irons_spellbooks:nature_magic": {
+      "absorption": 0.7
+    },
+    "irons_spellbooks:ice_magic": {
+      "absorption": 0.7
+    },
+    "irons_spellbooks:fire_magic": {
+      "absorption": 0.7
+    },
+    "irons_spellbooks:blood_magic": {
+      "absorption": 0.7
+    },
+    "irons_spellbooks:lightning_magic": {
+      "absorption": 0.7
+    },
+    "irons_spellbooks:eldritch_magic": {
+      "absorption": 0.7
+    },
+    "irons_spellbooks:ender_magic": {
+      "absorption": 0.7
+    },
+    "irons_spellbooks:holy_magic": {
+      "absorption": 0.7
+    },
+    "irons_spellbooks:evocation_magic": {
+      "absorption": 0.7
+    }
+  }
+}

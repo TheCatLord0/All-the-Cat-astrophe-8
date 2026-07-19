@@ -15,7 +15,6 @@ let bannedItems = [
    "mekanism:module_jetpack_unit",
    "ars_nouveau:glyph_blink",
    "mekanism:cardboard_box",
-   "mekanism:upgrade_anchor",
    "sophisticatedbackpacks:feeding_upgrade",
    "sophisticatedbackpacks:advanced_feeding_upgrade",
    "sophisticatedbackpacks:refill_upgrade",
@@ -133,6 +132,10 @@ let removedID = [
 
 // Replacement recipes
 ServerEvents.recipes(event => {
+event.replaceInput(
+  { output: 'mekanism:upgrade_anchor'},
+  'mekanism:dust_diamond',
+  'irons_spellbooks:blank_rune')
 event.replaceInput(
   { output: 'minecraft:lodestone' },
   'minecraft:netherite_ingot',
@@ -659,6 +662,11 @@ ItemEvents.rightClicked(books, event => {
     player.addItemCooldown(item, 15)
   })
 })
+ItemEvents.rightClicked('fdbosses:phase_sphere', event => {
+    const {player} = event
+    const hpPercent = player.getHealth() * 0.5
+    player.damage(hpPercent, "minecraft:magic")
+})
 ServerEvents.tags("entity_type", (event) => {
     event.add("industrialforegoing:mob_duplicator_blacklist", ["minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
     event.add("ars_nouveau:jar_blacklist", ["minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
@@ -728,4 +736,7 @@ RecipeViewerEvents.addInformation('item', event => {
 	event.add('kubejs:enkephalin_bucket', [
 		'Obtained from Cataclysm Bosses, Wilden Chimera, Dead King, and Tyros using a Liquid Laser drill.'
 	])
+})
+EntityJSEvents.biomeSpawns(event => {
+    event.removeSpawn('irons_spellbooks:necromancer', ['#minecraft:is_overworld']);
 })

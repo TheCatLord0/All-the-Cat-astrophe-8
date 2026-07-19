@@ -1,0 +1,12 @@
+KeyBindJSEvents.modify(event => {
+    event.remove('key.ars_nouveau.qc1')
+    event.remove('key.ars_nouveau.qc2')
+    event.remove('key.ars_nouveau.qc3')
+    event.remove('key.ars_nouveau.qc4')
+    event.remove('key.ars_nouveau.qc5')
+    event.remove('key.ars_nouveau.qc6')
+    event.remove('key.ars_nouveau.qc7')
+    event.remove('key.ars_nouveau.qc8')
+    event.remove('key.ars_nouveau.qc9')
+    event.remove('key.ars_nouveau.qc10')
+})

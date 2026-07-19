@@ -70,7 +70,7 @@
 	#Whether the XP cost scales with the number of prior orb uses.
 	#true  (default): Cost = levels_per_use * previous orb uses (first use free, then ramps).
 	#false: flat cost — every use (including the first) costs exactly levels_per_use levels.
-	scale_cost = true
+	scale_cost = false
 	#XP levels charged per orb use.
 	#When scale_cost=true:  Cost = this value * number of previous orb uses (first use free).
 	#When scale_cost=false: Cost = this value, flat, on every use.
@@ -133,7 +133,7 @@
 	tier_1_kills = 1000
 	#Enable the evolution system. When false, kills are not tracked
 	#and evolution prompts never appear.
-	enabled = true
+	enabled = false
 
 #Mount power settings. Controls how player-to-player mounting
 #consent works. ALWAYS: mount any player without consent.
