@@ -139,6 +139,7 @@ iris-flywheel-compat-NeoForge-2.4.0.jar
 iris-neoforge-1.8.14-beta.1+mc1.21.1.jar
 irons_lib-1.21.1-2.1.0.jar
 irons_spellbooks-1.21.1-3.16.2.jar
+irons_spells_js-4.0.3.jar
 ironssablecompat-1.0.4.jar
 Jade-1.21.1-NeoForge-15.10.5.jar
 jamlib-neoforge-1.3.6+1.21.1.jar
