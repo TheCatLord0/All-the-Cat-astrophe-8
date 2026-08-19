@@ -48,6 +48,9 @@ StartupEvents.registry('item', event => {
   .maxStackSize(1)
   .displayName('§5§lControl of Internal Aeternitas')
   .tooltip('§o§dAeternitas is within everyone and everything, including your very blood.')
+  .tooltip('')
+  .tooltip('Inverts all healing to turn into Mana')
+  .tooltip('Use P Key (Default) to activate.')
   .texture('thecatlord:item/aeternitas_control')
     .tag('curios:charm')
 

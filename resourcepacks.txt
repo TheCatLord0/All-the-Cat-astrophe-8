@@ -6,6 +6,7 @@ Connected-Rocks 1.14-1.21.8 v1.1.1.zip
 CreateSophBackpacks.zip
 Fancy Crops v1.3.zip
 Icon Xaero's 1.22.zip
+JustExpressions_v1.2.1.zip
 LowOnFire v26.2§8.zip
 Mandala Utopia.zip
 MandalasGUI+Dakmode_1.21.6_v2.1.zip
@@ -14,4 +15,5 @@ Os' Colorful Grasses (Short and Fluffy).zip
 Retextured Vine.zip
 Sounds x Ars Nouveau V1.5.zip
 Sounds x Create V1.4.zip
+Torchier Torches.zip
 TWIN PARRY.zip

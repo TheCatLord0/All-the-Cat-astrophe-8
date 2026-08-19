@@ -1,15 +1,7 @@
-import { tag } from "@package/dev/latvian/mods/kubejs/server";
-import { loot } from "@package/net/minecraft/data";
-
 // Banned items
 let bannedItems = [
    'easy_villagers:auto_trader',
    'easy_villagers:iron_farm',
-   "ars_nouveau:glyph_glide",
-   "minecraft:elytra",
-   "mekanism:hdpe_elytra",
-   "mekanism:module_elytra_unit",
-   "cataclysm:ignitium_elytra_chestplate",
    "mekanism:jetpack",
    "mekanism:jetpack_armored",
    "mekanism:module_jetpack_unit",
@@ -60,7 +52,12 @@ let bannedItems = [
    'create_lnl:thruster',
    'ars_zero:staff_telekinesis',
    'ars_nouveau:ritual_flight',
-   'immersiveengineering:glider',
+   '#curios:crystal',
+   '#curios:wing',
+   'hazennstuff:health_upgrade_orb',
+   'hazennstuff:melee_upgrade_orb',
+   'hazennstuff:archery_upgrade_orb',
+   'immersiveengineering:toolbox'
 ]
 
 PlayerEvents.inventoryChanged(event => {
@@ -101,6 +98,31 @@ ServerEvents.tags('item', event => {
     event.add('cat:removal', bannedItems)
   })
 })
+// Direct Item Replace
+PlayerEvents.inventoryChanged(event => {
+  var itemReplaced = (oldItem, newItem) => {
+    let player = event.player
+    let inventory = player.inventory.items
+    if (event.item.id !== oldItem) return
+    player.tell([
+      Text.darkRed("[Alert] ").bold(),
+      Text.gold(event.item.id).bold(),
+      Text.gray(" has been replaced with "),
+      Text.gold(newItem).bold(),
+      Text.gray("."),
+      "\n",
+      Text.green("If you have questions why, ask thecatlord0 on Discord.")
+    ])
+    for (let i = 0; i < inventory.length; i++) {
+      let slotItem = inventory[i]
+
+      if (slotItem && slotItem.id === oldItem) {
+        inventory.set(i, Item.of(newItem, slotItem.count))
+      }
+    }
+  }
+  itemReplaced('fdbosses:phase_sphere', 'kubejs:stompeez')
+})
 // Remove 
 
 let removedRecipe = [
@@ -129,7 +151,17 @@ let removedID = [
     event.remove({id: removedID })
   })
 })
-
+// Item Tags
+ServerEvents.tags('item', event => {
+  event.add('malum:scythe', [
+    'ess_requiem:scythe_of_rotten_dreams',
+    'neovitae:sentient_scythe',
+    'eidolon_repraised:reaper_scythe',
+    'eidolon_repraised:deathbringer_scythe',
+    'irons_spellbooks:decrepit_scythe',
+    'irons_spellbooks:hellrazor'])
+  event.add('c:dusts/salt', 'ratatouille:salt')
+})
 // Replacement recipes
 ServerEvents.recipes(event => {
 event.replaceInput(
@@ -635,6 +667,8 @@ event.custom({
       []
   )
   event.recipes.create.filling('minecraft:ender_pearl', [Fluid.of('minecraft:water', 500), 'create:powdered_obsidian'])
+  event.recipes.create.compacting('create:refined_radiance', ['minecraft:white_dye', 'create:andesite_alloy']).superheated()
+  event.recipes.create.compacting('create:shadow_steel', ['minecraft:black_dye', 'create:andesite_alloy']).superheated()
 })
 // Cooldowns
 let staffs = [
@@ -646,7 +680,7 @@ let staffs = [
 ItemEvents.rightClicked(staffs, event => {
     const { player, server, item } = event
     server.scheduleInTicks(1, callback => {
-    player.addItemCooldown(item, 30)
+    player.addItemCooldown(item, 5)
   })
 })
 let books = [
@@ -659,7 +693,7 @@ let books = [
 ItemEvents.rightClicked(books, event => {
     const { player, server, item } = event
     server.scheduleInTicks(1, callback => {
-    player.addItemCooldown(item, 15)
+    player.addItemCooldown(item, 2)
   })
 })
 ItemEvents.rightClicked('fdbosses:phase_sphere', event => {
@@ -711,6 +745,8 @@ const isNamedCotyn__ = entity => {
 
   event.addEntityModifier("cataclysm:ender_guardian")
     .addLoot("cataclysm:void_core")
+  event.addTableModifier("fdbosses:entities/chesed")
+    .replaceLoot("fdbosses:phase_sphere", "kubejs:stompeez")
 })
 
 // Item Tags
@@ -739,4 +775,73 @@ RecipeViewerEvents.addInformation('item', event => {
 })
 EntityJSEvents.biomeSpawns(event => {
     event.removeSpawn('irons_spellbooks:necromancer', ['#minecraft:is_overworld']);
+})
+const LivingIncomingDamageEvent = Java.loadClass('net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent')
+const EntityJoinLevelEvent = Java.loadClass('net.neoforged.neoforge.event.entity.EntityJoinLevelEvent')
+const LivingEntity = Java.loadClass('net.minecraft.world.entity.LivingEntity')
+const PlayerCurio = Java.loadClass('net.minecraft.world.entity.player.Player')
+const BuiltInRegistries = Java.loadClass('net.minecraft.core.registries.BuiltInRegistries')
+const Registries = Java.loadClass('net.minecraft.core.registries.Registries')
+const ResourceKey = Java.loadClass('net.minecraft.resources.ResourceKey')
+const ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
+
+const arsDamageResistance = BuiltInRegistries.ATTRIBUTE
+  .getHolder(ResourceLocation.parse('kubejs:ars_damage_resistance'))
+  .orElseThrow()
+
+const bossTag = ResourceLocation.parse('c:bosses')
+
+const reducedDamageTypes = [
+  'ars_nouveau:windshear',
+  'ars_nouveau:crush',
+  'ars_nouveau:flare',
+  'ars_nouveau:frost',
+  'ars_nouveau:spell',
+  'ars_elemental:water_jet',
+  'ars_elemental:spark',
+  'ars_elemental:poison',
+  'ars_elemental:hellfire',
+  'ars_elemental:beheading',
+  'ars_elemental:cavitation',
+  'minecraft:thrown'
+].map(id => ResourceKey.create(
+  Registries.DAMAGE_TYPE,
+  ResourceLocation.parse(id)
+))
+
+NativeEvents.onEvent(EntityJoinLevelEvent, event => {
+  if (event.getLevel().isClientSide()) return
+
+  const entity = event.getEntity()
+
+  if (!(entity instanceof LivingEntity)) return
+
+  const attribute = entity.getAttribute(arsDamageResistance)
+
+  if (attribute == null) return
+
+  const entityTypeHolder = BuiltInRegistries.ENTITY_TYPE.wrapAsHolder(entity.getType())
+
+  if (entityTypeHolder.isTag(bossTag)) {
+    attribute.setBaseValue(0.95)
+  } else if (entity instanceof PlayerCurio) {
+    attribute.setBaseValue(0.6)
+  } else {
+    attribute.setBaseValue(0.25)
+  }
+})
+
+NativeEvents.onEvent(LivingIncomingDamageEvent, event => {
+  const source = event.getSource()
+
+  if (!reducedDamageTypes.some(type => source.is(type))) return
+
+  const resistance = Math.max(
+    0,
+    Math.min(1, event.getEntity().getAttributeValue(arsDamageResistance))
+  )
+
+  if (resistance <= 0) return
+
+  event.setAmount(event.getAmount() * (1 - resistance))
 })

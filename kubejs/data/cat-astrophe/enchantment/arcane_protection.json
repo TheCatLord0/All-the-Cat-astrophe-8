@@ -1,0 +1,46 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "Arcane Protection"
+  },
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 0.021875,
+          "per_level_above_first": 0.021875
+        },
+        "attribute": "kubejs:ars_damage_resistance",
+        "id": "minecraft:enchantment.arcane_protection",
+        "operation": "add_value"
+      },
+      {
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 0.021875,
+          "per_level_above_first": 0.021875
+        },
+        "attribute": "irons_spellbooks:spell_resist",
+        "id": "minecraft:enchantment.arcane_protection",
+        "operation": "add_value"
+      }
+    ]
+  },
+  "exclusive_set": "#minecraft:exclusive_set/armor",
+  "max_cost": {
+    "base": 12,
+    "per_level_above_first": 11
+  },
+  "max_level": 4,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 11
+  },
+  "slots": [
+    "armor"
+  ],
+  "supported_items": "#minecraft:enchantable/armor",
+  "weight": 10
+}
+

@@ -16,23 +16,38 @@ ServerEvents.tags('item', event => {
 // Patreon recipes
 ServerEvents.recipes(event => {
 event.shaped(
-  'kubejs:justice[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false],irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:divine_smite",index:0,level:6}],maxSpells:1,mustEquip:0b,spellWheel:1b},irons_spellbooks:casting_implement={}]',
+  'kubejs:justice[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false],irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:divine_smite",index:0,level:5}],maxSpells:1,mustEquip:0b,spellWheel:1b}]',
   [
-    ' D ',
-    ' NG',
-    ' BG'
+    'LNL',
+    'GDG',
+    ' B '
   ],
   {
-    D: 'minecraft:diamond',
-    B: 'minecraft:blaze_rod',
+    L: 'minecraft:lapis_lazuli',
+    N: 'minecraft:netherite_ingot',
     G: 'minecraft:gold_ingot',
-    N: 'minecraft:netherite_ingot'
+    D: 'minecraft:diamond_sword',
+    B: 'minecraft:blaze_rod',
   }
 )
-event.smithing('kubejs:divine_justice[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false],irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:divine_smite",index:0,level:6}],maxSpells:1,mustEquip:0b,spellWheel:1b},irons_spellbooks:casting_implement={}]',
-  'minecraft:netherite_upgrade_smithing_template',
-  'kubejs:justice',
-  '#thecatlord:dragonsteel'
+event.shaped(
+  'kubejs:splendor[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false],irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:sunbeam",index:0,level:6}],maxSpells:1,mustEquip:0b,spellWheel:1b}]',
+  [
+    'GNG',
+    'LDL',
+    ' B '
+  ],
+  {
+    L: 'minecraft:lapis_lazuli',
+    N: 'minecraft:netherite_ingot',
+    G: 'minecraft:gold_ingot',
+    D: 'minecraft:diamond_sword',
+    B: 'minecraft:blaze_rod',
+  }
+)
+event.smithing('kubejs:justice',
+  'minecraft:iron_nugget',
+  'kubejs:divine_justice'
 )
 event.shaped(
   'kubejs:earthshaker[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]',
@@ -46,14 +61,8 @@ event.shaped(
     O: 'minecraft:dark_oak_leaves',
     A: 'minecraft:flowering_azalea_leaves',
     L: 'minecraft:dark_oak_log',
-    D: 'minecraft:diamond'
+    D: 'minecraft:diamond_axe'
   }
-)
-event.smithing(
- 'kubejs:eternal_earthshaker[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]',
-  'minecraft:netherite_upgrade_smithing_template',
-  'kubejs:earthshaker',
-  '#thecatlord:dragonsteel'
 )
 event.shaped(
   'kubejs:fixer_scythe[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]',
@@ -64,16 +73,10 @@ event.shaped(
   ],
   {
     N: 'minecraft:netherite_ingot',
-    D: 'minecraft:diamond',
+    D: 'minecraft:diamond_sword',
     G: 'minecraft:gold_ingot',
     I: 'minecraft:iron_ingot'
   }
-)
-event.smithing(
- 'kubejs:upgraded_fixer_scythe[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]',
-  'minecraft:netherite_upgrade_smithing_template',
-  'kubejs:fixer_scythe',
-  '#thecatlord:dragonsteel'
 )
 })
 
@@ -109,4 +112,21 @@ EntityEvents.afterHurt(event => {
     if (!attackingEntity) return
     if (attackingEntity.mainHandItem.id != 'kubejs:upgraded_fixer_scythe') return
     attackingEntity.potionEffects.add("minecraft:resistance", REVERB_TIME, REVERB_POWER, true, true)
+})
+const bloodKey = ResourceKey.create(Registries.ATTRIBUTE, ResourceLocation.parse('irons_spellbooks:blood_spell_power'))
+const Reduction = Java.loadClass('net.neoforged.neoforge.common.damagesource.DamageContainer$Reduction')
+NativeEvents.onEvent(LivingIncomingDamageEvent, event => {
+    let target = event.entity
+    let player = event.source.player
+    if (!player) return
+
+    let main = player.mainHandItem.id
+    let off = player.offHandItem.id
+    if (!((main === 'kubejs:justice' && off === 'kubejs:splendor') || (main === 'kubejs:splendor' && off === 'kubejs:justice'))) return
+
+    let access = target.level.registryAccess()
+    let blood = target.getAttributeValue(access.registryOrThrow(Registries.ATTRIBUTE).getHolderOrThrow(bloodKey))
+
+    if (target.isInvertedHealAndHarm() || blood > 0) event.amount *= 1.5
+    event.addReductionModifier(Reduction.ENCHANTMENTS, (container, reduction) => 0)
 })

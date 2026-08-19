@@ -169,7 +169,7 @@
 		blazeEnchanterMaxSuperEnchantLevel = 60
 		#.
 		#If Super Enchanting and Super Forging ignores enchantment compatibility
-		ignoreEnchantmentCompatibility = true
+		ignoreEnchantmentCompatibility = false
 		#.
 		#Chance per curse roll for blocked-lightning Super Enchanting to add an applicable curse to the result
 		# Default: 0.5

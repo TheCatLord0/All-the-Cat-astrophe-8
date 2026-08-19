@@ -36,4 +36,4 @@
 	#Set the max hp limit for Charm, mobs with more max hp will be immune.
 	# Default: 150
 	# Range: > 0
-	charm_hp_limit = 150
+	charm_hp_limit = 40

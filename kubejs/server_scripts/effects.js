@@ -1,6 +1,7 @@
 const NO_REMOVAL = [
     'cataclysm:ghost_form',
-    'cataclysm:ghost_sickness'
+    'cataclysm:ghost_sickness',
+    'malum:wyrd_exhaustion'
 ]
 const DISABLED_EFFECTS = [
     'spectrum:fatal_slumber'
@@ -16,9 +17,25 @@ const MOB_EFFECT_IMMUNITY_RULES = [
       'minecraft:poison',
       'minecraft:hunger'
     ]
+  },
+  {
+    mobs: [
+      'minecraft:player'
+    ],
+    effects: [
+      'ars_nouveau:snared'
+    ]
   }
 ]
 
+const DispelPre = Java.loadClass('com.hollingsworth.arsnouveau.api.event.DispelEvent$Pre')
+const EntityHitResult = Java.loadClass('net.minecraft.world.phys.EntityHitResult')
+
+NativeEvents.onEvent(DispelPre, event => {
+  if (!(event.rayTraceResult instanceof EntityHitResult)) return
+  const target = event.rayTraceResult.entity
+  if (event.shooter instanceof Player && target instanceof Player) event.setCanceled(true)
+})
 
 const $BuiltInRegistries = Java.loadClass(
   'net.minecraft.core.registries.BuiltInRegistries'

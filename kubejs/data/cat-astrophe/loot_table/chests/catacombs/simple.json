@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "cat-astrophe:chests/catacombs/explorer",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "cat-astrophe:chests/catacombs/metal",
+          "weight": 35
+        },
+
+        {
+          "type": "minecraft:loot_table",
+          "value": "cat-astrophe:chests/catacombs/rarity",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "cat-astrophe:chests/catacombs/magic",
+          "weight": 20
+        }
+      ]
+    }
+  ]
+}

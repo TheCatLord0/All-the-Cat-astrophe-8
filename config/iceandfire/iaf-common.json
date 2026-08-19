@@ -175,7 +175,7 @@
     "generateSirenIslandChance": 0.5
   },
   "misc": {
-    "enableDragonSeeker": false,
+    "enableDragonSeeker": true,
     "dreadQueenMaxHealth": 750.0
   }
 }

@@ -1,4 +1,5 @@
-﻿AdvancedAE-1.6.11-1.21.1.jar
+﻿aces_spell_utils-1.2.7.1-1.21.1.jar
+AdvancedAE-1.6.11-1.21.1.jar
 AdvancedLootInfo-neoforge-1.21.1-1.12.0.jar
 ae2wtlib-19.5.0.jar
 aeronauticscompat-1.1.2.jar
@@ -6,9 +7,11 @@ alltheleaks-1.1.9+1.21.1-neoforge.jar
 Almanac-1.21.1-2-neoforge-1.5.2.jar
 almostunified-neoforge-1.21.1-1.4.2.jar
 AmbientSounds_NEOFORGE_v6.3.8_mc1.21.1.jar
+ApothicAttributes-1.21.1-2.10.1.jar
 appleskin-neoforge-mc1.21-3.0.9.jar
 appliedenergistics2-19.2.17.jar
 AppliedFlux-1.21-2.1.5-neoforge.jar
+Applied-Mekanistics-1.6.3.jar
 appliedschematicannon-1.0.4.jar
 architectury-13.0.8-neoforge.jar
 ars_additions-1.21.1-21.3.0.jar
@@ -25,25 +28,32 @@ arseng-2.1.1-beta.jar
 arsnumerichud-1.0.2.jar
 attributefix-neoforge-1.21.1-21.1.3.jar
 audrops-1.0.1.jar
+azurelib-neo-1.21.1-3.1.11.jar
 baguettelib-1.21.1-NeoForge-2.0.3.jar
 balm-neoforge-1.21.1-21.0.60.jar
 better-clouds-1.13.5-beta+1.21.1-neoforge.rev.a60dfa0.jar
 better-compatability-checker-neoforge-21.1.8.jar
+better-respawn-neoforge-1.21.1-2.0.6.jar
 BiomesOPlenty-neoforge-1.21.1-21.1.0.14.jar
 biomespy-neoforge-1.21.1-1.3.3.jar
 bits_n_bobs-0.0.44.jar
+block_factorys_bosses-2.1.2-neo-1.21.1.jar
 blocks_previewer-2.1.1+1.21.1-neoforge.jar
+BOMD-NeoForge-1.21-1.3.3.jar
 bookshelf-neoforge-1.21.1-21.1.81.jar
+Boss Results 1.21(.1) v1.0.56.jar
+brutalbosses-1.21.1-8.6.jar
 c2me-neoforge-mc1.21.1-0.4.0-alpha.0.113.jar
+caelus-neoforge-7.0.1+1.21.1.jar
 catworks-1.0.6-neoforge.jar
-cccbridge-mc1.21.1-v1.7.3-neoforge.jar
-cc-tweaked-1.21.1-forge-1.120.0.jar
+CerbonsAPI-NeoForge-1.21-1.3.0.jar
 chat_heads-0.15.2-neoforge-1.21.jar
 Chunky-NeoForge-1.4.23.jar
 cleanswing-1.9.jar
 cleanview-1.21.1-v1-neoforge.jar
 cloth-config-15.0.140-neoforge.jar
 Clumps-neoforge-1.21.1-19.0.0.1.jar
+cobweb-neoforge-1.21-1.4.0.jar
 CodeChickenLib-1.21.1-4.6.1.526.jar
 collective-1.21.1-8.39.jar
 configurable-3.5.1+1.21.1-neoforge.jar
@@ -52,19 +62,18 @@ continuity-3.0.0+0.0.1+1.21.1.neoforge-all.jar
 Controlling-neoforge-1.21.1-19.0.5.jar
 Corgilib-NeoForge-1.21.1-5.0.0.9.jar
 coroutil-neoforge-1.21.0-1.3.9.jar
-cosmeticarmorreworked-1.21.1-v1-neoforge.jar
 cosycritters-0.3.2+1.21.1-neoforge.jar
 craft_config-1.1.12+1.21.1-neoforge.jar
 Create Encased-1.21.1-1.9.0-ht1.jar
-create_avionics-neoforge-1.21.1-0.5.1.jar
 create_connected-1.3.2-mc1.21.1.jar
 create_enhanced_schematicannon-1.0.4.jar
+create_power_loader-2.0.5-mc1.21.1.jar
 create_radar-0.4.9.4-1.21.1.jar
 create_ratatouille-1.21.1-1.3.9-2.jar
 create_schematic_sources-1.1.0.jar
 create-1.21.1-6.0.10.jar
 create-aeronautics-bundled-1.21.1-1.3.0.jar
-createaeronauticscurios-neoforge-1.21.1-2.1.jar
+createaeronauticscurios-neoforge-1.21.1-2.2.jar
 create-aeronautics-lift-patch-1.1.0.jar
 createbigcannons-5.11.7+mc.1.21.1.jar
 createdeco-2.1.3.jar
@@ -99,6 +108,7 @@ entity_model_features-3.2.4-1.21-neoforge.jar
 entity_texture_features_1.21-neoforge-7.1.jar
 entityculling-neoforge-1.10.5-mc1.21.1.jar
 entityjs-1.4.7.jar
+ess_requiem-0.1.6.jar
 etched-5.1.0.jar
 ExtendedAE-1.21-2.2.33-neoforge.jar
 ExtremeSoundMuffler-3.56_NeoForge-1.21.jar
@@ -129,6 +139,9 @@ gravestonecurioscompat-1.21.1-NeoForge-4.0.2.jar
 gravestone-neoforge-1.21.1-1.0.37.jar
 gtbcs_spell_lib-1.5.0-1.21.1.jar
 guideme-21.1.16.jar
+handcrafted-neoforge-1.21.1-4.0.3.jar
+hazennstuff-1.4.0.14.jar
+hazentouvelib-1.0.8.jar
 iceandfire-2.0-beta.17.jar
 iChunUtil-1.21-NeoForge-1.0.3.jar
 ImmediatelyFast-NeoForge-1.6.11+1.21.1.jar
@@ -201,6 +214,7 @@ Oh-The-Trees-Youll-Grow-neoforge-1.21.1-5.3.2.jar
 ok_zoomer-neo-10.0.0-beta.13.jar
 particlerain-4.0.0-beta.10+1.21.1-neoforge.jar
 particular-1.21.1-NeoForge-1.5.5.jar
+partysystem-1.0.4.jar
 Placebo-1.21.1-9.9.1.jar
 player-animation-lib-forge-2.0.4+1.21.1.jar
 polyeng-0.4.1.jar
@@ -209,6 +223,7 @@ polytone-neoforge-1.21-3.8.8.jar
 portable_engine_liquid_fuel-2.0.0-neoforge-1.21.1.jar
 PresenceFootsteps-1.21.1-1.12.0-beta.1-1.21NeoForge.jar
 prickle-neoforge-1.21.1-21.1.11.jar
+prometheus-neoforge-1.21-1.2.5.jar
 PuzzlesLib-v21.1.52-1.21.1-NeoForge.jar
 Quark-4.1-481.jar
 rechiseled-1.2.5-neoforge-mc1.21.jar
@@ -216,12 +231,15 @@ rechiseledae-1.0.1-neoforge-mc1.21.1.jar
 rechiseledae2-neoforge-1.21-1.21.1-1.0.0.jar
 rechiseledcreate-1.1.1-neoforge-mc1.21.jar
 reeses-sodium-options-neoforge-2.2.2+mc1.21.1.jar
+resourcefullib-neoforge-1.21-3.0.12.jar
 Resourcify (1.21.1-neoforge)-1.8.3.jar
 RespawningAnimals-v21.1.2-1.21.1-NeoForge.jar
+respawningstructures-1.21.1-4.2.jar
 revelationary-neoforge-1.5.0+1.21.1.jar
 rhino-2101.2.7-build.85.jar
 rightclickharvest-neoforge-4.6.1+1.21.1.jar
 ritchiesprojectilelib-2.1.2-mc.1.21.1-neoforge.jar
+sable_dupe_fix-1.0.2.jar
 sable_xaero_bridge-0.1.11.jar
 sablecleanup-0.3.0.jar
 sablejade-1.2.1.jar
@@ -238,6 +256,7 @@ sodium-neoforge-0.8.12+mc1.21.1.jar
 sootychimneys-neoforge-1.3.5.jar
 sophisticatedbackpacks-1.21.1-3.25.68.1971.jar
 sophisticatedcore-1.21.1-1.4.68.2113.jar
+soul-fire-d-neoforge-1.21-6.1.0.jar
 sounds-2.4.22+lts+1.21.1-neoforge.jar
 spark-1.10.124-neoforge.jar
 spectrum-1.11.8-1.21.1-neo.jar
@@ -254,11 +273,12 @@ titanium-1.21-4.0.43.jar
 ToastControl-1.21.1-9.0.1.jar
 toofast-1.21.0-0.4.3.6.jar
 toomanyrecipeviewers-0.9.0+mc.21.1.jar
+transmog-neoforge-1.6.0+1.21.1.jar
 uranus-2.4.1-1.21.1-neoforge.jar
 vista-neoforge-1.21.1-5.1.0.jar
 voicechat-neoforge-1.21.1-2.6.20.jar
 VS-Sable-HoseConnectors-0.1.8-1.21.1.jar
-watut-neoforge-1.21.0-1.2.7.jar
+wyrmroost-1.3.3.jar
 xaerominimap-neoforge-1.21.1-26.1.0.jar
 xaeroworldmap-neoforge-1.21.1-1.41.2.jar
 yeetusexperimentus-neoforge-87.0.0.jar

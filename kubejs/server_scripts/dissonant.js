@@ -45,12 +45,13 @@ var DISSONANT_CONTRACTS = [
         id: 'dwarf',
         short: 'Dwarven',
         name: 'Dwarven Might',
-        desc: "Some wish to invoke the might of a Dwarf, shortening them and giving faster mining speed, however you must carry more. (-30% Size, +50% Mining Speed, -1 Heart, -30% Speed)",
+        desc: "Some wish to invoke the might of a Dwarf, shortening them and giving faster mining speed, however you must carry more. (-30% Size, +50% Mining Speed, +4 Attack, -30% Saturation, -10% Speed)",
         attrs: [
             { attr: 'minecraft:generic.scale', id: 'dissonant:dwarf_scale', amount: -0.34 },
             { attr: 'minecraft:player.block_break_speed', id: 'dissonant:dwarf_mining', amount: 0.5, op: 'add_multiplied_base' },
-            { attr: 'minecraft:generic.movement_speed', id: 'dissonant:dwarf_speed', amount: -0.3, op: 'add_multiplied_base' },
-            { attr: 'minecraft:generic.max_health', id: 'dissonant:dwarf_health', amount: -2 }
+            { attr: 'minecraft:generic.movement_speed', id: 'dissonant:dwarf_speed', amount: -0.1, op: 'add_multiplied_base' },
+            { attr: 'ars_nouveau:ars_nouveau.perk.saturation', id: 'dissonant:dwarf_hunger', amount: -0.3 },
+            { attr: 'minecraft:generic.attack_damage', id: 'dissonant:dwarf_damage', amount: 4 }
         ],
         fx: [],
     },
@@ -73,7 +74,7 @@ var DISSONANT_CONTRACTS = [
         name: 'Large Soul, Tiny Heart',
         desc: "Always the bigger person even if the other was wrong, your soul reflected that you wished to be a wall for others but your frail body wouldn't allow it, until this Contract was branded onto you. (+50% Size, +4 Attack, +Gravity, Hunger I)",
         attrs: [
-            { attr: 'minecraft:generic.scale', id: 'dissonant:colossus_scale', amount: 0.5 },
+            { attr: 'minecraft:generic.scale', id: 'dissonant:colossus_scale', amount: 0.3 },
             { attr: 'minecraft:generic.attack_damage', id: 'dissonant:colossus_damage', amount: 4 },
             { attr: 'minecraft:generic.gravity', id: 'dissonant:colossus_gravity', amount: 0.05 },
             { attr: 'minecraft:generic.jump_strength', id: 'dissonant:colossus_jump', amount: 0.2 },
@@ -778,6 +779,7 @@ EntityEvents.afterHurt(function(event) {
     srv.runCommandSilent('attribute ' + player.username + ' minecraft:generic.max_health modifier add dissonant:revenant_drain -' + newDrain + ' add_value')
 
     player.setHealth(player.maxHealth)
+    srv.runCommandSilent('effect give ' + player.username + ' kubejs:grace 30 0 true')
 
     try {
         var JABlockPos = Java.loadClass('net.minecraft.core.BlockPos')

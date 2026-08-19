@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "cat-astrophe:chests/facility/ae2",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "cat-astrophe:chests/facility/metal",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "cat-astrophe:chests/facility/mekanism",
+          "weight": 4
+        }
+      ]
+    }
+  ]
+}
