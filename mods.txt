@@ -3,6 +3,7 @@ AdvancedAE-1.6.11-1.21.1.jar
 AdvancedLootInfo-neoforge-1.21.1-1.12.0.jar
 ae2wtlib-19.5.0.jar
 aeronauticscompat-1.1.2.jar
+aeroworks-1.4.2.jar
 alltheleaks-1.1.9+1.21.1-neoforge.jar
 Almanac-1.21.1-2-neoforge-1.5.2.jar
 almostunified-neoforge-1.21.1-1.4.2.jar
@@ -72,6 +73,7 @@ create_radar-0.4.9.4-1.21.1.jar
 create_ratatouille-1.21.1-1.3.9-2.jar
 create_schematic_sources-1.1.0.jar
 create-1.21.1-6.0.10.jar
+createadditionallogistics-1.21.1-1.4.5.jar
 create-aeronautics-bundled-1.21.1-1.3.0.jar
 createaeronauticscurios-neoforge-1.21.1-2.2.jar
 create-aeronautics-lift-patch-1.1.0.jar
@@ -278,6 +280,7 @@ uranus-2.4.1-1.21.1-neoforge.jar
 vista-neoforge-1.21.1-5.1.0.jar
 voicechat-neoforge-1.21.1-2.6.20.jar
 VS-Sable-HoseConnectors-0.1.8-1.21.1.jar
+weaponmaster_ydm-1.21.1-neoforge-4.2.7.jar
 wyrmroost-1.3.3.jar
 xaerominimap-neoforge-1.21.1-26.1.0.jar
 xaeroworldmap-neoforge-1.21.1-1.41.2.jar
