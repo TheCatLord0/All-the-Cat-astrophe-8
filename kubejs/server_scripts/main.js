@@ -57,7 +57,8 @@ let bannedItems = [
    'hazennstuff:health_upgrade_orb',
    'hazennstuff:melee_upgrade_orb',
    'hazennstuff:archery_upgrade_orb',
-   'immersiveengineering:toolbox'
+   'immersiveengineering:toolbox',
+   'spectrum:cotton_cloud_boots'
 ]
 
 PlayerEvents.inventoryChanged(event => {
@@ -161,6 +162,7 @@ ServerEvents.tags('item', event => {
     'irons_spellbooks:decrepit_scythe',
     'irons_spellbooks:hellrazor'])
   event.add('c:dusts/salt', 'ratatouille:salt')
+  event.remove('curios:ring', 'eidolon_repraised:angels_sight')
 })
 // Replacement recipes
 ServerEvents.recipes(event => {

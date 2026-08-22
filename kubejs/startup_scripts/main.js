@@ -551,4 +551,29 @@ ItemEvents.modification(event => {
         )
     )
   })
+  event.modify('irons_spellbooks:teleportation_amulet', item => {
+    item.attachCuriosCapability(
+      CuriosJSCapabilityBuilder.create()
+        .addAttribute(
+          'irons_spellbooks:cooldown_reduction',
+          'kubejs:teleportation_amulet_cooldown',
+          -0.2,
+          'add_value'
+        )
+    )
+  })
+})
+EntityJSEvents.attributes(event => {
+  let skeleton = ['minecraft:skeleton', 'minecraft:stray', 'minecraft:bogged']
+  let zombie = ['minecraft:zombie', 'minecraft:drowned', 'minecraft:husk']
+  skeleton.forEach(skeleton => {
+    event.modify(skeleton, attribute => {
+        attribute.add("minecraft:generic.max_health", 12)
+    })
+  })
+  zombie.forEach(zombie => {
+    event.modify(zombie, attribute => {
+        attribute.add("apothic_attributes:armor_shred", 0.2)
+    })
+  })
 })

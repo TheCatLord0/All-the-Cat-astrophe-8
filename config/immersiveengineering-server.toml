@@ -616,15 +616,15 @@
 		#The amount of base damage a Casull Cartridge inflicts
 		# Default: 10.0
 		# Range: 0.0 ~ 1.7976931348623157E308
-		casull = 10.0
+		casull = 20.0
 		#The amount of base damage a armor piercing Cartridge inflicts
 		# Default: 10.0
 		# Range: 0.0 ~ 1.7976931348623157E308
-		ap = 10.0
+		ap = 15.0
 		#The amount of base damage a single part of buckshot inflicts
 		# Default: 2.0
 		# Range: 0.0 ~ 1.7976931348623157E308
-		buck = 2.0
+		buck = 4.0
 		#The amount of base damage a dragon breath cartridge inflicts
 		# Default: 1.0
 		# Range: 0.0 ~ 1.7976931348623157E308
@@ -654,7 +654,7 @@
 		#The mb of fluid the Chemical Thrower will consume per tick of usage
 		# Default: 10
 		# Range: > 1
-		consumption = 10
+		consumption = 1
 		#Set this to false to disable the use of Sneak+Scroll to switch Chemthrower tanks.
 		scroll = true
 
@@ -666,4 +666,4 @@
 		#A modifier for the damage of all projectiles fired by the Railgun
 		# Default: 1.0
 		# Range: 0.0 ~ 1.7976931348623157E308
-		damage_modifier = 1.0
+		damage_modifier = 5.0
