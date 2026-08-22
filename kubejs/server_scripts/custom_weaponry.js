@@ -458,3 +458,15 @@ EntityEvents.beforeHurt(event => {
         }
     })
 }
+{
+    var $LivingDamagePre = Java.loadClass('net.neoforged.neoforge.event.entity.living.LivingDamageEvent$Pre')
+    var $DamageTypeTags = Java.loadClass('net.minecraft.tags.DamageTypeTags')
+    NativeEvents.onEvent($LivingDamagePre, event => {
+        var player = event.entity
+        if (!player.isPlayer()) return
+        if (!player.isCuriosEquipped('kubejs:firecrowned_ring')) return
+        var source = event.source
+        if (!source.is($DamageTypeTags.IS_FIRE)) return
+        event.setNewDamage(event.newDamage * 0.5)
+    })
+}

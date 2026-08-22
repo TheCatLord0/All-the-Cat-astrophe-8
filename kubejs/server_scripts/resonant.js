@@ -9,6 +9,7 @@ const SOURCE_JAR_GAIN = 40
 const SOURCE_JAR_COST = 1000
 const SOURCE_FOOD_GAIN = 20
 const SOURCE_FOOD_GAIN_CRAFTED = 50
+const SOUL_FOODS_GAIN = 75
 const SOURCE_DAMAGE_DRAIN_RATIO = 0.25
 const SOURCE_EAT_COOLDOWN = 20
 const SOURCE_EFFECT_AMPLIFIER = 1
@@ -28,6 +29,11 @@ const SOURCE_FOODS = [
 const SOURCE_FOODS_CRAFTED = [
     'ars_nouveau:source_berry_pie',
     'ars_nouveau:source_berry_roll'
+]
+const SOUL_FOODS = [
+    'kubejs:soul_pie',
+    'kubejs:soul_sausage',
+    'kubejs:soul_spaghetti'
 ]
 
 const SCROLL_COST = 30
@@ -149,6 +155,11 @@ function tryConsumeSourceFood(player, itemId) {
     if (gain === 0) {
         for (var j = 0; j < SOURCE_FOODS_CRAFTED.length; j++) {
             if (SOURCE_FOODS_CRAFTED[j] === itemId) { gain = SOURCE_FOOD_GAIN_CRAFTED; break }
+        }
+    }
+    if (gain === 0) {
+        for (var j = 0; j < SOUL_FOODS.length; j++) {
+            if (SOUL_FOODS[j] === itemId) { gain = SOUL_FOODS_GAIN; break }
         }
     }
     if (gain === 0) return false

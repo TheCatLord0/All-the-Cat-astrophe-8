@@ -3,22 +3,19 @@ StartupEvents.registry('creative_mode_tab', event => {
 	event.create('weaponry').icon(() => 'kubejs:mimicry').displayName(('Weaponry')).content(showRestrictedItems => [
             'kubejs:executioner',
             'kubejs:mimicry',
-            'kubejs:ego_mimicry',
             'kubejs:tibia',
-            'kubejs:callisto_tibia',
             'kubejs:first_blade',
             'kubejs:mark_of_cain',
             'kubejs:stompeez',
             'kubejs:palindrome',
-            'kubejs:debt'
+            'kubejs:debt',
+            'kubejs:firecrowned_ring'
   ])
 })
 StartupEvents.modifyCreativeTab('kubejs:weaponry', event => {
     event.remove('kubejs:executioner')
     event.remove('kubejs:mimicry')
-    event.remove('kubejs:ego_mimicry')
     event.remove('kubejs:tibia')
-    event.remove('kubejs:callisto_tibia')
     event.remove('kubejs:first_blade')
     event.remove('kubejs:mark_of_cain')
     event.remove('kubejs:stompeez')
@@ -28,9 +25,7 @@ StartupEvents.modifyCreativeTab('kubejs:weaponry', event => {
     event.add([
         Item.of('kubejs:executioner[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
         Item.of('kubejs:mimicry[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
-        Item.of('kubejs:ego_mimicry[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
         Item.of('kubejs:tibia[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
-        Item.of('kubejs:callisto_tibia[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
         Item.of('kubejs:first_blade[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
         Item.of('kubejs:palindrome[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
         Item.of('kubejs:debt[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
@@ -167,6 +162,14 @@ StartupEvents.registry('item', event => {
           'add_multiplied_base'
         )
     )
+  event.create('firecrowned_ring')
+    .displayName('Firecrowned Ring')
+    .unstackable()
+    .fireResistant(true)
+    .rarity('EPIC')
+    .tooltip("Reduces fire damage by 50%.")
+    .texture('irons_spellbooks:item/fireward_ring')
+    .tag('curios:ring')
 })
     const CORPUS_EFFECT = 'kubejs:corpus'
 

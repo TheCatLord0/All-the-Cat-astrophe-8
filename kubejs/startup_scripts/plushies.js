@@ -4,20 +4,16 @@ StartupEvents.registry('creative_mode_tab', event => {
     'kubejs:cat_plush',
     'kubejs:odins_plush',
     "kubejs:forest_plush",
-    'kubejs:cotyn_plush'
+    'kubejs:cotyn_plush',
+    "kubejs:rex_plush",
+    'kubejs:yaoi_plush',
+    'kubejs:odins_shork'
   ])
-})
-StartupEvents.modifyCreativeTab('kubejs:tab', event => {
-	event.remove('kubejs:odins_plush')
-	event.remove('kubejs:cat_plush')
-	event.remove('kubejs:forest_plush')
-	event.remove('kubejs:cotyn_plush')
 })
 StartupEvents.registry('block', event => {
   event.create('odins_plush','cardinal')
     .displayName('Odinshi Plushie')
     .item(item => {
-      item.unstackable()
       item.fireResistant(true)
       item.rarity('EPIC')
     })
@@ -31,7 +27,6 @@ StartupEvents.registry('block', event => {
   event.create('cat_plush','cardinal')
     .displayName('TheCatLord0 Plushie')
     .item(item => {
-      item.unstackable()
       item.fireResistant(true)
       item.rarity('EPIC')
     })
@@ -45,7 +40,6 @@ StartupEvents.registry('block', event => {
   event.create('forest_plush','cardinal')
     .displayName('ForestQueen558 Plushie')
     .item(item => {
-      item.unstackable()
       item.fireResistant(true)
       item.rarity('EPIC')
     })
@@ -59,7 +53,6 @@ StartupEvents.registry('block', event => {
   event.create('cotyn_plush','cardinal')
     .displayName('Cotyn__ Plushie')
     .item(item => {
-      item.unstackable()
       item.fireResistant(true)
       item.rarity('EPIC')
     })
@@ -70,10 +63,22 @@ StartupEvents.registry('block', event => {
     .hardness(0.5)
     .soundType('wool')
     .box(1.5, 0, 3, 14.5, 16, 12)
+  event.create('rex_plush','cardinal')
+    .displayName('Rex_The_Knight55 Plushie')
+    .item(item => {
+      item.fireResistant(true)
+      item.rarity('EPIC')
+    })
+    .parentModel('thecatlord:block/plushies/rex_plush')
+    .opaque(false)
+    .fullBlock(false)
+    .renderType('cutout')
+    .hardness(0.5)
+    .soundType('wool')
+    .box(1.5, 0, 3, 14.5, 16, 12)
   event.create('yaoi_plush','cardinal')
     .displayName('Cat and Odin Plushies')
     .item(item => {
-      item.unstackable()
       item.fireResistant(true)
       item.rarity('EPIC')
     })
@@ -87,7 +92,6 @@ StartupEvents.registry('block', event => {
   event.create('odins_shork','cardinal')
     .displayName('Odinshi Shork')
     .item(item => {
-      item.unstackable()
       item.fireResistant(true)
       item.rarity('EPIC')
     })

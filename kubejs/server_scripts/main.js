@@ -9,16 +9,8 @@ let bannedItems = [
    "mekanism:cardboard_box",
    "sophisticatedbackpacks:feeding_upgrade",
    "sophisticatedbackpacks:advanced_feeding_upgrade",
-   "sophisticatedbackpacks:refill_upgrade",
-   "sophisticatedbackpacks:advanced_refill_upgrade",
    "sophisticatedbackpacks:compacting_upgrade",
    "sophisticatedbackpacks:advanced_compacting_upgrade",
-   "sophisticatedbackpacks:smelting_upgrade",
-   "sophisticatedbackpacks:auto_smelting_upgrade",
-   "sophisticatedbackpacks:smoking_upgrade",
-   "sophisticatedbackpacks:auto_smoking_upgrade",
-   "sophisticatedbackpacks:blasting_upgrade",
-   "sophisticatedbackpacks:auto_blasting_upgrade",
    "sophisticatedbackpacks:inception_upgrade",
    "ars_zero:augment_amplify_two",
    "ars_zero:augment_amplify_three",
@@ -35,8 +27,6 @@ let bannedItems = [
    "industrialforegoing:infinity_backpack",
    "industrialforegoing:infinity_nuke",
    "industrialforegoing:mechanical_dirt",
-   "irons_spellbooks:fireward_ring",
-   "eidolon_repraised:raven_cloak",
    "ars_additions:source_spawner",
    "ars_additions:ender_source_jar",
    "sophisticatedbackpacks:mob_catcher_upgrade",
@@ -166,6 +156,10 @@ ServerEvents.tags('item', event => {
 })
 // Replacement recipes
 ServerEvents.recipes(event => {
+event.replaceOutput(
+  { output: 'irons_spellbooks:fireward_ring'},
+  'irons_spellbooks:fireward_ring',
+  'kubejs:firecrowned_ring')
 event.replaceInput(
   { output: 'mekanism:upgrade_anchor'},
   'mekanism:dust_diamond',
@@ -749,6 +743,8 @@ const isNamedCotyn__ = entity => {
     .addLoot("cataclysm:void_core")
   event.addTableModifier("fdbosses:entities/chesed")
     .replaceLoot("fdbosses:phase_sphere", "kubejs:stompeez")
+  event.addTableModifier(/.*/)
+    .replaceLoot("irons_spellbooks:fireward_ring", "kubejs:firecrowned_ring")
 })
 
 // Item Tags
