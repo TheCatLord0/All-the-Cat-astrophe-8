@@ -491,6 +491,9 @@ StartupEvents.registry('item', (event) => {
         .pentacleType("craft")
         .displayName('Ritual: Break the Curse of the Mark')
         .ritualTooltip('Removing it however releases a far greater evil...')
+    event.create('kings_rib')
+        .displayName('Rib of a Fallen King')
+        .texture('thecatlord:item/kings_rib')
 })
 ItemEvents.modification(event => {
   event.modify(/iceandfire:armor_.*_helmet/, item => {

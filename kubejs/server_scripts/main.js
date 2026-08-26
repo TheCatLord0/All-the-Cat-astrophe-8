@@ -120,6 +120,10 @@ let removedRecipe = [
   "occultism:miner_marid_master",
   "occultism:miner_ancient_eldritch",
   "neoorigins:orb_of_origin",
+  'dimdungeons:item_portal_key',
+  'hazennstuff:eldritch_rune',
+  'hazennstuff:eldritch_upgrade_orb',
+  'hazennstuff:health_rune',
 ]
 ServerEvents.recipes(event => {
   removedRecipe.forEach(removedRecipe => {
@@ -200,18 +204,6 @@ event.replaceInput(
   { output: ["industrialforegoing:ore_laser_base", "industrialforegoing:fluid_laser_base"] },
   ["industrialforegoing:diamond_gear"],
   "immersiveengineering:component_steel")
-event.replaceInput(
-  { output: "computercraft:turtle_normal" },
-  ["minecraft:iron_ingot"],
-  "mekanism:ingot_steel")
-event.replaceInput(
-  { output: "computercraft:turtle_advanced" },
-  ["minecraft:gold_ingot"],
-  "create:brass_ingot")
-event.replaceInput(
-  { output: ["computercraft:turtle_advanced", "computercraft:turtle_normal"] },
-  ["minecraft:chest"],
-  "mekanism:advanced_control_circuit")
 event.replaceInput(
   { output: "create:empty_blaze_burner" },
   ["create:iron_sheet"],
@@ -650,6 +642,18 @@ event.custom({
     id: "kubejs:odins_shork"
   }
   })
+  event.custom({
+  type: "spectrum:midnight_solution_converting",
+  ingredient: [
+    {
+      item: "kubejs:rex_plush"
+    }
+  ],
+  result: {
+    id: "kubejs:fox_knight",
+    count: 1
+  }
+  })
   event.recipes.ars_nouveau.imbuement(
       '#c:wools',
       'irons_spellbooks:magic_cloth',
@@ -665,7 +669,89 @@ event.custom({
   event.recipes.create.filling('minecraft:ender_pearl', [Fluid.of('minecraft:water', 500), 'create:powdered_obsidian'])
   event.recipes.create.compacting('create:refined_radiance', ['minecraft:white_dye', 'create:andesite_alloy']).superheated()
   event.recipes.create.compacting('create:shadow_steel', ['minecraft:black_dye', 'create:andesite_alloy']).superheated()
+  {
+  var helmet = ['hazennstuff:flesh_mass_helmet', 'hazennstuff:the_wither_helmet']
+  var chest = ['hazennstuff:flesh_mass_chestplate', 'hazennstuff:the_wither_chestplate']
+  var leg = ['hazennstuff:flesh_mass_leggings', 'hazennstuff:the_wither_leggings']
+  var boot = ['hazennstuff:flesh_mass_boots', 'hazennstuff:the_wither_boots']
+  helmet.forEach(ingredient => {
+  event.shaped(
+    'hazennstuff:dead_king_helmet',[
+    'RBR',
+    'BAB',
+    ' K '
+    ],{
+      R: "irons_spellbooks:blood_rune",
+      B: "kubejs:kings_rib",
+      A: ingredient,
+      K: 'irons_spellbooks:bone_key'
+     })
+  })
+  chest.forEach(ingredient => {
+  event.shaped(
+    'hazennstuff:dead_king_chestplate',[
+    'BAB',
+    'RKR',
+    'BBB'
+    ],{
+      R: "irons_spellbooks:blood_rune",
+      B: "kubejs:kings_rib",
+      A: ingredient,
+      K: 'irons_spellbooks:bone_key'
+     })
+  })
+  leg.forEach(ingredient => {
+  event.shaped(
+    'hazennstuff:dead_king_leggings',[
+    'RKR',
+    'BAB',
+    'B B'
+    ],{
+      R: "irons_spellbooks:blood_rune",
+      B: "kubejs:kings_rib",
+      A: ingredient,
+      K: 'irons_spellbooks:bone_key'
+     })
+  })
+  boot.forEach(ingredient => {
+  event.shaped(
+    'hazennstuff:dead_king_boots',[
+    'RKR',
+    'BAB'
+    ],{
+      R: "irons_spellbooks:blood_rune",
+      B: "kubejs:kings_rib",
+      A: ingredient,
+      K: 'irons_spellbooks:bone_key'
+     })
+  })
+  }
+  event.smithing('hazennstuff:true_nights_edge', 'hazennstuff:shadow_scale', 'hazennstuff:nights_edge', 'hazennstuff:hallowed_ingot')
+  event.shaped(
+    'hazennstuff:thorn_chakram',[
+    ' BR',
+    'BCR',
+    ' BR'
+    ],{
+      R: 'irons_spellbooks:nature_rune',
+      B: 'hazennstuff:overgrown_bone',
+      C: 'hazennstuff:chlorophyte_ingot'
+    })
+  event.shaped(
+    'hazennstuff:meowmere',[
+    ' D ',
+    'ZCZ',
+    'ZEZ'
+    ],{
+      D: 'hazennstuff:deus_essence',
+      Z: 'hazennstuff:zenalite_ingot',
+      C: 'kubejs:cat_plush',
+      E: 'hazennstuff:excalibur_fragment'
+    })
+ event.smithing('dimdungeons:item_blank_theme_key[dimdungeons:dungeon_key_data={key_activated:false,built:false,dest_x:-1L,dest_z:-1L,name_type:0,name_part_1:0,name_part_2:0,theme:4,dungeon_type:"BASIC"}]', 'minecraft:ender_eye', 'minecraft:trial_key', 'irons_spellbooks:uncommon_ink')
+ event.smithing('dimdungeons:item_blank_theme_key[dimdungeons:dungeon_key_data={key_activated:false,built:false,dest_x:-1L,dest_z:-1L,name_type:0,name_part_1:0,name_part_2:0,theme:5,dungeon_type:"BASIC"}]', 'minecraft:ender_eye', 'minecraft:trial_key', 'mekanism:advanced_control_circuit')
 })
+
 // Cooldowns
 let staffs = [
   "ars_zero:novice_spell_staff",
@@ -738,6 +824,14 @@ const isNamedCotyn__ = entity => {
        .matchEntityCustom(isNamedCotyn__)
        .addLoot("kubejs:cotyn_plush")
 
+const isNamedRexTheKnight55 = entity => {
+  if (entity == null) return false
+  return entity.getName().getString() == 'RexTheKnight55'
+}
+  event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
+       .matchEntityCustom(isNamedRexTheKnight55)
+       .addLoot("kubejs:rex_plush")
+
 
   event.addEntityModifier("cataclysm:ender_guardian")
     .addLoot("cataclysm:void_core")
@@ -745,6 +839,9 @@ const isNamedCotyn__ = entity => {
     .replaceLoot("fdbosses:phase_sphere", "kubejs:stompeez")
   event.addTableModifier(/.*/)
     .replaceLoot("irons_spellbooks:fireward_ring", "kubejs:firecrowned_ring")
+  event.addEntityModifier("irons_spellbooks:dead_king")
+    .addLoot(LootEntry.of("kubejs:kings_rib").setCount([1, 3]).applyEnchantmentBonus([0, 2]))
+    
 })
 
 // Item Tags
@@ -772,7 +869,8 @@ RecipeViewerEvents.addInformation('item', event => {
 	])
 })
 EntityJSEvents.biomeSpawns(event => {
-    event.removeSpawn('irons_spellbooks:necromancer', ['#minecraft:is_overworld']);
+    event.removeSpawn('irons_spellbooks:necromancer', ['#minecraft:is_overworld'])
+    event.removeSpawn('irons_spellbooks:necromancer', ['#minecraft:is_overworld'])
 })
 const LivingIncomingDamageEvent = Java.loadClass('net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent')
 const EntityJoinLevelEvent = Java.loadClass('net.neoforged.neoforge.event.entity.EntityJoinLevelEvent')
@@ -828,18 +926,44 @@ NativeEvents.onEvent(EntityJoinLevelEvent, event => {
     attribute.setBaseValue(0.25)
   }
 })
-
-NativeEvents.onEvent(LivingIncomingDamageEvent, event => {
+var LivingDamagePre = Java.loadClass(
+  'net.neoforged.neoforge.event.entity.living.LivingDamageEvent$Pre'
+)
+NativeEvents.onEvent(LivingDamagePre, event => {
   const source = event.getSource()
-
   if (!reducedDamageTypes.some(type => source.is(type))) return
-
   const resistance = Math.max(
     0,
     Math.min(1, event.getEntity().getAttributeValue(arsDamageResistance))
   )
-
   if (resistance <= 0) return
+  const damage = event.getNewDamage()
+  event.setNewDamage(damage * (1 - resistance))
+})
 
-  event.setAmount(event.getAmount() * (1 - resistance))
+const ONESHOT_AMOUNT = 0.9
+const ONESHOT_BLACKLIST = [
+  'createbigcannons:big_cannon_projectile',
+  'createbigcannons:cannon_projectile',
+  'create:potato_cannon'
+]
+NativeEvents.onEvent(LivingDamagePre, event => {
+let player = event.entity
+  if (!player || !player.isPlayer()) return
+let damage = event.getOriginalDamage()
+let source = event.getSource()
+let damageTypeKey = source.typeHolder().unwrapKey()
+  if (damageTypeKey.isEmpty()) return
+let damageTypeId = damageTypeKey.get().location().toString()
+  if (ONESHOT_BLACKLIST.includes(damageTypeId)) return
+let maxHealth = player.getMaxHealth()
+let currentHealth = player.getHealth()
+  if (currentHealth < maxHealth * ONESHOT_AMOUNT) return
+  if (maxHealth * ONESHOT_AMOUNT < damage) {
+      event.setNewDamage(maxHealth * ONESHOT_AMOUNT) 
+      player.potionEffects.add('kubejs:grace', 1*20, 0)
+      player.runCommandSilent(`execute positioned ${player.x} ${player.y} ${player.z} run playsound minecraft:block.respawn_anchor.set_spawn player @a[distance=..12] ~ ~ ~ 2 1`)
+      player.runCommandSilent('particle minecraft:cherry_leaves ~ ~2 ~ 1.5 1.5 1.5 0 25 normal')
+      player.runCommandSilent('particle minecraft:totem_of_undying ~ ~2 ~ 1.5 1.5 1.5 0 25 normal')
+      }
 })

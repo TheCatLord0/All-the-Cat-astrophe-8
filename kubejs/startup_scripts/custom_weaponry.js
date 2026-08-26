@@ -161,6 +161,12 @@ StartupEvents.registry('item', event => {
           0.5,
           'add_multiplied_base'
         )
+        .addAttribute(
+          'minecraft:generic.safe_fall_distance',
+          'kubejs:stompeez_fall',
+          6,
+          'add_value'
+        )
     )
   event.create('firecrowned_ring')
     .displayName('Firecrowned Ring')

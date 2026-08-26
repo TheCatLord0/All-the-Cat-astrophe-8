@@ -11,7 +11,7 @@
 	#How much ship inertia (kg*m^2) one gyro fully stabilizes at reference RPM. Bigger ship needs more gyros, ratio determines how many. Under-powered fleets degrade gracefully (slower correction, still stable).
 	# Default: 5000.0
 	# Range: 100.0 ~ 1000000.0
-	authorityPerUnit = 5000.0
+	authorityPerUnit = 500000.0
 	#Fraction of the observed external disturbance the controller cancels via feed-forward. 1.0 = full cancellation (firmest hold on unbalanced ships), 0.0 = disable feed-forward, leaving only the PD loop. Lower if the controller feels too aggressive on heavily unbalanced contraptions.
 	# Default: 1.0
 	# Range: 0.0 ~ 1.0
