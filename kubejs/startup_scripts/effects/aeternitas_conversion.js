@@ -9,13 +9,7 @@ StartupEvents.registry('mob_effect', event => {
     .beneficial()
     .color(0x3AA6FF)
 })
-  const KEY_ID = 'aeternitas_conversion'
 
-  KeyBindEvents.registry(event => {
-    event.register('aeternitas_conversion', 'KEY_P')
-      .inGame()
-      .category('key.categories.kubejs.thecatlord')
-})
 const $ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
 const $ResourceKey = Java.loadClass('net.minecraft.resources.ResourceKey')
 const $Registries = Java.loadClass('net.minecraft.core.registries.Registries')

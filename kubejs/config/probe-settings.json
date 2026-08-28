@@ -7,8 +7,8 @@
         "kubejs",
         "neoforge"
     ],
-    "probejs.generateBeans": false,
-    "probejs.hintsForLLM": false,
+    "probejs.generateBeans": true,
+    "probejs.hintsForLLM": true,
     "probejs.newGame": false,
-    "probejs.reset": false
+    "probejs.reset": true
 }

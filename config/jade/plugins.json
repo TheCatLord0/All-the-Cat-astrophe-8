@@ -115,6 +115,9 @@
   "ars_nouveau": {
     "mob_jar": true
   },
+  "create_mobile_packages": {
+    "bee_port": true
+  },
   "mekanism": {
     "chemical": true,
     "remove_builtin": true,

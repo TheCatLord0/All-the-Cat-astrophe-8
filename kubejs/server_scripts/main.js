@@ -157,6 +157,29 @@ ServerEvents.tags('item', event => {
     'irons_spellbooks:hellrazor'])
   event.add('c:dusts/salt', 'ratatouille:salt')
   event.remove('curios:ring', 'eidolon_repraised:angels_sight')
+  const armor = {
+    helmet: 'hazennstuff:dead_king_helmet',
+    chestplate: 'hazennstuff:dead_king_chestplate',
+    leggings: 'hazennstuff:dead_king_leggings',
+    boots: 'hazennstuff:dead_king_boots'
+  }
+  const allArmor = Object.values(armor)
+  allArmor.forEach(item => {
+    event.add('c:armors', item)
+    event.add('minecraft:enchantable/armor', item)
+    event.add('minecraft:enchantable/durability', item)
+    event.add('minecraft:enchantable/equippable', item)
+    event.add('minecraft:enchantable/vanishing', item)
+    event.add('minecraft:trimmable_armor', item)
+  })
+  event.add('minecraft:head_armor', armor.helmet)
+  event.add('minecraft:enchantable/head_armor', armor.helmet)
+  event.add('minecraft:chest_armor', armor.chestplate)
+  event.add('minecraft:enchantable/chest_armor', armor.chestplate)
+  event.add('minecraft:leg_armor', armor.leggings)
+  event.add('minecraft:enchantable/leg_armor', armor.leggings)
+  event.add('minecraft:foot_armor', armor.boots)
+  event.add('minecraft:enchantable/foot_armor', armor.boots)
 })
 // Replacement recipes
 ServerEvents.recipes(event => {
@@ -885,8 +908,6 @@ const arsDamageResistance = BuiltInRegistries.ATTRIBUTE
   .getHolder(ResourceLocation.parse('kubejs:ars_damage_resistance'))
   .orElseThrow()
 
-const bossTag = ResourceLocation.parse('c:bosses')
-
 const reducedDamageTypes = [
   'ars_nouveau:windshear',
   'ars_nouveau:crush',
@@ -909,6 +930,7 @@ NativeEvents.onEvent(EntityJoinLevelEvent, event => {
   if (event.getLevel().isClientSide()) return
 
   const entity = event.getEntity()
+  const boss = entity.getType()
 
   if (!(entity instanceof LivingEntity)) return
 
@@ -916,9 +938,7 @@ NativeEvents.onEvent(EntityJoinLevelEvent, event => {
 
   if (attribute == null) return
 
-  const entityTypeHolder = BuiltInRegistries.ENTITY_TYPE.wrapAsHolder(entity.getType())
-
-  if (entityTypeHolder.isTag(bossTag)) {
+  if (boss = 'c:bosses') {
     attribute.setBaseValue(0.95)
   } else if (entity instanceof PlayerCurio) {
     attribute.setBaseValue(0.6)
@@ -945,11 +965,14 @@ const ONESHOT_AMOUNT = 0.9
 const ONESHOT_BLACKLIST = [
   'createbigcannons:big_cannon_projectile',
   'createbigcannons:cannon_projectile',
-  'create:potato_cannon'
+  'create:potato_cannon',
+  'irons_spellbooks:heartstop',
+  'gametechbcs_spellbooks:lingering_strain'
 ]
 NativeEvents.onEvent(LivingDamagePre, event => {
 let player = event.entity
   if (!player || !player.isPlayer()) return
+let server = player.level.getServer()
 let damage = event.getOriginalDamage()
 let source = event.getSource()
 let damageTypeKey = source.typeHolder().unwrapKey()
@@ -962,8 +985,21 @@ let currentHealth = player.getHealth()
   if (maxHealth * ONESHOT_AMOUNT < damage) {
       event.setNewDamage(maxHealth * ONESHOT_AMOUNT) 
       player.potionEffects.add('kubejs:grace', 1*20, 0)
-      player.runCommandSilent(`execute positioned ${player.x} ${player.y} ${player.z} run playsound minecraft:block.respawn_anchor.set_spawn player @a[distance=..12] ~ ~ ~ 2 1`)
-      player.runCommandSilent('particle minecraft:cherry_leaves ~ ~2 ~ 1.5 1.5 1.5 0 25 normal')
-      player.runCommandSilent('particle minecraft:totem_of_undying ~ ~2 ~ 1.5 1.5 1.5 0 25 normal')
+      server.runCommandSilent(`execute positioned ${player.x} ${player.y} ${player.z} run playsound minecraft:block.respawn_anchor.set_spawn player @a[distance=..12] ~ ~ ~ 2 1`)
+      server.runCommandSilent(`execute positioned ${player.x} ${player.y} ${player.z} run particle minecraft:cherry_leaves ~ ~2 ~ 1.5 1.5 1.5 0 25 normal`)
+      server.runCommandSilent(`execute positioned ${player.x} ${player.y} ${player.z} run particle minecraft:totem_of_undying ~ ~2 ~ 1.5 1.5 1.5 0 25 normal`)
       }
+})
+NativeEvents.onEvent(LivingDamagePre, event =>{
+let entity = event.getEntity()
+let server = entity.level.getServer()
+const boss = entity.getType()
+  if (boss = 'c:bosses'){
+    const damage = event.getOriginalDamage()
+    const maxHP = entity.getMaxHealth()
+    if (damage > maxHP * 0.1){
+      event.setNewDamage(maxHP * 0.1)
+      server.runCommandSilent(`execute positioned ${entity.x} ${entity.y} ${entity.z} run playsound irons_spellbooks:entity.fiery_dagger.parry hostile @a[distance=..12] ~ ~ ~ 2 1`)
+    }
+  }
 })

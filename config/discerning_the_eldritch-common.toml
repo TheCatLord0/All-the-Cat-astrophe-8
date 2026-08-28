@@ -36,7 +36,7 @@
 "Mourning Star Damage Multiplier" = 5.5
 #Defines whether or not to enable Ascended One's damage cap.
 #Default is true
-"Enable Ascended One's damage cap" = true
+"Enable Ascended One's damage cap" = false
 #Defines the max damage the Ascended One can take for the damage cap
 #Default is [100]
 "Base Ascended One damage cap" = 100

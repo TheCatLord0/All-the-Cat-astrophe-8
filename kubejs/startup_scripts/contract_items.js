@@ -40,9 +40,4 @@ StartupEvents.registry('creative_mode_tab', event => {
           .canEquip((slotContext, stack) => true)
           .canUnequip((slotContext, stack) => true)
       )
-  })
-  KeyBindEvents.registry(event => {
-    event.register('martyr_core_blast', 'KEY_I')
-      .inGame()
-      .category('key.categories.kubejs.contract_items')
 })

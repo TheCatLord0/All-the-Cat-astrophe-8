@@ -123,6 +123,9 @@ EntityEvents.afterHurt(event => {
     entity.kill()
 })
 EntityEvents.afterHurt(event => {
+    const entity = event.getEntity()
+    const source = event.getSource()
+    const damageTypeKey = source.typeHolder().unwrapKey()
     if (event.source.player) {
         let player = event.source.player
         let weapon = player.getMainHandItem()
@@ -130,6 +133,17 @@ EntityEvents.afterHurt(event => {
             let damageDealt = event.damage
             let healAmount = damageDealt * MIMICRY_HEAL
             player.heal(healAmount)
+
+            if (!damageTypeKey.isEmpty()) {
+            const damageTypeId = damageTypeKey.get().location().toString()
+                if (damageTypeId === 'apothic_attributes:bleeding') return
+            }
+            {
+            let active = entity.potionEffects.getActive('apothic_attributes:bleeding')
+            let currentAmp = active == null ? -1 : active.amplifier
+            let nextAmp = Math.min(currentAmp + 2, 20)
+            entity.potionEffects.add('apothic_attributes:bleeding', (5*20), nextAmp, false, true)
+            }
         }
     }
 })

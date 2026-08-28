@@ -7,28 +7,50 @@ const effect=(namespace,path)=>$Registries.MOB_EFFECT.getHolder($RL.fromNamespac
 const GRACE=effect('kubejs','grace')
 const SPEED=effect('minecraft','speed')
 const JUMP=effect('minecraft','jump_boost')
-
-function apply(player){
+const SATURATION=effect('minecraft','saturation')
+function respawn(player){
   player.addEffect(new $Effect(GRACE,600,0,false,false,true))
-  player.addEffect(new $Effect(SPEED,600,0,false,false,false))
-  player.addEffect(new $Effect(JUMP,600,1,false,false,false))
+  player.addEffect(new $Effect(SPEED,600,2,false,false,false))
+  player.addEffect(new $Effect(JUMP,600,2,false,false,false))
+  player.addEffect(new $Effect(SATURATION,600,0,false,false,false))
 }
-
+function join(player){
+  player.addEffect(new $Effect(GRACE,200,0,false,false,true))
+}
 function remove(player){
   player.removeEffect(GRACE)
   player.removeEffect(SPEED)
   player.removeEffect(JUMP)
+  player.removeEffect(SATURATION)
 }
-
+function mana(player){
+  player.addEffect(new $Effect('irons_spellbooks:instant_mana',10,255,false,false,false))
+}
 PlayerEvents.respawned(event=>{
-  apply(event.player)
+  respawn(event.player)
 })
-
 BlockEvents.broken(event=>{
   const player=event.player
-  if(player&&player.hasEffect(GRACE))remove(player)
+  const broken = event.getBlock()
+    if (broken != 'gravestone:gravestone') return
+    if(player&&player.hasEffect(GRACE))
+      remove(player)
+      mana(player)
+})
+EntityEvents.afterHurt(event =>{
+if (event.source.player) {
+  let player = event.source.player
+  if(player&&player.hasEffect(GRACE))
+    {
+      remove(player)
+      mana(player)
+    }
+  }
+})
+NativeEvents.onEvent($DamageEvent,event=>{
+  if(event.getEntity().hasEffect(GRACE)){event.setCanceled(true)}
 })
 
-NativeEvents.onEvent($DamageEvent,event=>{
-  if(event.getEntity().hasEffect(GRACE))event.setCanceled(true)
+PlayerEvents.loggedIn(event=>{
+  join(event.player)
 })

@@ -4,7 +4,8 @@ const NO_REMOVAL = [
     'malum:wyrd_exhaustion'
 ]
 const DISABLED_EFFECTS = [
-    'spectrum:fatal_slumber'
+    'spectrum:fatal_slumber',
+    'ars_nouveau:snared'
 ]
 const MOB_EFFECT_IMMUNITY_RULES = [
   {

@@ -338,15 +338,15 @@ ItemEvents.modification(event => {
       const entry = Item.of(item.item().id).attributeModifiers;
       const attributes = entry.withModifierAdded(
         "aces_spell_utils:mana_steal",
-        { amount: 0.125, id: "identifier", operation: "add_value", },
+        { amount: 0.125, id: "helmet_steal", operation: "add_value", },
         "head"
       ).withModifierAdded(
         "aces_spell_utils:mana_rend",
-        { amount: 0.125, id: "identifier", operation: "add_value", },
+        { amount: 0.125, id: "helmet_rend", operation: "add_value", },
         "head"
       ).withModifierAdded(
         "apothic_attributes:life_steal",
-        { amount: 0.0625 , id: "identifier", operation: "add_value", },
+        { amount: 0.0625 , id: "helmet_life", operation: "add_value", },
         "head"
       )
       item.setAttributeModifiersWithTooltip(attributes.modifiers())
@@ -356,15 +356,15 @@ ItemEvents.modification(event => {
       const entry = Item.of(item.item().id).attributeModifiers;
       const attributes = entry.withModifierAdded(
         "aces_spell_utils:mana_steal",
-        { amount: 0.125, id: "identifier", operation: "add_value", },
+        { amount: 0.125, id: "chest_steal", operation: "add_value", },
         "chest"
       ).withModifierAdded(
         "aces_spell_utils:mana_rend",
-        { amount: 0.125, id: "identifier", operation: "add_value", },
+        { amount: 0.125, id: "chest_rend", operation: "add_value", },
         "chest"
       ).withModifierAdded(
         "apothic_attributes:life_steal",
-        { amount: 0.0625 , id: "identifier", operation: "add_value", },
+        { amount: 0.0625 , id: "chest_life", operation: "add_value", },
         "chest"
       )
       item.setAttributeModifiersWithTooltip(attributes.modifiers())
@@ -374,15 +374,15 @@ ItemEvents.modification(event => {
       const entry = Item.of(item.item().id).attributeModifiers;
       const attributes = entry.withModifierAdded(
         "aces_spell_utils:mana_steal",
-        { amount: 0.125, id: "identifier", operation: "add_value", },
+        { amount: 0.125, id: "leg_steal", operation: "add_value", },
         "legs"
       ).withModifierAdded(
         "aces_spell_utils:mana_rend",
-        { amount: 0.125, id: "identifier", operation: "add_value", },
+        { amount: 0.125, id: "leg_rend", operation: "add_value", },
         "legs"
       ).withModifierAdded(
         "apothic_attributes:life_steal",
-        { amount: 0.0625 , id: "identifier", operation: "add_value", },
+        { amount: 0.0625 , id: "leg_life", operation: "add_value", },
         "legs"
       )
       item.setAttributeModifiersWithTooltip(attributes.modifiers())
@@ -392,15 +392,15 @@ ItemEvents.modification(event => {
       const entry = Item.of(item.item().id).attributeModifiers;
       const attributes = entry.withModifierAdded(
         "aces_spell_utils:mana_steal",
-        { amount: 0.125, id: "identifier", operation: "add_value", },
+        { amount: 0.125, id: "boot_steal", operation: "add_value", },
         "feet"
       ).withModifierAdded(
         "aces_spell_utils:mana_rend",
-        { amount: 0.125, id: "identifier", operation: "add_value", },
+        { amount: 0.125, id: "boot_rend", operation: "add_value", },
         "feet"
       ).withModifierAdded(
         "apothic_attributes:life_steal",
-        { amount: 0.0625 , id: "identifier", operation: "add_value", },
+        { amount: 0.0625 , id: "boot_life", operation: "add_value", },
         "feet"
       )
       item.setAttributeModifiersWithTooltip(attributes.modifiers())
@@ -412,11 +412,11 @@ ItemEvents.modification(event => {
       const entry = Item.of(item.item().id).attributeModifiers;
       const attributes = entry.withModifierAdded(
         "aces_spell_utils:vigor_reap",
-        { amount: 0.05, id: "identifier", operation: "add_value", },
+        { amount: 0.05, id: "helmet_reap", operation: "add_value", },
         "head"
       ).withModifierAdded(
         "minecraft:generic.attack_damage",
-        { amount: 0.125, id: "identifier", operation: "add_multiplied_base", },
+        { amount: 0.125, id: "helmet_damage", operation: "add_multiplied_base", },
         "head"
       )
       item.setAttributeModifiersWithTooltip(attributes.modifiers())
@@ -426,11 +426,11 @@ ItemEvents.modification(event => {
       const entry = Item.of(item.item().id).attributeModifiers;
       const attributes = entry.withModifierAdded(
         "aces_spell_utils:vigor_reap",
-        { amount: 0.05, id: "identifier", operation: "add_value", },
+        { amount: 0.05, id: "chest_reap", operation: "add_value", },
         "chest"
       ).withModifierAdded(
         "minecraft:generic.attack_damage",
-        { amount: 0.125, id: "identifier", operation: "add_multiplied_base", },
+        { amount: 0.125, id: "chest_damage", operation: "add_multiplied_base", },
         "chest"
       )
       item.setAttributeModifiersWithTooltip(attributes.modifiers())
@@ -440,11 +440,11 @@ ItemEvents.modification(event => {
       const entry = Item.of(item.item().id).attributeModifiers;
       const attributes = entry.withModifierAdded(
         "aces_spell_utils:vigor_reap",
-        { amount: 0.05, id: "identifier", operation: "add_value", },
+        { amount: 0.05, id: "leg_reap", operation: "add_value", },
         "legs"
       ).withModifierAdded(
         "minecraft:generic.attack_damage",
-        { amount: 0.125, id: "identifier", operation: "add_multiplied_base", },
+        { amount: 0.125, id: "leg_damage", operation: "add_multiplied_base", },
         "legs"
       )
       item.setAttributeModifiersWithTooltip(attributes.modifiers())
@@ -454,11 +454,11 @@ ItemEvents.modification(event => {
       const entry = Item.of(item.item().id).attributeModifiers;
       const attributes = entry.withModifierAdded(
         "aces_spell_utils:vigor_reap",
-        { amount: 0.05, id: "identifier", operation: "add_value", },
+        { amount: 0.05, id: "boot_reap", operation: "add_value", },
         "feet"
       ).withModifierAdded(
         "minecraft:generic.attack_damage",
-        { amount: 0.125, id: "identifier", operation: "add_multiplied_base", },
+        { amount: 0.125, id: "boot_damage", operation: "add_multiplied_base", },
         "feet"
       )
       item.setAttributeModifiersWithTooltip(attributes.modifiers())

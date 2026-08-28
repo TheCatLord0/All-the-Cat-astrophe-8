@@ -208,6 +208,7 @@ PlayerEvents.tick(function(event) {
     }
 
     if (player.level.time % MOMENTUM_INTERVAL !== 0) return
+    if (player.getEffect('kubejs:grace')) return
 
     var wasStalled = player.tags.contains('automaton_stalled')
     var moved = hasMoved(player)

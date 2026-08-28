@@ -17,6 +17,7 @@ const SOURCE_HIGH_EFFECT_AMPLIFIER = 1
 const SOURCE_MEDIUM_EFFECT_AMPLIFIER = 0
 const SOURCE_JAR_ID = 'ars_nouveau:source_jar'
 const SOURCE_CREATIVE_JAR_ID = 'ars_nouveau:creative_source_jar'
+const RESPAWN_SOURCE = 100
 const SOURCE_FOODS = [
     'ars_nouveau:sourceberry_bush',
     'ars_nouveau:source_gem',
@@ -254,6 +255,7 @@ PlayerEvents.tick(function(event) {
     }
 
     if (player.level.time % SOURCE_INTERVAL !== 0) return
+    if (player.getEffect('kubejs:grace')) return
 
     var wasStarved = player.tags.contains('resonant_starved')
     var source = getPlayerSource(player)
@@ -492,7 +494,7 @@ PlayerEvents.respawned(function(event) {
     var player = event.player
     if (player.persistentData.getInt('resonant_is_owner') !== 1) return
 
-    var source = 60
+    var source = RESPAWN_SOURCE
     setPlayerSource(player, source)
     updateSourceBossbar(player, source)
 

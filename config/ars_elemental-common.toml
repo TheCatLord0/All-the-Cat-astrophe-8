@@ -14,17 +14,17 @@ frame_skip_recipe = false
 
 #Adjust these values to balance how much a spell gets amplified by the matching spell focus, doubled for major foci.
 ["Elemental Spell Foci - Amplify"]
-	fire_focus_buff = 1.0
-	water_focus_buff = 1.0
-	air_focus_buff = 1.0
-	earth_focus_buff = 1.0
+	fire_focus_buff = 0.0
+	water_focus_buff = 0.0
+	air_focus_buff = 0.0
+	earth_focus_buff = 0.0
 
 #Adjust these values to balance how much an elemental spell gets dampened by a not-matching lesser spell focus
 ["Elemental Spell Foci - Dampening"]
-	fire_focus_debuff = -1.0
-	water_focus_debuff = -1.0
-	air_focus_debuff = -1.0
-	earth_focus_debuff = -1.0
+	fire_focus_debuff = 0.0
+	water_focus_debuff = 0.0
+	air_focus_debuff = 0.0
+	earth_focus_debuff = 0.0
 
 #Enable or disable the passive bonus of the foci
 ["Elemental Spell Foci - Abilities"]

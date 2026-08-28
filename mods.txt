@@ -1,6 +1,7 @@
 ﻿aces_spell_utils-1.2.7.1-1.21.1.jar
 AdvancedAE-1.6.11-1.21.1.jar
 AdvancedLootInfo-neoforge-1.21.1-1.12.0.jar
+ae2importexportcard-1.21.1-1.5.0.jar
 ae2wtlib-19.5.0.jar
 aeronauticscompat-1.1.2.jar
 aeroworks-1.4.2.jar
@@ -69,6 +70,7 @@ craft_config-1.1.12+1.21.1-neoforge.jar
 Create Encased-1.21.1-1.9.0-ht1.jar
 create_connected-1.3.2-mc1.21.1.jar
 create_enhanced_schematicannon-1.0.4.jar
+create_mobile_packages-1.21.1-0.7.7.jar
 create_power_loader-2.0.5-mc1.21.1.jar
 create_radar-0.4.9.4-1.21.1.jar
 create_ratatouille-1.21.1-1.3.9-2.jar
@@ -239,7 +241,6 @@ rechiseled-1.2.5-neoforge-mc1.21.jar
 rechiseledae-1.0.1-neoforge-mc1.21.1.jar
 rechiseledae2-neoforge-1.21-1.21.1-1.0.0.jar
 rechiseledcreate-1.1.1-neoforge-mc1.21.jar
-recolor_tablet-1.2.0+1.21.1.jar
 reeses-sodium-options-neoforge-2.2.2+mc1.21.1.jar
 resourcefullib-neoforge-1.21-3.0.12.jar
 Resourcify (1.21.1-neoforge)-1.8.3.jar
