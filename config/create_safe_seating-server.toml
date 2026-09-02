@@ -1,0 +1,49 @@
+[features]
+	#Prevent hostile mobs from acquiring a seated player as a new target.
+	#Existing aggro is NOT cleared: you must sit down in peace for this to protect you.
+	enableMobSafety = true
+	#Slowly regenerate health while resting on a stationary seat.
+	enableHealthRegen = true
+	#Slowly restore hunger while resting on a stationary seat.
+	enableHungerRestore = true
+	#Reset the time-since-rest statistic while seated so phantoms do not spawn.
+	enablePhantomPrevention = true
+	#Ignore lightning strikes while seated (any seat, including moving contraptions).
+	enableLightningProtection = true
+	#Stop hunger from draining while the player is AFK on a seat.
+	enableExhaustionReduction = true
+	#Show a brief action-bar message when resting perks activate.
+	enableRestingFeedback = true
+
+[timing]
+	#Seconds a player must stay seated before resting perks activate.
+	#Mob-targeting prevention is always instant and ignores this value.
+	# Default: 10
+	# Range: 0 ~ 600
+	gracePeriodSeconds = 10
+
+[health]
+	#Seconds to regenerate from empty to full health on a normal seat.
+	# Default: 300
+	# Range: 1 ~ 3600
+	healthSecondsToFull = 300
+	#Seconds to regenerate from empty to full health near a lit campfire.
+	# Default: 180
+	# Range: 1 ~ 3600
+	healthSecondsToFullBoosted = 180
+
+[hunger]
+	#Seconds to restore from empty to full hunger on a normal seat.
+	# Default: 300
+	# Range: 1 ~ 3600
+	hungerSecondsToFull = 300
+	#Seconds to restore from empty to full hunger near a cake.
+	# Default: 180
+	# Range: 1 ~ 3600
+	hungerSecondsToFullBoosted = 180
+
+[proximity]
+	#Block radius searched for a lit campfire (health boost) or cake (hunger boost).
+	# Default: 4.0
+	# Range: 0.0 ~ 32.0
+	proximityRadius = 4.0

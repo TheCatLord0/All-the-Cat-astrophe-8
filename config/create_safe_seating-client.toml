@@ -1,0 +1,9 @@
+[afk]
+	#Seconds with no input while seated before you are considered AFK.
+	# Default: 60
+	# Range: 1 ~ 3600
+	afkIdleSeconds = 60
+	#Hide the HUD while AFK on a seat (restored when you return).
+	hideHudWhileAfk = true
+	#Switch to third-person (back) view while AFK on a seat (restored when you return).
+	thirdPersonWhileAfk = true

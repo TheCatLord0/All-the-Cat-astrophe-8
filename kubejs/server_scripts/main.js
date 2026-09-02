@@ -141,6 +141,7 @@ let removedID = [
   "ars_zero:archmage_spell_staff",
    "ars_zero:spellcasting_circlet",
    "occultism:ritual/resurrect_mob",
+   "createdieselgenerators:crushing/wood_chip_logs"
 ]
   removedID.forEach(removedID => {
     event.remove({id: removedID })
@@ -904,6 +905,7 @@ const Registries = Java.loadClass('net.minecraft.core.registries.Registries')
 const ResourceKey = Java.loadClass('net.minecraft.resources.ResourceKey')
 const ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
 
+
 const arsDamageResistance = BuiltInRegistries.ATTRIBUTE
   .getHolder(ResourceLocation.parse('kubejs:ars_damage_resistance'))
   .orElseThrow()
@@ -930,7 +932,6 @@ NativeEvents.onEvent(EntityJoinLevelEvent, event => {
   if (event.getLevel().isClientSide()) return
 
   const entity = event.getEntity()
-  const boss = entity.getType()
 
   if (!(entity instanceof LivingEntity)) return
 
@@ -938,7 +939,11 @@ NativeEvents.onEvent(EntityJoinLevelEvent, event => {
 
   if (attribute == null) return
 
-  if (boss = 'c:bosses') {
+  const entityType = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse(entity.getType().toString()))
+  const entityHolder = BuiltInRegistries.ENTITY_TYPE.wrapAsHolder(entityType)
+  const boss = BuiltInRegistries.ENTITY_TYPE.getTag(bossTag).get().contains(entityHolder)
+
+  if (boss) {
     attribute.setBaseValue(0.95)
   } else if (entity instanceof PlayerCurio) {
     attribute.setBaseValue(0.6)
@@ -946,9 +951,11 @@ NativeEvents.onEvent(EntityJoinLevelEvent, event => {
     attribute.setBaseValue(0.25)
   }
 })
+
 var LivingDamagePre = Java.loadClass(
   'net.neoforged.neoforge.event.entity.living.LivingDamageEvent$Pre'
 )
+
 NativeEvents.onEvent(LivingDamagePre, event => {
   const source = event.getSource()
   if (!reducedDamageTypes.some(type => source.is(type))) return
@@ -960,7 +967,6 @@ NativeEvents.onEvent(LivingDamagePre, event => {
   const damage = event.getNewDamage()
   event.setNewDamage(damage * (1 - resistance))
 })
-
 const ONESHOT_AMOUNT = 0.9
 const ONESHOT_BLACKLIST = [
   'createbigcannons:big_cannon_projectile',
@@ -990,16 +996,19 @@ let currentHealth = player.getHealth()
       server.runCommandSilent(`execute positioned ${player.x} ${player.y} ${player.z} run particle minecraft:totem_of_undying ~ ~2 ~ 1.5 1.5 1.5 0 25 normal`)
       }
 })
+const TagKey = Java.loadClass('net.minecraft.tags.TagKey')
+const bossTag = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse('c:bosses'))
+
 NativeEvents.onEvent(LivingDamagePre, event =>{
 let entity = event.getEntity()
 let server = entity.level.getServer()
-const boss = entity.getType()
-  if (boss = 'c:bosses'){
+const entityType = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse(entity.getType().toString()))
+const entityHolder = BuiltInRegistries.ENTITY_TYPE.wrapAsHolder(entityType)
+  if (!BuiltInRegistries.ENTITY_TYPE.getTag(bossTag).get().contains(entityHolder)) return
     const damage = event.getOriginalDamage()
     const maxHP = entity.getMaxHealth()
     if (damage > maxHP * 0.1){
       event.setNewDamage(maxHP * 0.1)
       server.runCommandSilent(`execute positioned ${entity.x} ${entity.y} ${entity.z} run playsound irons_spellbooks:entity.fiery_dagger.parry hostile @a[distance=..12] ~ ~ ~ 2 1`)
     }
-  }
 })
