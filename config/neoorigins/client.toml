@@ -28,6 +28,19 @@
 	#Set IMPACT_ASC to open the picker sorted by influence.
 	#Allowed Values: MANUAL, NAME_ASC, NAME_DESC, CLASS, IMPACT_ASC
 	default_sort = "CLASS"
+	#Layout of the origin / class selection screen. This is the arrangement
+	#only: the colours and font are controlled separately by theme_override
+	#and classic_picker_style above, and any skin works with any layout.
+	#  TWO_PANEL - scrolling list on the left, details on the right (default)
+	#  GRID      - a paged wall of origin cards, click one for its details
+	#  CAROUSEL  - one origin at a time with prev / next arrows, closest to
+	#              the original Origins mod's chooser
+	#CAROUSEL is a NeoOrigins screen shaped like the original, not a copy of
+	#it: it keeps the current theme rather than the old dirt-background window.
+	#GRID fits as many cards as the window allows and pages the rest; the
+	#card wall has no room for descriptions, so a card opens onto them.
+	#Allowed Values: TWO_PANEL, GRID, CAROUSEL
+	picker_layout = "TWO_PANEL"
 
 #Heads-up-display options local to this client.
 [hud]
@@ -53,7 +66,7 @@
 	#declares "always_show_icon": true or you enable
 	#always_show_ability_icons below.
 	#ALL_ACTIVE_ABILITIES: every keybind ability with an icon keeps a
-	#persistent slot — full-bright while idle, cooldown sweep while
+	#persistent slot: full-bright while idle, cooldown sweep while
 	#recharging, bright/dim for toggles.
 	#Allowed Values: COOLDOWNS_AND_TOGGLES, ALL_ACTIVE_ABILITIES
 	hud_ability_display = "ALL_ACTIVE_ABILITIES"
@@ -83,15 +96,22 @@
 	#(e.g. "1=key.keyboard.r", "2=key.keyboard.z", "3=key.mouse.4").
 	#This is a CLIENT setting applied at key registration; a datapack cannot
 	#set it (keybinds register before datapacks load). Players can still
-	#rebind any slot in Controls — this only sets the default.
+	#rebind any slot in Controls. This only sets the default.
 	slot_defaults = []
 
 #Cross-mod compatibility toggles.
 [compat]
-	#Dragon Survival: block DS's own dragon-SPECIES selection screens
-	#(the altar / species-choice popup) so the NeoOrigins origin picker
-	#is the only way to choose or change a dragon species. Default false
-	#= leave DS's species screens usable alongside origins. DS's
-	#appearance editor, skins, abilities and inventory are ALWAYS left
-	#open regardless of this setting.
-	suppress_dragon_species_screens = false
+	#Dragon Survival: what to do when DS opens one of its own dragon-SPECIES
+	#selection screens (the altar / species-choice popup) while the
+	#NeoOrigins origin picker is on screen. Both mods can open a screen at
+	#join, and whichever lands second replaces the first.
+	#  DEFER    - (default) hold DS's screen back and open it as soon as the
+	#             origin picker is finished, so neither is lost
+	#  SUPPRESS - cancel DS's species screens, making the origin picker the
+	#             only way to choose or change a dragon species
+	#  ALLOW    - never interfere; whichever screen opens last wins
+	#A species screen you open yourself (altar block, inventory button,
+	#command) is untouched under DEFER and ALLOW. DS's appearance editor,
+	#skins, abilities and inventory are ALWAYS left open regardless.
+	#Allowed Values: DEFER, SUPPRESS, ALLOW
+	dragon_species_screens = "DEFER"

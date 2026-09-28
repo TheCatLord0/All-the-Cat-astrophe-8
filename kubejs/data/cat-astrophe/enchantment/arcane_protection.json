@@ -11,7 +11,7 @@
           "base": 0.021875,
           "per_level_above_first": 0.021875
         },
-        "attribute": "kubejs:ars_damage_resistance",
+        "attribute": "ars_nouveau:sauce.perk.spell_resistance",
         "id": "minecraft:enchantment.arcane_protection",
         "operation": "add_value"
       },

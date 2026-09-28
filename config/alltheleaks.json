@@ -10,5 +10,5 @@
   "debugChunkLoading": false,
   "debugThreadsStuck": false,
   "disableEternalStarlightProgress": false,
-  "skipTickingUnloadedFluxNetworks": false
+  "skipTickingUnloadedFluxNetworks": true
 }

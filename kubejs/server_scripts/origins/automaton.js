@@ -26,14 +26,14 @@ var JAVec3f = null
 try {
     JADustParticle = Java.loadClass('net.minecraft.core.particles.DustParticleOptions')
     JAVec3f = Java.loadClass('org.joml.Vector3f')
-} catch(e) {}
+} catch (e) { }
 
 function spawnDust(level, x, y, z, r, g, b, size) {
     if (!JADustParticle || !JAVec3f) return
     try {
         var data = new JADustParticle(new JAVec3f(r, g, b), size)
         level.sendParticles(data, x, y, z, 1, 0, 0, 0, 0)
-    } catch(e) {}
+    } catch (e) { }
 }
 
 function getMomentum(player) {
@@ -65,7 +65,7 @@ function getNearbyRPM(player) {
                             if (maxRPM >= RPM_FAST_EXIT) return maxRPM
                         }
                     }
-                } catch(e) {}
+                } catch (e) { }
             }
         }
     }
@@ -124,7 +124,7 @@ function removeBossbar(player) {
     player.persistentData.putInt('automaton_bossbar_active', 0)
 }
 
-NeoOriginsEvents.originChosen(function(event) {
+NeoOriginsEvents.originChosen(function (event) {
     if (String(event.getOriginId()) !== 'cat-astrophe:automaton') return
     var player = event.getPlayer()
     player.persistentData.putInt('automaton_is_owner', 1)
@@ -133,12 +133,12 @@ NeoOriginsEvents.originChosen(function(event) {
     createBossbar(player)
 })
 
-NeoOriginsEvents.originChanged(function(event) {
+NeoOriginsEvents.originChanged(function (event) {
     if (String(event.getOldOriginId()) !== 'cat-astrophe:automaton') return
     event.getPlayer().tags.add('automaton_lost_pending')
 })
 
-PlayerEvents.loggedIn(function(event) {
+PlayerEvents.loggedIn(function (event) {
     var player = event.player
     if (player.persistentData.getInt('automaton_is_owner') !== 1) return
     player.tags.add('automaton_owner')
@@ -146,13 +146,13 @@ PlayerEvents.loggedIn(function(event) {
     createBossbar(player)
 })
 
-PlayerEvents.loggedOut(function(event) {
+PlayerEvents.loggedOut(function (event) {
     var player = event.player
     if (player.tags.contains('automaton_owner')) removeBossbar(player)
     player.tags.remove('automaton_owner')
 })
 
-PlayerEvents.tick(function(event) {
+PlayerEvents.tick(function (event) {
     var player = event.player
 
     if (player.tags.contains('automaton_lost_pending')) {
@@ -182,13 +182,13 @@ PlayerEvents.tick(function(event) {
             srv.runCommandSilent('effect clear ' + player.username + ' ars_elemental:static_charged')
             for (var cs = 0; cs < RUSH_TRAIL_SLOTS; cs++) player.persistentData.putInt('automaton_ta' + cs, 0)
         }
-        spawnDust(player.level, player.x + (Math.random()-0.5)*0.6, player.y + Math.random()*1.8, player.z + (Math.random()-0.5)*0.6, 0.3, 0.7, 1.0, 0.5)
-        spawnDust(player.level, player.x + (Math.random()-0.5)*0.6, player.y + Math.random()*1.8, player.z + (Math.random()-0.5)*0.6, 0.5, 0.9, 1.0, 0.4)
+        spawnDust(player.level, player.x + (Math.random() - 0.5) * 0.6, player.y + Math.random() * 1.8, player.z + (Math.random() - 0.5) * 0.6, 0.3, 0.7, 1.0, 0.5)
+        spawnDust(player.level, player.x + (Math.random() - 0.5) * 0.6, player.y + Math.random() * 1.8, player.z + (Math.random() - 0.5) * 0.6, 0.5, 0.9, 1.0, 0.4)
         try {
             player.level.sendParticles(
                 Java.loadClass('net.minecraft.core.particles.ParticleTypes').ELECTRIC_SPARK,
                 player.x, player.y + 0.9, player.z, 2, 0.3, 0.5, 0.3, 0.02)
-        } catch(e) {}
+        } catch (e) { }
         if (rushTicks % RUSH_TRAIL_INTERVAL === 0) {
             var slot = Math.floor((RUSH_DURATION - rushTicks) / RUSH_TRAIL_INTERVAL) % RUSH_TRAIL_SLOTS
             var pd = player.persistentData
@@ -243,7 +243,7 @@ PlayerEvents.tick(function(event) {
     }
 })
 
-NeoOriginsEvents.powerActivated(function(event) {
+NeoOriginsEvents.powerActivated(function (event) {
     if (String(event.getPowerId()) !== 'cat-astrophe:automaton_grapple') return
     var player = event.getPlayer()
     var srv = player.level.getServer()
@@ -254,7 +254,7 @@ NeoOriginsEvents.powerActivated(function(event) {
     srv.runCommandSilent('particle minecraft:electric_spark ' + player.x + ' ' + (player.y + 1.0) + ' ' + player.z + ' 0.4 0.6 0.4 0.1 30')
 })
 
-BlockEvents.rightClicked(function(event) {
+BlockEvents.rightClicked(function (event) {
     if (String(event.hand) !== 'MAIN_HAND') return
     var player = event.player
     if (!player || !player.tags.contains('automaton_owner')) return
@@ -275,7 +275,7 @@ BlockEvents.rightClicked(function(event) {
         try {
             var axisVal = String(block.properties['axis'])
             if (axisVal !== 'null' && axisVal !== 'undefined') axis = axisVal
-        } catch(e) {}
+        } catch (e) { }
         player.level.getServer().runCommandSilent('setblock ' + bx + ' ' + by + ' ' + bz + ' ' + strippedId + '[axis=' + axis + ']')
         player.level.getServer().runCommandSilent('playsound minecraft:item.axe.strip block ' + player.username + ' ' + bx + ' ' + by + ' ' + bz + ' 1.0 1.0')
         return

@@ -1,26 +1,26 @@
 Platform.mods.kubejs.name = 'TheCatLord'
 StartupEvents.modifyCreativeTab('kubejs:tab', event => {
-	event.icon = 'minecraft:music_disc_cat'
-	event.displayName = Text.darkBlue('Patreon Items')
-	event.remove('@kubejs')
+  event.icon = 'minecraft:music_disc_cat'
+  event.displayName = Text.darkBlue('Patreon Items')
+  event.remove('@kubejs')
 
-    event.add('kubejs:justice[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false,irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:divine_smite",index:0,level:5}],maxSpells:1,mustEquip:0b,spellWheel:1b}]')
-    event.add('kubejs:splendor[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false,irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:sunbeam",index:0,level:6}],maxSpells:1,mustEquip:0b,spellWheel:1b}]')
+  event.add('kubejs:justice[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false,irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:divine_smite",index:0,level:5}],maxSpells:1,mustEquip:0b,spellWheel:1b}]')
+  event.add('kubejs:splendor[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false,irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:sunbeam",index:0,level:6}],maxSpells:1,mustEquip:0b,spellWheel:1b}]')
 
-    event.add('kubejs:earthshaker[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
-    event.add('kubejs:eternal_earthshaker[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
+  event.add('kubejs:earthshaker[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
+  event.add('kubejs:eternal_earthshaker[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
 
-    event.add('kubejs:fixer_scythe[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
-    event.add('kubejs:upgraded_fixer_scythe[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
+  event.add('kubejs:fixer_scythe[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
+  event.add('kubejs:upgraded_fixer_scythe[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]')
 })
 StartupEvents.registry('item', event => {
-// Rex_The_Knight55
+  // Rex_The_Knight55
   event.create('justice', 'sword')
     .displayName('§l§6§kAAA §r§c§lJustice§6§k AAA')
     .unstackable()
     .fireResistant(true)
     .rarity('EPIC')
-    .tooltip('§4§lSplendor is Justice.')
+    .tooltip('§4§lJustice is Splendor.')
     .tooltip('Using both weapons causes you to rend flesh with holy power.')
     .tooltip('')
     .tooltip('§lMade for Rex_The_Knight55.')
@@ -33,7 +33,7 @@ StartupEvents.registry('item', event => {
     .unstackable()
     .fireResistant(true)
     .rarity('EPIC')
-    .tooltip('§4§lJustice is Splendor.')
+    .tooltip('§4§lSplendor is Justice.')
     .tooltip('Using both weapons causes you to rend flesh with holy power.')
     .tooltip('')
     .tooltip('§lMade for Rex_The_Knight55.')
@@ -50,7 +50,7 @@ StartupEvents.registry('item', event => {
     .texture('thecatlord:item/divine_justice')
     .speed(0)
     .attackDamageBonus(-4)
-// ForestQueen558
+  // ForestQueen558
   event.create('earthshaker', 'axe')
     .displayName('§l§a§kAAA §r§2§lEarthshaker§a§k AAA')
     .unstackable()
@@ -77,7 +77,7 @@ StartupEvents.registry('item', event => {
     .texture('thecatlord:item/earthshaker')
     .speed(9)
     .attackDamageBonus(16)
-// Odinshi
+  // Odinshi
   event.create('fixer_scythe', 'sword')
     .displayName('§1§l§kAAA§r§l§6 Scythe of a§o Certain Fixer§r§l§1§k AAA')
     .unstackable()

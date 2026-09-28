@@ -23,7 +23,20 @@
             moveZ: z
         })
     })
+    KeyBindEvents.pressed('stompeez_step_height', event => {
+        const player = event.player || Client.player
+        if (!player) return
+
+        player.sendData('stompeez_step_height', {})
+    })
     ClientEvents.lang('en_us', event => {
         event.add('key.kubejs.stompeez_dash', 'STOMPEEZ Boost')
+        event.add('key.kubejs.stompeez_step_height', 'STOMPEEZ Step Toggle')
+    })
+    KeyBindEvents.pressed('weapon_special', event => {
+        event.player.sendData('weapon_special', {})
+    })
+    ClientEvents.lang('en_us', event => {
+        event.add('key.kubejs.weapon_special', 'Weapon Special')
     })
 })()

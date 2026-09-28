@@ -80,3 +80,6 @@ etched-sounds/cache.json
 ldlib2/
 .mixin.out/
 dynamic-data-pack-cache/
+ponders_watched_azimuth.json
+defaultoptions.journal.json
+defaultconfigs/biolith/general.json

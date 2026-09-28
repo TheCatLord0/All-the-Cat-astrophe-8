@@ -5,23 +5,13 @@ const NO_REMOVAL = [
 ]
 const DISABLED_EFFECTS = [
     'spectrum:fatal_slumber',
-    'ars_nouveau:snared'
+    'ars_nouveau:flight'
 ]
 const MOB_EFFECT_IMMUNITY_RULES = [
   {
     mobs: [
-      'minecraft:zombie',
-      'minecraft:husk',
-      'minecraft:drowned'
-    ],
-    effects: [
-      'minecraft:poison',
-      'minecraft:hunger'
-    ]
-  },
-  {
-    mobs: [
-      'minecraft:player'
+      'minecraft:player',
+      '#c:bosses'
     ],
     effects: [
       'ars_nouveau:snared'
@@ -77,19 +67,19 @@ NativeEvents.onEvent($MobEffectApplicable, event => {
   event.setResult($MobEffectApplicableResult.DO_NOT_APPLY)
 })
 NativeEvents.onEvent($MobEffectApplicable, event => {
-  const entity = event.getEntity()
-  const effect = event.getEffectInstance()
-  if (!entity || !effect) return
-  const entityId = $BuiltInRegistries.ENTITY_TYPE
-    .getKey(entity.getType())
-    .toString()
-  const isImmune = MOB_EFFECT_IMMUNITY_RULES.some(rule => {
-    if (!rule.mobs.includes(entityId)) return false
-    return (
-      rule.effects.includes('*') ||
-      rule.effects.some(effectId => effect.is(effectId))
-    )
-  })
-  if (!isImmune) return
-  event.setResult($MobEffectApplicableResult.DO_NOT_APPLY)
+    const entity = event.getEntity()
+    const effect = event.getEffectInstance()
+    if (!entity || !effect) return
+    const entityId = String(entity.type)
+    const entityType = entity.getEntityType()
+    const isImmune = MOB_EFFECT_IMMUNITY_RULES.some(rule => {
+        const matchesMob = rule.mobs.some(mob => {
+            if (mob.startsWith('#')) return entityType.hasTag(mob.slice(1))
+            return mob === entityId
+        })
+        if (!matchesMob) return false
+        return rule.effects.includes('*') ||
+            rule.effects.some(effectId => effect.is(effectId))
+    })
+    if (isImmune) event.setResult($MobEffectApplicableResult.DO_NOT_APPLY)
 })

@@ -10,105 +10,105 @@ const FIRST_BLADE_MULTIPLY = 5.33333333333
 const FIRST_BLADE_DRAWBACK = 0.33
 // STOMPEEZ
 const STOMPEEZ_ITEM = 'kubejs:stompeez'
-const STOMPEEZ_BOOST = 2.0
-const STOMPEEZ_VERTICAL_MULTIPLIER = 0.2
-const STOMPEEZ_MAX_SPEED = 8.0
+const STOMPEEZ_BOOST = 1.2
+const STOMPEEZ_VERTICAL_MULTIPLIER = 0.1
+const STOMPEEZ_MAX_SPEED = 4.0
 const STOMPEEZ_RECHARGE = 40
 // Recipes
 ServerEvents.recipes(event => {
- event.shaped(
+    event.shaped(
         'kubejs:palindrome[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]',
-    [
-        'INI',
-        'GDG',
-        'INI'
-    ],
-    {
-        I: 'minecraft:diamond',
-        N: 'minecraft:netherite_ingot',
-        G: 'minecraft:gold_ingot',
-        D: 'minecraft:diamond_sword'
-    }
-  )
- event.shaped(
+        [
+            'INI',
+            'GDG',
+            'INI'
+        ],
+        {
+            I: 'minecraft:diamond',
+            N: 'minecraft:netherite_ingot',
+            G: 'minecraft:gold_ingot',
+            D: 'minecraft:diamond_sword'
+        }
+    )
+    event.shaped(
         'kubejs:debt[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]',
-    [
-        'INI',
-        'GDG',
-        ' B '
-    ],
-    {
-        I: 'minecraft:iron_block',
-        N: 'minecraft:netherite_ingot',
-        G: 'minecraft:gold_block',
-        D: 'minecraft:diamond_block',
-        B: 'minecraft:blaze_rod'
-    }
-  )
+        [
+            'INI',
+            'GDG',
+            ' B '
+        ],
+        {
+            I: 'minecraft:iron_block',
+            N: 'minecraft:netherite_ingot',
+            G: 'minecraft:gold_block',
+            D: 'minecraft:diamond_block',
+            B: 'minecraft:blaze_rod'
+        }
+    )
 })
 // Actual code
 const CuriosCheck = Java.loadClass('top.theillusivec4.curios.api.CuriosApi')
 
 function getEquippedCurios(player) {
-  const optional = CuriosCheck.getCuriosInventory(player)
+    const optional = CuriosCheck.getCuriosInventory(player)
 
-  if (!optional.isPresent()) {
-    return []
-  }
-
-  const curiosInventory = optional.get()
-  const curios = curiosInventory.getCurios()
-  const equipped = []
-
-  curios.entrySet().forEach(entry => {
-    const slotType = entry.getKey()
-    const handler = entry.getValue()
-    const stacks = handler.getStacks()
-
-    for (let i = 0; i < stacks.getSlots(); i++) {
-      const stack = stacks.getStackInSlot(i)
-
-      if (!stack.isEmpty()) {
-        equipped.push({
-          slot: slotType,
-          index: i,
-          id: stack.id,
-          count: stack.count
-        })
-      }
+    if (!optional.isPresent()) {
+        return []
     }
-  })
 
-  return equipped
+    const curiosInventory = optional.get()
+    const curios = curiosInventory.getCurios()
+    const equipped = []
+
+    curios.entrySet().forEach(entry => {
+        const slotType = entry.getKey()
+        const handler = entry.getValue()
+        const stacks = handler.getStacks()
+
+        for (let i = 0; i < stacks.getSlots(); i++) {
+            const stack = stacks.getStackInSlot(i)
+
+            if (!stack.isEmpty()) {
+                equipped.push({
+                    slot: slotType,
+                    index: i,
+                    id: stack.id,
+                    count: stack.count
+                })
+            }
+        }
+    })
+
+    return equipped
 }
 
 function hasEquippedCurio(player, itemId) {
-  return getEquippedCurios(player).some(curio => curio.id === itemId)
+    return getEquippedCurios(player).some(curio => curio.id === itemId)
 }
 
 ServerEvents.commandRegistry(event => {
-  const { commands: Commands } = event
+    const { commands: Commands } = event
 
-  event.register(
-    Commands.literal('curios_dump')
-      .executes(ctx => {
-        const player = ctx.source.playerOrException
-        const equipped = getEquippedCurios(player)
+    event.register(
+        Commands.literal('curios_dump')
+            .executes(ctx => {
+                const player = ctx.source.playerOrException
+                const equipped = getEquippedCurios(player)
 
-        if (equipped.length === 0) {
-          player.tell('No curios equipped.')
-          return 1
-        }
+                if (equipped.length === 0) {
+                    player.tell('No curios equipped.')
+                    return 1
+                }
 
-        player.tell('Equipped Curios:')
+                player.tell('Equipped Curios:')
 
-        equipped.forEach(curio => {
-          player.tell(`${curio.slot}[${curio.index}] = ${curio.id} x${curio.count}`)
-        })
+                equipped.forEach(curio => {
+                    player.tell(`${curio.slot}[${curio.index}] = ${curio.id} x${curio.count}`)
+                })
 
-        return 1
-      })
-  )
+                return 1
+            })
+    )
 })
 // Funny One Shot
 EntityEvents.afterHurt(event => {
@@ -118,7 +118,7 @@ EntityEvents.afterHurt(event => {
     if (attackingEntity.mainHandItem.id != 'kubejs:executioner') return
     let pitch = 0.9 + Math.random() * 0.2
     server.runCommandSilent(
-    `execute positioned ${entity.x} ${entity.y} ${entity.z} run playsound ${'kubejs:item.die'} master @a[distance=..32] ~ ~ ~ 1 ${pitch}`
+        `execute positioned ${entity.x} ${entity.y} ${entity.z} run playsound ${'kubejs:item.die'} master @a[distance=..32] ~ ~ ~ 1 ${pitch}`
     )
     entity.kill()
 })
@@ -135,83 +135,79 @@ EntityEvents.afterHurt(event => {
             player.heal(healAmount)
 
             if (!damageTypeKey.isEmpty()) {
-            const damageTypeId = damageTypeKey.get().location().toString()
+                const damageTypeId = damageTypeKey.get().location().toString()
                 if (damageTypeId === 'apothic_attributes:bleeding') return
             }
             {
-            let active = entity.potionEffects.getActive('apothic_attributes:bleeding')
-            let currentAmp = active == null ? -1 : active.amplifier
-            let nextAmp = Math.min(currentAmp + 2, 20)
-            entity.potionEffects.add('apothic_attributes:bleeding', (5*20), nextAmp, false, true)
+                let active = entity.potionEffects.getActive('apothic_attributes:bleeding')
+                let currentAmp = active == null ? -1 : active.amplifier
+                let nextAmp = Math.min(currentAmp + 2, 20)
+                entity.potionEffects.add('apothic_attributes:bleeding', (5 * 20), nextAmp, false, true)
             }
         }
     }
 })
-    const CORPUS_WEAPONS = [
-        'kubejs:tibia',
-        'kubejs:callisto_tibia'
-    ]
+const CORPUS_WEAPONS = [
+    'kubejs:tibia',
+    'kubejs:callisto_tibia'
+]
 
-    const CORPUS_EFFECT = 'kubejs:corpus'
+const CORPUS_EFFECT = 'kubejs:corpus'
 
-    EntityEvents.afterHurt(event => {
-        const { entity, source } = event
+EntityEvents.afterHurt(event => {
+    const { entity, source } = event
 
-        let attackingEntity = source.actual
-        if (!attackingEntity) return
+    let attackingEntity = source.actual
+    if (!attackingEntity) return
 
-        let heldItem = String(attackingEntity.mainHandItem.id)
+    let heldItem = String(attackingEntity.mainHandItem.id)
 
-        if (!CORPUS_WEAPONS.includes(heldItem)) return
+    if (!CORPUS_WEAPONS.includes(heldItem)) return
 
-        let active = entity.potionEffects.getActive(CORPUS_EFFECT)
+    let active = entity.potionEffects.getActive(CORPUS_EFFECT)
 
-        let currentAmp = active == null ? -1 : active.amplifier
-        let nextAmp = Math.min(currentAmp + 1, CORPUS_MAX_AMPLIFIER)
-
-        entity.potionEffects.add(CORPUS_EFFECT, CORPUS_DURATION, nextAmp, false, true)
+    let currentAmp = active == null ? -1 : active.amplifier
+    let nextAmp = Math.min(currentAmp + 1, CORPUS_MAX_AMPLIFIER)
+    if (!source.direct) return
+    entity.potionEffects.add(CORPUS_EFFECT, CORPUS_DURATION, nextAmp, false, true)
 })
-    const PM_SOUND_WEAPONS = [
-        'kubejs:tibia',
-        'kubejs:callisto_tibia',
-        "kubejs:fixer_scythe",
-        "kubejs:upgraded_fixer_scythe",
-        "kubejs:mimicry",
-        "kubejs:ego_mimicry"
-    ]
+const PM_SOUND_WEAPONS = [
+    'kubejs:tibia',
+    "kubejs:fixer_scythe",
+    "kubejs:mimicry"
+]
 
-    const PM_HIT_SOUND = 'kubejs:item.project_moon_hit'
+const PM_HIT_SOUND = 'kubejs:item.project_moon_hit'
 
-    EntityEvents.afterHurt(event => {
-        const { entity, source, server } = event
+EntityEvents.afterHurt(event => {
+    const { entity, source, server } = event
 
-        let attackingEntity = source.actual
-        if (!attackingEntity) return
+    let attackingEntity = source.actual
+    if (!attackingEntity) return
 
-        let heldItem = String(attackingEntity.mainHandItem.id)
+    let heldItem = String(attackingEntity.mainHandItem.id)
 
-        if (PM_SOUND_WEAPONS.indexOf(heldItem) == -1) return
+    if (PM_SOUND_WEAPONS.indexOf(heldItem) == -1) return
 
-        let pitch = 0.9 + Math.random() * 0.2
+    let pitch = 0.9 + Math.random() * 0.2
 
-        server.runCommandSilent(
-            `execute positioned ${entity.x} ${entity.y} ${entity.z} run playsound ${PM_HIT_SOUND} master @a[distance=..12] ~ ~ ~ 1 ${pitch}`
-        )
+    server.runCommandSilent(
+        `execute positioned ${entity.x} ${entity.y} ${entity.z} run playsound ${PM_HIT_SOUND} master @a[distance=..12] ~ ~ ~ 1 ${pitch}`
+    )
 })
 EntityEvents.beforeHurt(event => {
-  const player = event.source.player
-  if (!player) return
-  const health = player.getMaxHealth()
-  if (!hasEquippedCurio(player, 'kubejs:mark_of_cain')) return
-  const weapon = player.mainHandItem
-        if (weapon.id === 'kubejs:first_blade') {
-            event.setDamage(event.damage * FIRST_BLADE_MULTIPLY)
-            player.damage(health * FIRST_BLADE_DRAWBACK)
-        }
+    const player = event.source.player
+    if (!player) return
+    const health = player.getMaxHealth()
+    if (!hasEquippedCurio(player, 'kubejs:mark_of_cain')) return
+    const weapon = player.mainHandItem
+    if (weapon.id === 'kubejs:first_blade') {
+        event.setDamage(event.damage * FIRST_BLADE_MULTIPLY)
+        player.damage(health * FIRST_BLADE_DRAWBACK)
+    }
 })
 {
     var $LivingDamagePre = Java.loadClass('net.neoforged.neoforge.event.entity.living.LivingDamageEvent$Pre')
-    var WEAPON = 'kubejs:debt'
     var MAX_DEBT = 100
     var ARMED_TICKS = 200
     var DEBT = 'debt_amount'
@@ -235,7 +231,7 @@ EntityEvents.beforeHurt(event => {
     var armed = p => {
         return p.persistentData.getInt(ARMED) > 0
     }
-    ItemEvents.rightClicked(WEAPON, event => {
+    ItemEvents.rightClicked('kubejs:debt', event => {
         var player = event.player
         if (event.hand.toString() !== 'MAIN_HAND') return
         if (getDebt(player) <= 0) return
@@ -250,7 +246,7 @@ EntityEvents.beforeHurt(event => {
             attacker &&
             attacker.isPlayer() &&
             direct === attacker &&
-            attacker.mainHandItem.id === WEAPON
+            attacker.mainHandItem.id === 'kubejs:debt'
         ) {
             var damage = event.getNewDamage()
             if (damage <= 0) return
@@ -306,7 +302,7 @@ EntityEvents.beforeHurt(event => {
     PlayerEvents.loggedOut(event => {
         clearDebt(event.player)
     })
-  }
+}
 (function () {
     var $StompeezVec3 = Java.loadClass('net.minecraft.world.phys.Vec3')
     var CHARGE_1 = 'stompeez_charge_1'
@@ -314,6 +310,7 @@ EntityEvents.beforeHurt(event => {
     NetworkEvents.dataReceived('stompeez_dash', event => {
         var player = event.player
         if (!hasEquippedCurio(player, STOMPEEZ_ITEM)) return
+        if (player.isFallFlying()) return
         var data = player.persistentData
         var charge
         if (data.getInt(CHARGE_1) <= 0) {
@@ -390,10 +387,42 @@ EntityEvents.beforeHurt(event => {
     })
 })()
 {
+    var ITEM = 'kubejs:stompeez'
+    var EFFECT = 'occultism:step_height'
+    var ACTIVE = 'stompeez_step_height_active'
+
+    var disable = player => {
+        player.removeEffect(EFFECT)
+        player.persistentData.putBoolean(ACTIVE, false)
+    }
+
+    NetworkEvents.dataReceived('stompeez_step_height', event => {
+        const player = event.player
+        if (!player || !player.isCuriosEquipped(ITEM)) return
+
+        if (player.persistentData.getBoolean(ACTIVE)) {
+            disable(player)
+        } else {
+            player.potionEffects.add(EFFECT, -1, 0)
+            player.persistentData.putBoolean(ACTIVE, player.potionEffects.isActive(EFFECT))
+        }
+    })
+
+    PlayerEvents.tick(event => {
+        const player = event.player
+        if (!player.persistentData.getBoolean(ACTIVE)) return
+
+        if (!player.isCuriosEquipped(ITEM)) {
+            disable(player)
+        } else if (!player.potionEffects.isActive(EFFECT)) {
+            player.persistentData.putBoolean(ACTIVE, false)
+        }
+    })
+}
+{
     var $LivingIncomingDamageEvent = Java.loadClass(
         'net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent'
     )
-    var WEAPON = 'kubejs:palindrome'
     var PHASE = 'palindrome_phase'
     var HIT_INDEX = 'palindrome_hit_index'
     var HIT_1 = 'palindrome_hit_1'
@@ -412,7 +441,7 @@ EntityEvents.beforeHurt(event => {
         var player = event.source.player
         if (player == null || !player.isPlayer()) return
         var weapon = player.getMainHandItem()
-        if (weapon.id != WEAPON) return
+        if (weapon.id != 'kubejs:palindrome') return
         var data = player.persistentData
         var damage = event.getAmount()
         var phase = data.getInt(PHASE)
@@ -455,7 +484,7 @@ EntityEvents.beforeHurt(event => {
         var data = player.persistentData
         var weapon = player.getMainHandItem()
         var slot = player.inventory.selected
-        if (weapon.id != WEAPON) {
+        if (weapon.id != 'kubejs:palindrome') {
             if (data.contains(PHASE) || data.contains(HIT_INDEX)) {
                 resetPalindrome(player)
             }

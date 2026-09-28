@@ -1,37 +1,37 @@
 Platform.mods.kubejs.name = 'TheCatLord'
 StartupEvents.registry('creative_mode_tab', event => {
-	event.create('weaponry').icon(() => 'kubejs:mimicry').displayName(('Weaponry')).content(showRestrictedItems => [
-            'kubejs:executioner',
-            'kubejs:mimicry',
-            'kubejs:tibia',
-            'kubejs:first_blade',
-            'kubejs:mark_of_cain',
-            'kubejs:stompeez',
-            'kubejs:palindrome',
-            'kubejs:debt',
-            'kubejs:firecrowned_ring'
+  event.create('weaponry').icon(() => 'kubejs:mimicry').displayName(('Weaponry')).content(showRestrictedItems => [
+    'kubejs:executioner',
+    'kubejs:mimicry',
+    'kubejs:tibia',
+    'kubejs:first_blade',
+    'kubejs:mark_of_cain',
+    'kubejs:stompeez',
+    'kubejs:palindrome',
+    'kubejs:debt',
+    'kubejs:firecrowned_ring'
   ])
 })
 StartupEvents.modifyCreativeTab('kubejs:weaponry', event => {
-    event.remove('kubejs:executioner')
-    event.remove('kubejs:mimicry')
-    event.remove('kubejs:tibia')
-    event.remove('kubejs:first_blade')
-    event.remove('kubejs:mark_of_cain')
-    event.remove('kubejs:stompeez')
-    event.remove('kubejs:palindrome')
-    event.remove('kubejs:debt')
+  event.remove('kubejs:executioner')
+  event.remove('kubejs:mimicry')
+  event.remove('kubejs:tibia')
+  event.remove('kubejs:first_blade')
+  event.remove('kubejs:mark_of_cain')
+  event.remove('kubejs:stompeez')
+  event.remove('kubejs:palindrome')
+  event.remove('kubejs:debt')
 
-    event.add([
-        Item.of('kubejs:executioner[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
-        Item.of('kubejs:mimicry[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
-        Item.of('kubejs:tibia[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
-        Item.of('kubejs:first_blade[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
-        Item.of('kubejs:palindrome[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
-        Item.of('kubejs:debt[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
-        Item.of('kubejs:mark_of_cain[enchantment_glint_override=false]'),
-        Item.of('kubejs:stompeez[enchantment_glint_override=false]')
-    ])
+  event.add([
+    Item.of('kubejs:executioner[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
+    Item.of('kubejs:mimicry[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
+    Item.of('kubejs:tibia[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
+    Item.of('kubejs:first_blade[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
+    Item.of('kubejs:palindrome[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
+    Item.of('kubejs:debt[unbreakable={show_in_tooltip:false},enchantment_glint_override=false]'),
+    Item.of('kubejs:mark_of_cain[enchantment_glint_override=false]'),
+    Item.of('kubejs:stompeez[enchantment_glint_override=false]')
+  ])
 })
 StartupEvents.registry('item', event => {
   event.create('mimicry', 'sword')
@@ -49,16 +49,16 @@ StartupEvents.registry('item', event => {
 })
 StartupEvents.registry('item', event => {
   event.create('tibia', 'sword')
-  .displayName('§4§l§kAAA §r§7Tibia §4§l§kAAA')
-  .unstackable()
-  .fireResistant(true)
-  .rarity('EPIC')
-  .tooltip("§7§lVeins and arteries. The bicolor shades of red that will flow out of you... Aah...! Marvelous art!")
-  .tooltip('Inflicts Corpus which causes burst damage at 10 stacks.')
-  .parentModel('thecatlord:item/tibia')
-  .texture('thecatlord:item/tibia')
-  .speed(9)
-  .attackDamageBonus(4)
+    .displayName('§4§l§kAAA §r§7Tibia §4§l§kAAA')
+    .unstackable()
+    .fireResistant(true)
+    .rarity('EPIC')
+    .tooltip("§7§lVeins and arteries. The bicolor shades of red that will flow out of you... Aah...! Marvelous art!")
+    .tooltip('Inflicts Corpus which causes burst damage at 10 stacks.')
+    .parentModel('thecatlord:item/tibia')
+    .texture('thecatlord:item/tibia')
+    .speed(9)
+    .attackDamageBonus(4)
 })
 StartupEvents.registry('item', event => {
   event.create('executioner', 'sword')
@@ -122,19 +122,19 @@ StartupEvents.registry('item', event => {
     .texture('thecatlord:item/mark_of_cain')
     .tag('curios:an_focus')
     .attachCuriosCapability(
-        CuriosJSCapabilityBuilder.create()
-            .addAttribute(
-                "malum:healing_received",
-                "cdc642c8-25e3-4d23-9a11-7bc6963f4639",
-                -0.5,
-                'add_value'
-            )
-            .addAttribute(
-                "minecraft:generic.attack_damage",
-                "024f9ec8-618b-4354-b855-6d175d3e11c0",
-                0.5,
-                'add_multiplied_total'
-            )
+      CuriosJSCapabilityBuilder.create()
+        .addAttribute(
+          "malum:healing_received",
+          "cdc642c8-25e3-4d23-9a11-7bc6963f4639",
+          -0.5,
+          'add_value'
+        )
+        .addAttribute(
+          "minecraft:generic.attack_damage",
+          "024f9ec8-618b-4354-b855-6d175d3e11c0",
+          0.5,
+          'add_multiplied_total'
+        )
     )
   event.create('stompeez')
     .displayName('§b§l§kAA §r§1STOMPEEZ §b§l§kAA')
@@ -177,39 +177,39 @@ StartupEvents.registry('item', event => {
     .texture('irons_spellbooks:item/fireward_ring')
     .tag('curios:ring')
 })
-    const CORPUS_EFFECT = 'kubejs:corpus'
+const CORPUS_EFFECT = 'kubejs:corpus'
 
-    const CORPUS_MAX_STACKS = 10
-    const CORPUS_BURST_PERCENT = 0.25
-    const CORPUS_MIN_BURST_DAMAGE = 2
+const CORPUS_MAX_STACKS = 10
+const CORPUS_BURST_PERCENT = 0.25
+const CORPUS_MIN_BURST_DAMAGE = 2
 
-    function getAmplifier(effectInstance) {
-        if (effectInstance == null) return -1
-        return effectInstance.amplifier
-    }
+function getAmplifier(effectInstance) {
+  if (effectInstance == null) return -1
+  return effectInstance.amplifier
+}
 
-    function dealCorpusDamage(entity) {
-        let hpBase = entity.getMaxHealth()
-        let damage = Math.max(CORPUS_MIN_BURST_DAMAGE, hpBase * CORPUS_BURST_PERCENT)
+function dealCorpusDamage(entity) {
+  let hpBase = entity.getMaxHealth()
+  let damage = Math.max(CORPUS_MIN_BURST_DAMAGE, hpBase * CORPUS_BURST_PERCENT)
 
-        try {
-            entity.invulnerableTime = 0
-        } catch (e) {}
+  try {
+    entity.invulnerableTime = 0
+  } catch (e) { }
 
-        entity.attack(entity.damageSources().magic(), damage)
-    }
+  entity.attack(entity.damageSources().magic(), damage)
+}
 
-    StartupEvents.registry('mob_effect', event => {
-        event.create('corpus')
-            .harmful()
-            .color(0x8b0000)
-            .effectTick((entity, amplifier) => {
-                let active = entity.potionEffects.getActive(CORPUS_EFFECT)
-                let currentAmp = getAmplifier(active)
+StartupEvents.registry('mob_effect', event => {
+  event.create('corpus')
+    .harmful()
+    .color(0x8b0000)
+    .effectTick((entity, amplifier) => {
+      let active = entity.potionEffects.getActive(CORPUS_EFFECT)
+      let currentAmp = getAmplifier(active)
 
-                if (currentAmp < CORPUS_MAX_STACKS - 1) return
+      if (currentAmp < CORPUS_MAX_STACKS - 1) return
 
-                entity.removeEffect(CORPUS_EFFECT)
-                dealCorpusDamage(entity)
-            })
+      entity.removeEffect(CORPUS_EFFECT)
+      dealCorpusDamage(entity)
+    })
 })

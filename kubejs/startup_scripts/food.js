@@ -1,12 +1,12 @@
 StartupEvents.registry('creative_mode_tab', event => {
-	event.create('cat_food').icon(() => 'kubejs:soul_spaghetti').displayName(("Cat's Foods")).content(showRestrictedItems => [
-        'kubejs:powdered_soul',
-        'kubejs:soul_crust',
-        'kubejs:soul_dough',
-        'kubejs:soul_pasta',
-        'kubejs:soul_pie',
-        'kubejs:soul_sausage',
-        'kubejs:soul_spaghetti'
+  event.create('cat_food').icon(() => 'kubejs:soul_spaghetti').displayName(("Cat's Foods")).content(showRestrictedItems => [
+    'kubejs:powdered_soul',
+    'kubejs:soul_crust',
+    'kubejs:soul_dough',
+    'kubejs:soul_pasta',
+    'kubejs:soul_pie',
+    'kubejs:soul_sausage',
+    'kubejs:soul_spaghetti'
   ])
 })
 StartupEvents.registry('item', event => {

@@ -10,5 +10,49 @@
     "sounds": [
       "kubejs:item/die"
     ]
+  },
+  "gabriel_high_hp": {
+    "subtitle": "Gabriel High Taunt",
+    "sounds": [
+      "kubejs:item/gabriel/high/defy",
+      "kubejs:item/gabriel/high/devil",
+      "kubejs:item/gabriel/high/foolishness",
+      "kubejs:item/gabriel/high/imperfection",
+      "kubejs:item/gabriel/high/mortal",
+      "kubejs:item/gabriel/high/nothing",
+      "kubejs:item/gabriel/high/object"
+    ]
+  },
+  "gabriel_low_hp": {
+    "subtitle": "Gabriel Low Taunt",
+    "sounds": [
+      "kubejs:item/gabriel/low/best_you_got",
+      "kubejs:item/gabriel/low/come_get_some_blood",
+      "kubejs:item/gabriel/low/divine_justice",
+      "kubejs:item/gabriel/low/now_this_is_a_fight",
+      "kubejs:item/gabriel/low/right_my_wrong",
+      "kubejs:item/gabriel/low/rusty",
+      "kubejs:item/gabriel/low/scrap",
+      "kubejs:item/gabriel/low/settle_this",
+      "kubejs:item/gabriel/low/true_splendor",
+      "kubejs:item/gabriel/low/what_you_were_made_for",
+      "kubejs:item/gabriel/low/minecraft",
+      "kubejs:item/gabriel/low/papa"
+    ]
+  },
+  "gabriel_meme": {
+    "subtitle": "Gabriel Meme",
+    "sounds": [
+      "kubejs:item/gabriel/meme/bible",
+      "kubejs:item/gabriel/meme/do_you_mind",
+      "kubejs:item/gabriel/meme/fem_fishy",
+      "kubejs:item/gabriel/meme/fishy",
+      "kubejs:item/gabriel/meme/gamin_time",
+      "kubejs:item/gabriel/meme/handsome",
+      "kubejs:item/gabriel/meme/i_would_like_to_play",
+      "kubejs:item/gabriel/meme/infant",
+      "kubejs:item/gabriel/meme/mew",
+      "kubejs:item/gabriel/meme/what"
+    ]
   }
 }

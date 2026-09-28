@@ -2,7 +2,7 @@ var OriginChangedEventClass = Java.loadClass('com.cyberday1.neoorigins.api.event
 var NeoForgeCommon = Java.loadClass('net.neoforged.neoforge.common.NeoForge')
 var EventPriority = Java.loadClass('net.neoforged.bus.api.EventPriority')
 
-NeoForgeCommon.EVENT_BUS.addListener(EventPriority.NORMAL, OriginChangedEventClass, function(event) {
+NeoForgeCommon.EVENT_BUS.addListener(EventPriority.NORMAL, OriginChangedEventClass, function (event) {
     try {
         var player = event.getEntity()
         if (player === null) return
@@ -19,7 +19,7 @@ NeoForgeCommon.EVENT_BUS.addListener(EventPriority.NORMAL, OriginChangedEventCla
         for (var i = 0; i < pending.length; i++) {
             player.addTag(pending[i])
         }
-    } catch(e) {
+    } catch (e) {
         console.error('[Origins] listener error: ' + e)
     }
 })

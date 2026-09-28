@@ -6,7 +6,7 @@
 	#Number of ticks between chunk loading checks. Does not affect contraptions
 	# Default: 10
 	# Range: 0 ~ 200
-	chunkUpdateInterval = 10
+	chunkUpdateInterval = 20
 	#.
 	#Minimum number of ticks between loss of power and chunk unloading. Rounds up to multiples of update interval
 	# Default: 20
@@ -61,7 +61,7 @@
 	#Number of ticks between chunk loading checks. Does not affect contraptions
 	# Default: 10
 	# Range: 0 ~ 200
-	chunkUpdateInterval = 10
+	chunkUpdateInterval = 20
 	#.
 	#Minimum number of ticks between loss of power and chunk unloading. Rounds up to multiples of update interval
 	# Default: 20

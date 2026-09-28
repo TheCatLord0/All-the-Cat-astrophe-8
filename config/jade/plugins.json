@@ -52,6 +52,9 @@
     "painting": true,
     "chiseled_bookshelf": true
   },
+  "hostilenetworks": {
+    "io_port_mode": true
+  },
   "jade_access": {
     "held_item": true,
     "sign": true,
@@ -72,6 +75,11 @@
     "registry_name": "OFF",
     "block_properties": false,
     "mod_name": true
+  },
+  "beautify": {
+    "lamp_jar.glowstone_dust": true,
+    "trellis.pot_plant": true,
+    "hanging_pot.pot_flower": true
   },
   "extendedae": {
     "jade_chamber": true,
@@ -118,6 +126,9 @@
   "create_mobile_packages": {
     "bee_port": true
   },
+  "eidolon_repraised": {
+    "enthrall_tooltip": true
+  },
   "mekanism": {
     "chemical": true,
     "remove_builtin": true,
@@ -129,6 +140,12 @@
     "villager": true,
     "converter": true,
     "breeder": true
+  },
+  "quark": {
+    "oretoise_eating_cooldown": true
+  },
+  "supplementaries": {
+    "hat_stand": true
   },
   "gravestone": {
     "grave": true

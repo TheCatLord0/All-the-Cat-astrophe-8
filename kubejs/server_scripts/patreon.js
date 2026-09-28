@@ -15,118 +15,156 @@ ServerEvents.tags('item', event => {
 })
 // Patreon recipes
 ServerEvents.recipes(event => {
-event.shaped(
-  'kubejs:justice[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false],irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:divine_smite",index:0,level:5}],maxSpells:1,mustEquip:0b,spellWheel:1b}]',
-  [
-    'LNL',
-    'GDG',
-    ' B '
-  ],
-  {
-    L: 'minecraft:lapis_lazuli',
-    N: 'minecraft:netherite_ingot',
-    G: 'minecraft:gold_ingot',
-    D: 'minecraft:diamond_sword',
-    B: 'minecraft:blaze_rod',
-  }
-)
-event.shaped(
-  'kubejs:splendor[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false],irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:sunbeam",index:0,level:6}],maxSpells:1,mustEquip:0b,spellWheel:1b}]',
-  [
-    'GNG',
-    'LDL',
-    ' B '
-  ],
-  {
-    L: 'minecraft:lapis_lazuli',
-    N: 'minecraft:netherite_ingot',
-    G: 'minecraft:gold_ingot',
-    D: 'minecraft:diamond_sword',
-    B: 'minecraft:blaze_rod',
-  }
-)
-event.smithing('kubejs:justice',
-  'minecraft:iron_nugget',
-  'kubejs:divine_justice'
-)
-event.shaped(
-  'kubejs:earthshaker[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]',
-  [
-    'ODO',
-    'ANA',
-    ' L '
-  ],
-  {
-    N: 'minecraft:netherite_ingot',
-    O: 'minecraft:dark_oak_leaves',
-    A: 'minecraft:flowering_azalea_leaves',
-    L: 'minecraft:dark_oak_log',
-    D: 'minecraft:diamond_axe'
-  }
-)
-event.shaped(
-  'kubejs:fixer_scythe[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]',
-  [
-    'IDG',
-    ' NI',
-    'G  '
-  ],
-  {
-    N: 'minecraft:netherite_ingot',
-    D: 'minecraft:diamond_sword',
-    G: 'minecraft:gold_ingot',
-    I: 'minecraft:iron_ingot'
-  }
-)
+  event.shaped(
+    'kubejs:justice[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false],irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:divine_smite",index:0,level:5}],maxSpells:1,mustEquip:0b,spellWheel:1b}]',
+    [
+      'LNL',
+      'GDG',
+      ' B '
+    ],
+    {
+      L: 'minecraft:lapis_lazuli',
+      N: 'minecraft:netherite_ingot',
+      G: 'minecraft:gold_ingot',
+      D: 'minecraft:diamond_sword',
+      B: 'minecraft:blaze_rod',
+    }
+  )
+  event.shaped(
+    'kubejs:splendor[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false],irons_spellbooks:spell_container={data:[{id:"irons_spellbooks:sunbeam",index:0,level:6}],maxSpells:1,mustEquip:0b,spellWheel:1b}]',
+    [
+      'GNG',
+      'LDL',
+      ' B '
+    ],
+    {
+      L: 'minecraft:lapis_lazuli',
+      N: 'minecraft:netherite_ingot',
+      G: 'minecraft:gold_ingot',
+      D: 'minecraft:diamond_sword',
+      B: 'minecraft:blaze_rod',
+    }
+  )
+  event.smithing('kubejs:justice',
+    'minecraft:iron_nugget',
+    'kubejs:divine_justice'
+  )
+  event.shaped(
+    'kubejs:earthshaker[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]',
+    [
+      'ODO',
+      'ANA',
+      ' L '
+    ],
+    {
+      N: 'minecraft:netherite_ingot',
+      O: 'minecraft:dark_oak_leaves',
+      A: 'minecraft:flowering_azalea_leaves',
+      L: 'minecraft:dark_oak_log',
+      D: 'minecraft:diamond_axe'
+    }
+  )
+  event.shaped(
+    'kubejs:fixer_scythe[unbreakable={show_in_tooltip:0b},enchantment_glint_override=false]',
+    [
+      'IDG',
+      ' NI',
+      'G  '
+    ],
+    {
+      N: 'minecraft:netherite_ingot',
+      D: 'minecraft:diamond_sword',
+      G: 'minecraft:gold_ingot',
+      I: 'minecraft:iron_ingot'
+    }
+  )
 })
 
 ServerEvents.tags('item', event => {
-    event.add('malum:scythe', 'kubejs:fixer_scythe')
-    event.add('malum:scythe', 'kubejs:upgraded_fixer_scythe')
+  event.add('malum:scythe', 'kubejs:fixer_scythe')
+  event.add('malum:scythe', 'kubejs:upgraded_fixer_scythe')
 })
+// Specials
+const GabrielSoundPacket = Java.loadClass('net.minecraft.network.protocol.game.ClientboundSoundEntityPacket')
+const GabrielSoundEvent = Java.loadClass('net.minecraft.sounds.SoundEvent')
+const GabrielSoundSource = Java.loadClass('net.minecraft.sounds.SoundSource')
+const GabrielHolder = Java.loadClass('net.minecraft.core.Holder')
+const GabrielResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
+const GABRIEL_COOLDOWN = 15000
+
+const playGabriel = (player, allowMeme, volume) => {
+  if (!player) return
+  const main = player.mainHandItem.id, off = player.offHandItem.id
+  if (!((main === 'kubejs:justice' && off === 'kubejs:splendor') ||
+    (main === 'kubejs:splendor' && off === 'kubejs:justice'))) return
+  const now = Date.now(), data = player.persistentData
+  if (now < data.getLong('gabriel_sound_ready_at')) return
+  const health = player.getHealth(), maxHealth = player.getMaxHealth()
+  let soundId
+  if (health > maxHealth * 0.5 && health !== maxHealth) soundId = 'kubejs:gabriel_high_hp'
+  else if (health < maxHealth * 0.5) soundId = 'kubejs:gabriel_low_hp'
+  else if (allowMeme && health === maxHealth) soundId = 'kubejs:gabriel_meme'
+  else return
+  const sound = GabrielHolder.direct(
+    GabrielSoundEvent.createVariableRangeEvent(GabrielResourceLocation.parse(soundId))
+  )
+  const packet = new GabrielSoundPacket(sound, GabrielSoundSource.PLAYERS, player, volume, 1, player.getRandom().nextLong())
+  data.putLong('gabriel_sound_ready_at', now + GABRIEL_COOLDOWN)
+  player.level.getPlayers().forEach(listener => {
+    if (listener.distanceToSqr(player.x, player.y, player.z) <= 144) listener.connection.send(packet)
+  })
+}
+NetworkEvents.dataReceived('weapon_special', event => playGabriel(event.player, true, 4))
+EntityEvents.afterHurt(event => playGabriel(event.player, false, 4))
+
 // Effects on hit
 EntityEvents.afterHurt(event => {
-    const { entity, source } = event
-    let attackingEntity = source.actual
-    if (!attackingEntity) return
-    if (attackingEntity.mainHandItem.id != 'kubejs:earthshaker') return
-    entity.potionEffects.add("minecraft:slowness", EARTHSHAKER_TIME, EARTHSHAKER_POWER, true, true)
+  const { entity, source } = event
+  let attackingEntity = source.actual
+  if (!attackingEntity) return
+  if (attackingEntity.mainHandItem.id != 'kubejs:earthshaker') return
+  if (!source.direct) return
+  entity.level.getEntities(attackingEntity, entity.boundingBox.inflate(2)).forEach(target => {
+    if (target.isLiving() && target.distanceTo(entity.x, entity.y, entity.z) <= 2) {
+      target.potionEffects.add('minecraft:slowness', EARTHSHAKER_TIME, EARTHSHAKER_POWER, true, true)
+    }
+  })
 })
 EntityEvents.afterHurt(event => {
-    const { entity, source } = event
-    let attackingEntity = source.actual
-    if (!attackingEntity) return
-    if (attackingEntity.mainHandItem.id != 'kubejs:eternal_earthshaker') return
-    entity.potionEffects.add("minecraft:slowness", EARTHSHAKER_TIME, EARTHSHAKER_POWER, true, true)
+  const { entity, source } = event
+  let attackingEntity = source.actual
+  if (!attackingEntity) return
+  if (attackingEntity.mainHandItem.id != 'kubejs:eternal_earthshaker') return
+  entity.potionEffects.add("minecraft:slowness", EARTHSHAKER_TIME, EARTHSHAKER_POWER, true, true)
 })
 EntityEvents.afterHurt(event => {
-    const { source } = event
-    let attackingEntity = source.actual
-    if (!attackingEntity) return
-    if (attackingEntity.mainHandItem.id != 'kubejs:fixer_scythe') return
-    attackingEntity.potionEffects.add("minecraft:resistance", REVERB_TIME, REVERB_POWER, true, true)
+  const { source } = event
+  let attackingEntity = source.actual
+  if (!attackingEntity) return
+  if (attackingEntity.mainHandItem.id != 'kubejs:fixer_scythe') return
+  attackingEntity.potionEffects.add("minecraft:resistance", REVERB_TIME, REVERB_POWER, true, true)
 })
 EntityEvents.afterHurt(event => {
-    const { source } = event
-    let attackingEntity = source.actual
-    if (!attackingEntity) return
-    if (attackingEntity.mainHandItem.id != 'kubejs:upgraded_fixer_scythe') return
-    attackingEntity.potionEffects.add("minecraft:resistance", REVERB_TIME, REVERB_POWER, true, true)
+  const { source } = event
+  let attackingEntity = source.actual
+  if (!attackingEntity) return
+  if (attackingEntity.mainHandItem.id != 'kubejs:upgraded_fixer_scythe') return
+  attackingEntity.potionEffects.add("minecraft:resistance", REVERB_TIME, REVERB_POWER, true, true)
 })
 const bloodKey = ResourceKey.create(Registries.ATTRIBUTE, ResourceLocation.parse('irons_spellbooks:blood_spell_power'))
 const Reduction = Java.loadClass('net.neoforged.neoforge.common.damagesource.DamageContainer$Reduction')
 NativeEvents.onEvent(LivingIncomingDamageEvent, event => {
-    let target = event.entity
-    let player = event.source.player
-    if (!player) return
+  let target = event.entity
+  let player = event.source.player
+  if (!player) return
 
-    let main = player.mainHandItem.id
-    let off = player.offHandItem.id
-    if (!((main === 'kubejs:justice' && off === 'kubejs:splendor') || (main === 'kubejs:splendor' && off === 'kubejs:justice'))) return
+  let main = player.mainHandItem.id
+  let off = player.offHandItem.id
+  if (!((main === 'kubejs:justice' && off === 'kubejs:splendor') || (main === 'kubejs:splendor' && off === 'kubejs:justice'))) return
 
-    let access = target.level.registryAccess()
-    let blood = target.getAttributeValue(access.registryOrThrow(Registries.ATTRIBUTE).getHolderOrThrow(bloodKey))
+  let access = target.level.registryAccess()
+  let blood = target.getAttributeValue(access.registryOrThrow(Registries.ATTRIBUTE).getHolderOrThrow(bloodKey))
 
-    if (target.isInvertedHealAndHarm() || blood > 0) event.amount *= 1.5
-    event.addReductionModifier(Reduction.ENCHANTMENTS, (container, reduction) => 0)
+  if (target.isInvertedHealAndHarm() || blood > 0) event.amount *= 1.5
+  event.addReductionModifier(Reduction.ENCHANTMENTS, (container, reduction) => 0)
 })

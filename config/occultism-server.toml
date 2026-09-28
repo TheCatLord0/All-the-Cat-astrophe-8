@@ -359,11 +359,11 @@
 	#The horizontal value that the upgraded greedy familiar will seek blocks. (Large distances can cause delays in finding)
 	# Default: 32
 	# Range: > 0
-	greedySearchRange = 32
+	greedySearchRange = 16
 	#The vertical value that the upgraded greedy familiar will seek blocks. (Large distances can cause delays in finding)
 	# Default: 16
 	# Range: > 0
-	greedyVerticalSearchRange = 16
+	greedyVerticalSearchRange = 8
 
 #Ritual Settings
 [rituals]

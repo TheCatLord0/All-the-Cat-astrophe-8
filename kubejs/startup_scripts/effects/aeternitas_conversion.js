@@ -1,8 +1,8 @@
 StartupEvents.modifyCreativeTab('kubejs:custom_items', event => {
-	event.add('kubejs:aeternitas_control')
+  event.add('kubejs:aeternitas_control')
 })
 StartupEvents.modifyCreativeTab('kubejs:tab', event => {
-	event.remove('kubejs:aeternitas_control')
+  event.remove('kubejs:aeternitas_control')
 })
 StartupEvents.registry('mob_effect', event => {
   event.create('aeternitas_conversion')
@@ -39,13 +39,13 @@ function disableAeternitasConversion(entity) {
 
 StartupEvents.registry('item', event => {
   event.create('aeternitas_control')
-  .maxStackSize(1)
-  .displayName('§5§lControl of Internal Aeternitas')
-  .tooltip('§o§dAeternitas is within everyone and everything, including your very blood.')
-  .tooltip('')
-  .tooltip('Inverts all healing to turn into Mana')
-  .tooltip('Use P Key (Default) to activate.')
-  .texture('thecatlord:item/aeternitas_control')
+    .maxStackSize(1)
+    .displayName('§5§lControl of Internal Aeternitas')
+    .tooltip('§o§dAeternitas is within everyone and everything, including your very blood.')
+    .tooltip('')
+    .tooltip('Inverts all healing to turn into Mana')
+    .tooltip('Use P Key (Default) to activate.')
+    .texture('thecatlord:item/aeternitas_control')
     .tag('curios:charm')
 
     .attachCuriosCapability(

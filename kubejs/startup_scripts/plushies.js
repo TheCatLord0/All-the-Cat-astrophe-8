@@ -1,6 +1,6 @@
 Platform.mods.kubejs.name = 'TheCatLord'
 StartupEvents.registry('creative_mode_tab', event => {
-	event.create('plushies').icon(() => 'kubejs:cat_plush').displayName(('Plushies')).content(showRestrictedItems => [
+  event.create('plushies').icon(() => 'kubejs:cat_plush').displayName(('Plushies')).content(showRestrictedItems => [
     'kubejs:cat_plush',
     'kubejs:odins_plush',
     "kubejs:forest_plush",
@@ -11,7 +11,7 @@ StartupEvents.registry('creative_mode_tab', event => {
   ])
 })
 StartupEvents.registry('block', event => {
-  event.create('odins_plush','cardinal')
+  event.create('odins_plush', 'cardinal')
     .displayName('Odinshi Plushie')
     .item(item => {
       item.fireResistant(true)
@@ -24,7 +24,7 @@ StartupEvents.registry('block', event => {
     .hardness(0.5)
     .soundType('wool')
     .box(1.5, 0, 3, 14.5, 16, 12)
-  event.create('cat_plush','cardinal')
+  event.create('cat_plush', 'cardinal')
     .displayName('TheCatLord0 Plushie')
     .item(item => {
       item.fireResistant(true)
@@ -37,7 +37,7 @@ StartupEvents.registry('block', event => {
     .hardness(0.5)
     .soundType('wool')
     .box(1.5, 0, 3, 14.5, 16, 12)
-  event.create('forest_plush','cardinal')
+  event.create('forest_plush', 'cardinal')
     .displayName('ForestQueen558 Plushie')
     .item(item => {
       item.fireResistant(true)
@@ -50,7 +50,7 @@ StartupEvents.registry('block', event => {
     .hardness(0.5)
     .soundType('wool')
     .box(1.5, 0, 3, 14.5, 16, 12)
-  event.create('cotyn_plush','cardinal')
+  event.create('cotyn_plush', 'cardinal')
     .displayName('Cotyn__ Plushie')
     .item(item => {
       item.fireResistant(true)
@@ -63,7 +63,7 @@ StartupEvents.registry('block', event => {
     .hardness(0.5)
     .soundType('wool')
     .box(1.5, 0, 3, 14.5, 16, 12)
-  event.create('rex_plush','cardinal')
+  event.create('rex_plush', 'cardinal')
     .displayName('Rex_The_Knight55 Plushie')
     .item(item => {
       item.fireResistant(true)
@@ -76,7 +76,7 @@ StartupEvents.registry('block', event => {
     .hardness(0.5)
     .soundType('wool')
     .box(1.5, 0, 3, 14.5, 16, 12)
-  event.create('fox_knight','cardinal')
+  event.create('fox_knight', 'cardinal')
     .displayName('Rex_The_Knight55 Fox')
     .item(item => {
       item.fireResistant(true)
@@ -89,7 +89,7 @@ StartupEvents.registry('block', event => {
     .hardness(0.5)
     .soundType('wool')
     .box(1.5, 0, 3, 14.5, 16, 12)
-  event.create('yaoi_plush','cardinal')
+  event.create('yaoi_plush', 'cardinal')
     .displayName('Cat and Odin Plushies')
     .item(item => {
       item.fireResistant(true)
@@ -102,7 +102,7 @@ StartupEvents.registry('block', event => {
     .hardness(0.5)
     .soundType('wool')
     .box(0, 0, 5, 16, 12, 12)
-  event.create('odins_shork','cardinal')
+  event.create('odins_shork', 'cardinal')
     .displayName('Odinshi Shork')
     .item(item => {
       item.fireResistant(true)

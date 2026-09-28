@@ -8,7 +8,7 @@
 	#Allowed Values: INFINITE, DEFAULT, X2, X3, X4
 	channels = "DEFAULT"
 	#Whether Spatial Anchors should force random chunk ticks and entity spawning.
-	spatialAnchorEnableRandomTicks = true
+	spatialAnchorEnableRandomTicks = false
 
 [automation]
 	# Default: 128

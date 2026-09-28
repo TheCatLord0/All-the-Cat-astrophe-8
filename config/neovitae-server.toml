@@ -60,7 +60,12 @@ evolution_upgrade_points = 300
 	# Default: 1.0
 	# Range: 0.1 ~ 10.0
 	growth_speed = 1.0
-	#Minimum spiritus in chunk before crystals start growing (200 = vanilla)
+	#Reference saturation for the crystal growth rate curve. This is NOT a minimum:
+	#a cluster grows in any chunk holding more than 0.5 spiritus of its aspect.
+	#Rate is (1 / this) * sqrt(spiritus / this) progress per second and a segment
+	#completes at 1.0, so a segment takes roughly this many seconds in a chunk sitting
+	#at exactly this saturation, longer below it and shorter above.
+	#Raise to slow all crystal growth, lower to speed it up.
 	# Default: 200.0
 	# Range: 1.0 ~ 1000.0
 	growth_threshold = 200.0
@@ -101,9 +106,6 @@ evolution_upgrade_points = 300
 	# Range: 0 ~ 100000
 	sanguine_ward_min_ev = 200
 
-#Torment Nexus Configuration
-#Controls the EV upkeep and EV-yield modifier for the Torment Nexus ritual,
-#which simulates kills from caged spawners and trial spawners in its area.
 [torment_nexus]
 	#EV cost charged per simulated mob kill (paid out of the network each kill).
 	# Default: 75
@@ -130,6 +132,13 @@ evolution_upgrade_points = 300
 	# Default: 8000
 	# Range: 0 ~ 100000000
 	max_ev_per_operation = 8000
+	#Maximum loot table rolls per spawner per ritual operation. When more kills than this
+	#occur in one operation, the sampled drops are scaled up to match the full kill count,
+	#so total loot stays the same while loot tables (and other mods' loot modifiers) run
+	#far less often. Higher values give more variety per operation at a performance cost.
+	# Default: 5
+	# Range: 1 ~ 1024
+	max_loot_rolls_per_spawner = 5
 
 #Demon Lantern Configuration
 [demon_lantern]
@@ -137,3 +146,31 @@ evolution_upgrade_points = 300
 	# Default: 20
 	# Range: 0 ~ 1000000
 	upkeep_per_second = 20
+
+#Torment Nexus Configuration
+#Controls the EV upkeep and EV-yield modifier for the Torment Nexus ritual,
+#which simulates kills from caged spawners and trial spawners in its area.
+#Array of Liquified Experience: moves experience between Tomes of Peritia
+#in the container below the array and an adjacent tank holding a #c:experience fluid.
+[liquified_experience]
+	#Fluid the array reads and writes, as modid:fluid_id.
+	#Leave empty to use Neo Vitae's own Liquified Experience.
+	#Set this if another mod in your pack provides the experience fluid you would rather use,
+	#for example 'industrialforegoing:essence'. Unknown ids fall back to Neo Vitae's fluid.
+	preferred_fluid = ""
+	#Millibuckets of experience fluid produced per point of stored experience.
+	#Set this to match whichever mod provides the #c:experience fluid.
+	# Default: 20
+	# Range: 1 ~ 10000
+	mb_per_point = 20
+
+[sigil_of_necromancy]
+	#Maximum summons a single player may have alive at once. 0 removes the per-player limit.
+	# Default: 10
+	# Range: 0 ~ 1024
+	max_summons_per_player = 10
+
+[lanterns]
+	#Allow Blood and Demon Lanterns to suppress non-monster spawns.
+	#Disable to bypass lantern indexing and spawn suppression. Demon Lantern hostile spawning is unaffected.
+	spawn_suppression = true

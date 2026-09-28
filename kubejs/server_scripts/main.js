@@ -1,54 +1,55 @@
 // Banned items
 let bannedItems = [
-   'easy_villagers:auto_trader',
-   'easy_villagers:iron_farm',
-   "mekanism:jetpack",
-   "mekanism:jetpack_armored",
-   "mekanism:module_jetpack_unit",
-   "ars_nouveau:glyph_blink",
-   "mekanism:cardboard_box",
-   "sophisticatedbackpacks:feeding_upgrade",
-   "sophisticatedbackpacks:advanced_feeding_upgrade",
-   "sophisticatedbackpacks:compacting_upgrade",
-   "sophisticatedbackpacks:advanced_compacting_upgrade",
-   "sophisticatedbackpacks:inception_upgrade",
-   "ars_zero:augment_amplify_two",
-   "ars_zero:augment_amplify_three",
-   "ars_zero:augment_aoe_two",
-   "ars_zero:augment_aoe_three",
-   "ars_zero:effect_conjure_blight",
-   "ars_zero:zero_gravity_effect",
-   "ars_zero:anchor_effect",
-   "ars_zero:effect_convergence",
-   "ars_nouveau:glyph_explosion",
-   "mekanism:module_gravitational_modulating_unit",
-   "occultism:trinity_gem",
-   "starbunclemania:fluid_sourcelink",
-   "industrialforegoing:infinity_backpack",
-   "industrialforegoing:infinity_nuke",
-   "industrialforegoing:mechanical_dirt",
-   "ars_additions:source_spawner",
-   "ars_additions:ender_source_jar",
-   "sophisticatedbackpacks:mob_catcher_upgrade",
-   "sophisticatedbackpacks:advanced_mob_catcher_upgrade",
-   'dimdungeons:item_blank_build_key',
-   "ars_nouveau:drygmy_charm",
-   'dimdungeons:item_blank_teleporter_key',
-   'advanced_ae:quantum_helmet',
-   'advanced_ae:quantum_chestplate',
-   'advanced_ae:quantum_leggings',
-   'advanced_ae:quantum_boots',
-   'advanced_ae:quantum_upgrade_base',
-   'create_lnl:thruster',
-   'ars_zero:staff_telekinesis',
-   'ars_nouveau:ritual_flight',
-   '#curios:crystal',
-   '#curios:wing',
-   'hazennstuff:health_upgrade_orb',
-   'hazennstuff:melee_upgrade_orb',
-   'hazennstuff:archery_upgrade_orb',
-   'immersiveengineering:toolbox',
-   'spectrum:cotton_cloud_boots'
+  'easy_villagers:auto_trader',
+  'easy_villagers:iron_farm',
+  "mekanism:jetpack",
+  "mekanism:jetpack_armored",
+  "mekanism:module_jetpack_unit",
+  "ars_nouveau:glyph_blink",
+  "mekanism:cardboard_box",
+  "sophisticatedbackpacks:feeding_upgrade",
+  "sophisticatedbackpacks:advanced_feeding_upgrade",
+  "sophisticatedbackpacks:compacting_upgrade",
+  "sophisticatedbackpacks:advanced_compacting_upgrade",
+  "sophisticatedbackpacks:inception_upgrade",
+  "ars_zero:augment_amplify_two",
+  "ars_zero:augment_amplify_three",
+  "ars_zero:augment_aoe_two",
+  "ars_zero:augment_aoe_three",
+  "ars_zero:effect_conjure_blight",
+  "ars_zero:zero_gravity_effect",
+  "ars_zero:anchor_effect",
+  "ars_zero:effect_convergence",
+  "ars_nouveau:glyph_explosion",
+  "mekanism:module_gravitational_modulating_unit",
+  "occultism:trinity_gem",
+  "starbunclemania:fluid_sourcelink",
+  "industrialforegoing:infinity_backpack",
+  "industrialforegoing:infinity_nuke",
+  "industrialforegoing:mechanical_dirt",
+  "ars_additions:source_spawner",
+  "ars_additions:ender_source_jar",
+  "sophisticatedbackpacks:mob_catcher_upgrade",
+  "sophisticatedbackpacks:advanced_mob_catcher_upgrade",
+  'dimdungeons:item_blank_build_key',
+  "ars_nouveau:drygmy_charm",
+  'dimdungeons:item_blank_teleporter_key',
+  'advanced_ae:quantum_helmet',
+  'advanced_ae:quantum_chestplate',
+  'advanced_ae:quantum_leggings',
+  'advanced_ae:quantum_boots',
+  'advanced_ae:quantum_upgrade_base',
+  'create_lnl:thruster',
+  'ars_zero:staff_telekinesis',
+  'ars_nouveau:ritual_flight',
+  '#curios:crystal',
+  '#curios:wing',
+  'hazennstuff:health_upgrade_orb',
+  'hazennstuff:melee_upgrade_orb',
+  'hazennstuff:archery_upgrade_orb',
+  'immersiveengineering:toolbox',
+  'spectrum:cotton_cloud_boots',
+  'mekanism:upgrade_anchor'
 ]
 
 PlayerEvents.inventoryChanged(event => {
@@ -59,8 +60,8 @@ PlayerEvents.inventoryChanged(event => {
 
   // Alert the player
   player.tell([
-    Text.darkRed("[Alert] ").bold(), 
-    Text.gold(event.item.id).bold(), 
+    Text.darkRed("[Alert] ").bold(),
+    Text.gold(event.item.id).bold(),
     Text.gray(" has been deleted."),
     "\n",
     Text.green("If you have questions why, ask thecatlord0 on Discord.")
@@ -74,21 +75,18 @@ PlayerEvents.inventoryChanged(event => {
     }
   }
 })
-LootJS.modifiers(event => {
-  bannedItems.forEach(bannedItems => {
-    event.addTableModifier(/.*/).removeLoot(bannedItems)
-  })
-})
-ServerEvents.recipes(event => {
-  bannedItems.forEach(bannedItems => {
-    event.remove({output: bannedItems })
-  })
-})
 ServerEvents.tags('item', event => {
   bannedItems.forEach(bannedItems => {
     event.add('cat:removal', bannedItems)
   })
 })
+LootJS.modifiers(event => {
+  event.addTableModifier(/.*/).removeLoot('#cat:removal')
+})
+ServerEvents.recipes(event => {
+  event.remove({ output: '#cat:removal' })
+})
+
 // Direct Item Replace
 PlayerEvents.inventoryChanged(event => {
   var itemReplaced = (oldItem, newItem) => {
@@ -127,24 +125,24 @@ let removedRecipe = [
 ]
 ServerEvents.recipes(event => {
   removedRecipe.forEach(removedRecipe => {
-    event.remove({output: removedRecipe })
+    event.remove({ output: removedRecipe })
   })
-let removedID = [
-  "ars_nouveau:novice_spell_book",
+  let removedID = [
+    "ars_nouveau:novice_spell_book",
     "ars_nouveau:novice_spellbook_alt",
-  "ars_zero:novice_spell_staff",
-  "ars_nouveau:apprentice_spell_book",
+    "ars_zero:novice_spell_staff",
+    "ars_nouveau:apprentice_spell_book",
     "ars_nouveau:apprentice_book_upgrade",
-  "ars_zero:mage_spell_staff",
-  "ars_nouveau:archmage_spell_book",
-    "ars_nouveau:archmage_book_upgrade",  
-  "ars_zero:archmage_spell_staff",
-   "ars_zero:spellcasting_circlet",
-   "occultism:ritual/resurrect_mob",
-   "createdieselgenerators:crushing/wood_chip_logs"
-]
+    "ars_zero:mage_spell_staff",
+    "ars_nouveau:archmage_spell_book",
+    "ars_nouveau:archmage_book_upgrade",
+    "ars_zero:archmage_spell_staff",
+    "ars_zero:spellcasting_circlet",
+    "occultism:ritual/resurrect_mob",
+    "createdieselgenerators:crushing/wood_chip_logs"
+  ]
   removedID.forEach(removedID => {
-    event.remove({id: removedID })
+    event.remove({ id: removedID })
   })
 })
 // Item Tags
@@ -184,273 +182,273 @@ ServerEvents.tags('item', event => {
 })
 // Replacement recipes
 ServerEvents.recipes(event => {
-event.replaceOutput(
-  { output: 'irons_spellbooks:fireward_ring'},
-  'irons_spellbooks:fireward_ring',
-  'kubejs:firecrowned_ring')
-event.replaceInput(
-  { output: 'mekanism:upgrade_anchor'},
-  'mekanism:dust_diamond',
-  'irons_spellbooks:blank_rune')
-event.replaceInput(
-  { output: 'minecraft:lodestone' },
-  'minecraft:netherite_ingot',
-  'minecraft:iron_ingot')
-event.replaceInput(
-  { output: 'industrialforegoing:mob_duplicator' },
-  ['minecraft:nether_wart', 'minecraft:magma_cream'],
-  'mekanism:pellet_antimatter')
-event.replaceInput(
-  { output: 'simulated:red_portable_engine' },
-  ['minecraft:blast_furnace'],
-  'create:blaze_burner')
-event.replaceInput(
-  { output: 'ars_nouveau:ritual_flight' },
-  ['minecraft:feather', "minecraft:ender_pearl"],
-  "minecraft:nether_star")
-event.replaceInput(
-  { output: "mekanism:digital_miner" },
-  ["mekanism:basic_control_circuit"],
-  "ae2:quantum_entangled_singularity")
-event.replaceInput(
-  { output: "mekanism:digital_miner" },
-  ["mekanism:logistical_sorter"],
-  "ae2:quantum_link")
-event.replaceInput(
-  { output: ["industrialforegoing:ore_laser_base", "industrialforegoing:fluid_laser_base"] },
-  ["minecraft:redstone"],
-  "mekanism:ultimate_control_circuit")
-event.replaceInput(
-  { output: ["industrialforegoing:ore_laser_base", "industrialforegoing:fluid_laser_base"] },
-  ["industrialforegoing:plastic"],
-  "#iceandfire:dragon_steels")
-event.replaceInput(
-  { output: ["industrialforegoing:ore_laser_base", "industrialforegoing:fluid_laser_base"] },
-  ["industrialforegoing:diamond_gear"],
-  "immersiveengineering:component_steel")
-event.replaceInput(
-  { output: "create:empty_blaze_burner" },
-  ["create:iron_sheet"],
-  "immersiveengineering:plate_steel")
-event.replaceInput(
-  { output: "fluxnetworks:flux_dust" },
-  ["minecraft:redstone"],
-  "create:powdered_obsidian")
-event.replaceInput(
-  { output: "fluxnetworks:flux_controller" },
-  ["fluxnetworks:flux_dust"],
-  "ae2:quantum_entangled_singularity")
-event.replaceInput(
-  { output: "fluxnetworks:flux_core" },
-  ["minecraft:ender_eye"],
-  "mekanism:ultimate_control_circuit")
-event.replaceInput(
-  { output: "ae2:wireless_receiver" },
-  ["ae2:quartz_fiber"],
-  "mekanism:teleportation_core")
-event.replaceInput(
-  { output: "ae2:quantum_link" },
-  ["#ae2:smart_dense_cable"],
-  "mekanism:teleportation_core")
-event.replaceInput(
-  { output: "sfm:manager" },
-  ["#c:chests"],
-  "ae2:engineering_processor")
-event.replaceInput(
-  { output: "sfm:cable" },
-  ["minecraft:light_weighted_pressure_plate"],
-  "immersiveengineering:ingot_steel")
-event.replaceInput(
-  { output: "sfm:cable" },
-  ["minecraft:black_dye"],
-  'mekanism:basic_logistical_transporter')
-event.replaceInput(
-  { output: ["functionalstorage:storage_controller", "functionalstorage:framed_storage_controller"] },
-  ["minecraft:comparator"],
-  "create:precision_mechanism")
-event.replaceInput(
-  { output: "ars_technica:glyph_fuse" },
-  ["ars_nouveau:manipulation_essence"],
-  "create:blaze_burner")
-event.replaceInput(
-  { output: "ars_technica:glyph_fuse" },
-  ["ars_nouveau:fire_essence"],
-  "create:blaze_cake")
-event.replaceInput(
-  { output: "ars_technica:glyph_obliterate" },
-  ["minecraft:diamond_block","minecraft:anvil"],
-  "create:crushing_wheel")
-event.replaceInput(
-  { output: "ars_technica:glyph_pack" },
-  ["minecraft:iron_block"],
-  "create:mechanical_press")
-event.replaceInput(
-  { output: "ars_technica:glyph_whirl" },
-  ["ars_nouveau:air_essence"],
-  "create:encased_fan")
-event.replaceInput(
-  { output: "mekanismgenerators:heat_generator" },
-  ["mekanism:ingot_osmium"],
-  "create:blaze_burner")
+  event.replaceOutput(
+    { output: 'irons_spellbooks:fireward_ring' },
+    'irons_spellbooks:fireward_ring',
+    'kubejs:firecrowned_ring')
   event.replaceInput(
-  { output:'createpropulsion:ion_thruster'},
-  ["create:precision_mechanism"],
-  "extendedae:concurrent_processor")
+    { output: 'mekanism:upgrade_anchor' },
+    'mekanism:dust_diamond',
+    'irons_spellbooks:blank_rune')
   event.replaceInput(
-  { output:Fluid.of("aeronautics:levitite_blend")},
-  Fluid.of("minecraft:water"),
-  Fluid.of("industrialforegoing:ether_gas"))
+    { output: 'minecraft:lodestone' },
+    'minecraft:netherite_ingot',
+    'minecraft:iron_ingot')
   event.replaceInput(
-  { output:"eidolon_repraised:soul_enchanter"},
-  ["minecraft:diamond"],
-  "spectrum:stratine_gem")
+    { output: 'industrialforegoing:mob_duplicator' },
+    ['minecraft:nether_wart', 'minecraft:magma_cream'],
+    'mekanism:pellet_antimatter')
   event.replaceInput(
-  { output:'dimdungeons:item_portal_key'},
-  ["minecraft:name_tag"],
-  "ars_nouveau:spell_parchment")
-	event.recipes.ars_nouveau.enchanting_apparatus(
-        [
-            "minecraft:bow",
-            "minecraft:iron_sword",
-            "minecraft:iron_axe",
-            "minecraft:iron_pickaxe",
-            "minecraft:iron_shovel",
-            "ars_nouveau:source_gem_block",
-        ], // input items
-	    ["ars_nouveau:worn_notebook", "minecraft:book"], // reagent
-	    "ars_nouveau:novice_spell_book", // output
-	    10000, // source cost
-	    // true // NBT
-	)
-	event.recipes.ars_nouveau.enchanting_apparatus(
-        [
-          "create:blaze_burner",
-          "ars_nouveau:source_gem_block",
-          "minecraft:diamond",
-          "minecraft:diamond",
-          "minecraft:quartz_block",
-          "minecraft:quartz_block",
-          "minecraft:obsidian",
-          "malum:soul_stained_steel_ingot",
-        ], // input items
-	    "ars_nouveau:novice_spell_book", // reagent
-	    "ars_nouveau:apprentice_spell_book", // output
-	    50000, // source cost
-	    true // NBT
-	)
-	event.recipes.ars_nouveau.enchanting_apparatus(
-        [
-          "ars_nouveau:wilden_tribute",
-          "minecraft:nether_star",
-          "minecraft:totem_of_undying",
-          "malum:malignant_pewter_ingot",
-          "irons_spellbooks:pyrium_ingot",
-          "minecraft:echo_shard",
-          "cataclysm:void_core",
-          "minecraft:dragon_breath",
-        ], // input items
-	    "ars_nouveau:apprentice_spell_book", // reagent
-	    "ars_nouveau:archmage_spell_book", // output
-	    100000, // source cost
-	    true // NBT
-	)
-	event.recipes.ars_nouveau.enchanting_apparatus(
-        [
-          "ars_zero:archwood_rod",
-          "ars_zero:archwood_rod",
-          "minecraft:gold_block",
-          "minecraft:ender_pearl",
-          "minecraft:phantom_membrane",
-          "eidolon_repraised:shadow_gem",
-        ], // input items
-	    "ars_nouveau:novice_spell_book", // reagent
-	    "ars_zero:novice_spell_staff", // output
-	    10000, // source cost
-	    false // NBT
-	)
-	event.recipes.ars_nouveau.enchanting_apparatus(
-        [
-          "irons_spellbooks:epic_ink",
-          "minecraft:blaze_rod",
-          "minecraft:blaze_rod",
-          "minecraft:crying_obsidian",
-          "malum:hallowed_gold_ingot",
-          "iceandfire:pixie_dust",
-          "#iceandfire:scales/dragon",
-          "minecraft:diamond",
-        ], // input items
-	    "ars_nouveau:apprentice_spell_book", // reagent
-	    "ars_zero:mage_spell_staff", // output
-	    20000, // source cost
-	    false // NBT
-	)
-	event.recipes.ars_nouveau.enchanting_apparatus(
-        [
-          "irons_spellbooks:mithril_ingot",
-          "irons_spellbooks:legendary_ink",
-          "irons_spellbooks:ruined_book",
-          "minecraft:heart_of_the_sea",
-          "cataclysm:ignitium_ingot",
-          "malum:complete_design",
-          "minecraft:heavy_core",
-          "#iceandfire:dragon_steels", 
-        ], // input items
-	    "ars_nouveau:archmage_spell_book", // reagent
-	    "ars_zero:archmage_spell_staff", // output
-	    30000, // source cost
-	    false // NBT
-	)
-	event.recipes.ars_nouveau.enchanting_apparatus(
-        [
-          "irons_spellbooks:epic_ink",
-          "minecraft:blaze_rod",
-          "minecraft:blaze_rod",
-          "minecraft:crying_obsidian",
-          "malum:hallowed_gold_ingot",
-          "iceandfire:pixie_dust",
-          "#iceandfire:scales/dragon",
-          "minecraft:diamond",
-          "ars_nouveau:apprentice_spell_book",
-        ], // input items
-	    "ars_zero:novice_spell_staff", // reagent
-	    "ars_zero:mage_spell_staff", // output
-	    20000, // source cost
-	    false // NBT
-	)
-	event.recipes.ars_nouveau.enchanting_apparatus(
-        [
-          "irons_spellbooks:mithril_ingot",
-          "irons_spellbooks:legendary_ink",
-          "irons_spellbooks:ruined_book",
-          "minecraft:heart_of_the_sea",
-          "cataclysm:ignitium_ingot",
-          "malum:complete_design",
-          "minecraft:heavy_core",
-          "#iceandfire:dragon_steels",
-          "ars_nouveau:archmage_spell_book", 
-        ], // input items
-	    "ars_zero:mage_spell_staff", // reagent
-	    "ars_zero:archmage_spell_staff", // output
-	    30000, // source cost
-	    true // NBT
-	)
-	event.recipes.ars_nouveau.enchanting_apparatus(
-        [
-          "irons_spellbooks:mithril_ingot",
-          "irons_spellbooks:legendary_ink",
-          "irons_spellbooks:ruined_book",
-          "minecraft:heart_of_the_sea",
-          "cataclysm:ignitium_ingot",
-          "malum:complete_design",
-          "minecraft:heavy_core",
-          "#iceandfire:dragon_steels",
-          "ars_nouveau:archmage_spell_book", 
-        ], // input items
-	    "ars_zero:dull_circlet", // reagent
-	    "ars_zero:spellcasting_circlet", // output
-	    50000, // source cost
-	    false // NBT
-	)
+    { output: 'simulated:red_portable_engine' },
+    ['minecraft:blast_furnace'],
+    'create:blaze_burner')
+  event.replaceInput(
+    { output: 'ars_nouveau:ritual_flight' },
+    ['minecraft:feather', "minecraft:ender_pearl"],
+    "minecraft:nether_star")
+  event.replaceInput(
+    { output: "mekanism:digital_miner" },
+    ["mekanism:basic_control_circuit"],
+    "ae2:quantum_entangled_singularity")
+  event.replaceInput(
+    { output: "mekanism:digital_miner" },
+    ["mekanism:logistical_sorter"],
+    "ae2:quantum_link")
+  event.replaceInput(
+    { output: ["industrialforegoing:ore_laser_base", "industrialforegoing:fluid_laser_base"] },
+    ["minecraft:redstone"],
+    "mekanism:ultimate_control_circuit")
+  event.replaceInput(
+    { output: ["industrialforegoing:ore_laser_base", "industrialforegoing:fluid_laser_base"] },
+    ["industrialforegoing:plastic"],
+    "#iceandfire:dragon_steels")
+  event.replaceInput(
+    { output: ["industrialforegoing:ore_laser_base", "industrialforegoing:fluid_laser_base"] },
+    ["industrialforegoing:diamond_gear"],
+    "immersiveengineering:component_steel")
+  event.replaceInput(
+    { output: "create:empty_blaze_burner" },
+    ["create:iron_sheet"],
+    "immersiveengineering:plate_steel")
+  event.replaceInput(
+    { output: "fluxnetworks:flux_dust" },
+    ["minecraft:redstone"],
+    "create:powdered_obsidian")
+  event.replaceInput(
+    { output: "fluxnetworks:flux_controller" },
+    ["fluxnetworks:flux_dust"],
+    "ae2:quantum_entangled_singularity")
+  event.replaceInput(
+    { output: "fluxnetworks:flux_core" },
+    ["minecraft:ender_eye"],
+    "mekanism:ultimate_control_circuit")
+  event.replaceInput(
+    { output: "ae2:wireless_receiver" },
+    ["ae2:quartz_fiber"],
+    "mekanism:teleportation_core")
+  event.replaceInput(
+    { output: "ae2:quantum_link" },
+    ["#ae2:smart_dense_cable"],
+    "mekanism:teleportation_core")
+  event.replaceInput(
+    { output: "sfm:manager" },
+    ["#c:chests"],
+    "ae2:engineering_processor")
+  event.replaceInput(
+    { output: "sfm:cable" },
+    ["minecraft:light_weighted_pressure_plate"],
+    "immersiveengineering:ingot_steel")
+  event.replaceInput(
+    { output: "sfm:cable" },
+    ["minecraft:black_dye"],
+    'mekanism:basic_logistical_transporter')
+  event.replaceInput(
+    { output: ["functionalstorage:storage_controller", "functionalstorage:framed_storage_controller"] },
+    ["minecraft:comparator"],
+    "create:precision_mechanism")
+  event.replaceInput(
+    { output: "ars_technica:glyph_fuse" },
+    ["ars_nouveau:manipulation_essence"],
+    "create:blaze_burner")
+  event.replaceInput(
+    { output: "ars_technica:glyph_fuse" },
+    ["ars_nouveau:fire_essence"],
+    "create:blaze_cake")
+  event.replaceInput(
+    { output: "ars_technica:glyph_obliterate" },
+    ["minecraft:diamond_block", "minecraft:anvil"],
+    "create:crushing_wheel")
+  event.replaceInput(
+    { output: "ars_technica:glyph_pack" },
+    ["minecraft:iron_block"],
+    "create:mechanical_press")
+  event.replaceInput(
+    { output: "ars_technica:glyph_whirl" },
+    ["ars_nouveau:air_essence"],
+    "create:encased_fan")
+  event.replaceInput(
+    { output: "mekanismgenerators:heat_generator" },
+    ["mekanism:ingot_osmium"],
+    "create:blaze_burner")
+  event.replaceInput(
+    { output: 'createpropulsion:ion_thruster' },
+    ["create:precision_mechanism"],
+    "extendedae:concurrent_processor")
+  event.replaceInput(
+    { output: Fluid.of("aeronautics:levitite_blend") },
+    Fluid.of("minecraft:water"),
+    Fluid.of("industrialforegoing:ether_gas"))
+  event.replaceInput(
+    { output: "eidolon_repraised:soul_enchanter" },
+    ["minecraft:diamond"],
+    "spectrum:stratine_gem")
+  event.replaceInput(
+    { output: 'dimdungeons:item_portal_key' },
+    ["minecraft:name_tag"],
+    "ars_nouveau:spell_parchment")
+  event.recipes.ars_nouveau.enchanting_apparatus(
+    [
+      "minecraft:bow",
+      "minecraft:iron_sword",
+      "minecraft:iron_axe",
+      "minecraft:iron_pickaxe",
+      "minecraft:iron_shovel",
+      "ars_nouveau:source_gem_block",
+    ], // input items
+    ["ars_nouveau:worn_notebook", "minecraft:book"], // reagent
+    "ars_nouveau:novice_spell_book", // output
+    10000, // source cost
+    // true // NBT
+  )
+  event.recipes.ars_nouveau.enchanting_apparatus(
+    [
+      "create:blaze_burner",
+      "ars_nouveau:source_gem_block",
+      "minecraft:diamond",
+      "minecraft:diamond",
+      "minecraft:quartz_block",
+      "minecraft:quartz_block",
+      "minecraft:obsidian",
+      "malum:soul_stained_steel_ingot",
+    ], // input items
+    "ars_nouveau:novice_spell_book", // reagent
+    "ars_nouveau:apprentice_spell_book", // output
+    50000, // source cost
+    true // NBT
+  )
+  event.recipes.ars_nouveau.enchanting_apparatus(
+    [
+      "ars_nouveau:wilden_tribute",
+      "minecraft:nether_star",
+      "minecraft:totem_of_undying",
+      "malum:malignant_pewter_ingot",
+      "irons_spellbooks:pyrium_ingot",
+      "minecraft:echo_shard",
+      "cataclysm:void_core",
+      "minecraft:dragon_breath",
+    ], // input items
+    "ars_nouveau:apprentice_spell_book", // reagent
+    "ars_nouveau:archmage_spell_book", // output
+    100000, // source cost
+    true // NBT
+  )
+  event.recipes.ars_nouveau.enchanting_apparatus(
+    [
+      "ars_zero:archwood_rod",
+      "ars_zero:archwood_rod",
+      "minecraft:gold_block",
+      "minecraft:ender_pearl",
+      "minecraft:phantom_membrane",
+      "eidolon_repraised:shadow_gem",
+    ], // input items
+    "ars_nouveau:novice_spell_book", // reagent
+    "ars_zero:novice_spell_staff", // output
+    10000, // source cost
+    false // NBT
+  )
+  event.recipes.ars_nouveau.enchanting_apparatus(
+    [
+      "irons_spellbooks:epic_ink",
+      "minecraft:blaze_rod",
+      "minecraft:blaze_rod",
+      "minecraft:crying_obsidian",
+      "malum:hallowed_gold_ingot",
+      "iceandfire:pixie_dust",
+      "#iceandfire:scales/dragon",
+      "minecraft:diamond",
+    ], // input items
+    "ars_nouveau:apprentice_spell_book", // reagent
+    "ars_zero:mage_spell_staff", // output
+    20000, // source cost
+    false // NBT
+  )
+  event.recipes.ars_nouveau.enchanting_apparatus(
+    [
+      "irons_spellbooks:mithril_ingot",
+      "irons_spellbooks:legendary_ink",
+      "irons_spellbooks:ruined_book",
+      "minecraft:heart_of_the_sea",
+      "cataclysm:ignitium_ingot",
+      "malum:complete_design",
+      "minecraft:heavy_core",
+      "#iceandfire:dragon_steels",
+    ], // input items
+    "ars_nouveau:archmage_spell_book", // reagent
+    "ars_zero:archmage_spell_staff", // output
+    30000, // source cost
+    false // NBT
+  )
+  event.recipes.ars_nouveau.enchanting_apparatus(
+    [
+      "irons_spellbooks:epic_ink",
+      "minecraft:blaze_rod",
+      "minecraft:blaze_rod",
+      "minecraft:crying_obsidian",
+      "malum:hallowed_gold_ingot",
+      "iceandfire:pixie_dust",
+      "#iceandfire:scales/dragon",
+      "minecraft:diamond",
+      "ars_nouveau:apprentice_spell_book",
+    ], // input items
+    "ars_zero:novice_spell_staff", // reagent
+    "ars_zero:mage_spell_staff", // output
+    20000, // source cost
+    false // NBT
+  )
+  event.recipes.ars_nouveau.enchanting_apparatus(
+    [
+      "irons_spellbooks:mithril_ingot",
+      "irons_spellbooks:legendary_ink",
+      "irons_spellbooks:ruined_book",
+      "minecraft:heart_of_the_sea",
+      "cataclysm:ignitium_ingot",
+      "malum:complete_design",
+      "minecraft:heavy_core",
+      "#iceandfire:dragon_steels",
+      "ars_nouveau:archmage_spell_book",
+    ], // input items
+    "ars_zero:mage_spell_staff", // reagent
+    "ars_zero:archmage_spell_staff", // output
+    30000, // source cost
+    true // NBT
+  )
+  event.recipes.ars_nouveau.enchanting_apparatus(
+    [
+      "irons_spellbooks:mithril_ingot",
+      "irons_spellbooks:legendary_ink",
+      "irons_spellbooks:ruined_book",
+      "minecraft:heart_of_the_sea",
+      "cataclysm:ignitium_ingot",
+      "malum:complete_design",
+      "minecraft:heavy_core",
+      "#iceandfire:dragon_steels",
+      "ars_nouveau:archmage_spell_book",
+    ], // input items
+    "ars_zero:dull_circlet", // reagent
+    "ars_zero:spellcasting_circlet", // output
+    50000, // source cost
+    false // NBT
+  )
   event.recipes.occultism.ritual(
     'occultism:miner_marid_master',
     [
@@ -466,45 +464,52 @@ event.replaceInput(
     'occultism:book_of_binding_bound_marid',
     'occultism:craft_marid'
   )
-  .duration(240)
-  .ritualType('occultism:craft_miner_spirit')
-  .dummy('occultism:ritual_dummy/craft_miner_marid_master')
-  .id('occultism:ritual/craft_miner_marid_master')
+    .duration(240)
+    .ritualType('occultism:craft_miner_spirit')
+    .dummy('occultism:ritual_dummy/craft_miner_marid_master')
+    .id('occultism:ritual/craft_miner_marid_master')
   // New recipes!
-  const enkephalinEnemies = (entityIDs) => {
-  event.custom({
-  type: "industrialforegoing:laser_drill_fluid",
-  catalyst: {
-    item: "industrialforegoing:lime_laser_lens"
-  },
-  entity_data: {
-    data: {},
-    display: "",
-    entity: {
-      type: entityIDs
-    }
-  },
-  output: {
-    amount: 10,
-    fluid: "kubejs:enkephalin"
-  },
-  rarity: [
-    {
-      biome_filter: {
-        "blacklist": [],
-        "whitelist": []
-      },
-      depth_max: 256,
-      depth_min: -64,
-      dimension_filter: {
-        "blacklist": [],
-        "whitelist": []
-      },
-      weight: 8
-      }
+  event.shapeless(
+    Item.of('hostilenetworks:prediction_matrix', 4),
+    [
+      'minecraft:iron_ingot',
+      'minecraft:gold_ingot'
     ]
-  })
-}
+  )
+  const enkephalinEnemies = (entityIDs) => {
+    event.custom({
+      type: "industrialforegoing:laser_drill_fluid",
+      catalyst: {
+        item: "industrialforegoing:lime_laser_lens"
+      },
+      entity_data: {
+        data: {},
+        display: "",
+        entity: {
+          type: entityIDs
+        }
+      },
+      output: {
+        amount: 10,
+        fluid: "kubejs:enkephalin"
+      },
+      rarity: [
+        {
+          biome_filter: {
+            "blacklist": [],
+            "whitelist": []
+          },
+          depth_max: 256,
+          depth_min: -64,
+          dimension_filter: {
+            "blacklist": [],
+            "whitelist": []
+          },
+          weight: 8
+        }
+      ]
+    })
+  }
   enkephalinEnemies('cataclysm:ender_guardian')
   enkephalinEnemies('cataclysm:netherite_monstrosity')
   enkephalinEnemies('cataclysm:ignis')
@@ -516,50 +521,50 @@ event.replaceInput(
   enkephalinEnemies('ars_nouveau:wilden_boss')
   enkephalinEnemies('irons_spellbooks:dead_king')
   enkephalinEnemies('irons_spellbooks:fire_boss')
-event.custom({
-  type: "neovitae:alchemytable",
-  input: [
-    {
-      item: "kubejs:enkephalin_bucket"
+  event.custom({
+    type: "neovitae:alchemytable",
+    input: [
+      {
+        item: "kubejs:enkephalin_bucket"
+      },
+      {
+        item: "malum:imitation_heart"
+      },
+      {
+        item: "kubejs:enkephalin_bucket"
+      },
+      {
+        item: "malum:imitation_flesh"
+      },
+      {
+        item: "malum:imitation_flesh"
+      },
+      {
+        item: "malum:imitation_flesh"
+      }
+    ],
+    output: {
+      count: 1,
+      id: "kubejs:mimicry"
     },
-    {
-      item: "malum:imitation_heart"
-    },
-    {
-      item: "kubejs:enkephalin_bucket"
-    },
-    {
-      item: "malum:imitation_flesh"
-    },
-    {
-      item: "malum:imitation_flesh"
-    },
-    {
-      item: "malum:imitation_flesh"
-    }
-  ],
-  output: {
-    count: 1,
-    id: "kubejs:mimicry"
-  },
-  syphon: 72000,
-  ticks: 72000,
-  upgradeLevel: 5
+    syphon: 72000,
+    ticks: 72000,
+    upgradeLevel: 5
   })
-	event.recipes.ars_nouveau.enchanting_apparatus(
-        [
-          'minecraft:potion[potion_contents={potion:"minecraft:healing"}]',
-          "minecraft:echo_shard",
-          "ars_nouveau:source_gem_block",
-          "minecraft:echo_shard",
-          'minecraft:potion[potion_contents={potion:"minecraft:healing"}]',
+  event.recipes.ars_nouveau.enchanting_apparatus(
+    [
+      'minecraft:potion[potion_contents={potion:"minecraft:healing"}]',
+      "minecraft:echo_shard",
+      "ars_nouveau:source_gem_block",
+      "minecraft:echo_shard",
+      'minecraft:potion[potion_contents={potion:"minecraft:healing"}]',
 
-        ], // input items
-	    "neovitae:blood_orb_weak", // reagent
-	    "kubejs:aeternitas_control", // output
-	    10000, // source cost
-	    false // NBT
-	)
+    ], // input items
+    "neovitae:blood_orb_weak", // reagent
+    "kubejs:aeternitas_control", // output
+    10000, // source cost
+    false // NBT
+  )
   event.custom({
     type: "neovitae:alchemytable",
     input: [
@@ -592,10 +597,10 @@ event.custom({
     '#iceandfire:mob_skulls',
     "occultism:craft_marid"
   )
-  .duration(2000)
-  .ritualType("occultism:craft")
-  .id("kubejs:ritual/craft_first_blade")
-  .dummy('kubejs:craft_first_blade')
+    .duration(2000)
+    .ritualType("occultism:craft")
+    .id("kubejs:ritual/craft_first_blade")
+    .dummy('kubejs:craft_first_blade')
   event.recipes.occultism.ritual(
     "kubejs:mark_of_cain",
     [
@@ -603,7 +608,7 @@ event.custom({
       'minecraft:enchanted_golden_apple',
       Item.of('minecraft:ominous_bottle[ominous_bottle_amplifier=4]'),
       'irons_spellbooks:pyrium_ingot'
-      
+
     ],
     'irons_spellbooks:divine_soulshard',
     'occultism:craft_marid'
@@ -627,12 +632,12 @@ event.custom({
     "occultism:book_of_binding_bound_afrit",
     "occultism:craft_afrit"
   )
-  .ritualType('occultism:execute_command')
-  .duration(1000)
-  .id("kubejs:ritual/craft_mark_of_cain")
-  .command('curios replace an_focus 0 @p[distance=..10] with kubejs:mark_of_cain[enchantments={levels:{"ars_elemental:soulbound":1,"minecraft:binding_curse":1}},enchantment_glint_override=false]')
-  .dummy('kubejs:craft_the_mark')
-  .id('kubejs:ritual/mark_of_cain_creation')
+    .ritualType('occultism:execute_command')
+    .duration(1000)
+    .id("kubejs:ritual/craft_mark_of_cain")
+    .command('curios replace an_focus 0 @p[distance=..10] with kubejs:mark_of_cain[enchantments={levels:{"ars_elemental:soulbound":1,"minecraft:binding_curse":1}},enchantment_glint_override=false]')
+    .dummy('kubejs:craft_the_mark')
+    .id('kubejs:ritual/mark_of_cain_creation')
 
   event.recipes.create.mechanical_crafting("neoorigins:orb_of_origin", [
     '  S  ',
@@ -646,215 +651,215 @@ event.custom({
     P: "mekanism:pellet_polonium",
     S: "create_enchantment_industry:super_experience_nugget"
   })
-	event.recipes.ars_nouveau.enchanting_apparatus(
-        [
-          "kubejs:cat_plush",
-          "kubejs:odins_plush"
-        ], // input items
-	    'minecraft:nether_star', // reagent
-	    "kubejs:yaoi_plush", // output
-	    100000, // source cost
-	    false // NBT
-	)
+  event.recipes.ars_nouveau.enchanting_apparatus(
+    [
+      "kubejs:cat_plush",
+      "kubejs:odins_plush"
+    ], // input items
+    'minecraft:nether_star', // reagent
+    "kubejs:yaoi_plush", // output
+    100000, // source cost
+    false // NBT
+  )
   event.custom({
-  type: "malum:void_favor",
-  input: {
-    item: "kubejs:odins_plush"
-  },
-  result: {
-    count: 1,
-    id: "kubejs:odins_shork"
-  }
+    type: "malum:void_favor",
+    input: {
+      item: "kubejs:odins_plush"
+    },
+    result: {
+      count: 1,
+      id: "kubejs:odins_shork"
+    }
   })
   event.custom({
-  type: "spectrum:midnight_solution_converting",
-  ingredient: [
-    {
-      item: "kubejs:rex_plush"
+    type: "spectrum:midnight_solution_converting",
+    ingredient: [
+      {
+        item: "kubejs:rex_plush"
+      }
+    ],
+    result: {
+      id: "kubejs:fox_knight",
+      count: 1
     }
-  ],
-  result: {
-    id: "kubejs:fox_knight",
-    count: 1
-  }
   })
   event.recipes.ars_nouveau.imbuement(
-      '#c:wools',
-      'irons_spellbooks:magic_cloth',
-      500,
-      []
+    '#c:wools',
+    'irons_spellbooks:magic_cloth',
+    500,
+    []
   )
   event.recipes.ars_nouveau.imbuement(
-      'create:sturdy_sheet',
-      'irons_spellbooks:blank_rune',
-      2000,
-      []
+    'create:sturdy_sheet',
+    'irons_spellbooks:blank_rune',
+    2000,
+    []
   )
   event.recipes.create.filling('minecraft:ender_pearl', [Fluid.of('minecraft:water', 500), 'create:powdered_obsidian'])
   event.recipes.create.compacting('create:refined_radiance', ['minecraft:white_dye', 'create:andesite_alloy']).superheated()
   event.recipes.create.compacting('create:shadow_steel', ['minecraft:black_dye', 'create:andesite_alloy']).superheated()
   {
-  var helmet = ['hazennstuff:flesh_mass_helmet', 'hazennstuff:the_wither_helmet']
-  var chest = ['hazennstuff:flesh_mass_chestplate', 'hazennstuff:the_wither_chestplate']
-  var leg = ['hazennstuff:flesh_mass_leggings', 'hazennstuff:the_wither_leggings']
-  var boot = ['hazennstuff:flesh_mass_boots', 'hazennstuff:the_wither_boots']
-  helmet.forEach(ingredient => {
-  event.shaped(
-    'hazennstuff:dead_king_helmet',[
-    'RBR',
-    'BAB',
-    ' K '
-    ],{
-      R: "irons_spellbooks:blood_rune",
-      B: "kubejs:kings_rib",
-      A: ingredient,
-      K: 'irons_spellbooks:bone_key'
-     })
-  })
-  chest.forEach(ingredient => {
-  event.shaped(
-    'hazennstuff:dead_king_chestplate',[
-    'BAB',
-    'RKR',
-    'BBB'
-    ],{
-      R: "irons_spellbooks:blood_rune",
-      B: "kubejs:kings_rib",
-      A: ingredient,
-      K: 'irons_spellbooks:bone_key'
-     })
-  })
-  leg.forEach(ingredient => {
-  event.shaped(
-    'hazennstuff:dead_king_leggings',[
-    'RKR',
-    'BAB',
-    'B B'
-    ],{
-      R: "irons_spellbooks:blood_rune",
-      B: "kubejs:kings_rib",
-      A: ingredient,
-      K: 'irons_spellbooks:bone_key'
-     })
-  })
-  boot.forEach(ingredient => {
-  event.shaped(
-    'hazennstuff:dead_king_boots',[
-    'RKR',
-    'BAB'
-    ],{
-      R: "irons_spellbooks:blood_rune",
-      B: "kubejs:kings_rib",
-      A: ingredient,
-      K: 'irons_spellbooks:bone_key'
-     })
-  })
+    var helmet = ['hazennstuff:flesh_mass_helmet', 'hazennstuff:the_wither_helmet']
+    var chest = ['hazennstuff:flesh_mass_chestplate', 'hazennstuff:the_wither_chestplate']
+    var leg = ['hazennstuff:flesh_mass_leggings', 'hazennstuff:the_wither_leggings']
+    var boot = ['hazennstuff:flesh_mass_boots', 'hazennstuff:the_wither_boots']
+    helmet.forEach(ingredient => {
+      event.shaped(
+        'hazennstuff:dead_king_helmet', [
+        'RBR',
+        'BAB',
+        ' K '
+      ], {
+        R: "irons_spellbooks:blood_rune",
+        B: "kubejs:kings_rib",
+        A: ingredient,
+        K: 'irons_spellbooks:bone_key'
+      })
+    })
+    chest.forEach(ingredient => {
+      event.shaped(
+        'hazennstuff:dead_king_chestplate', [
+        'BAB',
+        'RKR',
+        'BBB'
+      ], {
+        R: "irons_spellbooks:blood_rune",
+        B: "kubejs:kings_rib",
+        A: ingredient,
+        K: 'irons_spellbooks:bone_key'
+      })
+    })
+    leg.forEach(ingredient => {
+      event.shaped(
+        'hazennstuff:dead_king_leggings', [
+        'RKR',
+        'BAB',
+        'B B'
+      ], {
+        R: "irons_spellbooks:blood_rune",
+        B: "kubejs:kings_rib",
+        A: ingredient,
+        K: 'irons_spellbooks:bone_key'
+      })
+    })
+    boot.forEach(ingredient => {
+      event.shaped(
+        'hazennstuff:dead_king_boots', [
+        'RKR',
+        'BAB'
+      ], {
+        R: "irons_spellbooks:blood_rune",
+        B: "kubejs:kings_rib",
+        A: ingredient,
+        K: 'irons_spellbooks:bone_key'
+      })
+    })
   }
   event.smithing('hazennstuff:true_nights_edge', 'hazennstuff:shadow_scale', 'hazennstuff:nights_edge', 'hazennstuff:hallowed_ingot')
   event.shaped(
-    'hazennstuff:thorn_chakram',[
+    'hazennstuff:thorn_chakram', [
     ' BR',
     'BCR',
     ' BR'
-    ],{
-      R: 'irons_spellbooks:nature_rune',
-      B: 'hazennstuff:overgrown_bone',
-      C: 'hazennstuff:chlorophyte_ingot'
-    })
+  ], {
+    R: 'irons_spellbooks:nature_rune',
+    B: 'hazennstuff:overgrown_bone',
+    C: 'hazennstuff:chlorophyte_ingot'
+  })
   event.shaped(
-    'hazennstuff:meowmere',[
+    'hazennstuff:meowmere', [
     ' D ',
     'ZCZ',
     'ZEZ'
-    ],{
-      D: 'hazennstuff:deus_essence',
-      Z: 'hazennstuff:zenalite_ingot',
-      C: 'kubejs:cat_plush',
-      E: 'hazennstuff:excalibur_fragment'
-    })
- event.smithing('dimdungeons:item_blank_theme_key[dimdungeons:dungeon_key_data={key_activated:false,built:false,dest_x:-1L,dest_z:-1L,name_type:0,name_part_1:0,name_part_2:0,theme:4,dungeon_type:"BASIC"}]', 'minecraft:ender_eye', 'minecraft:trial_key', 'irons_spellbooks:uncommon_ink')
- event.smithing('dimdungeons:item_blank_theme_key[dimdungeons:dungeon_key_data={key_activated:false,built:false,dest_x:-1L,dest_z:-1L,name_type:0,name_part_1:0,name_part_2:0,theme:5,dungeon_type:"BASIC"}]', 'minecraft:ender_eye', 'minecraft:trial_key', 'mekanism:advanced_control_circuit')
+  ], {
+    D: 'hazennstuff:deus_essence',
+    Z: 'hazennstuff:zenalite_ingot',
+    C: 'kubejs:cat_plush',
+    E: 'hazennstuff:excalibur_fragment'
+  })
+  event.smithing('dimdungeons:item_blank_theme_key[dimdungeons:dungeon_key_data={key_activated:false,built:false,dest_x:-1L,dest_z:-1L,name_type:0,name_part_1:0,name_part_2:0,theme:4,dungeon_type:"BASIC"}]', 'minecraft:ender_eye', 'minecraft:trial_key', 'irons_spellbooks:uncommon_ink')
+  event.smithing('dimdungeons:item_blank_theme_key[dimdungeons:dungeon_key_data={key_activated:false,built:false,dest_x:-1L,dest_z:-1L,name_type:0,name_part_1:0,name_part_2:0,theme:5,dungeon_type:"BASIC"}]', 'minecraft:ender_eye', 'minecraft:trial_key', 'mekanism:advanced_control_circuit')
 })
 
 // Cooldowns
-let staffs = [
-  "ars_zero:novice_spell_staff",
-  "ars_zero:mage_spell_staff",
-  "ars_zero:archmage_spell_staff",
-  "ars_zero:creative_spell_staff"
+let teleporters = [
+  'mekanism:portable_teleporter',
+  'ars_nouveau:warp_scroll',
+  'ars_nouveau:stable_warp_scroll'
 ]
-ItemEvents.rightClicked(staffs, event => {
-    const { player, server, item } = event
-    server.scheduleInTicks(1, callback => {
-    player.addItemCooldown(item, 5)
+ItemEvents.rightClicked(teleporters, event => {
+  const { player, server, item } = event
+  server.scheduleInTicks(1, callback => {
+    player.addItemCooldown(item, 1200)
   })
 })
-let books = [
-    "ars_nouveau:novice_spell_book",
-    "ars_nouveau:apprentice_spell_book",
-    "ars_nouveau:archmage_spell_book",
-    "ars_nouveau:creative_spell_book",
-    "not_enough_glyphs:spell_binder",
+let portal = [
+  'ars_nouveau:portal',
+  'irons_spellbooks:portal_frame',
+  'mekanism:teleporter'
 ]
-ItemEvents.rightClicked(books, event => {
-    const { player, server, item } = event
-    server.scheduleInTicks(1, callback => {
-    player.addItemCooldown(item, 2)
-  })
-})
-ItemEvents.rightClicked('fdbosses:phase_sphere', event => {
-    const {player} = event
-    const hpPercent = player.getHealth() * 0.5
-    player.damage(hpPercent, "minecraft:magic")
+PlayerEvents.tick(event => {
+  const player = event.player
+  const level = player.level
+  const pos = player.blockPosition()
+  const currentBlock = level.getBlock(pos).id
+  const blockBelow = level.getBlock(pos.below()).id
+  if (!portal.includes(currentBlock) && !portal.includes(blockBelow)) return
+  player.potionEffects.add('minecraft:nausea', 10 * 20, 0)
+  player.potionEffects.add('hazennstuff:mana_sickness', 30 * 20, 0)
 })
 ServerEvents.tags("entity_type", (event) => {
-    event.add("industrialforegoing:mob_duplicator_blacklist", ["minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
-    event.add("ars_nouveau:jar_blacklist", ["minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"]) 
+  event.add("industrialforegoing:mob_duplicator_blacklist", ["minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks", '#c:bosses'])
+  event.add("industrialforegoing:mob_imprisonment_tool_blacklist", ["minecraft:wither", "minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks", '#c:bosses'])
+  event.add("industrialforegoing:mob_crusher_blacklist", ["minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks", '#c:bosses'])
+  event.add("neovitae:ritual_boss_blacklist", ["@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks", '#c:bosses'])
+  event.add("neovitae:deny_imprisonment", ["@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks", '#c:bosses'])
+  event.add("ars_nouveau:jar_blacklist", ["minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks"])
 })
 
 // Global Loot
 LootJS.modifiers(event => {
   event.addTableModifier(/chests/).removeLoot(["minecraft:netherite_scrap", "minecraft:netherite_ingot", "minecraft:ancient_debris", "minecraft:diamond", 'ars_additions:codex_entry'])
 
-const isNamedOdinshi = entity => {
-  if (entity == null) return false
-  return entity.getName().getString() == 'Odinshi'
-}
+  const isNamedOdinshi = entity => {
+    if (entity == null) return false
+    return entity.getName().getString() == 'Odinshi'
+  }
   event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
-       .matchEntityCustom(isNamedOdinshi)
-       .addLoot("kubejs:odins_plush")
+    .matchEntityCustom(isNamedOdinshi)
+    .addLoot("kubejs:odins_plush")
 
-const isNamedTheCatLord0 = entity => {
-  if (entity == null) return false
-  return entity.getName().getString() == 'TheCatLord0'
-}
+  const isNamedTheCatLord0 = entity => {
+    if (entity == null) return false
+    return entity.getName().getString() == 'TheCatLord0'
+  }
   event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
-       .matchEntityCustom(isNamedTheCatLord0)
-       .addLoot("kubejs:cat_plush")
+    .matchEntityCustom(isNamedTheCatLord0)
+    .addLoot("kubejs:cat_plush")
 
-const isNamedForestQueen558 = entity => {
-  if (entity == null) return false
-  return entity.getName().getString() == 'ForestQueen558'
-}
+  const isNamedForestQueen558 = entity => {
+    if (entity == null) return false
+    return entity.getName().getString() == 'ForestQueen558'
+  }
   event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
-       .matchEntityCustom(isNamedForestQueen558)
-       .addLoot("kubejs:forest_plush")
+    .matchEntityCustom(isNamedForestQueen558)
+    .addLoot("kubejs:forest_plush")
 
-const isNamedCotyn__ = entity => {
-  if (entity == null) return false
-  return entity.getName().getString() == 'Cotyn__'
-}
+  const isNamedCotyn__ = entity => {
+    if (entity == null) return false
+    return entity.getName().getString() == 'Cotyn__'
+  }
   event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
-       .matchEntityCustom(isNamedCotyn__)
-       .addLoot("kubejs:cotyn_plush")
+    .matchEntityCustom(isNamedCotyn__)
+    .addLoot("kubejs:cotyn_plush")
 
-const isNamedRexTheKnight55 = entity => {
-  if (entity == null) return false
-  return entity.getName().getString() == 'RexTheKnight55'
-}
+  const isNamedRexTheKnight55 = entity => {
+    if (entity == null) return false
+    return entity.getName().getString() == 'RexTheKnight55'
+  }
   event.addEntityModifier(["minecraft:player", "minecraft:snow_golem"])
-       .matchEntityCustom(isNamedRexTheKnight55)
-       .addLoot("kubejs:rex_plush")
+    .matchEntityCustom(isNamedRexTheKnight55)
+    .addLoot("kubejs:rex_plush")
 
 
   event.addEntityModifier("cataclysm:ender_guardian")
@@ -863,9 +868,17 @@ const isNamedRexTheKnight55 = entity => {
     .replaceLoot("fdbosses:phase_sphere", "kubejs:stompeez")
   event.addTableModifier(/.*/)
     .replaceLoot("irons_spellbooks:fireward_ring", "kubejs:firecrowned_ring")
+  event.addTableModifier(('hazennstuff:entities/aptos'))
+    .removeLoot("irons_spellbooks:pyrium_ingot")
+    .removeLoot('hazennstuff:blade_of_the_legate')
+    .addLoot(LootEntry.of('hazennstuff:blade_of_the_legate').randomChance(0.25))
+  event.addTableModifier(('hazennstuff:entities/pyromus'))
+    .removeLoot("irons_spellbooks:pyrium_ingot")
+    .removeLoot('hazennstuff:the_tribunes_medallion')
+    .addLoot(LootEntry.of('hazennstuff:the_tribunes_medallion').randomChance(0.25))
   event.addEntityModifier("irons_spellbooks:dead_king")
     .addLoot(LootEntry.of("kubejs:kings_rib").setCount([1, 3]).applyEnchantmentBonus([0, 2]))
-    
+
 })
 
 // Item Tags
@@ -879,22 +892,25 @@ ServerEvents.tags("item", (event) => {
   event.remove("curios:waist", "cataclysm:belt_of_beginner")
   event.add("curios:belt", "cataclysm:belt_of_monstrosity")
   event.remove("curios:waist", "cataclysm:belt_of_monstrosity")
-
+})
+// Damage Tags
+ServerEvents.tags("damage_type", (event) => {
+  event.remove('minecraft:bypasses_cooldown', 'malum:voodoo')
 })
 // EMI Information
 RecipeViewerEvents.addInformation('fluid', event => {
-	event.add('kubejs:enkephalin', [
-		'Obtained from Cataclysm Bosses, Wilden Chimera, Dead King, and Tyros using a Liquid Laser drill.'
-	])
+  event.add('kubejs:enkephalin', [
+    'Obtained from Cataclysm Bosses, Wilden Chimera, Dead King, and Tyros using a Liquid Laser drill.'
+  ])
 })
 RecipeViewerEvents.addInformation('item', event => {
-	event.add('kubejs:enkephalin_bucket', [
-		'Obtained from Cataclysm Bosses, Wilden Chimera, Dead King, and Tyros using a Liquid Laser drill.'
-	])
+  event.add('kubejs:enkephalin_bucket', [
+    'Obtained from Cataclysm Bosses, Wilden Chimera, Dead King, and Tyros using a Liquid Laser drill.'
+  ])
 })
 EntityJSEvents.biomeSpawns(event => {
-    event.removeSpawn('irons_spellbooks:necromancer', ['#minecraft:is_overworld'])
-    event.removeSpawn('irons_spellbooks:necromancer', ['#minecraft:is_overworld'])
+  event.removeSpawn('irons_spellbooks:necromancer', ['#minecraft:is_overworld'])
+  event.removeSpawn('irons_spellbooks:necromancer', ['#minecraft:is_overworld'])
 })
 const LivingIncomingDamageEvent = Java.loadClass('net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent')
 const EntityJoinLevelEvent = Java.loadClass('net.neoforged.neoforge.event.entity.EntityJoinLevelEvent')
@@ -906,47 +922,20 @@ const ResourceKey = Java.loadClass('net.minecraft.resources.ResourceKey')
 const ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
 
 
-const arsDamageResistance = BuiltInRegistries.ATTRIBUTE
-  .getHolder(ResourceLocation.parse('kubejs:ars_damage_resistance'))
-  .orElseThrow()
-
-const reducedDamageTypes = [
-  'ars_nouveau:windshear',
-  'ars_nouveau:crush',
-  'ars_nouveau:flare',
-  'ars_nouveau:frost',
-  'ars_nouveau:spell',
-  'ars_elemental:water_jet',
-  'ars_elemental:spark',
-  'ars_elemental:poison',
-  'ars_elemental:hellfire',
-  'ars_elemental:beheading',
-  'ars_elemental:cavitation',
-  'minecraft:thrown'
-].map(id => ResourceKey.create(
-  Registries.DAMAGE_TYPE,
-  ResourceLocation.parse(id)
-))
-
 NativeEvents.onEvent(EntityJoinLevelEvent, event => {
   if (event.getLevel().isClientSide()) return
-
   const entity = event.getEntity()
-
   if (!(entity instanceof LivingEntity)) return
-
-  const attribute = entity.getAttribute(arsDamageResistance)
-
+  const attribute = entity.getAttribute('ars_nouveau:sauce.perk.spell_resistance')
   if (attribute == null) return
-
   const entityType = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse(entity.getType().toString()))
   const entityHolder = BuiltInRegistries.ENTITY_TYPE.wrapAsHolder(entityType)
   const boss = BuiltInRegistries.ENTITY_TYPE.getTag(bossTag).get().contains(entityHolder)
 
   if (boss) {
-    attribute.setBaseValue(0.95)
+    attribute.setBaseValue(0.8)
   } else if (entity instanceof PlayerCurio) {
-    attribute.setBaseValue(0.6)
+    attribute.setBaseValue(0.7)
   } else {
     attribute.setBaseValue(0.25)
   }
@@ -955,60 +944,104 @@ NativeEvents.onEvent(EntityJoinLevelEvent, event => {
 var LivingDamagePre = Java.loadClass(
   'net.neoforged.neoforge.event.entity.living.LivingDamageEvent$Pre'
 )
-
-NativeEvents.onEvent(LivingDamagePre, event => {
-  const source = event.getSource()
-  if (!reducedDamageTypes.some(type => source.is(type))) return
-  const resistance = Math.max(
-    0,
-    Math.min(1, event.getEntity().getAttributeValue(arsDamageResistance))
-  )
-  if (resistance <= 0) return
-  const damage = event.getNewDamage()
-  event.setNewDamage(damage * (1 - resistance))
-})
 const ONESHOT_AMOUNT = 0.9
 const ONESHOT_BLACKLIST = [
   'createbigcannons:big_cannon_projectile',
   'createbigcannons:cannon_projectile',
   'create:potato_cannon',
   'irons_spellbooks:heartstop',
-  'gametechbcs_spellbooks:lingering_strain'
+  'gametechbcs_spellbooks:lingering_strain',
+  'minecraft:generic_kill'
 ]
 NativeEvents.onEvent(LivingDamagePre, event => {
-let player = event.entity
+  let player = event.entity
   if (!player || !player.isPlayer()) return
-let server = player.level.getServer()
-let damage = event.getOriginalDamage()
-let source = event.getSource()
-let damageTypeKey = source.typeHolder().unwrapKey()
+  let server = player.level.getServer()
+  let damage = event.getNewDamage()
+  let source = event.getSource()
+  let damageTypeKey = source.typeHolder().unwrapKey()
   if (damageTypeKey.isEmpty()) return
-let damageTypeId = damageTypeKey.get().location().toString()
+  let damageTypeId = damageTypeKey.get().location().toString()
   if (ONESHOT_BLACKLIST.includes(damageTypeId)) return
-let maxHealth = player.getMaxHealth()
-let currentHealth = player.getHealth()
+  let maxHealth = player.getMaxHealth()
+  let currentHealth = player.getHealth()
+  const now = Date.now(), data = player.persistentData
+  if (now < data.getLong('osp_cooldown')) return
   if (currentHealth < maxHealth * ONESHOT_AMOUNT) return
   if (maxHealth * ONESHOT_AMOUNT < damage) {
-      event.setNewDamage(maxHealth * ONESHOT_AMOUNT) 
-      player.potionEffects.add('kubejs:grace', 1*20, 0)
-      server.runCommandSilent(`execute positioned ${player.x} ${player.y} ${player.z} run playsound minecraft:block.respawn_anchor.set_spawn player @a[distance=..12] ~ ~ ~ 2 1`)
-      server.runCommandSilent(`execute positioned ${player.x} ${player.y} ${player.z} run particle minecraft:cherry_leaves ~ ~2 ~ 1.5 1.5 1.5 0 25 normal`)
-      server.runCommandSilent(`execute positioned ${player.x} ${player.y} ${player.z} run particle minecraft:totem_of_undying ~ ~2 ~ 1.5 1.5 1.5 0 25 normal`)
-      }
+    event.setNewDamage(0)
+    player.setHealth(maxHealth * 0.1)
+    player.potionEffects.add('kubejs:grace', 1 * 20, 0)
+    server.runCommandSilent(`execute positioned ${player.x} ${player.y} ${player.z} run playsound minecraft:block.respawn_anchor.set_spawn player @a[distance=..12] ~ ~ ~ 2 1`)
+    server.runCommandSilent(`execute positioned ${player.x} ${player.y} ${player.z} run particle minecraft:cherry_leaves ~ ~2 ~ 1.5 1.5 1.5 0 25 normal`)
+    server.runCommandSilent(`execute positioned ${player.x} ${player.y} ${player.z} run particle minecraft:totem_of_undying ~ ~2 ~ 1.5 1.5 1.5 0 25 normal`)
+    data.putLong('osp_cooldown', now + 10000)
+  }
+})
+PlayerEvents.respawned(event => {
+  const player = event.player
+  const data = player.persistentData
+  if (data.getLong('osp_cooldown') > 0) {
+    data.putLong('osp_cooldown', 0)
+  }
 })
 const TagKey = Java.loadClass('net.minecraft.tags.TagKey')
 const bossTag = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse('c:bosses'))
 
-NativeEvents.onEvent(LivingDamagePre, event =>{
-let entity = event.getEntity()
-let server = entity.level.getServer()
-const entityType = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse(entity.getType().toString()))
-const entityHolder = BuiltInRegistries.ENTITY_TYPE.wrapAsHolder(entityType)
+NativeEvents.onEvent(LivingDamagePre, event => {
+  let entity = event.getEntity()
+  let server = entity.level.getServer()
+  const entityType = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse(entity.getType().toString()))
+  const entityHolder = BuiltInRegistries.ENTITY_TYPE.wrapAsHolder(entityType)
   if (!BuiltInRegistries.ENTITY_TYPE.getTag(bossTag).get().contains(entityHolder)) return
-    const damage = event.getOriginalDamage()
-    const maxHP = entity.getMaxHealth()
-    if (damage > maxHP * 0.1){
-      event.setNewDamage(maxHP * 0.1)
-      server.runCommandSilent(`execute positioned ${entity.x} ${entity.y} ${entity.z} run playsound irons_spellbooks:entity.fiery_dagger.parry hostile @a[distance=..12] ~ ~ ~ 2 1`)
+  const damage = event.getNewDamage()
+  const maxHP = entity.getMaxHealth()
+  let source = event.getSource()
+  let damageTypeKey = source.typeHolder().unwrapKey()
+  if (damageTypeKey.isEmpty()) return
+  let damageTypeId = damageTypeKey.get().location().toString()
+  if (ONESHOT_BLACKLIST.includes(damageTypeId)) return
+  if (damage > maxHP * 0.1) {
+    event.setNewDamage(maxHP * 0.1)
+    server.runCommandSilent(`execute positioned ${entity.x} ${entity.y} ${entity.z} run playsound irons_spellbooks:entity.fiery_dagger.parry hostile @a[distance=..12] ~ ~ ~ 2 1`)
+  }
+})
+// Tyros summons
+EntityEvents.spawned(event => {
+  let entity = event.entity
+  const x = entity.x + (Math.random() * 4 - 2)
+  const z = entity.z + (Math.random() * 4 - 2)
+  if (entity.getType().toString() == 'irons_spellbooks:fire_boss') {
+    const flamebearers = ['hazennstuff:pyromus', 'hazennstuff:aptos']
+    flamebearers.forEach(entityID => {
+      let mob = event.level.createEntity(entityID)
+      mob.setPos(x, entity.y, z)
+      mob.spawn()
     }
+    )
+  }
+})
+NativeEvents.onEvent(LivingDamagePre, event => {
+  let entity = event.entity
+  let health = entity.getHealth()
+  let maxHealth = entity.getMaxHealth()
+  let source = event.getSource()
+  let player = source.getPlayer()
+  let damageTypeKey = source.typeHolder().unwrapKey()
+  if (damageTypeKey.isEmpty()) return
+  let damageTypeId = damageTypeKey.get().location().toString()
+  if ('minecraft:generic_kill'.includes(damageTypeId)) return
+  if (entity.getType().toString() == 'irons_spellbooks:fire_boss' && health <= maxHealth * 0.5) {
+    let entities = entity.level.getEntities(null, entity.boundingBoxForCulling.inflate(32))
+    if (entities.some(e => flamebearers.includes(e.type.toString())))
+      event.setNewDamage(0)
+    player.displayClientMessage(Text.of("Tyros is protected by the flamebearers.").color(Color.RED), true)
+  }
+})
+EntityEvents.death(event =>{
+  const entity = event.getEntity()
+  const dimension = entity.level.dimension.toString()
+  if (dimension !== 'firesenderexpansion:void_dimension') return
+  entity.setHealth(1)
+  event.cancel()
 })

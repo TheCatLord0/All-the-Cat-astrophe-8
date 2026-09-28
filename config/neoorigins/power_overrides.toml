@@ -304,7 +304,7 @@
 		cooldown_ticks = 200
 
 	[power_overrides.strider_water_weakness]
-		# Default: 3.0
+		# Default: 1.0
 		# Range: 0.0 ~ 100.0
 		multiplier = 3.0
 
@@ -355,7 +355,7 @@
 		amount = 1.0
 
 	[power_overrides.blazeling_water_damage]
-		# Default: 2.5
+		# Default: 1.0
 		# Range: 0.0 ~ 100.0
 		multiplier = 2.5
 
@@ -437,7 +437,7 @@
 		amount = -0.5
 
 	[power_overrides.enderite_water_damage]
-		# Default: 3.0
+		# Default: 1.0
 		# Range: 0.0 ~ 100.0
 		multiplier = 3.0
 
@@ -515,7 +515,7 @@
 		unbreaking_level = 1
 
 	[power_overrides.feline_water_weakness]
-		# Default: 1.5
+		# Default: 1.0
 		# Range: 0.0 ~ 100.0
 		multiplier = 1.5
 
@@ -525,7 +525,7 @@
 		multiplier = 1.5
 
 	[power_overrides.draconic_water_weakness]
-		# Default: 2.0
+		# Default: 1.0
 		# Range: 0.0 ~ 100.0
 		multiplier = 2.0
 
@@ -948,7 +948,7 @@
 		amount = -0.25
 
 	[power_overrides.vampire_water_weakness]
-		# Default: 2.0
+		# Default: 1.0
 		# Range: 0.0 ~ 100.0
 		multiplier = 2.0
 
@@ -1100,7 +1100,7 @@
 		amount = 0.3
 
 	[power_overrides.voidwalker_water_damage]
-		# Default: 1.75
+		# Default: 1.0
 		# Range: 0.0 ~ 100.0
 		multiplier = 1.75
 
@@ -1318,7 +1318,7 @@
 		radius = 8.0
 
 	[power_overrides.cinderborn_water_weakness]
-		# Default: 3.0
+		# Default: 1.0
 		# Range: 0.0 ~ 100.0
 		multiplier = 3.0
 
@@ -1678,3 +1678,39 @@
 		# Default: 300
 		# Range: 0 ~ 72000
 		cooldown_ticks = 300
+
+	[power_overrides.caveborn_copper_tint]
+		enabled = true
+
+	[power_overrides.caveborn_iron_tint]
+		enabled = true
+
+	[power_overrides.caveborn_gold_tint]
+		enabled = true
+
+	[power_overrides.caveborn_diamond_tint]
+		enabled = true
+
+	[power_overrides.caveborn_emerald_tint]
+		enabled = true
+
+	[power_overrides.caveborn_netherite_tint]
+		enabled = true
+
+	[power_overrides.necromancer_water_breathing]
+		enabled = true
+
+	[power_overrides.phantom_water_breathing]
+		enabled = true
+
+	[power_overrides.revenant_water_breathing]
+		enabled = true
+
+	[power_overrides.skeleton_water_breathing]
+		enabled = true
+
+	[power_overrides.wraith_water_breathing]
+		enabled = true
+
+	[power_overrides.vampire_water_breathing]
+		enabled = true

@@ -3,25 +3,13 @@ type = fancymenu_layout
 layout-meta {
   identifier = %fancymenu:universal_layout%
   render_custom_elements_behind_vanilla = false
-  last_edited_time = 1782087460633
+  last_edited_time = 1789770607609
   is_enabled = true
   randommode = false
   randomgroup = 1
   randomonlyfirsttime = false
   layout_index = 0
-  [loading_requirement_container_meta:4fa7f1fd-03f2-40d3-a9c4-a98623973aca-1782087452858] = [groups:][instances:]
-}
-
-menu_background {
-  source = [source:local]config/fancymenu/assets/cozy_menu.mp4
-  loop = true
-  volume = 1.0
-  sound_source = master
-  parallax = false
-  parallax_intensity = 0.02
-  invert_parallax = false
-  instance_identifier = ab8005e6-4da7-4ea7-b3ee-af2996f60771-1782087439104
-  background_type = video_mcef
+  [loading_requirement_container_meta:cbedc8de-4753-49ff-b87b-a1111acbc0bb-1789770594227] = [groups:][instances:]
 }
 
 customization {

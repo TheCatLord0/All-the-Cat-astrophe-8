@@ -31,10 +31,10 @@ function toArray(javaCollection) {
     try {
         var iter = javaCollection.iterator()
         while (iter.hasNext()) arr.push(iter.next())
-    } catch(e) {
+    } catch (e) {
         try {
             for (var i = 0; i < javaCollection.size(); i++) arr.push(javaCollection.get(i))
-        } catch(e2) {}
+        } catch (e2) { }
     }
     return arr
 }
@@ -52,7 +52,7 @@ function getInfectedMobs(player) {
                 result.push(e)
             }
         }
-    } catch(e) {}
+    } catch (e) { }
     return result
 }
 
@@ -72,7 +72,7 @@ function getInfectedMobsOrdered(player) {
             var m = entityMap[list[j]]
             if (m && m.isAlive()) result.push(m)
         }
-    } catch(e) {}
+    } catch (e) { }
     return result
 }
 
@@ -85,7 +85,7 @@ function saveInfectedUUID(player, uuid) {
         }
         if (list.indexOf(uuid) === -1) list.push(uuid)
         data.putString('myconid_infected_uuids', JSON.stringify(list))
-    } catch(e) {}
+    } catch (e) { }
 }
 
 function removeInfectedUUID(player, uuid) {
@@ -93,9 +93,9 @@ function removeInfectedUUID(player, uuid) {
         var data = player.persistentData
         if (!data.contains('myconid_infected_uuids')) return
         var list = JSON.parse(data.getString('myconid_infected_uuids'))
-        list = list.filter(function(u) { return u !== uuid })
+        list = list.filter(function (u) { return u !== uuid })
         data.putString('myconid_infected_uuids', JSON.stringify(list))
-    } catch(e) {}
+    } catch (e) { }
 }
 
 function infectMob(mob, ownerPlayer) {
@@ -103,13 +103,13 @@ function infectMob(mob, ownerPlayer) {
         if (mob.isPlayer()) return false
         if (mob.tags.contains('myconid_infected')) return false
         var maxHp = 0
-        try { maxHp = mob.maxHealth } catch(e) {}
+        try { maxHp = mob.maxHealth } catch (e) { }
         if (maxHp <= 0) return false
         var infectedCount = 0
         try {
             if (ownerPlayer.persistentData.contains('myconid_infected_uuids'))
                 infectedCount = JSON.parse(ownerPlayer.persistentData.getString('myconid_infected_uuids')).length
-        } catch(e) {}
+        } catch (e) { }
         if (infectedCount >= NETWORK_CAP) return false
 
         mob.tags.add('myconid_infected')
@@ -129,7 +129,7 @@ function infectMob(mob, ownerPlayer) {
             ' run playsound ' + randomFungalSound() + ' hostile @a[distance=..16] ~ ~ ~ 0.6 0.5'
         )
         return true
-    } catch(e) {
+    } catch (e) {
         return false
     }
 }
@@ -139,7 +139,7 @@ function sendCameraPacket(player, entity) {
         var JAPacket = Java.loadClass('net.minecraft.network.protocol.game.ClientboundSetCameraPacket')
         player.connection.send(new JAPacket(entity))
         return true
-    } catch(e) {
+    } catch (e) {
         return false
     }
 }
@@ -154,7 +154,7 @@ function exitPossession(player) {
 
 function getMobName(entity) {
     if (entity.hasCustomName()) {
-        try { return String(entity.name.getString()) } catch(e) { return String(entity.name) }
+        try { return String(entity.name.getString()) } catch (e) { return String(entity.name) }
     }
     var mobType = entity.type.toString()
     var name = mobType.indexOf(':') !== -1 ? mobType.split(':')[1] : mobType
@@ -169,11 +169,11 @@ function clearMob(mob, ownerPlayer) {
         mob.persistentData.remove('PersistenceRequired')
         mob.persistentData.remove('myconid_log')
         mob.level.getServer().runCommandSilent('effect clear @e[uuid=' + mob.uuid.toString() + '] minecraft:slowness')
-    } catch(e) {}
+    } catch (e) { }
 }
 
 
-NeoOriginsEvents.powerActivated(function(event) {
+NeoOriginsEvents.powerActivated(function (event) {
     var powerId = String(event.getPowerId())
     var player = event.getPlayer()
 
@@ -211,7 +211,7 @@ NeoOriginsEvents.powerActivated(function(event) {
         var mob = infected[i]
         if (!mob.isAlive()) continue
         var dx = mob.x - player.x, dy = mob.y - player.y, dz = mob.z - player.z
-        var d = dx*dx + dy*dy + dz*dz
+        var d = dx * dx + dy * dy + dz * dz
         if (d < nearestDist) { nearest = mob; nearestDist = d }
     }
 
@@ -229,7 +229,7 @@ NeoOriginsEvents.powerActivated(function(event) {
     player.level.getServer().runCommandSilent('effect give ' + player.username + ' minecraft:slowness 999999 10 true')
 })
 
-ItemEvents.firstLeftClicked(function(event) {
+ItemEvents.firstLeftClicked(function (event) {
     var player = event.player
     if (!player.tags.contains('myconoid_owner')) return
     if (!player.mainHandItem.isEmpty()) return
@@ -241,7 +241,7 @@ ItemEvents.firstLeftClicked(function(event) {
         var e = entities[i]
         if (e.isPlayer() || !e.isAlive()) continue
         var edx = e.x - player.x, edy = e.y - player.y, edz = e.z - player.z
-        var d = edx*edx + edy*edy + edz*edz
+        var d = edx * edx + edy * edy + edz * edz
         if (d < nearestDist) {
             nearest = e
             nearestDist = d
@@ -250,7 +250,7 @@ ItemEvents.firstLeftClicked(function(event) {
     if (nearest) infectMob(nearest, player)
 })
 
-NeoOriginsEvents.originChosen(function(event) {
+NeoOriginsEvents.originChosen(function (event) {
     if (String(event.getOriginId()) !== 'cat-astrophe:myconoid') return
     var player = event.getPlayer()
     player.persistentData.putInt('myconoid_is_owner', 1)
@@ -258,19 +258,19 @@ NeoOriginsEvents.originChosen(function(event) {
     player.tags.remove('myconoid_lost_pending')
 })
 
-NeoOriginsEvents.originChanged(function(event) {
+NeoOriginsEvents.originChanged(function (event) {
     if (String(event.getOldOriginId()) !== 'cat-astrophe:myconoid') return
     event.getPlayer().tags.add('myconoid_lost_pending')
 })
 
-PlayerEvents.loggedIn(function(event) {
+PlayerEvents.loggedIn(function (event) {
     var player = event.player
     if (player.persistentData.getInt('myconoid_is_owner') !== 1) return
     player.tags.add('myconoid_owner')
     player.tags.remove('myconoid_lost_pending')
 })
 
-PlayerEvents.loggedOut(function(event) {
+PlayerEvents.loggedOut(function (event) {
     var player = event.player
     if (player.tags.contains('myconoid_possessing')) {
         player.persistentData.remove('myconid_possess_uuid')
@@ -280,7 +280,7 @@ PlayerEvents.loggedOut(function(event) {
     player.tags.remove('myconoid_owner')
 })
 
-PlayerEvents.respawned(function(event) {
+PlayerEvents.respawned(function (event) {
     var player = event.player
     player.persistentData.remove('myconid_possess_uuid')
     player.persistentData.remove('myconid_slot_prev')
@@ -297,27 +297,27 @@ PlayerEvents.respawned(function(event) {
         var dz = mob.z - origin.z
         var delay = Math.floor(Math.sqrt(dx * dx + dz * dz) * 0.5)
 
-        ;(function(m, d) {
-            m.level.getServer().scheduleInTicks(d, function() {
-                if (!m.isAlive()) return
-                m.attack(6.0)
-                m.level.getServer().runCommandSilent('effect give @e[uuid=' + m.uuid.toString() + '] minecraft:slowness 15 4 true')
-                m.level.getServer().runCommandSilent('effect give @e[uuid=' + m.uuid.toString() + '] minecraft:blindness 15 0 true')
-                m.level.getServer().runCommandSilent(
-                    'execute positioned ' + m.x + ' ' + m.y + ' ' + m.z +
-                    ' run playsound ' + FUNGAL_SOUND + ' hostile @a[distance=..32] ~ ~ ~ 2.0 0.25'
-                )
-                m.level.getServer().runCommandSilent(
-                    'execute positioned ' + m.x + ' ' + (m.y + 1) + ' ' + m.z +
-                    ' run particle minecraft:spore_blossom_air ~ ~ ~ 0.5 0.5 0.5 0.05 40 normal'
-                )
-                clearMob(m, player)
-            })
-        })(mob, delay)
+            ; (function (m, d) {
+                m.level.getServer().scheduleInTicks(d, function () {
+                    if (!m.isAlive()) return
+                    m.attack(6.0)
+                    m.level.getServer().runCommandSilent('effect give @e[uuid=' + m.uuid.toString() + '] minecraft:slowness 15 4 true')
+                    m.level.getServer().runCommandSilent('effect give @e[uuid=' + m.uuid.toString() + '] minecraft:blindness 15 0 true')
+                    m.level.getServer().runCommandSilent(
+                        'execute positioned ' + m.x + ' ' + m.y + ' ' + m.z +
+                        ' run playsound ' + FUNGAL_SOUND + ' hostile @a[distance=..32] ~ ~ ~ 2.0 0.25'
+                    )
+                    m.level.getServer().runCommandSilent(
+                        'execute positioned ' + m.x + ' ' + (m.y + 1) + ' ' + m.z +
+                        ' run particle minecraft:spore_blossom_air ~ ~ ~ 0.5 0.5 0.5 0.05 40 normal'
+                    )
+                    clearMob(m, player)
+                })
+            })(mob, delay)
     }
 })
 
-ItemEvents.entityInteracted(function(event) {
+ItemEvents.entityInteracted(function (event) {
     var player = event.player
     var target = event.target
     if (!player.isCrouching()) return
@@ -336,7 +336,7 @@ ItemEvents.entityInteracted(function(event) {
     event.cancel()
 })
 
-EntityEvents.death(function(event) {
+EntityEvents.death(function (event) {
     var entity = event.entity
     var deadUUID = String(entity.uuid)
     var allPlayers = toArray(entity.level.players)
@@ -365,12 +365,12 @@ EntityEvents.death(function(event) {
             var ownerLog = JSON.parse(String(ownerLogStr))
             ownerName = ownerLog.owner || ''
         }
-    } catch(e) {}
+    } catch (e) { }
     var sameDimPlayers = toArray(entity.level.players)
     for (var i = 0; i < sameDimPlayers.length; i++) {
         var p = sameDimPlayers[i]
         var pddx = p.x - x, pddy = p.y - y, pddz = p.z - z
-        if (pddx*pddx + pddy*pddy + pddz*pddz < 64) {
+        if (pddx * pddx + pddy * pddy + pddz * pddz < 64) {
             p.level.getServer().runCommandSilent('effect give ' + p.username + ' minecraft:slowness 3 0 true')
         }
     }
@@ -386,7 +386,7 @@ EntityEvents.death(function(event) {
     }
 })
 
-PlayerEvents.tick(function(event) {
+PlayerEvents.tick(function (event) {
     var player = event.player
     var time = player.level.time
 
@@ -439,7 +439,7 @@ PlayerEvents.tick(function(event) {
             var nearestDist = 25.0
             for (var ni = 0; ni < infected.length; ni++) {
                 var sdx = infected[ni].x - player.x, sdy = infected[ni].y - player.y, sdz = infected[ni].z - player.z
-                var d = sdx*sdx + sdy*sdy + sdz*sdz
+                var d = sdx * sdx + sdy * sdy + sdz * sdz
                 if (d < nearestDist) { nearest = infected[ni]; nearestDist = d }
             }
             if (nearest !== null) {
@@ -468,15 +468,15 @@ PlayerEvents.tick(function(event) {
 
                         var mobType = nearest.type.toString()
                         var flavor = 'Unknown host — mycelium adapting. Colony behaviour uncharted.'
-                        var undead = ['minecraft:zombie','minecraft:skeleton','minecraft:drowned','minecraft:phantom','minecraft:wither_skeleton','minecraft:stray','minecraft:husk','minecraft:zombie_villager','minecraft:zombified_piglin','minecraft:zoglin']
-                        var arthropod = ['minecraft:spider','minecraft:cave_spider']
-                        var livestock = ['minecraft:cow','minecraft:sheep','minecraft:pig','minecraft:chicken','minecraft:rabbit','minecraft:horse','minecraft:donkey','minecraft:mule','minecraft:llama']
-                        var aquatic = ['minecraft:squid','minecraft:glow_squid','minecraft:cod','minecraft:salmon','minecraft:tropical_fish','minecraft:pufferfish','minecraft:turtle','minecraft:axolotl','minecraft:tadpole']
-                        var hostVolatile = ['minecraft:creeper','minecraft:witch','minecraft:pillager','minecraft:vindicator','minecraft:ravager','minecraft:iron_golem']
-                        var neutral = ['minecraft:wolf','minecraft:cat','minecraft:fox','minecraft:bee','minecraft:goat','minecraft:panda','minecraft:polar_bear','minecraft:trader_llama']
-                        var sapient = ['minecraft:villager','minecraft:wandering_trader']
-                        var nether = ['minecraft:piglin','minecraft:blaze','minecraft:ghast','minecraft:magma_cube','minecraft:hoglin','minecraft:strider']
-                        var end = ['minecraft:enderman','minecraft:shulker']
+                        var undead = ['minecraft:zombie', 'minecraft:skeleton', 'minecraft:drowned', 'minecraft:phantom', 'minecraft:wither_skeleton', 'minecraft:stray', 'minecraft:husk', 'minecraft:zombie_villager', 'minecraft:zombified_piglin', 'minecraft:zoglin']
+                        var arthropod = ['minecraft:spider', 'minecraft:cave_spider']
+                        var livestock = ['minecraft:cow', 'minecraft:sheep', 'minecraft:pig', 'minecraft:chicken', 'minecraft:rabbit', 'minecraft:horse', 'minecraft:donkey', 'minecraft:mule', 'minecraft:llama']
+                        var aquatic = ['minecraft:squid', 'minecraft:glow_squid', 'minecraft:cod', 'minecraft:salmon', 'minecraft:tropical_fish', 'minecraft:pufferfish', 'minecraft:turtle', 'minecraft:axolotl', 'minecraft:tadpole']
+                        var hostVolatile = ['minecraft:creeper', 'minecraft:witch', 'minecraft:pillager', 'minecraft:vindicator', 'minecraft:ravager', 'minecraft:iron_golem']
+                        var neutral = ['minecraft:wolf', 'minecraft:cat', 'minecraft:fox', 'minecraft:bee', 'minecraft:goat', 'minecraft:panda', 'minecraft:polar_bear', 'minecraft:trader_llama']
+                        var sapient = ['minecraft:villager', 'minecraft:wandering_trader']
+                        var nether = ['minecraft:piglin', 'minecraft:blaze', 'minecraft:ghast', 'minecraft:magma_cube', 'minecraft:hoglin', 'minecraft:strider']
+                        var end = ['minecraft:enderman', 'minecraft:shulker']
 
                         if (undead.indexOf(mobType) !== -1) flavor = 'Reanimated tissue — mycelium bonded to necrotic substrate. Durable. Mindless.'
                         else if (arthropod.indexOf(mobType) !== -1) flavor = 'Chitinous host — spore threads woven between exoskeletal plates. Skittish but persistent.'
@@ -497,7 +497,7 @@ PlayerEvents.tick(function(event) {
                         for (var nj = 0; nj < allEntities.length; nj++) {
                             var ne = allEntities[nj]
                             var nndx = ne.x - nearest.x, nndy = ne.y - nearest.y, nndz = ne.z - nearest.z
-                            if (ne !== nearest && ne.tags.contains('myconid_infected') && nndx*nndx + nndy*nndy + nndz*nndz <= 1024) {
+                            if (ne !== nearest && ne.tags.contains('myconid_infected') && nndx * nndx + nndy * nndy + nndz * nndz <= 1024) {
                                 var neUUID = ne.uuid.toString()
                                 var isOwned = false
                                 for (var ok = 0; ok < infected.length; ok++) {
@@ -512,7 +512,7 @@ PlayerEvents.tick(function(event) {
                         player.tell(Text.of('§8Host integrity: §2' + integrity + ' §7(' + healthPct + '%) §8— Network: §2' + networkSize + '§7/§220'))
                         player.tell(Text.of('§8Adjacent nodes: §2' + nearbyNodes + ' §7— ' + nodeFlav))
                         player.tell(Text.of('§8Colonized §2' + daysSince + ' §8day(s) ago  §8Spread: §2' + spread))
-                    } catch(e) {}
+                    } catch (e) { }
                 }
             } else {
                 player.persistentData.putString('myconid_sneak_uuid', '')
@@ -565,7 +565,7 @@ PlayerEvents.tick(function(event) {
                     ne.isAlive() &&
                     ne !== mob &&
                     !ne.tags.contains('myconid_infected') &&
-                    spdx*spdx + spdy*spdy + spdz*spdz <= SPREAD_RANGE * SPREAD_RANGE) {
+                    spdx * spdx + spdy * spdy + spdz * spdz <= SPREAD_RANGE * SPREAD_RANGE) {
                     candidates.push(ne)
                 }
             }
@@ -580,7 +580,7 @@ PlayerEvents.tick(function(event) {
                             log.spreadCount = (log.spreadCount || 0) + 1
                             mob.persistentData.putString('myconid_log', JSON.stringify(log))
                         }
-                    } catch(e) {}
+                    } catch (e) { }
                     player.level.getServer().runCommandSilent('playsound minecraft:block.mycelium.step player ' + player.username + ' ' + player.x + ' ' + player.y + ' ' + player.z + ' 0.8 0.7')
                     player.displayClientMessage(Text.of('§2The network grows...'), true)
                 }
@@ -589,11 +589,11 @@ PlayerEvents.tick(function(event) {
     }
 })
 
-ServerEvents.commandRegistry(function(event) {
+ServerEvents.commandRegistry(function (event) {
     var JACommands = Java.loadClass('net.minecraft.commands.Commands')
     event.register(
-        JACommands.literal('myconid').requires(function(src) { return src.hasPermission(2) })
-            .then(JACommands.literal('purge').executes(function(ctx) {
+        JACommands.literal('myconid').requires(function (src) { return src.hasPermission(2) })
+            .then(JACommands.literal('purge').executes(function (ctx) {
                 var server = ctx.getSource().getServer()
                 var count = 0
                 var levels = toArray(server.getAllLevels())
@@ -613,7 +613,7 @@ ServerEvents.commandRegistry(function(event) {
                 for (var pi = 0; pi < players.length; pi++) {
                     players[pi].persistentData.remove('myconid_infected_uuids')
                 }
-                ctx.getSource().sendSuccess(function() { return Text.of('Purged ' + count + ' infected entities and cleared all networks.') }, false)
+                ctx.getSource().sendSuccess(function () { return Text.of('Purged ' + count + ' infected entities and cleared all networks.') }, false)
                 return 1
             }))
     )

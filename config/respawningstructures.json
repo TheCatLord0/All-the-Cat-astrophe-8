@@ -5,23 +5,23 @@
   },
   "minutesUntilRespawn": {
     "desc:": "Sets the time after which a structure can respawn, the timer starts after the last activity within the structure. default:5760 minutes(96h)",
-    "minutesUntilRespawn": 5760
+    "minutesUntilRespawn": 1440
   },
   "increaseDifficultyWithRespawn": {
     "desc:": "Enables increased difficulty for mobs in respawned dungeons(mobs can get enchanted items/potions effects), default: true",
-    "increaseDifficultyWithRespawn": true
+    "increaseDifficultyWithRespawn": false
   },
   "blockCountMod": {
     "desc:": "Modifies the placed/broken block count, which can prevent respawn. Setting it to zero means respawn will ignore placed/broken blocks. Setting it higher than 1.0 makes it more likely that players breaking/placing things in the structure will prevent its respawn.By default it blocks respawn after 200+(scales slightly with structure size) blocks placed/broken. default: 1.0",
-    "blockCountMod": 1.0
+    "blockCountMod": 0.0
   },
   "playerRespawnDist": {
     "desc:": "Sets the minimum distance from player respawn position(bed e.g.) to allow structure respawning, 0 to disable this. default: 200 blocks",
-    "playerRespawnDist": 200
+    "playerRespawnDist": 10
   },
   "playerNearbyTime": {
     "desc:": "Prevents respawns in too busy player areas, tracks how much percent of the respawntime a player was nearby loading the chunk. Resets respawn time counter when it prevent a structure respawn. default: 15 percent, range 0-100",
-    "playerNearbyTime": 15
+    "playerNearbyTime": 100
   },
   "dimensionBlackList": {
     "desc:": "List of blacklisted dimension ids, e.g. minecraft:overworld  Seperate multiple entries by , ",

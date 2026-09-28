@@ -6,6 +6,9 @@
 	# Default: 1
 	# Range: 0 ~ 4
 	display_mode = 1
+	#Should a panel containing components, a cover, or a custom color drop as an item when broken in creative mode?
+	#This prevents an accidental left click from permanently destroying a circuit. (default:true)
+	creative_panel_drops = true
 
 #Performance Settings
 [performance]
@@ -29,6 +32,6 @@
 	#Set to 0 for immediate updates. 20 ticks = 1 second. (default: 4)
 	# Default: 4
 	# Range: 0 ~ 100
-	light_update_delay = 4
+	light_update_delay = 8
 	#List of blocks from other mods to be treated as redstone wire.
 	redstone_wires = ["redstonepen:track", "cb_multipart:multipart", "cyclic:clock", "tinyredstone:redstone_panel"]

@@ -46,13 +46,13 @@ const INFUSE_TABLE = [
 ]
 var SCROLL_FORM_CLASSES = [
     { cls: 'com.hollingsworth.arsnouveau.common.spell.method.MethodProjectile', names: ['Bolt', 'Shot'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.method.MethodTouch',      names: ['Touch', 'Grasp'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.method.MethodSelf',       names: ['Me', 'Self'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.method.MethodUnderfoot',  names: ['Bottom', 'Feet'] },
-    { cls: 'alexthw.not_enough_glyphs.common.glyphs.forms.MethodMissile',      names: ['Missile', 'Lance'] }
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.method.MethodTouch', names: ['Touch', 'Grasp'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.method.MethodSelf', names: ['Me', 'Self'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.method.MethodUnderfoot', names: ['Bottom', 'Feet'] },
+    { cls: 'alexthw.not_enough_glyphs.common.glyphs.forms.MethodMissile', names: ['Missile', 'Lance'] }
 ]
-var AOE_PREFIXES  = ['', 'Wide', 'Vast', 'Enormous']
-var DUR_PREFIXES  = ['Brief', '', 'Lasting', 'Enduring', 'Eternal']
+var AOE_PREFIXES = ['', 'Wide', 'Vast', 'Enormous']
+var DUR_PREFIXES = ['Brief', '', 'Lasting', 'Enduring', 'Eternal']
 
 var EFFECT_DURATION_SET = {
     'com.hollingsworth.arsnouveau.common.spell.effect.EffectBubble': true,
@@ -70,27 +70,27 @@ var EFFECT_AOE_SET = {
 }
 
 var SCROLL_EFFECT_CLASSES = [
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectIgnite',      names: ['Blazing', 'Scorching'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectHarm',        names: ['Vicious', 'Wounding'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectHeal',        names: ['Mending', 'Restorative'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectLightning',   names: ['Thunderous', 'Shocking'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectDispel',      names: ['Cleansing', 'Nullifying'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectSlowfall',    names: ['Drifting', 'Floating'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectInvisibility',names: ['Phantom', 'Veiled'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectSnare',       names: ['Binding', 'Entangling'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectFreeze',      names: ['Glacial', 'Frost'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectPull',        names: ['Drawing', 'Magnetic'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectLight',       names: ['Radiant', 'Illuminating'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectBubble',      names: ['Floating', 'Soapy'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectFell',        names: ['Felling', 'Cleaving'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectBreak',       names: ['Shattering', 'Crushing'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectGrow',        names: ['Verdant', 'Flourishing'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectFirework',    names: ['Festive', 'Sparkling'] },
-    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectPhantomBlock',names: ['Conjured', 'Spectral'] },
-    { cls: 'alexthw.ars_elemental.common.glyphs.EffectSummonBee',                names: ['Swarming summon', 'Buzzing summon'] },
-    { cls: 'alexthw.ars_elemental.common.glyphs.EffectSummonSlime',              names: ['Gelatinous summon', 'Viscous summon'] },
-    { cls: 'alexthw.ars_elemental.common.glyphs.EffectSlipper',                  names: ['Slipping', 'Gliding'] },
-    { cls: 'alexthw.ars_elemental.common.glyphs.EffectGeyser',                   names: ['Gushing', 'Torrential'] }
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectIgnite', names: ['Blazing', 'Scorching'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectHarm', names: ['Vicious', 'Wounding'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectHeal', names: ['Mending', 'Restorative'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectLightning', names: ['Thunderous', 'Shocking'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectDispel', names: ['Cleansing', 'Nullifying'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectSlowfall', names: ['Drifting', 'Floating'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectInvisibility', names: ['Phantom', 'Veiled'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectSnare', names: ['Binding', 'Entangling'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectFreeze', names: ['Glacial', 'Frost'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectPull', names: ['Drawing', 'Magnetic'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectLight', names: ['Radiant', 'Illuminating'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectBubble', names: ['Floating', 'Soapy'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectFell', names: ['Felling', 'Cleaving'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectBreak', names: ['Shattering', 'Crushing'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectGrow', names: ['Verdant', 'Flourishing'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectFirework', names: ['Festive', 'Sparkling'] },
+    { cls: 'com.hollingsworth.arsnouveau.common.spell.effect.EffectPhantomBlock', names: ['Conjured', 'Spectral'] },
+    { cls: 'alexthw.ars_elemental.common.glyphs.EffectSummonBee', names: ['Swarming summon', 'Buzzing summon'] },
+    { cls: 'alexthw.ars_elemental.common.glyphs.EffectSummonSlime', names: ['Gelatinous summon', 'Viscous summon'] },
+    { cls: 'alexthw.ars_elemental.common.glyphs.EffectSlipper', names: ['Slipping', 'Gliding'] },
+    { cls: 'alexthw.ars_elemental.common.glyphs.EffectGeyser', names: ['Gushing', 'Torrential'] }
 ]
 
 
@@ -181,37 +181,37 @@ function tryConsumeSourceFood(player, itemId) {
     return true
 }
 
-NeoOriginsEvents.originChosen(function(event) {
+NeoOriginsEvents.originChosen(function (event) {
     if (String(event.getOriginId()) !== 'cat-astrophe:resonant') return
     var player = event.getPlayer()
     player.persistentData.putInt('resonant_is_owner', 1)
     player.tags.add('resonant_owner')
     player.tags.remove('resonant_lost_pending')
-    try { player.getFoodData().setSaturation(0) } catch(e) {}
+    try { player.getFoodData().setSaturation(0) } catch (e) { }
     createSourceBossbar(player)
 })
 
-NeoOriginsEvents.originChanged(function(event) {
+NeoOriginsEvents.originChanged(function (event) {
     if (String(event.getOldOriginId()) !== 'cat-astrophe:resonant') return
     event.getPlayer().tags.add('resonant_lost_pending')
 })
 
-PlayerEvents.loggedIn(function(event) {
+PlayerEvents.loggedIn(function (event) {
     var player = event.player
     if (player.persistentData.getInt('resonant_is_owner') !== 1) return
     player.tags.add('resonant_owner')
     player.tags.remove('resonant_lost_pending')
-    try { player.getFoodData().setSaturation(0) } catch(e) {}
+    try { player.getFoodData().setSaturation(0) } catch (e) { }
     createSourceBossbar(player)
 })
 
-PlayerEvents.loggedOut(function(event) {
+PlayerEvents.loggedOut(function (event) {
     var player = event.player
     if (player.tags.contains('resonant_owner')) removeSourceBossbar(player)
     player.tags.remove('resonant_owner')
 })
 
-PlayerEvents.tick(function(event) {
+PlayerEvents.tick(function (event) {
     var player = event.player
 
     if (player.tags.contains('resonant_lost_pending')) {
@@ -234,7 +234,7 @@ PlayerEvents.tick(function(event) {
         var fd = player.getFoodData()
         fd.setSaturation(0)
         if (fd.getFoodLevel() > 19) fd.setFoodLevel(19)
-    } catch(e) {}
+    } catch (e) { }
 
     var curHealth = Math.floor(player.health)
     var prevHealth = player.persistentData.contains('resonant_prev_health') ? player.persistentData.getInt('resonant_prev_health') : curHealth
@@ -301,7 +301,7 @@ PlayerEvents.tick(function(event) {
     }
 })
 
-ItemEvents.rightClicked(function(event) {
+ItemEvents.rightClicked(function (event) {
     if (String(event.hand) !== 'MAIN_HAND') return
     var player = event.player
     if (!player || !player.tags.contains('resonant_owner')) return
@@ -309,7 +309,7 @@ ItemEvents.rightClicked(function(event) {
     if (tryConsumeSourceFood(player, String(event.item.id))) event.cancel()
 })
 
-BlockEvents.rightClicked(function(event) {
+BlockEvents.rightClicked(function (event) {
     if (String(event.hand) !== 'MAIN_HAND') return
     var player = event.player
     if (!player || !player.tags.contains('resonant_owner')) return
@@ -342,7 +342,7 @@ BlockEvents.rightClicked(function(event) {
                     }
                 }
             }
-        } catch(e) {}
+        } catch (e) { }
         if (gain > 0) {
             setPlayerSource(player, currentSource + gain)
             updateSourceBossbar(player, currentSource + gain)
@@ -409,13 +409,13 @@ function createSpellParchment() {
         var imbuedItem = JABuiltInRegistries.ITEM.get(JAResourceLocation.parse('ars_additions:imbued_spell_parchment'))
 
         return JACasterTomeData.makeTome(imbuedItem, spellName, spell, '')
-    } catch(e) {
+    } catch (e) {
         console.error('[resonant] createSpellParchment failed: ' + e)
         return null
     }
 }
 
-NeoOriginsEvents.powerActivated(function(event) {
+NeoOriginsEvents.powerActivated(function (event) {
     if (String(event.getPowerId()) !== 'cat-astrophe:resonant_channel') return
     var player = event.getPlayer()
     player.tags.remove('resonant_channeled')
@@ -455,7 +455,7 @@ NeoOriginsEvents.powerActivated(function(event) {
                 if (contractList[i] === 'void_chord') { hasVoidChord = true; break }
             }
         }
-    } catch(e) {}
+    } catch (e) { }
 
     var hp = player.health
     var source = getPlayerSource(player)
@@ -490,7 +490,7 @@ NeoOriginsEvents.powerActivated(function(event) {
     player.level.getServer().runCommandSilent('playsound ars_nouveau:ea_channel block ' + player.username + ' ' + player.x + ' ' + player.y + ' ' + player.z + ' 0.8 1.2')
     player.level.getServer().runCommandSilent('particle minecraft:end_rod ' + player.x + ' ' + (player.y + 0.5) + ' ' + player.z + ' 0.3 0.5 0.3 0.05 15')
 })
-PlayerEvents.respawned(function(event) {
+PlayerEvents.respawned(function (event) {
     var player = event.player
     if (player.persistentData.getInt('resonant_is_owner') !== 1) return
 

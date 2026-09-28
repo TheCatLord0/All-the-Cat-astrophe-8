@@ -180,12 +180,6 @@
       return
     }
 
-    if (!isEquipped(player)) {
-      disable(player)
-      actionBar(player, 'Aeternitas Conversion is not equipped.')
-      return
-    }
-
     var data = getData(player)
     var cooldown = data.getInt(COOLDOWN_KEY)
 

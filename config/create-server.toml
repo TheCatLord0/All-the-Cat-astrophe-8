@@ -98,7 +98,7 @@
 	#Game ticks between Kinetic Blocks checking whether their source is still valid.
 	# Default: 60
 	# Range: > 5
-	kineticValidationFrequency = 60
+	kineticValidationFrequency = 120
 	#.
 	#multiplier used for calculating exhaustion from speed when a crank is turned.
 	# Default: 0.009999999776482582
@@ -153,7 +153,7 @@
 		#Game ticks required for a Fan-based processing recipe to take effect.
 		# Default: 150
 		# Range: > 0
-		fanProcessingTime = 150
+		fanProcessingTime = 75
 
 	#.
 	#Moving Contraptions
@@ -442,7 +442,7 @@
 	#The amount of ticks a factory gauge waits between requests.
 	# Default: 100
 	# Range: > 5
-	factoryGaugeTimer = 100
+	factoryGaugeTimer = 200
 	#.
 	#Whether hostile mobs walking near a seat will start riding it.
 	seatHostileMobs = true
