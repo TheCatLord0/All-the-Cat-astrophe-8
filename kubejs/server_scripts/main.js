@@ -647,17 +647,14 @@ ServerEvents.recipes(event => {
     .dummy('kubejs:craft_the_mark')
     .id('kubejs:ritual/mark_of_cain_creation')
 
-  event.recipes.create.mechanical_crafting("neoorigins:orb_of_origin", [
-    '  S  ',
-    ' PEP ',
-    'SEDES',
-    ' PEP ',
-    '  S  '
+  event.shaped('neoorigins:orb_of_origin', [
+    'DND',
+    'NSN',
+    'DND'
   ], {
-    D: /iceandfire:dragonegg_.*/,
-    E: "ars_elemental:mark_of_mastery",
-    P: "mekanism:pellet_polonium",
-    S: "create_enchantment_industry:super_experience_nugget"
+    D: 'minecraft:diamond_block',
+    N: 'minecraft:netherite_ingot',
+    S: 'minecraft:nether_star'
   })
   event.recipes.ars_nouveau.enchanting_apparatus(
     [

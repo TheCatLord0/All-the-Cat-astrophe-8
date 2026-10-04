@@ -11,9 +11,12 @@ const FIRST_BLADE_DRAWBACK = 0.33
 // STOMPEEZ
 const STOMPEEZ_ITEM = 'kubejs:stompeez'
 const STOMPEEZ_BOOST = 1.2
+const STOMPEEZ_GROUND_BOOST = 6.0
+const STOMPEEZ_GLIDING_BOOST = 0.4
 const STOMPEEZ_VERTICAL_MULTIPLIER = 0.1
 const STOMPEEZ_MAX_SPEED = 4.0
 const STOMPEEZ_RECHARGE = 40
+const STOMPEEZ_GLIDING_RECHARGE = 200
 // Recipes
 ServerEvents.recipes(event => {
     event.shaped(
@@ -309,8 +312,10 @@ EntityEvents.beforeHurt(event => {
     var CHARGE_2 = 'stompeez_charge_2'
     NetworkEvents.dataReceived('stompeez_dash', event => {
         var player = event.player
-        if (!hasEquippedCurio(player, STOMPEEZ_ITEM)) return
-        if (player.isFallFlying()) return
+        if (!player || !hasEquippedCurio(player, STOMPEEZ_ITEM)) return
+        var gliding = player.isFallFlying()
+        var grounded = player.onGround() && !gliding
+        var boost = grounded ? STOMPEEZ_GROUND_BOOST : STOMPEEZ_BOOST
         var data = player.persistentData
         var charge
         if (data.getInt(CHARGE_1) <= 0) {
@@ -330,7 +335,7 @@ EntityEvents.beforeHurt(event => {
         if (groundInput > 0.001) {
             dirX = moveX / groundInput
             dirZ = moveZ / groundInput
-            if (player.onGround()) {
+            if (grounded) {
                 dirY = 0
             } else {
                 var verticalReference = Math.abs(motion.y)
@@ -347,9 +352,9 @@ EntityEvents.beforeHurt(event => {
             dirY = motion.y / length
             dirZ = motion.z / length
         }
-        var newX = motion.x + dirX * STOMPEEZ_BOOST
+        var newX = motion.x + dirX * boost
         var newY = motion.y + dirY * STOMPEEZ_BOOST * STOMPEEZ_VERTICAL_MULTIPLIER
-        var newZ = motion.z + dirZ * STOMPEEZ_BOOST
+        var newZ = motion.z + dirZ * boost
         var horizontalSpeed = Math.sqrt(
             newX * newX +
             newZ * newZ
@@ -367,7 +372,7 @@ EntityEvents.beforeHurt(event => {
             )
         )
         player.hurtMarked = true
-        data.putInt(charge, STOMPEEZ_RECHARGE)
+        data.putInt(charge, gliding ? STOMPEEZ_GLIDING_RECHARGE : STOMPEEZ_RECHARGE)
     })
     PlayerEvents.tick(event => {
         var data = event.player.persistentData

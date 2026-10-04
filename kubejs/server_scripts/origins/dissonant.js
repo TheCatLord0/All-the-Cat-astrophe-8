@@ -1,3 +1,4 @@
+const WARNING_TEXT = '\n\n§c§l[WARNING]§r§c\nThis contract may be changed due to balancing reasons!\nThe Dissonant may remove this contract at any time, and the effects will be removed.\nAccepting this contract lets the Dissonant control your soul causing them to instantly kill you, teleport to you, or apply certain effects with a cooldown.\n'
 var DISSONANT_CONTRACT_ITEMS = [
     'kubejs:martyr_core'
 ]
@@ -17,7 +18,7 @@ var DISSONANT_CONTRACTS = [
         id: 'revenant',
         short: 'Revenant',
         name: 'Revenant',
-        desc: "One dies only when their soul escapes their corpse, what if we locked it to this plane? Which the Revenant Contract does exactly however, the body doesn't take the time to recover causing them to be frailer. (Death Prevention, -1 Heart per Prevention)",
+        desc: "One dies only when their soul escapes their corpse, what if we locked it to this plane? Which the Revenant Contract does exactly however, the body doesn't take the time to recover causing them to be frailer. (Death Prevention, -1 Heart per Prevention)"+WARNING_TEXT,
         attrs: [],
         fx: [],
         requireItem: 'minecraft:totem_of_undying'
@@ -26,7 +27,7 @@ var DISSONANT_CONTRACTS = [
         id: 'knowledge',
         short: 'Knowledge',
         name: 'Forbidden Knowledge',
-        desc: "By accepting this, the Dissonant will give you eldritch and forbidden knowledge causing you to be in a state of madness. (+50% XP Gained, -20% Attack Damage)",
+        desc: "By accepting this, the Dissonant will give you eldritch and forbidden knowledge causing you to be in a state of madness. (+50% XP Gained, -20% Attack Damage)"+WARNING_TEXT,
         attrs: [{ attr: 'irons_lib:experience_gained', id: 'dissonant:knowledge_xp', amount: 0.5, op: 'add_multiplied_base' },
         { attr: 'minecraft:generic.attack_damage', id: 'dissonant:knowledge_damage', amount: -0.2, op: 'add_multiplied_base' }
         ],
@@ -36,7 +37,7 @@ var DISSONANT_CONTRACTS = [
         id: 'embers',
         short: 'Fire',
         name: 'Fear no Fire',
-        desc: "Having been afraid of fire all one's life will make them gravitate towards this type of Contract which lowers one's health but grants them the magical effect of Fire Resistance. (-1 Hearts, +Fire Resistance)",
+        desc: "Having been afraid of fire all one's life will make them gravitate towards this type of Contract which lowers one's health but grants them the magical effect of Fire Resistance. (-1 Hearts, +Fire Resistance)"+WARNING_TEXT,
         attrs: [{ attr: 'minecraft:generic.max_health', id: 'dissonant:embers_health', amount: -2 }],
         fx: [{ id: 'minecraft:fire_resistance', amp: 0 }]
     },
@@ -44,7 +45,7 @@ var DISSONANT_CONTRACTS = [
         id: 'web_pact',
         short: 'Silk',
         name: 'Silk touched',
-        desc: "Webs cause fear to so many, not for you. (Cobweb Immunity, -20% Attack Damage)",
+        desc: "Webs cause fear to so many, not for you. (Cobweb Immunity, -20% Attack Damage)"+WARNING_TEXT,
         attrs: [
             { attr: 'minecraft:generic.attack_damage', id: 'dissonant:gossamer_damage', amount: -0.2, op: 'add_multiplied_base' }
         ],
@@ -55,7 +56,7 @@ var DISSONANT_CONTRACTS = [
         id: 'dwarf',
         short: 'Dwarven',
         name: 'Dwarven Might',
-        desc: "Some wish to invoke the might of a Dwarf, shortening them and giving faster mining speed, however you must carry more. (-30% Size, +50% Mining Speed, +4 Attack, -30% Saturation, -10% Speed)",
+        desc: "Some wish to invoke the might of a Dwarf, shortening them and giving faster mining speed, however you must carry more. (-30% Size, +50% Mining Speed, +4 Attack, -30% Saturation, -10% Speed)"+WARNING_TEXT,
         attrs: [
             { attr: 'minecraft:generic.scale', id: 'dissonant:dwarf_scale', amount: -0.34 },
             { attr: 'minecraft:player.block_break_speed', id: 'dissonant:dwarf_mining', amount: 0.5, op: 'add_multiplied_base' },
@@ -69,7 +70,7 @@ var DISSONANT_CONTRACTS = [
         id: 'waif',
         short: 'Tiny',
         name: 'Tiny Soul, Large Heart',
-        desc: 'You were always the smaller person at heart, having this Contract will make you faster at the cost of there being less surface area to protect from any attack. (-40% Size, +20% Speed, -3 Heart, -20% Gravity)',
+        desc: 'You were always the smaller person at heart, having this Contract will make you faster at the cost of there being less surface area to protect from any attack. (-40% Size, +20% Speed, -3 Heart, -20% Gravity)'+WARNING_TEXT,
         attrs: [
             { attr: 'minecraft:generic.scale', id: 'dissonant:waif_scale', amount: -0.4 },
             { attr: 'minecraft:generic.movement_speed', id: 'dissonant:waif_speed', amount: 0.2, op: 'add_multiplied_base' },
@@ -82,7 +83,7 @@ var DISSONANT_CONTRACTS = [
         id: 'colossus',
         short: 'Large',
         name: 'Large Soul, Tiny Heart',
-        desc: "Always the bigger person even if the other was wrong, your soul reflected that you wished to be a wall for others but your frail body wouldn't allow it, until this Contract was branded onto you. (+50% Size, +4 Attack, +Gravity, Hunger I)",
+        desc: "Always the bigger person even if the other was wrong, your soul reflected that you wished to be a wall for others but your frail body wouldn't allow it, until this Contract was branded onto you. (+50% Size, +4 Attack, +Gravity, Hunger I)"+WARNING_TEXT,
         attrs: [
             { attr: 'minecraft:generic.scale', id: 'dissonant:colossus_scale', amount: 0.3 },
             { attr: 'minecraft:generic.attack_damage', id: 'dissonant:colossus_damage', amount: 4 },
@@ -96,7 +97,7 @@ var DISSONANT_CONTRACTS = [
         id: 'knight',
         short: 'Metal',
         name: 'Metal Ossification',
-        desc: 'This Contract slowly, painfully, eternally changes your bones to be that of metal causing you to move extremely slowly however your bones will not break. (+6 Armor, +Slowness I)',
+        desc: 'This Contract slowly, painfully, eternally changes your bones to be that of metal causing you to move extremely slowly however your bones will not break. (+6 Armor, +Slowness I)'+WARNING_TEXT,
         attrs: [{ attr: 'minecraft:generic.armor', id: 'dissonant:knight_armor', amount: 6 }],
         fx: [{ id: 'minecraft:slowness', amp: 0 }]
     },
@@ -104,7 +105,7 @@ var DISSONANT_CONTRACTS = [
         id: 'leviathan',
         short: 'Leviathan',
         name: 'Leviathan',
-        desc: 'You were always fascinated by the Deep, drawn towards it, your soul screams to be within it, your body disallowed it, this Contract will force it into the Deep. (Water Breathing, 3x Swim Speed, -20% Land Speed)',
+        desc: 'You were always fascinated by the Deep, drawn towards it, your soul screams to be within it, your body disallowed it, this Contract will force it into the Deep. (Water Breathing, 3x Swim Speed, -20% Land Speed)'+WARNING_TEXT,
         attrs: [
             { attr: 'additionalentityattributes:generic.water_speed', id: 'dissonant:leviathan_swim', amount: 2 },
             { attr: 'minecraft:generic.movement_speed', id: 'dissonant:leviathan_land', amount: -0.2, op: 'add_multiplied_base' }
@@ -115,7 +116,7 @@ var DISSONANT_CONTRACTS = [
         id: 'void_chord',
         short: 'Void Song',
         name: 'Song of the Void',
-        desc: "Contrary to the believe that Resonant are Angels they are nothing more than another creature in the world that have free will, so they will make a deal with a Dissonant to use darker powers. (Channel consumes 3 Hearts)",
+        desc: "Contrary to the believe that Resonant are Angels they are nothing more than another creature in the world that have free will, so they will make a deal with a Dissonant to use darker powers. (Channel consumes 3 Hearts)"+WARNING_TEXT,
         attrs: [],
         fx: [],
         color: 'aqua',
@@ -125,7 +126,7 @@ var DISSONANT_CONTRACTS = [
         id: 'overclock',
         short: '20000 Volts',
         name: 'DEATH AT 20,000 VOLTS',
-        desc: 'Less of a Contract between Automaton and Dissonant and more of a modification to your core circuits, letting you turn your Potential Energy into Electric. (80%< Momentum turns attacks electric, Uses 40% Momentum per hit)',
+        desc: 'Less of a Contract between Automaton and Dissonant and more of a modification to your core circuits, letting you turn your Potential Energy into Electric. (80%< Momentum turns attacks electric, Uses 40% Momentum per hit)'+WARNING_TEXT,
         attrs: [],
         fx: [],
         color: 'yellow',
