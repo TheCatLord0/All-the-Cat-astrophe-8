@@ -1,8 +1,10 @@
 (function () {
   const COOLDOWN_TICKS = 5 * 20
   const EFFECT_DURATION = 2147483647
-  const ARS_MANA_PER_HEALTH_POINT = 10
-  const IRONS_MANA_PER_HEALTH_POINT = 10
+  const FLAT_ARS_MANA = 10
+  const FLAT_IRONS_MANA = 5
+  const PERCENT_ARS_MANA = 0.05
+  const PERCENT_IRONS_MANA = 0.05
 
   const Component = Java.loadClass('net.minecraft.network.chat.Component')
   const MobEffectInstance = Java.loadClass('net.minecraft.world.effect.MobEffectInstance')
@@ -16,6 +18,7 @@
   const IronMagicData = Java.loadClass('io.redspace.ironsspellbooks.api.magic.MagicData')
   const IronSyncManaPacket = Java.loadClass('io.redspace.ironsspellbooks.network.SyncManaPacket')
   const PacketDistributor = Java.loadClass('net.neoforged.neoforge.network.PacketDistributor')
+  const IronAttributes = Java.loadClass('io.redspace.ironsspellbooks.api.registry.AttributeRegistry')
 
   const CHANNEL = 'aeternitas_conversion'
   const ITEM_ID = 'kubejs:aeternitas_control'
@@ -116,12 +119,13 @@
   }
 
   function giveMana(player, health) {
-    var arsAmount = health * ARS_MANA_PER_HEALTH_POINT
-    var ironAmount = health * IRONS_MANA_PER_HEALTH_POINT
     var arsCap = null
     var ironData = null
     var oldArsMana = 0
     var oldIronMana = 0
+    var arsAmount = health * (FLAT_ARS_MANA + arsCap.getMaxMana() * 0.05)
+    var ironMaxMana = player.getAttributeValue(IronAttributes.MAX_MANA)
+    var ironAmount = health * (10 + ironMaxMana * 0.05)
 
     try {
       arsCap = new ArsManaCap(player)
@@ -167,6 +171,11 @@
         data.putInt(COOLDOWN_KEY, cooldown - 1)
       }
 
+      if (!isEquipped(player)) {
+        disable(player)
+        return
+      }
+
       if (data.getBoolean(ACTIVE_KEY) && !isEquipped(player)) {
         disable(player)
       }
@@ -175,7 +184,7 @@
 
   NetworkEvents.dataReceived(CHANNEL, function (event) {
     var player = getPacketPlayer(event)
-
+    if (!player || !isEquipped(player)) return
     if (!player) {
       return
     }
@@ -187,14 +196,15 @@
       actionBar(
         player,
         'Aeternitas Conversion cooling down: ' +
-          Math.ceil(cooldown / 20) +
-          's'
+        Math.ceil(cooldown / 20) +
+        's'
       )
 
       return
     }
 
     data.putInt(COOLDOWN_KEY, COOLDOWN_TICKS)
+
 
     if (data.getBoolean(ACTIVE_KEY)) {
       disable(player)

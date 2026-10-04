@@ -2,7 +2,7 @@ const ItemAttributeModifiers = Java.loadClass('net.minecraft.world.item.componen
 
 const damage = 'minecraft:generic.attack_damage'
 const maxMana = 'irons_spellbooks:max_mana'
-const manaRegeneration = 'irons_spellbooks:mana_regeneration'
+const manaRegeneration = 'irons_spellbooks:mana_regen'
 const spellPower = 'irons_spellbooks:spell_power'
 const spellResist = 'irons_spellbooks:spell_resist'
 const arsDamageResist = 'ars_nouveau:sauce.perk.spell_resistance'
@@ -10,7 +10,7 @@ const fireSpellPower = 'irons_spellbooks:fire_spell_power'
 const enderSpellPower = 'irons_spellbooks:ender_spell_power'
 const eldritchSpellPower = 'irons_spellbooks:eldritch_spell_power'
 const bloodSpellPower = 'irons_spellbooks:blood_spell_power'
-const occultSpellPower = 'discerning_the_eldritch:occult_spell_power'
+const occultSpellPower = 'discerning_the_eldritch:ritual_spell_power'
 const cooldownReduction = 'irons_spellbooks:cooldown_reduction'
 const castTimeReduction = 'irons_spellbooks:cast_time_reduction'
 const manaSteal = 'aces_spell_utils:mana_steal'
@@ -233,21 +233,29 @@ ItemEvents.modification(event => {
 
 ItemEvents.modification(event => {
   const curiosFix = (itemID, attribute, value, operation) => {
-    const entries = Array.isArray(attribute) ? attribute : [[attribute, value, operation]]
+    const entries = Array.isArray(attribute)
+      ? attribute
+      : [[attribute, value, operation]]
+
     const modifierItem = itemID.replace(':', '_')
 
     event.modify(itemID, item => {
       const builder = CuriosJSCapabilityBuilder.create()
+        .modifyAttribute(context => {
+          const slot = context.getSlotContext()
+          const slotID = `${slot.identifier()}_${slot.index()}`
 
-      entries.forEach(entry => {
-        const modifierAttribute = entry[0].replace(':', '_')
-        builder.addAttribute(
-          entry[0],
-          `thecatlord:${modifierAttribute}_${modifierItem}`,
-          entry[1],
-          entry[2]
-        )
-      })
+          entries.forEach((entry, index) => {
+            const modifierAttribute = entry[0].replace(':', '_')
+
+            context.modify(
+              entry[0],
+              `thecatlord:${modifierAttribute}_${modifierItem}_${slotID}_${index}`,
+              entry[1],
+              entry[2]
+            )
+          })
+        })
 
       item.attachCuriosCapability(builder)
     })
@@ -291,8 +299,8 @@ ItemEvents.modification(event => {
   ])
 
   curiosFix('hazennstuff:scroll_sheath', [
-    [spellPower, 0.05, 'add_value'],
-    [spellResist, 0.05, 'add_value']
+    [spellPower, 0.1, 'add_value'],
+    [spellResist, 0.1, 'add_value']
   ])
 
   curiosFix('discerning_the_eldritch:casters_mantle', [
@@ -318,7 +326,7 @@ EntityJSEvents.attributes(event => {
   skeleton.forEach(skeleton => {
     event.modify(skeleton, attribute => {
       attribute.add('minecraft:generic.max_health', 12)
-      attribute.add('apothic_attributes:dodge_chance', 0.2)
+      attribute.add('apothic_attributes:dodge_chance', 0.4)
     })
   })
 
@@ -333,6 +341,9 @@ EntityJSEvents.attributes(event => {
     })
     event.modify('minecraft:cave_spider', attribute => {
       attribute.add('apothic_attributes:dodge_chance', 0.3)
+    })
+    event.modify('minecraft:creeper', attribute => {
+      attribute.add('minecraft:generic.knockback_resistance', 1.0)
     })
   })
 })

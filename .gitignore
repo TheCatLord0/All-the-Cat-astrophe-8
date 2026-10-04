@@ -83,3 +83,10 @@ dynamic-data-pack-cache/
 ponders_watched_azimuth.json
 defaultoptions.journal.json
 defaultconfigs/biolith/general.json
+config/Veinminer/blocks.json
+config/Veinminer/client_patterns.json
+config/Veinminer/groups.json
+config/Veinminer/settings.json
+config/Veinminer/update/veinminer-client-neoforge-2.11.2+1.21.1.jar
+config/Veinminer/update/veinminer-neoforge-2.11.2+1.21.1.jar
+hotbar.nbt

@@ -49,7 +49,8 @@ let bannedItems = [
   'hazennstuff:archery_upgrade_orb',
   'immersiveengineering:toolbox',
   'spectrum:cotton_cloud_boots',
-  'mekanism:upgrade_anchor'
+  'mekanism:upgrade_anchor',
+  'neoorigins:orb_of_class'
 ]
 
 PlayerEvents.inventoryChanged(event => {
@@ -179,6 +180,13 @@ ServerEvents.tags('item', event => {
   event.add('minecraft:enchantable/leg_armor', armor.leggings)
   event.add('minecraft:foot_armor', armor.boots)
   event.add('minecraft:enchantable/foot_armor', armor.boots)
+})
+// Item Tags
+ServerEvents.tags('block', event => {
+  event.add('ars_nouveau:gravity_blacklist',
+    ['aeronautics:levitite'],
+    ['aeronautics:pearlescent_levitite'],
+    ['ae2:flawless_budding_quartz'])
 })
 // Replacement recipes
 ServerEvents.recipes(event => {
@@ -698,63 +706,51 @@ ServerEvents.recipes(event => {
   event.recipes.create.filling('minecraft:ender_pearl', [Fluid.of('minecraft:water', 500), 'create:powdered_obsidian'])
   event.recipes.create.compacting('create:refined_radiance', ['minecraft:white_dye', 'create:andesite_alloy']).superheated()
   event.recipes.create.compacting('create:shadow_steel', ['minecraft:black_dye', 'create:andesite_alloy']).superheated()
-  {
-    var helmet = ['hazennstuff:flesh_mass_helmet', 'hazennstuff:the_wither_helmet']
-    var chest = ['hazennstuff:flesh_mass_chestplate', 'hazennstuff:the_wither_chestplate']
-    var leg = ['hazennstuff:flesh_mass_leggings', 'hazennstuff:the_wither_leggings']
-    var boot = ['hazennstuff:flesh_mass_boots', 'hazennstuff:the_wither_boots']
-    helmet.forEach(ingredient => {
-      event.shaped(
-        'hazennstuff:dead_king_helmet', [
-        'RBR',
-        'BAB',
-        ' K '
-      ], {
-        R: "irons_spellbooks:blood_rune",
-        B: "kubejs:kings_rib",
-        A: ingredient,
-        K: 'irons_spellbooks:bone_key'
-      })
-    })
-    chest.forEach(ingredient => {
-      event.shaped(
-        'hazennstuff:dead_king_chestplate', [
-        'BAB',
-        'RKR',
-        'BBB'
-      ], {
-        R: "irons_spellbooks:blood_rune",
-        B: "kubejs:kings_rib",
-        A: ingredient,
-        K: 'irons_spellbooks:bone_key'
-      })
-    })
-    leg.forEach(ingredient => {
-      event.shaped(
-        'hazennstuff:dead_king_leggings', [
-        'RKR',
-        'BAB',
-        'B B'
-      ], {
-        R: "irons_spellbooks:blood_rune",
-        B: "kubejs:kings_rib",
-        A: ingredient,
-        K: 'irons_spellbooks:bone_key'
-      })
-    })
-    boot.forEach(ingredient => {
-      event.shaped(
-        'hazennstuff:dead_king_boots', [
-        'RKR',
-        'BAB'
-      ], {
-        R: "irons_spellbooks:blood_rune",
-        B: "kubejs:kings_rib",
-        A: ingredient,
-        K: 'irons_spellbooks:bone_key'
-      })
-    })
-  }
+
+  event.shaped(
+    'hazennstuff:dead_king_helmet', [
+    'RBR',
+    'BAB',
+    ' K '
+  ], {
+    R: "irons_spellbooks:blood_rune",
+    B: "kubejs:kings_rib",
+    A: ['hazennstuff:flesh_mass_helmet', 'hazennstuff:the_wither_helmet'],
+    K: 'irons_spellbooks:bone_key'
+  })
+  event.shaped(
+    'hazennstuff:dead_king_chestplate', [
+    'BAB',
+    'RKR',
+    'BBB'
+  ], {
+    R: "irons_spellbooks:blood_rune",
+    B: "kubejs:kings_rib",
+    A: ['hazennstuff:flesh_mass_chestplate', 'hazennstuff:the_wither_chestplate'],
+    K: 'irons_spellbooks:bone_key'
+  })
+  event.shaped(
+    'hazennstuff:dead_king_leggings', [
+    'RKR',
+    'BAB',
+    'B B'
+  ], {
+    R: "irons_spellbooks:blood_rune",
+    B: "kubejs:kings_rib",
+    A: ['hazennstuff:flesh_mass_leggings', 'hazennstuff:the_wither_leggings'],
+    K: 'irons_spellbooks:bone_key'
+  })
+  event.shaped(
+    'hazennstuff:dead_king_boots', [
+    'RKR',
+    'BAB'
+  ], {
+    R: "irons_spellbooks:blood_rune",
+    B: "kubejs:kings_rib",
+    A: ['hazennstuff:flesh_mass_boots', 'hazennstuff:the_wither_boots'],
+    K: 'irons_spellbooks:bone_key'
+  })
+
   event.smithing('hazennstuff:true_nights_edge', 'hazennstuff:shadow_scale', 'hazennstuff:nights_edge', 'hazennstuff:hallowed_ingot')
   event.shaped(
     'hazennstuff:thorn_chakram', [
@@ -777,6 +773,15 @@ ServerEvents.recipes(event => {
     C: 'kubejs:cat_plush',
     E: 'hazennstuff:excalibur_fragment'
   })
+  event.shaped(
+    'discerning_the_eldritch:razor_sheath', [
+    'MBM',
+    'VVV'
+  ], {
+    M: 'irons_spellbooks:mithril_ingot',
+    B: 'irons_spellbooks:blood_vial',
+    V: 'irons_spellbooks:bloody_vellum'
+  })
   event.smithing('dimdungeons:item_blank_theme_key[dimdungeons:dungeon_key_data={key_activated:false,built:false,dest_x:-1L,dest_z:-1L,name_type:0,name_part_1:0,name_part_2:0,theme:4,dungeon_type:"BASIC"}]', 'minecraft:ender_eye', 'minecraft:trial_key', 'irons_spellbooks:uncommon_ink')
   event.smithing('dimdungeons:item_blank_theme_key[dimdungeons:dungeon_key_data={key_activated:false,built:false,dest_x:-1L,dest_z:-1L,name_type:0,name_part_1:0,name_part_2:0,theme:5,dungeon_type:"BASIC"}]', 'minecraft:ender_eye', 'minecraft:trial_key', 'mekanism:advanced_control_circuit')
 })
@@ -790,7 +795,7 @@ let teleporters = [
 ItemEvents.rightClicked(teleporters, event => {
   const { player, server, item } = event
   server.scheduleInTicks(1, callback => {
-    player.addItemCooldown(item, 1200)
+    player.addItemCooldown(item, 600)
   })
 })
 let portal = [
@@ -805,8 +810,6 @@ PlayerEvents.tick(event => {
   const currentBlock = level.getBlock(pos).id
   const blockBelow = level.getBlock(pos.below()).id
   if (!portal.includes(currentBlock) && !portal.includes(blockBelow)) return
-  player.potionEffects.add('minecraft:nausea', 10 * 20, 0)
-  player.potionEffects.add('hazennstuff:mana_sickness', 30 * 20, 0)
 })
 ServerEvents.tags("entity_type", (event) => {
   event.add("industrialforegoing:mob_duplicator_blacklist", ["minecraft:warden", "@cataclysm", /iceandfire:.*dragon/, "@irons_spellbooks", '#c:bosses'])
@@ -910,7 +913,6 @@ RecipeViewerEvents.addInformation('item', event => {
 })
 EntityJSEvents.biomeSpawns(event => {
   event.removeSpawn('irons_spellbooks:necromancer', ['#minecraft:is_overworld'])
-  event.removeSpawn('irons_spellbooks:necromancer', ['#minecraft:is_overworld'])
 })
 const LivingIncomingDamageEvent = Java.loadClass('net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent')
 const EntityJoinLevelEvent = Java.loadClass('net.neoforged.neoforge.event.entity.EntityJoinLevelEvent')
@@ -933,11 +935,11 @@ NativeEvents.onEvent(EntityJoinLevelEvent, event => {
   const boss = BuiltInRegistries.ENTITY_TYPE.getTag(bossTag).get().contains(entityHolder)
 
   if (boss) {
-    attribute.setBaseValue(0.8)
+    attribute.setBaseValue(0.6)
   } else if (entity instanceof PlayerCurio) {
-    attribute.setBaseValue(0.7)
+    attribute.setBaseValue(0.5)
   } else {
-    attribute.setBaseValue(0.25)
+    attribute.setBaseValue(0.2)
   }
 })
 
@@ -951,7 +953,9 @@ const ONESHOT_BLACKLIST = [
   'create:potato_cannon',
   'irons_spellbooks:heartstop',
   'gametechbcs_spellbooks:lingering_strain',
-  'minecraft:generic_kill'
+  'minecraft:generic_kill',
+  'immersiveengineering:railgun',
+  'irons_artifice:bullet'
 ]
 NativeEvents.onEvent(LivingDamagePre, event => {
   let player = event.entity
@@ -1006,14 +1010,16 @@ NativeEvents.onEvent(LivingDamagePre, event => {
     server.runCommandSilent(`execute positioned ${entity.x} ${entity.y} ${entity.z} run playsound irons_spellbooks:entity.fiery_dagger.parry hostile @a[distance=..12] ~ ~ ~ 2 1`)
   }
 })
+// Shared by the Tyros spawn and damage handlers.
+const TYROS_FLAMEBEARERS = ['hazennstuff:pyromus', 'hazennstuff:aptos']
+
 // Tyros summons
 EntityEvents.spawned(event => {
   let entity = event.entity
   const x = entity.x + (Math.random() * 4 - 2)
   const z = entity.z + (Math.random() * 4 - 2)
   if (entity.getType().toString() == 'irons_spellbooks:fire_boss') {
-    const flamebearers = ['hazennstuff:pyromus', 'hazennstuff:aptos']
-    flamebearers.forEach(entityID => {
+    TYROS_FLAMEBEARERS.forEach(entityID => {
       let mob = event.level.createEntity(entityID)
       mob.setPos(x, entity.y, z)
       mob.spawn()
@@ -1030,15 +1036,18 @@ NativeEvents.onEvent(LivingDamagePre, event => {
   let damageTypeKey = source.typeHolder().unwrapKey()
   if (damageTypeKey.isEmpty()) return
   let damageTypeId = damageTypeKey.get().location().toString()
-  if ('minecraft:generic_kill'.includes(damageTypeId)) return
+  if (damageTypeId === 'minecraft:generic_kill') return
   if (entity.getType().toString() == 'irons_spellbooks:fire_boss' && health <= maxHealth * 0.5) {
     let entities = entity.level.getEntities(null, entity.boundingBoxForCulling.inflate(32))
-    if (entities.some(e => flamebearers.includes(e.type.toString())))
+    if (entities.some(e => e.isAlive() && TYROS_FLAMEBEARERS.includes(e.type.toString()))) {
       event.setNewDamage(0)
-    player.displayClientMessage(Text.of("Tyros is protected by the flamebearers.").color(Color.RED), true)
+      if (player) {
+        player.displayClientMessage(Text.of("Tyros is protected by the flamebearers.").color(Color.RED), true)
+      }
+    }
   }
 })
-EntityEvents.death(event =>{
+EntityEvents.death(event => {
   const entity = event.getEntity()
   const dimension = entity.level.dimension.toString()
   if (dimension !== 'firesenderexpansion:void_dimension') return

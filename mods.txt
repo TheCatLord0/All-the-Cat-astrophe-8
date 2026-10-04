@@ -29,7 +29,7 @@ ars_hex-1.21.1-5.0.4b.jar
 ars_nouveau-1.21.1-5.13.2.jar
 ars_ocultas-1.21.1-2.6.1.jar
 ars_polymorphia-1.0.3.jar
-ars_sable-1.21.1-1.1.4.jar
+ars_sable-1.21.1-1.2.0.jar
 ars_technica-1.21.1-2.7.6.jar
 ars_zero-1.21.1-2.0.2.jar
 arseng-2.1.1-beta.jar
@@ -81,6 +81,7 @@ Create Encased-1.21.1-1.9.0-ht3.jar
 create_aeronautics_toolgun-0.3.6.jar
 create_connected-1.3.3-mc1.21.1.jar
 create_enhanced_schematicannon-1.0.4.jar
+create_hypertube-0.6.0-NEOFORGE.jar
 create_mobile_packages-1.21.1-0.7.7.jar
 create_power_loader-2.0.5-mc1.21.1.jar
 create_radar-0.4.9.4-1.21.1.jar
@@ -88,6 +89,7 @@ create_ratatouille-1.21.1-1.4.0.jar
 create_re_packager_fix-1.21.1-neoforge-1.1.0.jar
 create_safe_seating-1.0.1.jar
 create_schematic_sources-1.1.0.jar
+create_wizardry-1.21.1-0.5.1-pre1.jar
 create-1.21.1-6.0.10.jar
 createadditionallogistics-1.21.1-1.4.5.jar
 createadvancedoptimization-1.5.jar
@@ -118,7 +120,6 @@ discerning_the_eldritch-1.4.4-1.21.jar
 doespotatotick-1.21.1-5.6.4.jar
 dummmmmmy-1.21-2.1.2-neoforge.jar
 duplicationless-1.21.1-1.2.1.jar
-durabilitytooltip-1.2.0-neoforge-mc1.21.jar
 dyeable_ropes-1.2.3.jar
 EasyMagic-v21.1.4-1.21.1-NeoForge.jar
 easy-villagers-neoforge-1.21.1-1.1.42.jar
@@ -135,9 +136,10 @@ entity_model_features-3.3.9-1.21-neoforge.jar
 entity_texture_features-7.2.4-1.21-neoforge.jar
 entityculling-neoforge-1.11.2-mc1.21.1.jar
 entityjs-1.5.0.jar
-ess_requiem-0.1.7a.jar
+ess_requiem-0.1.7b.jar
 etched-5.1.0.jar
 ExtendedAE-1.21-2.2.38-neoforge.jar
+ExtremeReactors2-1.21.1-2.4.28.jar
 ExtremeSoundMuffler-3.56_NeoForge-1.21.jar
 FallingTree-1.21.1-1.21.1.11.jar
 fancymenu_neoforge_3.9.12_MC_1.21.1.jar
@@ -149,7 +151,7 @@ FastWorkbench-1.21.1-9.1.3.jar
 fdbosses-3.2-1.21.1.jar
 fdlib-1.0.9-1.21.1.jar
 ferritecore-7.0.3-neoforge.jar
-firesenderexpansion-2.5.0.jar
+firesenderexpansion-2.5.1.jar
 flerovium-neoforge-1.21.1-1.2.0-all.jar
 FluxNetworks-1.21.1-8.0.0.jar
 fragmentum-5.0.0+1.21.1-neoforge.jar
@@ -194,6 +196,7 @@ justplayerheads-1.21.1-4.4.jar
 KeyBindJS-2101-1.1.0.jar
 konkrete_neoforge_1.9.9_MC_1.21.jar
 kotlinforforge-5.12.0-all.jar
+KotlinLangForge-2.14.1-k2.4.20-3.0+neoforge.jar
 kubejs_curios_neoforge_1.21.1-1.0.4.jar
 kubejsarsnouveau-1.3.2.jar
 kubejs-create-neoforge-2101.3.1-build.18.jar
@@ -226,6 +229,7 @@ mcw-mcwfences-1.2.1-mc1.21.1neoforge.jar
 mcw-mcwstairs-1.0.2-mc1.21.1neoforge.jar
 mcw-mcwwindows-2.4.2-mc1.21.1neoforge.jar
 mcw-trapdoors-1.1.5-mc1.21.1neoforge.jar
+megacells-4.11.0.jar
 Mekanism-1.21.1-10.7.19.85.jar
 MekanismGenerators-1.21.1-10.7.19.85.jar
 melody_neoforge_1.0.10_MC_1.21.jar
@@ -316,6 +320,8 @@ toofast-1.21.0-0.4.3.6.jar
 toomanyrecipeviewers-0.9.0+mc.21.1.jar
 transmog-neoforge-1.6.0+1.21.1.jar
 uranus-3.0-beta.1.jar
+veinminer-client-neoforge-2.11.2+1.21.1.jar
+veinminer-neoforge-2.11.2+1.21.1.jar
 voicechat-neoforge-1.21.1-2.6.24.jar
 VS-Sable-HoseConnectors-0.1.8-1.21.1.jar
 weaponmaster_ydm-1.21.1-neoforge-4.2.7.jar
@@ -324,4 +330,5 @@ xaerominimap-neoforge-1.21.1-26.5.0.jar
 xaeroworldmap-neoforge-1.21.1-1.46.0.jar
 yeetusexperimentus-neoforge-87.0.0.jar
 yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar
+ZeroCore2-1.21.1-2.4.21.jar
 Zeta-1.1-40.jar

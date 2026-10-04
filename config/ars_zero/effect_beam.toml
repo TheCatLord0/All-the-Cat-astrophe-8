@@ -24,7 +24,7 @@
 	augment_cost_overrides = []
 	#Prevents the given glyph from being used in the same spell as the given glyph
 	#Example entry: "glyph_burst"
-	invalid_combos = ["ars_hex:glyph_soul_shatter","ars_elemental:glyph_conflagrate","ars_elemental:glyph_cavitate","ars_elemental:glyph_discharge","ars_elemental:glyph_envenom","ars_elemental:glyph_oxidize","ars_elemental:glyph_phantom_grasp","ars_elemental:glyph_poison_spores","ars_elemental:glyph_spark","ars_elemental:glyph_spike","ars_elemental:glyph_watery_grave","ars_elemental:glyph_cauterize","ars_nouveau:glyph_crush","ars_nouveau:glyph_cut","ars_nouveau:glyph_fangs","ars_nouveau:glyph_firework","ars_nouveau:glyph_flare","ars_nouveau:glyph_freeze","ars_nouveau:glyph_harm","ars_nouveau:glyph_ignite"]
+	invalid_combos = []
 
 	#Effect Beam Settings
 	[general.effect_beam]
